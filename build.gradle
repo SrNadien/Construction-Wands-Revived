@@ -1,0 +1,120 @@
+plugins {
+    id 'java-library'
+    id 'eclipse'
+    id 'idea'
+    id 'maven-publish'
+    id 'net.neoforged.gradle.userdev' version '7.0.171'
+}
+
+version = "${mcversion}-${mod_version}"
+group = "${author}.${modid}"
+base {
+    archivesName = "${modid}-${tag_version}"
+}
+
+// Mojang ships Java 21 to end users in 1.20.5+, so your mod should target Java 21.
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+
+//minecraft.accessTransformers.file rootProject.file('src/main/resources/META-INF/accesstransformer.cfg')
+//minecraft.accessTransformers.entry public net.minecraft.client.Minecraft textureManager # textureManager
+
+runs {
+    // applies to all the run configs below
+    configureEach {
+        // Recommended logging data for a userdev environment
+        systemProperty 'forge.logging.markers', 'REGISTRIES'
+
+        // Recommended logging level for the console
+        systemProperty 'forge.logging.console.level', 'debug'
+
+        //Limit ram usage for the dev environment to 4GB
+        jvmArgument '-Xmx4G'
+
+        modSource project.sourceSets.main
+    }
+
+    client {
+        // Comma-separated list of namespaces to load gametests from. Empty = all namespaces.
+        systemProperty 'forge.enabledGameTestNamespaces', "${modid}"
+    }
+
+    server {
+        systemProperty 'forge.enabledGameTestNamespaces', "${modid}"
+        programArgument '--nogui'
+    }
+
+    data {
+        // example of overriding the workingDirectory set in configureEach above, uncomment if you want to use it
+        // workingDirectory project.file('run-data')
+
+        // Specify the modid for data generation, where to output the resulting resource, and where to look for existing resources.
+        programArguments.addAll '--mod', "${modid}", '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
+    }
+}
+
+sourceSets.main.resources {
+    srcDir 'src/generated/resources'
+}
+
+repositories {
+    maven {
+        url = "https://maven.blamejared.com"
+    }
+    maven {
+        url = "https://maven.theillusivec4.top/"
+    }
+}
+
+dependencies {
+    implementation "net.neoforged:neoforge:${neoversion}"
+
+    compileOnly "mezz.jei:jei-${mcversion}-common-api:${jei_version}"
+    compileOnly "mezz.jei:jei-${mcversion}-neoforge-api:${jei_version}"
+    runtimeOnly "mezz.jei:jei-${mcversion}-neoforge:${jei_version}"
+
+//    compileOnly ([
+//            group: "vazkii.botania",
+//            name: "Botania",
+//            version: "${project.botania}",
+//            classifier: "api"
+//    ])
+}
+
+jar {
+    manifest {
+        attributes([
+                "Specification-Title": archivesBaseName,
+                "Specification-Vendor": "${author}",
+                "Specification-Version": "1", // We are version 1 of ourselves
+                "Implementation-Title": archivesBaseName,
+                "Implementation-Version": "${version}",
+                "Implementation-Vendor" :"${author}",
+                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+        ])
+    }
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifact jar
+        }
+    }
+    repositories {
+        maven {
+            url "file:///${project.projectDir}/mcmodsrepo"
+        }
+    }
+}
+
+// IDEA no longer automatically downloads sources/javadoc jars for dependencies, so we need to explicitly enable the behavior.
+idea {
+    module {
+        downloadSources = true
+        downloadJavadoc = true
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
+}
