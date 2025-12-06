@@ -1,23 +1,23 @@
 {
-  "item.constructionwand.stone_wand": "Varita de Piedra",
-  "item.constructionwand.iron_wand": "Varita de Hierro",
-  "item.constructionwand.diamond_wand": "Varita de Diamante",
-  "item.constructionwand.infinity_wand": "Varita del Infinito",
-  "item.constructionwand.core_angel": "Núcleo de Varita Angelical",
-  "item.constructionwand.core_destruction": "Núcleo de Varita de Destrucción",
+  "item.constructionwand.stone_wand": "Varita de piedra",
+  "item.constructionwand.iron_wand": "Varita de hierro",
+  "item.constructionwand.diamond_wand": "Varita de diamante",
+  "item.constructionwand.infinity_wand": "Varita infinita",
+  "item.constructionwand.core_angel": "Núcleo de varita angelical",
+  "item.constructionwand.core_destruction": "Núcleo de varita de destrucción",
 
-  "constructionwand.tooltip.blocks": "Máx. %d bloques",
+  "constructionwand.tooltip.blocks": "%d bloques máx.",
   "constructionwand.tooltip.shift": "Presiona [MAYÚS]",
   "constructionwand.tooltip.cores": "Núcleos de varita:",
-  "constructionwand.tooltip.core_tip": "Combina el núcleo con tu varita en una rejilla de crafteo",
+  "constructionwand.tooltip.core_tip": "Combina el núcleo con tu varita en una cuadrícula de fabricación",
 
   "constructionwand.option.cores": "",
-  "constructionwand.option.cores.constructionwand:default": "Núcleo de Construcción",
-  "constructionwand.option.cores.constructionwand:default.desc": "Extiende tu construcción hacia el lado que te mira",
-  "constructionwand.option.cores.constructionwand:core_angel": "§6Núcleo Angelical",
+  "constructionwand.option.cores.constructionwand:default": "Núcleo de construcción",
+  "constructionwand.option.cores.constructionwand:default.desc": "Extiende tu construcción hacia el lado que estás mirando",
+  "constructionwand.option.cores.constructionwand:core_angel": "§6Núcleo angelical",
   "constructionwand.option.cores.constructionwand:core_angel.desc": "Coloca bloques detrás, incluso en el aire",
-  "constructionwand.option.cores.constructionwand:core_destruction": "§cNúcleo de Destrucción",
-  "constructionwand.option.cores.constructionwand:core_destruction.desc": "Destruye bloques en el lado que te mira",
+  "constructionwand.option.cores.constructionwand:core_destruction": "§cNúcleo de destrucción",
+  "constructionwand.option.cores.constructionwand:core_destruction.desc": "Destruye bloques en el lado que estás mirando",
 
   "constructionwand.option.lock": "Restricción: ",
   "constructionwand.option.lock.horizontal": "§aIzquierda/Derecha",
@@ -29,7 +29,7 @@
   "constructionwand.option.lock.eastwest": "§6Este/Oeste",
   "constructionwand.option.lock.eastwest.desc": "Construye una fila en dirección E/O sobre el bloque original",
   "constructionwand.option.lock.nolock": "§cNinguna",
-  "constructionwand.option.lock.nolock.desc": "Extender desde cualquier lado del bloque original",
+  "constructionwand.option.lock.nolock.desc": "Extiende desde cualquier lado del bloque original",
 
   "constructionwand.option.direction": "Dirección: ",
   "constructionwand.option.direction.target": "§6Objetivo",
@@ -53,19 +53,18 @@
 
   "constructionwand.option.random": "Aleatorio: ",
   "constructionwand.option.random.yes": "§aSí",
-  "constructionwand.option.random.yes.desc": "Coloca bloques al azar presentes en tu barra rápida",
+  "constructionwand.option.random.yes.desc": "Coloca bloques al azar presentes en tu barra de acceso rápido",
   "constructionwand.option.random.no": "§cNo",
   "constructionwand.option.random.no.desc": "No aleatorizar los bloques colocados",
 
-  "constructionwand.description.wand": "La %1$s puede colocar hasta %2$d bloques al lado de una construcción que te mire y dura %3$s.\n\nMantén presionado %5$s y rota la rueda para cambiar la restricción de colocación (Horizontal, Vertical, Norte/Sur, Este/Oeste, Sin restricción).\n\nAbre la pantalla de opciones con %6$s§9+Clic derecho§0.\n\n§5§nDESHACER§0§r\nManteniendo presionado §9Agacharse+§0%4$s mientras mirás un bloque mostrará los últimos bloques que colocaste con un borde verde alrededor. §9Agacharse+§0%4$s§9+Clic derecho§0 sobre cualquiera de ellos deshará la operación, devolviéndote todos los objetos. Si usaste el núcleo de Destrucción, restaurará los bloques.\n\n§5§nCONTENEDORES§0§r\nShulker boxes, bundles y muchos contenedores de otros mods pueden proveer bloques de construcción para la varita.\n\n§5§nPRIORIDAD MAIN/SECUNDARIA§0§r\nTener bloques en la mano secundaria hará que se coloquen ellos en vez del bloque en el que estás mirando.",
-
-  "constructionwand.description.durability.limited": "por %d bloques",
+  "constructionwand.description.wand": "La %1$s puede colocar hasta %2$d bloques al lado de una construcción que estés mirando y dura %3$s.\n\nMantén presionado %5$s y gira la rueda para cambiar la restricción de colocación (Horizontal, Vertical, Norte/Sur, Este/Oeste, Sin restricción).\n\nAbre la pantalla de opciones con %6$s§9 + Clic derecho§0.\n\n§5§nDESHACER§0§r\nManteniendo presionado §9Agacharse + §0%4$s mientras miras un bloque mostrará los últimos bloques que colocaste resaltados con un borde verde. §9Agacharse + §0%4$s§9 + Clic derecho§0 sobre cualquiera de ellos deshará la operación, devolviéndote todos los objetos. Si usaste el núcleo de destrucción, restaurará los bloques.\n\n§5§nCONTENEDORES§0§r\nLas cajas de shulker, sacos y muchos contenedores de otros mods pueden proveer bloques de construcción para la varita.\n\n§5§nPRIORIDAD DE MANO SECUNDARIA§0§r\nTener bloques en la mano secundaria hará que se coloquen ellos en vez del bloque al que estás mirando.",
+  "constructionwand.description.durability.limited": "para %d bloques",
   "constructionwand.description.durability.unlimited": "para siempre",
   "constructionwand.description.key.sneak": "Agacharse",
-  "constructionwand.description.key.sneak_opt": "Agacharse+%s",
-  "constructionwand.description.core": "§5§nINSTALACIÓN§0§r\nPon tu nuevo núcleo junto con tu varita en una rejilla de crafteo para instalarlo. Para cambiar entre núcleos, mantén presionado %s y haz clic izquierdo en el aire con tu varita o usa la pantalla de opciones.",
-  "constructionwand.description.core_angel": "El núcleo angelical coloca un bloque en el lado opuesto del bloque (o fila de bloques) al que estás mirando. La distancia máxima depende del nivel de la varita. Clic derecho en el aire para colocar un bloque en el aire. Para eso, necesitarás tener el bloque que quieras colocar en la mano secundaria.",
-  "constructionwand.description.core_destruction": "El núcleo de destrucción destruye bloques (no entidades de bloque) en el lado que estás mirando. El número máximo de bloques depende del nivel de la varita. Los bloques destruidos desaparecen en el vacío; podés usar la función deshacer si te equivocás.",
+  "constructionwand.description.key.sneak_opt": "Agacharse + %s",
+  "constructionwand.description.core": "§5§nINSTALACIÓN§0§r\nColoca tu nuevo núcleo junto con tu varita en una cuadrícula de fabricación para instalarlo. Para cambiar entre núcleos, mantén presionado %s y haz clic izquierdo en un espacio vacío con tu varita o usa la pantalla de opciones.",
+  "constructionwand.description.core_angel": "El núcleo angelical coloca un bloque en el lado opuesto del bloque (o fila de bloques) que estás mirando. La distancia máxima depende del nivel de la varita. Haz clic derecho en un espacio vacío para colocar un bloque en el aire. Para hacer eso, necesitarás tener el bloque que deseas colocar en tu mano secundaria.",
+  "constructionwand.description.core_destruction": "El núcleo de destrucción destruye bloques (no entidades de bloque) en el lado que estás mirando. El número máximo de bloques depende del nivel de la varita. Los bloques destruidos desaparecen en el vacío, puedes usar la función de deshacer si cometiste un error.",
 
-  "stat.constructionwand.use_wand": "Bloques colocados usando la Varita"
+  "stat.constructionwand.use_wand": "Bloques colocados usando la varita"
 }
