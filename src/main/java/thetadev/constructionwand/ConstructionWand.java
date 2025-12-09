@@ -28,7 +28,7 @@ import thetadev.constructionwand.wand.undo.UndoHistory;
 @Mod(ConstructionWand.MODID)
 public class ConstructionWand {
     public static final String MODID = "constructionwand";
-    public static final String MODNAME = "ConstructionWand";
+    public static final String MODNAME = "ConstructionWandRevived";
 
     public static ConstructionWand instance;
     public static final Logger LOGGER = LogManager.getLogger();
