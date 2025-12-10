@@ -6,7 +6,7 @@ plugins {
     id 'net.neoforged.gradle.userdev' version '7.0.171'
 }
 
-version = "${mcversion}-${mod_version}"
+version = "${mcversion}-${mod_version}-${tag_lanzador}"
 group = "${author}.${modid}"
 base {
     archivesName = "${modid}-${tag_version}"
