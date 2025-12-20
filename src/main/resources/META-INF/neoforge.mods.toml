@@ -4,7 +4,7 @@ license = "MIT License"
 [[mods]]
 modId="constructionwand"
 version="${file.jarVersion}"
-displayName="Construction Wand"
+displayName="Construction Wands Revived"
 displayURL=""
 logoFile="logo.png"
 authors="ThetaDev, SrNadien"

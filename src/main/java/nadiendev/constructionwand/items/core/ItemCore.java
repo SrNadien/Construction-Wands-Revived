@@ -20,6 +20,17 @@ public abstract class ItemCore extends Item implements IWandCore
         super(properties);
     }
 
+  
+    @Override
+    public boolean hasCraftingRemainingItem(ItemStack stack) {
+        return false;  
+    }
+
+    @Override
+    public ItemStack getCraftingRemainingItem(ItemStack itemStack) {
+        return ItemStack.EMPTY;  
+    }
+
     @OnlyIn(Dist.CLIENT)
     public void appendHoverText(@Nonnull ItemStack itemstack, Level worldIn, @Nonnull List<Component> lines, @Nonnull TooltipFlag extraInfo) {
         lines.add(
