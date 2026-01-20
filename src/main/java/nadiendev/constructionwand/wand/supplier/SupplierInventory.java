@@ -108,6 +108,15 @@ public class SupplierInventory implements IWandSupplier
         if(player.getInventory().items == null) return count;
         if(player.isCreative()) return 0;
 
+        // Primero intentar consumir del offhand si tiene el item correcto
+        ItemStack offhandStack = player.getItemInHand(InteractionHand.OFF_HAND);
+        if(!offhandStack.isEmpty() && WandUtil.stackEquals(offhandStack, item)) {
+            int toTake = Math.min(count, offhandStack.getCount());
+            offhandStack.shrink(toTake);
+            count -= toTake;
+            if(count == 0) return 0;
+        }
+
         List<ItemStack> hotbar = WandUtil.getHotbarWithOffhand(player);
         List<ItemStack> mainInv = WandUtil.getMainInv(player);
 
@@ -127,6 +136,9 @@ public class SupplierInventory implements IWandSupplier
 
         for(ItemStack stack : inv) {
             if(count == 0) break;
+            
+            // Skip offhand ya que lo procesamos primero en takeItemStack
+            if(stack == player.getItemInHand(InteractionHand.OFF_HAND)) continue;
 
             if(container) {
                 count = containerManager.useItems(player, new ItemStack(item), stack, count);
