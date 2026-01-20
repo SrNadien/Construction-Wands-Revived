@@ -129,6 +129,6 @@ and making a PR.
 
 As #Hacktoberfest now requires repo owners to opt in, I added the tag to this repository.
 
-I'd really appreciate translations. Currently, ConstructionWand is available in English, German and Swedish.
+I'd really appreciate translations. Currently, ConstructionWand is available in English, German, Swedish And Spanish.
 If you speak any other language you can help translate the mod and add a new language file
 under `src/main/resources/assets/constructionwand/lang/`.
