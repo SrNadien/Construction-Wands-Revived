@@ -1,15 +1,18 @@
 package nadiendev.constructionwand.items;
 
 import net.minecraft.client.renderer.item.ItemProperties;
-import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tiers;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
-import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
+import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import nadiendev.constructionwand.ConstructionWand;
@@ -20,10 +23,11 @@ import nadiendev.constructionwand.items.wand.ItemWand;
 import nadiendev.constructionwand.items.wand.ItemWandBasic;
 import nadiendev.constructionwand.items.wand.ItemWandInfinity;
 
-@EventBusSubscriber(modid = ConstructionWand.MODID, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = ConstructionWand.MODID)
 public class ModItems
 {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(ConstructionWand.MODID);
+    public static final DeferredRegister<CreativeModeTab> CREATIVE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, ConstructionWand.MODID);
 
     // Wands
     public static final DeferredItem<Item> WAND_STONE = ITEMS.register("stone_wand", () -> new ItemWandBasic(propWand(), Tiers.STONE));
@@ -36,8 +40,27 @@ public class ModItems
     public static final DeferredItem<Item> CORE_DESTRUCTION = ITEMS.register("core_destruction", () -> new ItemCoreDestruction(propUpgrade()));
 
     // Collections
+    @SuppressWarnings("unchecked")
     public static final DeferredItem<Item>[] WANDS = new DeferredItem[] {WAND_STONE, WAND_IRON, WAND_DIAMOND, WAND_INFINITY};
+    @SuppressWarnings("unchecked")
     public static final DeferredItem<Item>[] CORES = new DeferredItem[] {CORE_ANGEL, CORE_DESTRUCTION};
+
+    // Creative Tab - Todos los items del mod en una sola pestaña
+    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> CONSTRUCTION_WAND_TAB = CREATIVE_TABS.register("construction_wand_tab", () -> CreativeModeTab.builder()
+            .title(Component.translatable("itemGroup." + ConstructionWand.MODID))
+            .icon(() -> new ItemStack(WAND_INFINITY.get()))
+            .displayItems((parameters, output) -> {
+                // Agregar todas las varitas
+                output.accept(WAND_STONE.get());
+                output.accept(WAND_IRON.get());
+                output.accept(WAND_DIAMOND.get());
+                output.accept(WAND_INFINITY.get());
+                
+                // Agregar todos los cores
+                output.accept(CORE_ANGEL.get());
+                output.accept(CORE_DESTRUCTION.get());
+            })
+            .build());
 
     public static Item.Properties propWand() {
         return new Item.Properties();
@@ -66,19 +89,6 @@ public class ModItems
             Item item = itemSupplier.get();
             event.register((stack, layer) -> (layer == 1 && stack.getItem() instanceof ItemWand) ?
                     new WandOptions(stack).cores.get().getColor() : -1, item);
-        }
-    }
-
-    @SubscribeEvent
-    public static void addCreative(BuildCreativeModeTabContentsEvent event) {
-        if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
-            for(DeferredItem<Item> itemSupplier : WANDS) {
-                event.accept(itemSupplier);
-            }
-        } else if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
-            for(DeferredItem<Item> itemSupplier : CORES) {
-                event.accept(itemSupplier);
-            }
         }
     }
 }

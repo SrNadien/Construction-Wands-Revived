@@ -2,8 +2,8 @@ modLoader = "javafml"
 loaderVersion = "[4,)"
 license = "MIT License"
 [[mods]]
-modId="constructionwand"
-version="${file.jarVersion}"
+modId="${modid}"
+version="${mod_version}"
 displayName="Construction Wands Revived"
 displayURL=""
 logoFile="logo.png"
@@ -17,15 +17,25 @@ behind the block you are facing, conjure blocks in mid air or destroy lots of bl
 
 This is my first minecraft mod. May the odds be ever in your favor.
 '''
-[[dependencies.constructionwand]]
+[[dependencies.${modid}]]
     modId="neoforge"
     type="required"
     versionRange="[21.1.1,)"
     ordering = "NONE"
     side="BOTH"
-[[dependencies.constructionwand]]
+[[dependencies.${modid}]]
     modId="minecraft"
     type="required"
     versionRange="[1.21,1.22)"
     ordering = "NONE"
     side="BOTH"
+
+#jei dependency 
+[[dependencies.${modid}]]
+    modId="jei"
+    type="optional"
+    versionRange="${jei_version}"
+    ordering="AFTER"
+    side="CLIENT"
+
+

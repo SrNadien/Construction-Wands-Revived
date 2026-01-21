@@ -63,14 +63,21 @@ repositories {
     maven {
         url = "https://maven.theillusivec4.top/"
     }
+    maven {
+		name = "TerraformersMC"
+		url = "https://maven.terraformersmc.com/"
+	}
+    maven { url "https://maven.shedaniel.me" }
 }
 
 dependencies {
     implementation "net.neoforged:neoforge:${neoversion}"
 
+    //jei
     compileOnly "mezz.jei:jei-${mcversion}-common-api:${jei_version}"
     compileOnly "mezz.jei:jei-${mcversion}-neoforge-api:${jei_version}"
     runtimeOnly "mezz.jei:jei-${mcversion}-neoforge:${jei_version}"
+
 
 //    compileOnly ([
 //            group: "vazkii.botania",
@@ -91,6 +98,21 @@ jar {
                 "Implementation-Vendor" :"${author}",
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
+    }
+}
+
+tasks.withType(ProcessResources).configureEach {
+    var replaceProperties = [
+            mod_version            : mod_version,
+            modid                  : modid,
+            jei_version            : jei_version,
+            // rei_version            : rei_version,
+            // emi_version            : emi_version,
+    ]
+    inputs.properties replaceProperties
+
+    filesMatching(['META-INF/neoforge.mods.toml']) {
+        expand replaceProperties
     }
 }
 

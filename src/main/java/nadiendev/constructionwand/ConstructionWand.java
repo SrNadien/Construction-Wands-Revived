@@ -53,6 +53,7 @@ public class ConstructionWand {
         ModDataComponents.DATA_COMPONENT_TYPES.register(eventBus);
         ModItems.ITEMS.register(eventBus);
         ModRecipes.RECIPE_SERIALIZERS.register(eventBus);
+         ModItems.CREATIVE_TABS.register(eventBus);
         ModStats.CUSTOM_STATS.register(eventBus);
 
         // Config setup

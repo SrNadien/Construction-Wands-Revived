@@ -1,4 +1,5 @@
-{
+{ 
+    "itemGroup.constructionwand": "Varinhas de Construção Revividas",
     "item.constructionwand.stone_wand": "Varinha de pedra",
     "item.constructionwand.iron_wand": "Varinha de ferro",
     "item.constructionwand.diamond_wand": "diamondWand",
