@@ -10,7 +10,6 @@ import net.minecraft.world.item.Tiers;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredItem;
@@ -23,7 +22,6 @@ import nadiendev.constructionwand.items.wand.ItemWand;
 import nadiendev.constructionwand.items.wand.ItemWandBasic;
 import nadiendev.constructionwand.items.wand.ItemWandInfinity;
 
-@EventBusSubscriber(modid = ConstructionWand.MODID)
 public class ModItems
 {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(ConstructionWand.MODID);
@@ -48,7 +46,7 @@ public class ModItems
     // Creative Tab - Todos los items del mod en una sola pestaña
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> CONSTRUCTION_WAND_TAB = CREATIVE_TABS.register("construction_wand_tab", () -> CreativeModeTab.builder()
             .title(Component.translatable("itemGroup." + ConstructionWand.MODID))
-            .icon(() -> new ItemStack(WAND_INFINITY.get()))
+            .icon(() -> new ItemStack(WAND_DIAMOND.get()))
             .displayItems((parameters, output) -> {
                 // Agregar todas las varitas
                 output.accept(WAND_STONE.get());
