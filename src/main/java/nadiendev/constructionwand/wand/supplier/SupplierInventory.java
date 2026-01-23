@@ -108,25 +108,46 @@ public class SupplierInventory implements IWandSupplier
         if(player.getInventory().items == null) return count;
         if(player.isCreative()) return 0;
 
+        boolean inventoryChanged = false;
+
         // Primero intentar consumir del offhand si tiene el item correcto
         ItemStack offhandStack = player.getItemInHand(InteractionHand.OFF_HAND);
         if(!offhandStack.isEmpty() && WandUtil.stackEquals(offhandStack, item)) {
             int toTake = Math.min(count, offhandStack.getCount());
             offhandStack.shrink(toTake);
             count -= toTake;
-            if(count == 0) return 0;
+            inventoryChanged = true;
+            if(count == 0) {
+                player.getInventory().setChanged();
+                return 0;
+            }
         }
 
         List<ItemStack> hotbar = WandUtil.getHotbarWithOffhand(player);
         List<ItemStack> mainInv = WandUtil.getMainInv(player);
 
         // Take items from main inv, loose items first
+        int prevCount = count;
         count = takeItemsInvList(count, item, mainInv, false);
+        if(count < prevCount) inventoryChanged = true;
+        
+        prevCount = count;
         count = takeItemsInvList(count, item, mainInv, true);
+        if(count < prevCount) inventoryChanged = true;
 
         // Take items from hotbar, containers first
+        prevCount = count;
         count = takeItemsInvList(count, item, hotbar, true);
+        if(count < prevCount) inventoryChanged = true;
+        
+        prevCount = count;
         count = takeItemsInvList(count, item, hotbar, false);
+        if(count < prevCount) inventoryChanged = true;
+
+        // Solo llamar setChanged() una vez al final si hubo cambios
+        if(inventoryChanged) {
+            player.getInventory().setChanged();
+        }
 
         return count;
     }
@@ -148,7 +169,7 @@ public class SupplierInventory implements IWandSupplier
                 int toTake = Math.min(count, stack.getCount());
                 stack.shrink(toTake);
                 count -= toTake;
-                player.getInventory().setChanged();
+                // NO llamar setChanged() aquí - se llama una sola vez al final
             }
         }
         return count;
