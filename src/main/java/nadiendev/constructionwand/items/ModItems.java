@@ -46,7 +46,7 @@ public class ModItems
     // Creative Tab - Todos los items del mod en una sola pestaña
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> CONSTRUCTION_WAND_TAB = CREATIVE_TABS.register("construction_wand_tab", () -> CreativeModeTab.builder()
             .title(Component.translatable("itemGroup." + ConstructionWand.MODID))
-            .icon(() -> new ItemStack(WAND_DIAMOND.get()))
+            .icon(() -> new ItemStack(WAND_INFINITY.get()))
             .displayItems((parameters, output) -> {
                 // Agregar todas las varitas
                 output.accept(WAND_STONE.get());
