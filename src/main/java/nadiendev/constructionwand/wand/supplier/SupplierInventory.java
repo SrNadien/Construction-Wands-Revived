@@ -144,7 +144,7 @@ public class SupplierInventory implements IWandSupplier
         count = takeItemsInvList(count, item, hotbar, false);
         if(count < prevCount) inventoryChanged = true;
 
-        // Solo llamar setChanged() una vez al final si hubo cambios
+        //  setChanged() 
         if(inventoryChanged) {
             player.getInventory().setChanged();
         }
@@ -158,18 +158,22 @@ public class SupplierInventory implements IWandSupplier
         for(ItemStack stack : inv) {
             if(count == 0) break;
             
-            // Skip offhand ya que lo procesamos primero en takeItemStack
+            // Skip offhand 
             if(stack == player.getItemInHand(InteractionHand.OFF_HAND)) continue;
 
+            // Try to take from containers first if we're looking for containers
             if(container) {
                 count = containerManager.useItems(player, new ItemStack(item), stack, count);
+                if(count == 0) break;
             }
 
-            if(!container && WandUtil.stackEquals(stack, item)) {
+            // Then try to take from loose items if this stack matches
+            // This happens regardless of 'container' flag to ensure we always try both methods
+            if(WandUtil.stackEquals(stack, item)) {
                 int toTake = Math.min(count, stack.getCount());
                 stack.shrink(toTake);
                 count -= toTake;
-                // NO llamar setChanged() aquí - se llama una sola vez al final
+                
             }
         }
         return count;
