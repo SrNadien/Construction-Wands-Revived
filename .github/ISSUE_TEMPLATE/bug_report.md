@@ -2,7 +2,7 @@
 name: Bug report
 about: Report a bug or problem with Construction Wand Revived
 title: "[BUG]"
-labels: ''
+labels: 1.21.1, bug, Important Bug
 assignees: ''
 
 ---
