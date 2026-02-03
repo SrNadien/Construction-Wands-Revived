@@ -31,6 +31,7 @@ public class ModItems
     public static final DeferredItem<Item> WAND_STONE = ITEMS.register("stone_wand", () -> new ItemWandBasic(propWand(), Tiers.STONE));
     public static final DeferredItem<Item> WAND_IRON = ITEMS.register("iron_wand", () -> new ItemWandBasic(propWand(), Tiers.IRON));
     public static final DeferredItem<Item> WAND_DIAMOND = ITEMS.register("diamond_wand", () -> new ItemWandBasic(propWand(), Tiers.DIAMOND));
+     public static final DeferredItem<Item> WAND_NETHERITE = ITEMS.register("netherite_wand", () -> new ItemWandBasic(propWand().fireResistant(), Tiers.NETHERITE));
     public static final DeferredItem<Item> WAND_INFINITY = ITEMS.register("infinity_wand", () -> new ItemWandInfinity(propWand()));
 
     // Cores
@@ -39,7 +40,7 @@ public class ModItems
 
     // Collections
     @SuppressWarnings("unchecked")
-    public static final DeferredItem<Item>[] WANDS = new DeferredItem[] {WAND_STONE, WAND_IRON, WAND_DIAMOND, WAND_INFINITY};
+    public static final DeferredItem<Item>[] WANDS = new DeferredItem[] {WAND_STONE, WAND_IRON, WAND_DIAMOND, WAND_NETHERITE, WAND_INFINITY};
     @SuppressWarnings("unchecked")
     public static final DeferredItem<Item>[] CORES = new DeferredItem[] {CORE_ANGEL, CORE_DESTRUCTION};
 
@@ -52,6 +53,7 @@ public class ModItems
                 output.accept(WAND_STONE.get());
                 output.accept(WAND_IRON.get());
                 output.accept(WAND_DIAMOND.get());
+                output.accept(WAND_NETHERITE.get());
                 output.accept(WAND_INFINITY.get());
                 
                 // Agregar todos los cores

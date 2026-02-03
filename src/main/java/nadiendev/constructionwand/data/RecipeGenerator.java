@@ -31,6 +31,7 @@ public class RecipeGenerator extends RecipeProvider {
         wandRecipe(output, ModItems.WAND_STONE.get(), Inp.fromTag(ItemTags.STONE_TOOL_MATERIALS));
         wandRecipe(output, ModItems.WAND_IRON.get(), Inp.fromTag(Tags.Items.INGOTS_IRON));
         wandRecipe(output, ModItems.WAND_DIAMOND.get(), Inp.fromTag(Tags.Items.GEMS_DIAMOND));
+        wandRecipe(output, ModItems.WAND_NETHERITE.get(), Inp.fromTag(Tags.Items.INGOTS_NETHERITE));
         wandRecipe(output, ModItems.WAND_INFINITY.get(), Inp.fromTag(Tags.Items.NETHER_STARS));
 
         coreRecipe(output, ModItems.CORE_ANGEL.get(), Inp.fromTag(Tags.Items.FEATHERS), Inp.fromTag(Tags.Items.INGOTS_GOLD));

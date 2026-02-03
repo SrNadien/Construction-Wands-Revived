@@ -30,7 +30,14 @@ public class ContainerManager
     public int useItems(Player player, ItemStack itemStack, ItemStack inventoryStack, int count) {
         for(IContainerHandler handler : handlers) {
             if(handler.matches(player, itemStack, inventoryStack)) {
-                return handler.useItems(player, itemStack, inventoryStack, count);
+                int prevCount = count;
+                int remainingCount = handler.useItems(player, itemStack, inventoryStack, count);
+                // Si el handler consumió items del contenedor, marcar inventario como modificado
+                // para que el cliente se actualice correctamente
+                if(remainingCount < prevCount) {
+                    player.getInventory().setChanged();
+                }
+                return remainingCount;
             }
         }
         return count;
