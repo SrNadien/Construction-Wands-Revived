@@ -7,7 +7,7 @@ import nadiendev.constructionwand.basics.WandUtil;
 import nadiendev.constructionwand.basics.option.WandOptions;
 import nadiendev.constructionwand.basics.pool.RandomPool;
 
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 import java.util.LinkedHashMap;
 
 public class SupplierRandom extends SupplierInventory
@@ -24,7 +24,7 @@ public class SupplierRandom extends SupplierInventory
         itemPool = new RandomPool<>(player.getRandom());
 
         for(ItemStack stack : WandUtil.getHotbarWithOffhand(player)) {
-            if(stack.getItem() instanceof BlockItem) addBlockItem((BlockItem) stack.getItem());
+            if(stack.getItem() instanceof BlockItem blockItem) addBlockItem(blockItem);
         }
     }
 }
