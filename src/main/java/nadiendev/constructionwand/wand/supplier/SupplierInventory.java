@@ -66,11 +66,36 @@ public class SupplierInventory implements IWandSupplier {
     }
 
     protected void addBlockItem(BlockItem item) {
+        // Contar items sueltos en el inventario
         int count = WandUtil.countItem(player, item);
+
+        // BUGFIX: También contar items dentro de contenedores (mochilas, shulkers, etc.)
+        // Sin esto, si los bloques SOLO están en la mochila, count=0 y el wand
+        // nunca los usa, resultando en bloques "infinitos" que no se consumen.
+        count += countItemInContainers(item);
+
         if (count > 0) {
             itemCounts.put(item, count);
             itemPool.add(item);
         }
+    }
+
+    /**
+     * Cuenta cuántos items del tipo dado hay dentro de todos los contenedores
+     * del inventario del jugador (hotbar + inventario principal).
+     */
+    private int countItemInContainers(BlockItem item) {
+        ContainerManager containerManager = ConstructionWand.instance.containerManager;
+        ItemStack itemStack = new ItemStack(item);
+        int total = 0;
+
+        for (ItemStack inv : WandUtil.getHotbarWithOffhand(player)) {
+            total += containerManager.countItems(player, itemStack, inv);
+        }
+        for (ItemStack inv : WandUtil.getMainInv(player)) {
+            total += containerManager.countItems(player, itemStack, inv);
+        }
+        return total;
     }
 
     @Override
@@ -137,12 +162,10 @@ public class SupplierInventory implements IWandSupplier {
             if (count == 0)
                 break;
 
-            // Intentar consumir desde contenedores (ej: Sophisticated Backpacks)
+            // Intentar consumir desde contenedores (ej: Sophisticated Backpacks, Shulkers)
             if (container) {
                 int prevCount = count;
                 count = containerManager.useItems(player, new ItemStack(item), stack, count);
-                // Si realmente consumió algo, marcar inventario como modificado
-                // sin esto el cliente no se actualiza y los items "no desaparecen"
                 if (count < prevCount)
                     player.getInventory().setChanged();
             }

@@ -10,6 +10,8 @@ import net.minecraft.world.level.block.ShulkerBoxBlock;
 import nadiendev.constructionwand.api.IContainerHandler;
 import nadiendev.constructionwand.basics.WandUtil;
 
+import java.util.List;
+
 public class HandlerShulkerbox implements IContainerHandler
 {
     private final int SLOTS = 27;
@@ -22,11 +24,9 @@ public class HandlerShulkerbox implements IContainerHandler
     @Override
     public int countItems(Player player, ItemStack itemStack, ItemStack inventoryStack) {
         int count = 0;
-
         for(ItemStack stack : getItemList(inventoryStack)) {
             if(WandUtil.stackEquals(stack, itemStack)) count += stack.getCount();
         }
-
         return count;
     }
 
@@ -48,14 +48,18 @@ public class HandlerShulkerbox implements IContainerHandler
             setItemList(inventoryStack, itemList);
             player.getInventory().setChanged();
         }
-
         return count;
     }
 
     private NonNullList<ItemStack> getItemList(ItemStack itemStack) {
-        NonNullList<ItemStack> itemStacks = NonNullList.withSize(SLOTS, ItemStack.EMPTY);
         ItemContainerContents contents = itemStack.getOrDefault(DataComponents.CONTAINER, ItemContainerContents.EMPTY);
-        itemStacks.addAll(contents.stream().toList());
+        List<ItemStack> contentList = contents.stream().toList();
+
+        
+        NonNullList<ItemStack> itemStacks = NonNullList.withSize(SLOTS, ItemStack.EMPTY);
+        for (int i = 0; i < Math.min(contentList.size(), SLOTS); i++) {
+            itemStacks.set(i, contentList.get(i));
+        }
         return itemStacks;
     }
 
