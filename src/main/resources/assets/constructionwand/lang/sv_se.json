@@ -7,12 +7,10 @@
   "item.constructionwand.infinity_wand": "Oändlighetsstav",
   "item.constructionwand.core_angel": "Änglastavskärna",
   "item.constructionwand.core_destruction": "Rivningsstavskärna",
-
   "constructionwand.tooltip.blocks": "Max. %d block",
   "constructionwand.tooltip.shift": "Håll ned [SHIFT]",
   "constructionwand.tooltip.cores": "Stavkärnor:",
   "constructionwand.tooltip.core_tip": "Kombinera kärnan med din stav i ett tillverkningsrutnät",
-
   "constructionwand.option.cores": "",
   "constructionwand.option.cores.constructionwand:default": "Byggkärna",
   "constructionwand.option.cores.constructionwand:default.desc": "Utvidga din byggnad åt sidan som är riktad mot dig",
@@ -20,7 +18,6 @@
   "constructionwand.option.cores.constructionwand:core_angel.desc": "Placera block bakom befintliga block och i luften",
   "constructionwand.option.cores.constructionwand:core_destruction": "§cRivningskärna",
   "constructionwand.option.cores.constructionwand:core_destruction.desc": "Förstör block på sidan som är riktad mot dig",
-
   "constructionwand.option.lock": "Begränsning: ",
   "constructionwand.option.lock.horizontal": "§aVänster/Höger",
   "constructionwand.option.lock.horizontal.desc": "Bygg en horisontal kolumn framför originalblocket",
@@ -32,19 +29,16 @@
   "constructionwand.option.lock.eastwest.desc": "Bygg en öst-/västriktad rad ovanpå originalblocket",
   "constructionwand.option.lock.nolock": "§cIngen",
   "constructionwand.option.lock.nolock.desc": "Utvidga från en valfri sida av originalblocket",
-
   "constructionwand.option.direction": "Riktning: ",
   "constructionwand.option.direction.target": "§6Mål",
   "constructionwand.option.direction.target.desc": "Placera block i samma riktning som målblocket",
   "constructionwand.option.direction.player": "§aSpelare",
   "constructionwand.option.direction.player.desc": "Placera block i samma riktning som spelaren tittar åt",
-
   "constructionwand.option.replace": "Ersättning: ",
   "constructionwand.option.replace.yes": "§aJa",
   "constructionwand.option.replace.yes.desc": "Ersätt vissa block, t.ex. vätskor, snö och högt gräs",
   "constructionwand.option.replace.no": "§cNej",
   "constructionwand.option.replace.no.desc": "Ersätt inte något block",
-
   "constructionwand.option.match": "Matchning: ",
   "constructionwand.option.match.exact": "§aExakt",
   "constructionwand.option.match.exact.desc": "Utvidga endast block som är exakt likadana",
@@ -52,13 +46,11 @@
   "constructionwand.option.match.similar.desc": "Behandla liknande block (jord-/grästyper) likadant",
   "constructionwand.option.match.any": "§cAllting",
   "constructionwand.option.match.any.desc": "Utvidga alla block",
-
   "constructionwand.option.random": "Slumpa: ",
   "constructionwand.option.random.yes": "§aJa",
   "constructionwand.option.random.yes.desc": "Placera slumpartade block från din föremålsmeny",
   "constructionwand.option.random.no": "§cNej",
   "constructionwand.option.random.no.desc": "Slumpa inte block som ska placeras ut",
-
   "constructionwand.description.wand": "En %1$s kan placera upp till %2$d block på sidan av en byggnad som är riktad mot dig och räcker %3$s.\n\nHåll ned %5$s och rulla med mushjulet för att ändra placeringsbegränsningen (horisontal, vertikal, nord/syd, öst/väst, ingen låsning).\n\nÖppna alternativmenyn med %6$s§9+Högerklick§0.\n\n§5§nÅNGRA§0§r\nNär du håller ned §9Smyga+§0%4$s medan du tittar på ett block kommer du se de senaste blocken du placerade omgivna av en grön ram. §9Smyg+§0%4$s§9+högerklicka§0 på något av dem för att ångra handlingen och få tillbaka alla föremål. Om du har använt rivningskärnan kommer blocken att återställas.\n\n§5§nBEHÅLLARE§0§r\nShulkerlådor, påsar och många behållare från andra moddar kan tillhandahålla byggblock för staven.\n\n§5§nPRIO FÖR SEKUNDÄR HAND§0§r\nBlocken i din sekundära hand placeras i stället för blocket du tittar på.",
   "constructionwand.description.durability.limited": "för %d block",
   "constructionwand.description.durability.unlimited": "för alltid",
@@ -67,6 +59,21 @@
   "constructionwand.description.core": "§5§nINSTALLATION§0§r\nLägg din nya kärna tillsammans med din stav i ett tillverkningsrutnät för att installera den. Håll ned %s och vänsterklicka i luften med din stav eller använd alternativmenyn för att byta kärna.",
   "constructionwand.description.core_angel": "Änglakärnan placerar ett block på den motsatta sidan av blocket (eller blockraden) som är riktad mot dig. Det maximala avståndet beror på stavens nivå. Högerklicka i luften för att placera ett block i luften. För att göra detta behöver du hålla blocket du vill placera i din sekundära hand.",
   "constructionwand.description.core_destruction": "Rivningskärnan förstör block (inte blockentiteter) på sidan som är riktad mot dig. Det maximala antalet block beror på stavens nivå. Förstörda block försvinner helt och hållet, men du kan använda ångrafunktionen om du har gjort ett misstag.",
-
-  "stat.constructionwand.use_wand": "Block placerade med stavar"
+  "stat.constructionwand.use_wand": "Block placerade med stavar",
+  "advancement.constructionwand.root.title": "Byggstavar Återupplivade",
+  "advancement.constructionwand.root.desc": "Skaffa din första stav",
+  "advancement.constructionwand.stone_wand.title": "Stenstav",
+  "advancement.constructionwand.stone_wand.desc": "Skaffa en stenstav",
+  "advancement.constructionwand.iron_wand.title": "Järnstav",
+  "advancement.constructionwand.iron_wand.desc": "Skaffa en järnstav",
+  "advancement.constructionwand.diamond_wand.title": "Diamantstav",
+  "advancement.constructionwand.diamond_wand.desc": "Skaffa en diamantstav",
+  "advancement.constructionwand.netherite_wand.title": "Netheritstav",
+  "advancement.constructionwand.netherite_wand.desc": "Skaffa en netheritstav",
+  "advancement.constructionwand.infinity_wand.title": "Oändlighetsstav",
+  "advancement.constructionwand.infinity_wand.desc": "Skaffa oändlighetsstaven",
+  "advancement.constructionwand.core_angel.title": "Änglakärna",
+  "advancement.constructionwand.core_angel.desc": "Skaffa en änglastavskärna",
+  "advancement.constructionwand.core_destruction.title": "Rivningskärna",
+  "advancement.constructionwand.core_destruction.desc": "Skaffa en rivningsstavskärna"
 }

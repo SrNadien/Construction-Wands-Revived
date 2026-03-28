@@ -20,7 +20,7 @@ and last longer. These properties can be changed in the config.
 | Stone    | 131         | 9           | No          | -              | -                     |
 | Iron     | 250         | 27          | Yes         | 1              | 9                     |
 | Diamond  | 1561        | 128         | Yes         | 4              | 25                    |
-| Netherite| 2031        | 512         | Yes         | 4              | 49                    |
+| Netherite| 2031        | 512         | Yes         | 15              | 75                    |
 | Infinity | Unbreakable | 1024        | Yes         | 8              | 81                    |
 
 ## Crafting

@@ -1,9 +1,5 @@
 package nadiendev.constructionwand.items;
 
-import net.minecraft.client.renderer.item.ItemProperties;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.network.chat.Component;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tiers;
@@ -11,7 +7,6 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
-import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import nadiendev.constructionwand.ConstructionWand;
@@ -25,42 +20,23 @@ import nadiendev.constructionwand.items.wand.ItemWandInfinity;
 public class ModItems
 {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(ConstructionWand.MODID);
-    public static final DeferredRegister<CreativeModeTab> CREATIVE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, ConstructionWand.MODID);
 
     // Wands
-    public static final DeferredItem<Item> WAND_STONE = ITEMS.register("stone_wand", () -> new ItemWandBasic(propWand(), Tiers.STONE));
-    public static final DeferredItem<Item> WAND_IRON = ITEMS.register("iron_wand", () -> new ItemWandBasic(propWand(), Tiers.IRON));
-    public static final DeferredItem<Item> WAND_DIAMOND = ITEMS.register("diamond_wand", () -> new ItemWandBasic(propWand(), Tiers.DIAMOND));
-     public static final DeferredItem<Item> WAND_NETHERITE = ITEMS.register("netherite_wand", () -> new ItemWandBasic(propWand().fireResistant(), Tiers.NETHERITE));
-    public static final DeferredItem<Item> WAND_INFINITY = ITEMS.register("infinity_wand", () -> new ItemWandInfinity(propWand()));
+    public static final DeferredItem<Item> WAND_STONE     = ITEMS.register("stone_wand",    () -> new ItemWandBasic(propWand(), Tiers.STONE));
+    public static final DeferredItem<Item> WAND_IRON      = ITEMS.register("iron_wand",     () -> new ItemWandBasic(propWand(), Tiers.IRON));
+    public static final DeferredItem<Item> WAND_DIAMOND   = ITEMS.register("diamond_wand",  () -> new ItemWandBasic(propWand(), Tiers.DIAMOND));
+    public static final DeferredItem<Item> WAND_NETHERITE = ITEMS.register("netherite_wand",() -> new ItemWandBasic(propWand().fireResistant(), Tiers.NETHERITE));
+    public static final DeferredItem<Item> WAND_INFINITY  = ITEMS.register("infinity_wand", () -> new ItemWandInfinity(propWand()));
 
     // Cores
-    public static final DeferredItem<Item> CORE_ANGEL = ITEMS.register("core_angel", () -> new ItemCoreAngel(propUpgrade()));
+    public static final DeferredItem<Item> CORE_ANGEL      = ITEMS.register("core_angel",      () -> new ItemCoreAngel(propUpgrade()));
     public static final DeferredItem<Item> CORE_DESTRUCTION = ITEMS.register("core_destruction", () -> new ItemCoreDestruction(propUpgrade()));
 
     // Collections
     @SuppressWarnings("unchecked")
-    public static final DeferredItem<Item>[] WANDS = new DeferredItem[] {WAND_STONE, WAND_IRON, WAND_DIAMOND, WAND_NETHERITE, WAND_INFINITY};
+    public static final DeferredItem<Item>[] WANDS = new DeferredItem[]{WAND_STONE, WAND_IRON, WAND_DIAMOND, WAND_NETHERITE, WAND_INFINITY};
     @SuppressWarnings("unchecked")
-    public static final DeferredItem<Item>[] CORES = new DeferredItem[] {CORE_ANGEL, CORE_DESTRUCTION};
-
-    // Creative Tab - Todos los items del mod en una sola pestaña
-    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> CONSTRUCTION_WAND_TAB = CREATIVE_TABS.register("construction_wand_tab", () -> CreativeModeTab.builder()
-            .title(Component.translatable("itemGroup." + ConstructionWand.MODID))
-            .icon(() -> new ItemStack(WAND_INFINITY.get()))
-            .displayItems((parameters, output) -> {
-                // Agregar todas las varitas
-                output.accept(WAND_STONE.get());
-                output.accept(WAND_IRON.get());
-                output.accept(WAND_DIAMOND.get());
-                output.accept(WAND_NETHERITE.get());
-                output.accept(WAND_INFINITY.get());
-                
-                // Agregar todos los cores
-                output.accept(CORE_ANGEL.get());
-                output.accept(CORE_DESTRUCTION.get());
-            })
-            .build());
+    public static final DeferredItem<Item>[] CORES = new DeferredItem[]{CORE_ANGEL, CORE_DESTRUCTION};
 
     public static Item.Properties propWand() {
         return new Item.Properties();
@@ -72,9 +48,9 @@ public class ModItems
 
     @OnlyIn(Dist.CLIENT)
     public static void registerModelProperties() {
-        for(DeferredItem<Item> itemSupplier : WANDS) {
+        for (DeferredItem<Item> itemSupplier : WANDS) {
             Item item = itemSupplier.get();
-            ItemProperties.register(
+            net.minecraft.client.renderer.item.ItemProperties.register(
                     item, ConstructionWand.loc("using_core"),
                     (stack, world, entity, n) -> entity == null || !(stack.getItem() instanceof ItemWand) ? 0 :
                             new WandOptions(stack).cores.get().getColor() > -1 ? 1 : 0
@@ -85,7 +61,7 @@ public class ModItems
     @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
     public static void registerItemColors(RegisterColorHandlersEvent.Item event) {
-        for(DeferredItem<Item> itemSupplier : WANDS) {
+        for (DeferredItem<Item> itemSupplier : WANDS) {
             Item item = itemSupplier.get();
             event.register((stack, layer) -> (layer == 1 && stack.getItem() instanceof ItemWand) ?
                     new WandOptions(stack).cores.get().getColor() : -1, item);

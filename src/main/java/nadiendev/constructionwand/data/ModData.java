@@ -22,6 +22,7 @@ public class ModData
 
         if(event.includeServer()) {
             generator.addProvider(true, new RecipeGenerator(packOutput, lookupProvider));
+            generator.addProvider(true, new AdvancementGenerator(packOutput, lookupProvider, fileHelper));
         }
 
         if(event.includeClient()) {

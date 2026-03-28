@@ -20,10 +20,10 @@ import nadiendev.constructionwand.component.ModDataComponents;
 import nadiendev.constructionwand.containers.ContainerManager;
 import nadiendev.constructionwand.containers.ContainerRegistrar;
 import nadiendev.constructionwand.crafting.ModRecipes;
+import nadiendev.constructionwand.creative.ModCreativeTabs;
 import nadiendev.constructionwand.items.ModItems;
 import nadiendev.constructionwand.network.ModMessages;
 import nadiendev.constructionwand.wand.undo.UndoHistory;
-
 
 @Mod(ConstructionWand.MODID)
 public class ConstructionWand {
@@ -43,28 +43,22 @@ public class ConstructionWand {
         containerManager = new ContainerManager();
         undoHistory = new UndoHistory();
 
-        // Register setup methods for modloading
         eventBus.addListener(this::commonSetup);
         eventBus.addListener(this::clientSetup);
-        // Register packets
         eventBus.addListener(ModMessages::registerPayloads);
 
-        // Register Item DeferredRegister
         ModDataComponents.DATA_COMPONENT_TYPES.register(eventBus);
         ModItems.ITEMS.register(eventBus);
         ModRecipes.RECIPE_SERIALIZERS.register(eventBus);
-         ModItems.CREATIVE_TABS.register(eventBus);
+        ModCreativeTabs.register(eventBus);
         ModStats.CUSTOM_STATS.register(eventBus);
 
-        // Config setup
         container.registerConfig(ModConfig.Type.SERVER, ConfigServer.SPEC);
         container.registerConfig(ModConfig.Type.CLIENT, ConfigClient.SPEC);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
         LOGGER.info("ConstructionWand says hello - may the odds be ever in your favor.");
-
-        // Container registry
         ContainerRegistrar.register();
     }
 
@@ -72,7 +66,6 @@ public class ConstructionWand {
         renderBlockPreview = new RenderBlockPreview();
         NeoForge.EVENT_BUS.register(renderBlockPreview);
         NeoForge.EVENT_BUS.register(new ClientEvents());
-
         event.enqueueWork(ModItems::registerModelProperties);
     }
 
