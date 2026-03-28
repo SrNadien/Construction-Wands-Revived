@@ -114,7 +114,7 @@ public class ConfigServer
         new WandProperties(builder, ModItems.WAND_STONE, ToolMaterial.STONE.durability(), 9, 0, 0, false);
         new WandProperties(builder, ModItems.WAND_IRON, ToolMaterial.IRON.durability(), 27, 2, 9, true);
         new WandProperties(builder, ModItems.WAND_DIAMOND, ToolMaterial.DIAMOND.durability(), 128, 8, 25, true);
-        new WandProperties(builder, ModItems.WAND_NETHERITE, ToolMaterial.NETHERITE.durability(), 512, 12, 49, true);
+        new WandProperties(builder, ModItems.WAND_NETHERITE, ToolMaterial.NETHERITE.durability(), 512, 15, 75, true);
         new WandProperties(builder, ModItems.WAND_INFINITY, 0, 1024, 16, 81, true);
 
         builder.push("misc");
