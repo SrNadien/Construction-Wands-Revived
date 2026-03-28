@@ -1,32 +1,25 @@
 modLoader = "javafml"
-loaderVersion = "[4,)"
-license = "MIT License"
+license = "${licence}"
+
 [[mods]]
 modId="${modid}"
 version="${mod_version}"
-displayName="Construction Wands Revived"
+displayName="${mod_names}"
 displayURL=""
 logoFile="logo.png"
-authors="ThetaDev, SrNadien"
-description='''
-Construction Wands make building easier!
+authors="${author}"
+description="${mod_description}"
 
-With a Construction Wand you can place multiple blocks (up to 1024) at once, extending your build on the side you're
-facing. If that's not enough: you can upgrade your wand with additional cores, allowing you to place a block
-behind the block you are facing, conjure blocks in mid air or destroy lots of blocks very fast.
-
-This is my first minecraft mod. May the odds be ever in your favor.
-'''
 [[dependencies.${modid}]]
     modId="neoforge"
     type="required"
-    versionRange="[21.1.1,)"
+    versionRange="${neo_version}"
     ordering = "NONE"
     side="BOTH"
 [[dependencies.${modid}]]
     modId="minecraft"
     type="required"
-    versionRange="[1.21,1.22)"
+    versionRange="${mcversion}"
     ordering = "NONE"
     side="BOTH"
 

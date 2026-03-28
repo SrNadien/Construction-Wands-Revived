@@ -4,7 +4,7 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
@@ -20,7 +20,7 @@ public record PacketWandOption(String key, String value, boolean notifyMessage) 
     public static final StreamCodec<FriendlyByteBuf, PacketWandOption> CODEC = CustomPacketPayload.codec(
             PacketWandOption::encode,
             PacketWandOption::new);
-    public static final Type<PacketWandOption> ID = new Type<>(ResourceLocation.fromNamespaceAndPath(MODID, "wand_option"));
+    public static final Type<PacketWandOption> ID = new Type<>(Identifier.fromNamespaceAndPath(MODID, "wand_option"));
 
     private PacketWandOption(FriendlyByteBuf buffer) {
         this(buffer.readUtf(100), buffer.readUtf(100), buffer.readBoolean());

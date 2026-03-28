@@ -1,42 +1,51 @@
 package nadiendev.constructionwand.basics.option;
 
+
 import com.google.common.base.Enums;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.core.component.DataComponentType;
-import net.minecraft.world.item.ItemStack;
 
 public class OptionEnum<E extends Enum<E>> implements IOption<E>
 {
-    private final ItemStack stack;
-    private final DataComponentType<E> componentType;
+    private final CompoundTag tag;
     private final String key;
     private final Class<E> enumClass;
     private final boolean enabled;
     private final E dval;
+    private final Runnable onChanged;
     private E value;
 
-    public OptionEnum(ItemStack stack, DataComponentType<E> componentType, String key, Class<E> enumClass, E dval, boolean enabled) {
-        this.stack = stack;
-        this.componentType = componentType;
+    public OptionEnum(CompoundTag tag, String key, Class<E> enumClass, E dval, boolean enabled, Runnable onChanged) {
+        this.tag = tag;
         this.key = key;
         this.enumClass = enumClass;
         this.enabled = enabled;
         this.dval = dval;
+        this.onChanged = onChanged;
 
-        value = stack.getOrDefault(componentType, dval);
+        value = Enums.getIfPresent(enumClass, tag.getString(key).orElse("").toUpperCase()).or(dval);
     }
 
-    public OptionEnum(ItemStack stack, DataComponentType<E> componentType, String key, Class<E> enumClass, E dval) {
-        this(stack, componentType, key, enumClass, dval, true);
+    public OptionEnum(CompoundTag tag, String key, Class<E> enumClass, E dval, boolean enabled) {
+        this(tag, key, enumClass, dval, enabled, null);
     }
 
-    @Override
-    public String getKey() {
-        return key;
+    public OptionEnum(CompoundTag tag, String key, Class<E> enumClass, E dval) {
+        this(tag, key, enumClass, dval, true);
+    }
+
+    public OptionEnum(CompoundTag tag, String key, Class<E> enumClass, E dval, Runnable onChanged) {
+        this(tag, key, enumClass, dval, true, onChanged);
     }
 
     @Override
     public DataComponentType<?> getComponentType() {
-        return componentType;
+    return null;
+   }
+
+    @Override
+    public String getKey() {
+        return key;
     }
 
     @Override
@@ -58,7 +67,8 @@ public class OptionEnum<E extends Enum<E>> implements IOption<E>
     public void set(E val) {
         if(!enabled) return;
         value = val;
-        stack.set(componentType, val);
+        tag.putString(key, getValueString());
+        if (onChanged != null) onChanged.run();
     }
 
     @Override

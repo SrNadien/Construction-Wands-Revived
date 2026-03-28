@@ -1,18 +1,20 @@
 package nadiendev.constructionwand.client;
 
-import com.mojang.blaze3d.platform.InputConstants;
+// import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.client.event.InputEvent;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import nadiendev.constructionwand.basics.ConfigClient;
+import nadiendev.constructionwand.client.KeybindHandler;
 import nadiendev.constructionwand.basics.WandUtil;
 import nadiendev.constructionwand.basics.option.WandOptions;
 import nadiendev.constructionwand.items.wand.ItemWand;
-import nadiendev.constructionwand.network.ModMessages;
+// import nadiendev.constructionwand.network.ModMessages;
 import nadiendev.constructionwand.network.PacketQueryUndo;
 import nadiendev.constructionwand.network.PacketWandOption;
 
@@ -34,7 +36,7 @@ public class ClientEvents
         boolean optState = isOptKeyDown();
         if(optPressed != optState) {
             optPressed = optState;
-            ModMessages.sendToServer(new PacketQueryUndo(optPressed));
+            ClientPacketDistributor.sendToServer(new PacketQueryUndo(optPressed, isLeftShiftKeyDown()));
             //ConstructionWand.LOGGER.debug("OPT key update: " + optPressed);
         }
     }
@@ -52,7 +54,7 @@ public class ClientEvents
 
         WandOptions wandOptions = new WandOptions(wand);
         wandOptions.lock.next(scroll < 0);
-        ModMessages.sendToServer(new PacketWandOption(wandOptions.lock, true));
+        ClientPacketDistributor.sendToServer(new PacketWandOption(wandOptions.lock, true));
         event.setCanceled(true);
     }
 
@@ -68,7 +70,7 @@ public class ClientEvents
 
         WandOptions wandOptions = new WandOptions(wand);
         wandOptions.cores.next();
-        ModMessages.sendToServer(new PacketWandOption(wandOptions.cores, true));
+        ClientPacketDistributor.sendToServer(new PacketWandOption(wandOptions.cores, true));
     }
 
     // Sneak+(OPT)+Right click wand to open GUI
@@ -86,12 +88,12 @@ public class ClientEvents
         event.setCanceled(true);
     }
 
-    private static boolean isKeyDown(int id) {
-        return InputConstants.isKeyDown(Minecraft.getInstance().getWindow().getWindow(), id);
+    private static boolean isLeftShiftKeyDown() {
+        return Minecraft.getInstance().options.keyShift.isDown();
     }
 
     public static boolean isOptKeyDown() {
-        return isKeyDown(ConfigClient.OPT_KEY.get());
+        return KeybindHandler.isOptKeyDown();
     }
 
     public static boolean modeKeyCombDown(Player player) {

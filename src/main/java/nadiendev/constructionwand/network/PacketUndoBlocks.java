@@ -5,9 +5,10 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 import nadiendev.constructionwand.ConstructionWand;
+import nadiendev.constructionwand.client.ClientHandler;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -19,7 +20,7 @@ public record PacketUndoBlocks(HashSet<BlockPos> undoBlocks) implements CustomPa
     public static final StreamCodec<FriendlyByteBuf, PacketUndoBlocks> CODEC = CustomPacketPayload.codec(
             PacketUndoBlocks::encode,
             PacketUndoBlocks::new);
-    public static final Type<PacketUndoBlocks> ID = new Type<>(ResourceLocation.fromNamespaceAndPath(MODID, "undo_blocks"));
+    public static final Type<PacketUndoBlocks> ID = new Type<>(Identifier.fromNamespaceAndPath(MODID, "undo_blocks"));
 
     public PacketUndoBlocks(FriendlyByteBuf buffer) {
         this(getSet(buffer));
@@ -63,7 +64,7 @@ public record PacketUndoBlocks(HashSet<BlockPos> undoBlocks) implements CustomPa
         public static void handle(final PacketUndoBlocks msg, final IPayloadContext ctx) {
             ctx.enqueueWork(() -> {
                 //ConstructionWand.LOGGER.debug("PacketUndoBlocks received, Blocks: " + msg.undoBlocks.size());
-                ConstructionWand.instance.renderBlockPreview.undoBlocks = msg.undoBlocks;
+                ClientHandler.renderBlockPreview.undoBlocks = msg.undoBlocks;
             })
             .exceptionally(e -> {
                 // Handle exception

@@ -3,9 +3,11 @@ package nadiendev.constructionwand.containers.handlers;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.BundleContents;
 import nadiendev.constructionwand.api.IContainerHandler;
+import nadiendev.constructionwand.containers.ContainerTrace;
 import nadiendev.constructionwand.basics.WandUtil;
 
 import java.util.List;
@@ -20,13 +22,18 @@ public class HandlerBundle implements IContainerHandler
     }
 
     @Override
-    public int countItems(Player player, ItemStack itemStack, ItemStack inventoryStack) {
+    public int getSignature(Player player, ItemStack inventoryStack) {
+        return inventoryStack.hashCode();
+    }
+
+    @Override
+    public int countItems(Player player, ContainerTrace trace, ItemStack itemStack, ItemStack inventoryStack) {
         return getContents(inventoryStack).filter((stack) -> WandUtil.stackEquals(stack, itemStack))
                 .map(ItemStack::getCount).reduce(0, Integer::sum);
     }
 
     @Override
-    public int useItems(Player player, ItemStack itemStack, ItemStack inventoryStack, int count) {
+    public int useItems(Player player, ContainerTrace trace, ItemStack itemStack, ItemStack inventoryStack, int count) {
         AtomicInteger newCount = new AtomicInteger(count);
 
         List<ItemStack> itemStacks = getContents(inventoryStack).filter((stack -> {
@@ -44,17 +51,15 @@ public class HandlerBundle implements IContainerHandler
     }
 
     private Stream<ItemStack> getContents(ItemStack bundleStack) {
-        if(bundleStack.has(DataComponents.BUNDLE_CONTENTS)) {
-            return Stream.empty();
-        }
-        else {
-            BundleContents contents = bundleStack.getOrDefault(DataComponents.BUNDLE_CONTENTS, BundleContents.EMPTY);
-            return contents.itemCopyStream();
-        }
+        BundleContents contents = bundleStack.getOrDefault(DataComponents.BUNDLE_CONTENTS, BundleContents.EMPTY);
+        return contents.itemCopyStream();
     }
 
     private void setItemList(ItemStack itemStack, List<ItemStack> itemStacks) {
-        BundleContents contents = new BundleContents(itemStacks);
+        List<ItemStackTemplate> templates = itemStacks.stream()
+            .map(stack -> new ItemStackTemplate(stack.getItem(), stack.getCount()))
+                .toList();
+        BundleContents contents = new BundleContents(templates);
         itemStack.set(DataComponents.BUNDLE_CONTENTS, contents);
     }
 }
