@@ -68,7 +68,8 @@ dependencies {
     // compileOnly "mezz.jei:jei-${mcversion}-common-api:${jei_version}"
     // compileOnly "mezz.jei:jei-${mcversion}-neoforge-api:${jei_version}"
     // runtimeOnly "mezz.jei:jei-${mcversion}-neoforge:${jei_version}"
-    compileOnly "mezz.jei:jei-${mcversion}-pre-3-common-api:${jei_version}"
+    // compileOnly "mezz.jei:jei-${mcversion}-pre-3-common-api:${jei_version}"
+    implementation "mezz.jei:jei-${mcversion}-neoforge:${jei_version}"
 }
 
 jar {
@@ -126,4 +127,5 @@ idea {
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
+    options.getRelease().set(25)
 }
