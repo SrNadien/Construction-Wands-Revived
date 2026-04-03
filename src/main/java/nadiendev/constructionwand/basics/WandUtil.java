@@ -3,11 +3,14 @@ package nadiendev.constructionwand.basics;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -24,6 +27,7 @@ import net.neoforged.neoforge.common.util.BlockSnapshot;
 import net.neoforged.neoforge.event.level.BlockEvent;
 import nadiendev.constructionwand.ConstructionWand;
 import nadiendev.constructionwand.containers.ContainerManager;
+import nadiendev.constructionwand.containers.ContainerTrace;
 import nadiendev.constructionwand.items.wand.ItemWand;
 import nadiendev.constructionwand.wand.WandItemUseContext;
 
@@ -67,22 +71,34 @@ public class WandUtil
     }
 
     public static List<ItemStack> getHotbar(Player player) {
-        return player.getInventory().items.subList(0, 9);
+        return player.getInventory().getNonEquipmentItems().subList(0, 9);
     }
 
     public static List<ItemStack> getHotbarWithOffhand(Player player) {
-        ArrayList<ItemStack> inventory = new ArrayList<>(player.getInventory().items.subList(0, 9));
-        inventory.addAll(player.getInventory().offhand);
+        ArrayList<ItemStack> inventory = new ArrayList<>(player.getInventory().getNonEquipmentItems().subList(0, 9));
+        inventory.add(player.getOffhandItem());
         return inventory;
     }
 
     public static List<ItemStack> getMainInv(Player player) {
-        return player.getInventory().items.subList(9, player.getInventory().items.size());
+        return player.getInventory().getNonEquipmentItems().subList(9, player.getInventory().getNonEquipmentItems().size());
+    }
+
+    public static List<ItemStack> getArmor(Player player) {
+        ArrayList<ItemStack> armor = new ArrayList<>(4);
+        int inventorySize = Inventory.INVENTORY_SIZE;
+        armor.add(player.getInventory().getItem(EquipmentSlot.FEET.getIndex(inventorySize)));
+        armor.add(player.getInventory().getItem(EquipmentSlot.LEGS.getIndex(inventorySize)));
+        armor.add(player.getInventory().getItem(EquipmentSlot.CHEST.getIndex(inventorySize)));
+        armor.add(player.getInventory().getItem(EquipmentSlot.HEAD.getIndex(inventorySize)));
+        return armor;
     }
 
     public static List<ItemStack> getFullInv(Player player) {
-        ArrayList<ItemStack> inventory = new ArrayList<>(player.getInventory().offhand);
-        inventory.addAll(player.getInventory().items);
+        ArrayList<ItemStack> inventory = new ArrayList<>();
+        inventory.add(player.getOffhandItem());
+        inventory.addAll(player.getInventory().getNonEquipmentItems());
+        inventory.addAll(getArmor(player));
         return inventory;
     }
 
@@ -93,7 +109,7 @@ public class WandUtil
     public static boolean isTEAllowed(BlockState state) {
         if(!state.hasBlockEntity()) return true;
 
-        ResourceLocation name = BuiltInRegistries.BLOCK.getKey(state.getBlock());
+        Identifier name = BuiltInRegistries.BLOCK.getKey(state.getBlock());
         if(name == null) return false;
 
         String fullId = name.toString();
@@ -111,7 +127,6 @@ public class WandUtil
             return false;
         }
 
-        // Remove block if placeEvent is canceled
         BlockSnapshot snapshot = BlockSnapshot.create(world.dimension(), world, pos);
         BlockEvent.EntityPlaceEvent placeEvent = new BlockEvent.EntityPlaceEvent(snapshot, block, player);
         NeoForge.EVENT_BUS.post(placeEvent);
@@ -127,7 +142,6 @@ public class WandUtil
             player.awardStat(Stats.ITEM_USED.get(item));
         }
 
-        // Call OnBlockPlaced method
         block.getBlock().setPlacedBy(world, pos, block, player, stack);
 
         return true;
@@ -154,53 +168,47 @@ public class WandUtil
     }
 
     public static int countItem(Player player, Item item) {
-        if(player.getInventory().items == null) return 0;
         if(player.isCreative()) return Integer.MAX_VALUE;
 
         int total = 0;
-        ContainerManager containerManager = ConstructionWand.instance.containerManager;
-        List<ItemStack> inventory = WandUtil.getFullInv(player);
 
-        for(ItemStack stack : inventory) {
-            if(stack == null || stack.isEmpty()) continue;
+        if(player instanceof ServerPlayer serverPlayer) {
+            ContainerManager containerManager = ConstructionWand.containerManager;
+            ContainerTrace trace = new ContainerTrace(serverPlayer);
+            List<ItemStack> inventory = WandUtil.getFullInv(serverPlayer);
 
-            if(WandUtil.stackEquals(stack, item)) {
-                total += stack.getCount();
-            }
-            else {
-                int amount = containerManager.countItems(player, new ItemStack(item), stack);
-                if(amount == Integer.MAX_VALUE) return Integer.MAX_VALUE;
-                total += amount;
+            for(ItemStack stack : inventory) {
+                if(stack == null || stack.isEmpty()) continue;
+
+                if(WandUtil.stackEquals(stack, item)) {
+                    total += stack.getCount();
+                }
+                else {
+                    int amount = containerManager.countItems(serverPlayer, trace, new ItemStack(item), stack);
+                    if(amount == Integer.MAX_VALUE) return Integer.MAX_VALUE;
+                    total += amount;
+                }
             }
         }
         return total;
     }
 
     private static boolean isPositionModifiable(Level world, Player player, BlockPos pos) {
-        // Is position out of world?
         if(!world.isInWorldBounds(pos)) return false;
 
-        // Is block modifiable?
         if(!world.mayInteract(player, pos)) return false;
 
-        // Limit range
         if(ConfigServer.MAX_RANGE.get() > 0 &&
                 WandUtil.blockDistance(player.blockPosition(), pos) > ConfigServer.MAX_RANGE.get()) return false;
 
         return true;
     }
 
-    /**
-     * Tests if a wand can place a block at a certain position.
-     * This check is independent of the used block.
-     */
     public static boolean isPositionPlaceable(Level world, Player player, BlockPos pos, boolean replace) {
         if(!isPositionModifiable(world, player, pos)) return false;
 
-        // If replace mode is off, target has to be air
         if(world.isEmptyBlock(pos)) return true;
 
-        // Otherwise, check if the block can be replaced by a generic block
         return replace && world.getBlockState(pos).canBeReplaced(
                 new WandItemUseContext(world, player,
                         new BlockHitResult(new Vec3(0, 0, 0), Direction.DOWN, pos, false),
@@ -230,6 +238,6 @@ public class WandUtil
     }
 
     public static Direction fromVector(Vec3 vector) {
-        return Direction.getNearest(vector.x, vector.y, vector.z);
+        return Direction.getNearest((int) vector.x, (int) vector.y, (int) vector.z, null);
     }
 }

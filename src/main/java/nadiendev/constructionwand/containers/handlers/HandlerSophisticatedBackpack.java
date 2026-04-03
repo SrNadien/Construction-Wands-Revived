@@ -10,11 +10,6 @@ import nadiendev.constructionwand.api.IContainerHandler;
 import nadiendev.constructionwand.basics.WandUtil;
 import nadiendev.constructionwand.containers.ContainerTrace;
 
-/**
- * Sophisticated Backpack handler 
- *
- * By NadienDev
- */
 public class HandlerSophisticatedBackpack implements IContainerHandler {
 
     private static final int SLOTS = 108;

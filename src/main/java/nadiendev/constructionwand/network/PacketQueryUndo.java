@@ -4,27 +4,28 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 import nadiendev.constructionwand.ConstructionWand;
 
 import static nadiendev.constructionwand.ConstructionWand.MODID;
 
-public record PacketQueryUndo(boolean undoPressed) implements CustomPacketPayload
+public record PacketQueryUndo(boolean undoPressed, boolean leftShiftPressed) implements CustomPacketPayload
 {
     public static final StreamCodec<FriendlyByteBuf, PacketQueryUndo> CODEC = CustomPacketPayload.codec(
             PacketQueryUndo::encode,
             PacketQueryUndo::new);
-    public static final Type<PacketQueryUndo> ID = new Type<>(ResourceLocation.fromNamespaceAndPath(MODID, "query_undo"));
+    public static final Type<PacketQueryUndo> ID = new Type<>(Identifier.fromNamespaceAndPath(MODID, "query_undo"));
 
     public PacketQueryUndo(FriendlyByteBuf buf) {
-        this(buf.readBoolean());
+    this(buf.readBoolean(), buf.readBoolean());
     }
 
     public void encode(FriendlyByteBuf buf) {
-        buf.writeBoolean(undoPressed);
-    }
+    buf.writeBoolean(undoPressed);
+    buf.writeBoolean(leftShiftPressed);
+   }
 
     @Override
     public Type<? extends CustomPacketPayload> type() {
@@ -36,7 +37,7 @@ public record PacketQueryUndo(boolean undoPressed) implements CustomPacketPayloa
         public static void handle(final PacketQueryUndo msg, final IPayloadContext ctx) {
             ctx.enqueueWork(() -> {
                 if (ctx.player() instanceof ServerPlayer player) {
-                    ConstructionWand.instance.undoHistory.updateClient(player, msg.undoPressed);
+                    ConstructionWand.undoHistory.updateClient(player, msg.undoPressed, msg.leftShiftPressed);
 
                     //ConstructionWand.LOGGER.debug("Undo queried");
                 }

@@ -1,6 +1,7 @@
 package nadiendev.constructionwand.wand.supplier;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
@@ -17,18 +18,20 @@ import nadiendev.constructionwand.basics.WandUtil;
 import nadiendev.constructionwand.basics.option.WandOptions;
 import nadiendev.constructionwand.basics.pool.IPool;
 import nadiendev.constructionwand.basics.pool.OrderedPool;
+import nadiendev.constructionwand.containers.ContainerTrace;
 import nadiendev.constructionwand.containers.ContainerManager;
 import nadiendev.constructionwand.wand.undo.PlaceSnapshot;
 
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 
 /**
- * Default WandSupplier. Takes items from player inventory in order.
+ * Default WandSupplier. Takes items from player inventory.
  */
-public class SupplierInventory implements IWandSupplier {
+public class SupplierInventory implements IWandSupplier
+{
     protected final Player player;
     protected final WandOptions options;
 
@@ -40,91 +43,59 @@ public class SupplierInventory implements IWandSupplier {
         this.options = options;
     }
 
-    @Override
     public void getSupply(@Nullable BlockItem target) {
         itemCounts = new LinkedHashMap<>();
         ItemStack offhandStack = player.getItemInHand(InteractionHand.OFF_HAND);
 
         itemPool = new OrderedPool<>();
 
-        // Bloque en la mano izquierda -> tiene prioridad
-        if (!offhandStack.isEmpty() && offhandStack.getItem() instanceof BlockItem blockItem) {
-            addBlockItem(blockItem);
+        // Block in offhand -> override
+        if(!offhandStack.isEmpty() && offhandStack.getItem() instanceof BlockItem) {
+            addBlockItem((BlockItem) offhandStack.getItem());
         }
-        // Si no, usar el bloque objetivo
-        else if (target != null && target != Items.AIR) {
+        // Otherwise use target block
+        else if(target != null && target != Items.AIR) {
             addBlockItem(target);
 
-            // Agregar items de reemplazo
-            if (options.match.get() != WandOptions.MATCH.EXACT) {
-                for (Item it : ReplacementRegistry.getMatchingSet(target)) {
-                    if (it instanceof BlockItem blockItem)
-                        addBlockItem(blockItem);
+            // Add replacement items
+            if(options.match.get() != WandOptions.MATCH.EXACT) {
+                for(Item it : ReplacementRegistry.getMatchingSet(target)) {
+                    if(it instanceof BlockItem) addBlockItem((BlockItem) it);
                 }
             }
         }
     }
 
     protected void addBlockItem(BlockItem item) {
-        // Contar items sueltos en el inventario
         int count = WandUtil.countItem(player, item);
-
-        // BUGFIX: También contar items dentro de contenedores (mochilas, shulkers, etc.)
-        // Sin esto, si los bloques SOLO están en la mochila, count=0 y el wand
-        // nunca los usa, resultando en bloques "infinitos" que no se consumen.
-        count += countItemInContainers(item);
-
-        if (count > 0) {
+        if(count > 0) {
             itemCounts.put(item, count);
             itemPool.add(item);
         }
     }
 
-    /**
-     * Cuenta cuántos items del tipo dado hay dentro de todos los contenedores
-     * del inventario del jugador (hotbar + inventario principal).
-     */
-    private int countItemInContainers(BlockItem item) {
-        ContainerManager containerManager = ConstructionWand.instance.containerManager;
-        ItemStack itemStack = new ItemStack(item);
-        int total = 0;
-
-        for (ItemStack inv : WandUtil.getHotbarWithOffhand(player)) {
-            total += containerManager.countItems(player, itemStack, inv);
-        }
-        for (ItemStack inv : WandUtil.getMainInv(player)) {
-            total += containerManager.countItems(player, itemStack, inv);
-        }
-        return total;
-    }
-
     @Override
     @Nullable
     public PlaceSnapshot getPlaceSnapshot(Level world, BlockPos pos, BlockHitResult rayTraceResult,
-            @Nullable BlockState supportingBlock) {
-        if (!WandUtil.isPositionPlaceable(world, player, pos, options.replace.get()))
-            return null;
+                                          @Nullable BlockState supportingBlock) {
+        if(!WandUtil.isPositionPlaceable(world, player, pos, options.replace.get())) return null;
         itemPool.reset();
 
-        while (true) {
-            // Sacar item del pool (retorna null si no queda ninguno)
+        while(true) {
+            // Draw item from pool (returns null if none are left)
             BlockItem item = itemPool.draw();
-            if (item == null)
-                return null;
+            if(item == null) return null;
 
             int count = itemCounts.get(item);
-            if (count == 0)
-                continue;
+            if(count == 0) continue;
 
-            PlaceSnapshot placeSnapshot = PlaceSnapshot.get(world, player, rayTraceResult, pos, item, supportingBlock,
-                    options);
-            if (placeSnapshot != null) {
-                int newCount = count - 1;
-                itemCounts.put(item, newCount);
+            PlaceSnapshot placeSnapshot = PlaceSnapshot.get(world, player, rayTraceResult, pos, item, supportingBlock, options);
+            if(placeSnapshot != null) {
+                int ncount = count - 1;
+                itemCounts.put(item, ncount);
 
-                // Remover del pool si ya no queda ninguno de ese item
-                if (newCount == 0)
-                    itemPool.remove(item);
+                // Remove item from pool if there are no items left
+                if(ncount == 0) itemPool.remove(item);
 
                 return placeSnapshot;
             }
@@ -136,46 +107,51 @@ public class SupplierInventory implements IWandSupplier {
         int count = stack.getCount();
         Item item = stack.getItem();
 
-        if (player.getInventory().items == null)
-            return count;
-        if (player.isCreative())
-            return 0;
+        if(player.getInventory().getNonEquipmentItems().isEmpty()) return count;
+        if(player.isCreative()) return 0;
 
         List<ItemStack> hotbar = WandUtil.getHotbarWithOffhand(player);
         List<ItemStack> mainInv = WandUtil.getMainInv(player);
+        List<ItemStack> armor = WandUtil.getArmor(player);
+    
 
-        // Consumir de inventario principal, items sueltos primero
+        // Take items from main inv, loose items first
         count = takeItemsInvList(count, item, mainInv, false);
         count = takeItemsInvList(count, item, mainInv, true);
 
-        // Consumir de hotbar, contenedores primero
+        // Take items from hotbar, containers first
         count = takeItemsInvList(count, item, hotbar, true);
         count = takeItemsInvList(count, item, hotbar, false);
+
+        count = takeItemsInvList(count, item, armor, true);
+        count = takeItemsInvList(count, item, armor, false);    
+
+        
 
         return count;
     }
 
     private int takeItemsInvList(int count, Item item, List<ItemStack> inv, boolean container) {
-        ContainerManager containerManager = ConstructionWand.instance.containerManager;
+        if (count == 0) return count;
+        if (player instanceof ServerPlayer serverPlayer) {
 
-        for (ItemStack stack : inv) {
-            if (count == 0)
-                break;
+            ContainerManager containerManager = ConstructionWand.containerManager;
+            // In use, ContainerTrace is just a placeholder
+            ContainerTrace trace = new ContainerTrace(serverPlayer);
 
-            // Intentar consumir desde contenedores (ej: Sophisticated Backpacks, Shulkers)
-            if (container) {
-                int prevCount = count;
-                count = containerManager.useItems(player, new ItemStack(item), stack, count);
-                if (count < prevCount)
-                    player.getInventory().setChanged();
-            }
+            for(ItemStack stack : inv) {
+                if(count == 0) break;
 
-            // Intentar consumir desde items sueltos directamente
-            if (!container && WandUtil.stackEquals(stack, item)) {
-                int toTake = Math.min(count, stack.getCount());
-                stack.shrink(toTake);
-                count -= toTake;
-                player.getInventory().setChanged();
+                if(container) {
+                    count = containerManager.useItems(serverPlayer, trace, new ItemStack(item), stack, count);
+                }
+
+                if(!container && WandUtil.stackEquals(stack, item)) {
+                    int toTake = Math.min(count, stack.getCount());
+                    stack.shrink(toTake);
+                    count -= toTake;
+                    serverPlayer.getInventory().setChanged();
+                }
             }
         }
         return count;

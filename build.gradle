@@ -30,7 +30,7 @@ runs {
 
     client {
         systemProperty 'neoforge.enabledGameTestNamespaces', "${modid}"
-         jvmArgument '-Xmx1800m'
+         jvmArgument '-Xmx2G'
     }
 
     server {

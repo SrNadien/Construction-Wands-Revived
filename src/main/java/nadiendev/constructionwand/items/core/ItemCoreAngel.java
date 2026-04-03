@@ -1,6 +1,6 @@
 package nadiendev.constructionwand.items.core;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import nadiendev.constructionwand.ConstructionWand;
 import nadiendev.constructionwand.api.IWandAction;
 import nadiendev.constructionwand.wand.action.ActionAngel;
@@ -13,7 +13,7 @@ public class ItemCoreAngel extends ItemCore
 
     @Override
     public int getColor() {
-        return 0xE9B115;
+        return 0xFFE9B115;
     }
 
     @Override
@@ -22,7 +22,7 @@ public class ItemCoreAngel extends ItemCore
     }
 
     @Override
-    public ResourceLocation getRegistryName() {
+    public Identifier getRegistryName() {
         return ConstructionWand.loc("core_angel");
     }
 }

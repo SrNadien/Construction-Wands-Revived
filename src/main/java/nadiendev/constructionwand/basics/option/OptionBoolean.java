@@ -1,37 +1,46 @@
 package nadiendev.constructionwand.basics.option;
 
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.core.component.DataComponentType;
-import net.minecraft.world.item.ItemStack;
 
 public class OptionBoolean implements IOption<Boolean>
 {
-    private final ItemStack stack;
-    private final DataComponentType<Boolean> componentType;
+    private final CompoundTag tag;
     private final String key;
     private final boolean enabled;
+    private final Runnable onChanged;
     private boolean value;
 
-    public OptionBoolean(ItemStack stack, DataComponentType<Boolean> componentType, String key, boolean dval, boolean enabled) {
-        this.stack = stack;
-        this.componentType = componentType;
+    public OptionBoolean(CompoundTag tag, String key, boolean dval, boolean enabled, Runnable onChanged) {
+        this.tag = tag;
         this.key = key;
         this.enabled = enabled;
+        this.onChanged = onChanged;
 
-        value = stack.getOrDefault(componentType, dval);
+        if(tag.contains(key)) value = tag.getBoolean(key).orElse(dval);
+        else value = dval;
     }
 
-    public OptionBoolean(ItemStack stack, DataComponentType<Boolean> componentType, String key, boolean dval) {
-        this(stack, componentType, key, dval, true);
+    public OptionBoolean(CompoundTag tag, String key, boolean dval, boolean enabled) {
+        this(tag, key, dval, enabled, null);
     }
+
+    public OptionBoolean(CompoundTag tag, String key, boolean dval) {
+        this(tag, key, dval, true);
+    }
+
+    public OptionBoolean(CompoundTag tag, String key, boolean dval, Runnable onChanged) {
+        this(tag, key, dval, true, onChanged);
+    }
+
+     @Override
+      public DataComponentType<?> getComponentType() {
+      return null;
+       }
 
     @Override
     public String getKey() {
         return key;
-    }
-
-    @Override
-    public DataComponentType<Boolean> getComponentType() {
-        return componentType;
     }
 
     @Override
@@ -53,7 +62,8 @@ public class OptionBoolean implements IOption<Boolean>
     public void set(Boolean val) {
         if(!enabled) return;
         value = val;
-        stack.set(componentType, val);
+        tag.putBoolean(key, value);
+        if (onChanged != null) onChanged.run();
     }
 
     @Override

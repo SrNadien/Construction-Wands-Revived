@@ -121,7 +121,7 @@ public class WandJob
             world.playSound(null, player.blockPosition(), sound.getPlaceSound(), SoundSource.BLOCKS, sound.volume, sound.pitch);
 
             // Add to job history for undo
-            ConstructionWand.instance.undoHistory.add(player, world, placeSnapshots);
+            ConstructionWand.undoHistory.add(player, world, placeSnapshots);
         }
 
         return !placeSnapshots.isEmpty();
