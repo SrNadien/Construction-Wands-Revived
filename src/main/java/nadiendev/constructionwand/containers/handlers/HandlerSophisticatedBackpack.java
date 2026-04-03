@@ -1,80 +1,81 @@
 package nadiendev.constructionwand.containers.handlers;
 
+import net.minecraft.core.NonNullList;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.items.IItemHandler;
+import net.minecraft.world.item.component.ItemContainerContents;
 import nadiendev.constructionwand.api.IContainerHandler;
 import nadiendev.constructionwand.basics.WandUtil;
+import nadiendev.constructionwand.containers.ContainerTrace;
 
 /**
- * Sophisticated Backpack handler.
+ * Sophisticated Backpack handler 
+ *
  * By NadienDev
  */
 public class HandlerSophisticatedBackpack implements IContainerHandler {
 
-    // Comprueba si el item del inventario es una mochila de Sophisticated.
+    private static final int SLOTS = 108;
 
     @Override
     public boolean matches(Player player, ItemStack itemStack, ItemStack inventoryStack) {
         if (inventoryStack == null || inventoryStack.isEmpty() || inventoryStack.getCount() != 1) {
             return false;
         }
-        // Comprueba que el item expone IItemHandler como capability de item
-        // Esto detecta mochilas de Sophisticated sin depender directamente de sus clases
-        IItemHandler handler = inventoryStack.getCapability(Capabilities.ItemHandler.ITEM);
-        return handler != null;
+        String namespace = BuiltInRegistries.ITEM
+                .getKey(inventoryStack.getItem())
+                .getNamespace();
+        return "sophisticatedbackpacks".equals(namespace);
     }
 
-  
-      //Cuenta cuántos items coincidentes hay dentro de la mochila.
+    @Override
+    public int getSignature(Player player, ItemStack inventoryStack) {
+        return inventoryStack.hashCode();
+    }
 
     @Override
-    public int countItems(Player player, ItemStack itemStack, ItemStack inventoryStack) {
-        IItemHandler handler = inventoryStack.getCapability(Capabilities.ItemHandler.ITEM);
-        if (handler == null) return 0;
-
+    public int countItems(Player player, ContainerTrace trace, ItemStack itemStack, ItemStack inventoryStack) {
         int count = 0;
-        for (int i = 0; i < handler.getSlots(); i++) {
-            ItemStack slotStack = handler.getStackInSlot(i);
-            if (WandUtil.stackEquals(slotStack, itemStack)) {
-                count += slotStack.getCount();
+        for (ItemStack stack : getItemList(inventoryStack)) {
+            if (WandUtil.stackEquals(stack, itemStack)) {
+                count += stack.getCount();
             }
         }
         return count;
     }
 
-    /**
-     * Extrae items de la mochila.
-     * Usa extractItem() de IItemHandler para que Sophisticated pueda
-     *
-     * @return items restantes por consumir (0 = todos consumidos)
-     */
     @Override
-    public int useItems(Player player, ItemStack itemStack, ItemStack inventoryStack, int count) {
-        IItemHandler handler = inventoryStack.getCapability(Capabilities.ItemHandler.ITEM);
-        if (handler == null) return count;
-
+    public int useItems(Player player, ContainerTrace trace, ItemStack itemStack, ItemStack inventoryStack, int count) {
+        NonNullList<ItemStack> itemList = getItemList(inventoryStack);
         boolean changed = false;
 
-        for (int i = 0; i < handler.getSlots() && count > 0; i++) {
-            ItemStack slotStack = handler.getStackInSlot(i);
-            if (!WandUtil.stackEquals(slotStack, itemStack)) continue;
-
-            int toTake = Math.min(count, slotStack.getCount());
-
-            // simulate=false para extraer de verdad
-            ItemStack extracted = handler.extractItem(i, toTake, false);
-            if (!extracted.isEmpty()) {
-                count -= extracted.getCount();
-                changed = true;
-            }
+        for (ItemStack stack : itemList) {
+            if (!WandUtil.stackEquals(stack, itemStack)) continue;
+            int toTake = Math.min(count, stack.getCount());
+            stack.shrink(toTake);
+            count -= toTake;
+            changed = true;
+            if (count == 0) break;
         }
 
         if (changed) {
+            setItemList(inventoryStack, itemList);
             player.getInventory().setChanged();
         }
 
         return count;
+    }
+
+    private NonNullList<ItemStack> getItemList(ItemStack itemStack) {
+        NonNullList<ItemStack> itemStacks = NonNullList.withSize(SLOTS, ItemStack.EMPTY);
+        ItemContainerContents contents = itemStack.getOrDefault(DataComponents.CONTAINER, ItemContainerContents.EMPTY);
+        contents.copyInto(itemStacks);
+        return itemStacks;
+    }
+
+    private void setItemList(ItemStack itemStack, NonNullList<ItemStack> itemStacks) {
+        itemStack.set(DataComponents.CONTAINER, ItemContainerContents.fromItems(itemStacks));
     }
 }
