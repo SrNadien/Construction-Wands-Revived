@@ -4,6 +4,10 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
+<<<<<<< Updated upstream
+=======
+import net.minecraft.server.level.ServerPlayer;
+>>>>>>> Stashed changes
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
@@ -161,6 +165,7 @@ public class WandUtil
         ContainerManager containerManager = ConstructionWand.instance.containerManager;
         List<ItemStack> inventory = WandUtil.getFullInv(player);
 
+<<<<<<< Updated upstream
         for(ItemStack stack : inventory) {
             if(stack == null || stack.isEmpty()) continue;
 
@@ -169,6 +174,17 @@ public class WandUtil
             }
             else {
                 int amount = containerManager.countItems(player, new ItemStack(item), stack);
+=======
+        ContainerTrace trace = player instanceof ServerPlayer sp ? new ContainerTrace(sp) : null;
+
+        for(ItemStack stack : inventory) {
+            if(stack == null || stack.isEmpty()) continue;
+
+            if(WandUtil.stackEquals(stack, item)) {
+                total += stack.getCount();
+            } else if(trace != null) {
+                int amount = containerManager.countItems(player, trace, new ItemStack(item), stack);
+>>>>>>> Stashed changes
                 if(amount == Integer.MAX_VALUE) return Integer.MAX_VALUE;
                 total += amount;
             }

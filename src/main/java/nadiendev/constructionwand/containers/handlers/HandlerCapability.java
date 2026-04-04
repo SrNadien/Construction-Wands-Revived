@@ -15,12 +15,19 @@ public class HandlerCapability implements IContainerHandler
     }
 
     @Override
+<<<<<<< Updated upstream
     public int countItems(Player player, ItemStack itemStack, ItemStack inventoryStack) {
+=======
+    public int countItems(Player player, ContainerTrace trace, ItemStack itemStack, ItemStack inventoryStack) {
+>>>>>>> Stashed changes
         IItemHandler itemHandler = inventoryStack.getCapability(Capabilities.ItemHandler.ITEM);
         if(itemHandler == null) return 0;
 
         int total = 0;
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
         for(int i = 0; i < itemHandler.getSlots(); i++) {
             ItemStack containerStack = itemHandler.getStackInSlot(i);
             if(WandUtil.stackEquals(itemStack, containerStack)) {
@@ -31,7 +38,11 @@ public class HandlerCapability implements IContainerHandler
     }
 
     @Override
+<<<<<<< Updated upstream
     public int useItems(Player player, ItemStack itemStack, ItemStack inventoryStack, int count) {
+=======
+    public int useItems(Player player, ContainerTrace trace, ItemStack itemStack, ItemStack inventoryStack, int count) {
+>>>>>>> Stashed changes
         IItemHandler itemHandler = inventoryStack.getCapability(Capabilities.ItemHandler.ITEM);
         if(itemHandler == null) return count;
 

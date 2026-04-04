@@ -28,7 +28,11 @@ runs {
         systemProperty 'forge.logging.console.level', 'debug'
 
         //Limit ram usage for the dev environment to 4GB
+<<<<<<< Updated upstream
         jvmArgument '-Xmx4G'
+=======
+        jvmArgument '-Xmx2G'
+>>>>>>> Stashed changes
 
         modSource project.sourceSets.main
     }
@@ -57,6 +61,13 @@ sourceSets.main.resources {
 }
 
 repositories {
+    mavenCentral()
+    maven {
+        url = 'https://maven.creeperhost.net'
+        content {
+            includeGroup("com.refinedmods.refinedstorage")
+        }
+    }
     maven {
         url = "https://maven.blamejared.com"
     }
@@ -68,6 +79,16 @@ repositories {
 		url = "https://maven.terraformersmc.com/"
 	}
     maven { url "https://maven.shedaniel.me" }
+<<<<<<< Updated upstream
+=======
+    maven {
+        name = "Curse Maven"
+        url = "https://cursemaven.com"
+        content {
+            includeGroup "curse.maven"
+        }
+    }
+>>>>>>> Stashed changes
 }
 
 dependencies {
@@ -77,8 +98,26 @@ dependencies {
     compileOnly "mezz.jei:jei-${mcversion}-common-api:${jei_version}"
     compileOnly "mezz.jei:jei-${mcversion}-neoforge-api:${jei_version}"
     runtimeOnly "mezz.jei:jei-${mcversion}-neoforge:${jei_version}"
+<<<<<<< Updated upstream
+=======
+     
+     // Applied Energistics 2
+    compileOnly "org.appliedenergistics:appliedenergistics2:${ae2_version}"
+    implementation "org.appliedenergistics:appliedenergistics2:${ae2_version}"
+    implementation "org.appliedenergistics:guideme:${guideme_version}"
+
+    //refined Storage
+    implementation "com.refinedmods.refinedstorage:refinedstorage-neoforge:${refinedstorage_version}"
+>>>>>>> Stashed changes
 
 
+<<<<<<< Updated upstream
+=======
+    //sophisticated core
+    implementation "curse.maven:sophisticated-core-618298:${sophisticatedcore_version}"
+
+
+>>>>>>> Stashed changes
 //    compileOnly ([
 //            group: "vazkii.botania",
 //            name: "Botania",
@@ -103,9 +142,28 @@ jar {
 
 tasks.withType(ProcessResources).configureEach {
     var replaceProperties = [
+<<<<<<< Updated upstream
             mod_version            : mod_version,
             modid                  : modid,
             jei_version            : jei_version,
+=======
+            mcversion              : mcversion,
+            mod_version            : mod_version,
+            modid                  : modid,
+            author                 : author,
+            mod_named              : mod_named,
+            tag_lanzador           : tag_lanzador,
+            description            : description,
+            license                 : license,
+            neoversion             : neoversion,
+            loader_version        : loader_version,
+            jei_version            : jei_version,
+            guideme_version        : guideme_version,
+            ae2_version            : ae2_version,
+            refinedstorage_version : refinedstorage_version,
+            sophisticatedbackpacks_version : sophisticatedbackpacks_version,
+            sophisticatedcore_version : sophisticatedcore_version,
+>>>>>>> Stashed changes
             // rei_version            : rei_version,
             // emi_version            : emi_version,
     ]
@@ -139,4 +197,8 @@ idea {
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
+<<<<<<< Updated upstream
+=======
+    options.getRelease().set(21)
+>>>>>>> Stashed changes
 }

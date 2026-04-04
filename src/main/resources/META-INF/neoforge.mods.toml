@@ -1,15 +1,27 @@
 modLoader = "javafml"
+<<<<<<< Updated upstream
 loaderVersion = "[4,)"
 license = "MIT License"
+=======
+loaderVersion = "${loader_version}"
+license = "${license}"
+>>>>>>> Stashed changes
 [[mods]]
 modId="${modid}"
 version="${mod_version}"
 displayName="Construction Wands Revived"
+<<<<<<< Updated upstream
 displayURL=""
 logoFile="logo.png"
 authors="ThetaDev, SrNadien"
 description='''
 Construction Wands make building easier!
+=======
+displayURL="https://www.curseforge.com/minecraft/mc-mods/construction-wands-revived"
+logoFile="logo.png"
+authors="${author}"
+description="${description}"
+>>>>>>> Stashed changes
 
 With a Construction Wand you can place multiple blocks (up to 1024) at once, extending your build on the side you're
 facing. If that's not enough: you can upgrade your wand with additional cores, allowing you to place a block
@@ -20,7 +32,11 @@ This is my first minecraft mod. May the odds be ever in your favor.
 [[dependencies.${modid}]]
     modId="neoforge"
     type="required"
+<<<<<<< Updated upstream
     versionRange="[21.1.1,)"
+=======
+    versionRange="${neoversion}"
+>>>>>>> Stashed changes
     ordering = "NONE"
     side="BOTH"
 [[dependencies.${modid}]]
@@ -30,7 +46,7 @@ This is my first minecraft mod. May the odds be ever in your favor.
     ordering = "NONE"
     side="BOTH"
 
-#jei dependency 
+# jei dependency 
 [[dependencies.${modid}]]
     modId="jei"
     type="optional"
@@ -38,4 +54,42 @@ This is my first minecraft mod. May the odds be ever in your favor.
     ordering="AFTER"
     side="CLIENT"
 
+# guideme dependency 
+[[dependencies.${modid}]]
+    modId="guideme"
+    type="optional"
+    versionRange="${guideme_version}"
+    ordering="AFTER"
+    side="CLIENT"
 
+# ae2 dependency 
+[[dependencies.${modid}]]
+    modId="ae2"
+    type="optional"
+    versionRange="${ae2_version}"
+    ordering="AFTER"
+    side="CLIENT"
+
+# refined storage dependency 
+[[dependencies.${modid}]]
+    modId="refinedstorage"
+    type="optional"
+    versionRange="${refinedstorage_version}"
+    ordering="AFTER"
+    side="CLIENT"
+
+# sophisticated core dependency 
+[[dependencies.${modid}]]
+    modId="sophisticatedcore"
+    type="optional"
+    versionRange="${sophisticatedcore_version}"
+    ordering="AFTER"
+    side="CLIENT"
+
+# sophisticated backpacks dependency 
+[[dependencies.${modid}]]
+    modId="sophisticatedbackpacks"
+    type="optional"
+    versionRange="${sophisticatedbackpacks_version}"
+    ordering="AFTER"
+    side="CLIENT"

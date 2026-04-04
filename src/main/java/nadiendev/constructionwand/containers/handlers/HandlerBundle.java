@@ -7,6 +7,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.BundleContents;
 import nadiendev.constructionwand.api.IContainerHandler;
 import nadiendev.constructionwand.basics.WandUtil;
+import nadiendev.constructionwand.containers.ContainerTrace;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -20,7 +21,11 @@ public class HandlerBundle implements IContainerHandler
     }
 
     @Override
+<<<<<<< Updated upstream
     public int countItems(Player player, ItemStack itemStack, ItemStack inventoryStack) {
+=======
+    public int countItems(Player player, ContainerTrace trace, ItemStack itemStack, ItemStack inventoryStack) {
+>>>>>>> Stashed changes
         return getContents(inventoryStack).filter((stack) -> WandUtil.stackEquals(stack, itemStack))
                 .map(ItemStack::getCount).reduce(0, Integer::sum);
     }
@@ -46,8 +51,12 @@ public class HandlerBundle implements IContainerHandler
     private Stream<ItemStack> getContents(ItemStack bundleStack) {
         if(bundleStack.has(DataComponents.BUNDLE_CONTENTS)) {
             return Stream.empty();
+<<<<<<< Updated upstream
         }
         else {
+=======
+        } else {
+>>>>>>> Stashed changes
             BundleContents contents = bundleStack.getOrDefault(DataComponents.BUNDLE_CONTENTS, BundleContents.EMPTY);
             return contents.itemCopyStream();
         }

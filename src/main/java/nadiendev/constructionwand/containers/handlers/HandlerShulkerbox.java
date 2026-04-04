@@ -22,7 +22,11 @@ public class HandlerShulkerbox implements IContainerHandler
     }
 
     @Override
+<<<<<<< Updated upstream
     public int countItems(Player player, ItemStack itemStack, ItemStack inventoryStack) {
+=======
+    public int countItems(Player player, ContainerTrace trace, ItemStack itemStack, ItemStack inventoryStack) {
+>>>>>>> Stashed changes
         int count = 0;
         for(ItemStack stack : getItemList(inventoryStack)) {
             if(WandUtil.stackEquals(stack, itemStack)) count += stack.getCount();
@@ -55,7 +59,10 @@ public class HandlerShulkerbox implements IContainerHandler
         ItemContainerContents contents = itemStack.getOrDefault(DataComponents.CONTAINER, ItemContainerContents.EMPTY);
         List<ItemStack> contentList = contents.stream().toList();
 
+<<<<<<< Updated upstream
         
+=======
+>>>>>>> Stashed changes
         NonNullList<ItemStack> itemStacks = NonNullList.withSize(SLOTS, ItemStack.EMPTY);
         for (int i = 0; i < Math.min(contentList.size(), SLOTS); i++) {
             itemStacks.set(i, contentList.get(i));
