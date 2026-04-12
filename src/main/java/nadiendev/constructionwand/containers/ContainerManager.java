@@ -18,12 +18,6 @@ public class ContainerManager
         return handlers.add(handler);
     }
 
-<<<<<<< Updated upstream
-    public int countItems(Player player, ItemStack itemStack, ItemStack inventoryStack) {
-        for(IContainerHandler handler : handlers) {
-            if(handler.matches(player, itemStack, inventoryStack)) {
-                return handler.countItems(player, itemStack, inventoryStack);
-=======
     /**
      * Devuelve true si algún handler registrado reconoce inventoryStack como
      * un container válido. Funciona en cliente y servidor.
@@ -41,23 +35,16 @@ public class ContainerManager
         for(IContainerHandler handler : handlers) {
             if(handler.matches(player, itemStack, inventoryStack)) {
                 return handler.countItems(player, trace, itemStack, inventoryStack);
->>>>>>> Stashed changes
             }
         }
         return 0;
     }
 
-    public int useItems(Player player, ItemStack itemStack, ItemStack inventoryStack, int count) {
+    public int useItems(Player player, ContainerTrace trace, ItemStack itemStack, ItemStack inventoryStack, int count) {
         for(IContainerHandler handler : handlers) {
             if(handler.matches(player, itemStack, inventoryStack)) {
                 int prevCount = count;
-<<<<<<< Updated upstream
-                int remainingCount = handler.useItems(player, itemStack, inventoryStack, count);
-                // Si el handler consumió items del contenedor, marcar inventario como modificado
-                // para que el cliente se actualice correctamente
-=======
                 int remainingCount = handler.useItems(player, trace, itemStack, inventoryStack, count);
->>>>>>> Stashed changes
                 if(remainingCount < prevCount) {
                     player.getInventory().setChanged();
                 }

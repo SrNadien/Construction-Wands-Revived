@@ -6,23 +6,28 @@ import appeng.api.stacks.AEItemKey;
 import appeng.api.storage.MEStorage;
 import appeng.api.storage.StorageHelper;
 import appeng.helpers.WirelessTerminalMenuHost;
-import appeng.items.tools.powered.WirelessCraftingTerminalItem;
 import appeng.items.tools.powered.WirelessTerminalItem;
 import appeng.menu.locator.ItemMenuHostLocator;
-import appeng.menu.locator.MenuLocators;
+import de.mari_023.ae2wtlib.api.registration.WTDefinition;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import nadiendev.constructionwand.api.IContainerHandler;
 import nadiendev.constructionwand.containers.ContainerTrace;
-import top.theillusivec4.curios.api.CuriosApi;
 
-public class HandlerWirelessTerminal implements IContainerHandler {
+public class HandlerWirelessTerminalAE2WTLib implements IContainerHandler {
 
     @Override
     public boolean matches(Player player, ItemStack itemStack, ItemStack inventoryStack) {
-        return inventoryStack.getItem() instanceof WirelessTerminalItem
-                || inventoryStack.getItem() instanceof WirelessCraftingTerminalItem;
+        return isWTLibTerminal(inventoryStack.getItem());
+    }
+
+    private static boolean isWTLibTerminal(Item item) {
+        for (WTDefinition def : WTDefinition.wirelessTerminals()) {
+            if (def.item() == item) return true;
+        }
+        return false;
     }
 
     @Override
@@ -70,16 +75,19 @@ public class HandlerWirelessTerminal implements IContainerHandler {
     }
 
     private MEStorage getStorage(ServerPlayer player, ItemStack terminal) {
-        var host = getHost(player, terminal);
+        WirelessTerminalMenuHost<?> host = getHost(player, terminal);
         return host != null ? host.getInventory() : null;
     }
 
     private WirelessTerminalMenuHost<?> getHost(ServerPlayer player, ItemStack terminal) {
         try {
-            ItemMenuHostLocator locator = resolveLocator(player, terminal);
+            WTDefinition definition = definitionOf(terminal);
+            if (definition == null) return null;
+
+            ItemMenuHostLocator locator = HandlerWirelessTerminal.resolveLocator(player, terminal);
             if (locator == null) return null;
 
-            WirelessTerminalMenuHost<?> host = buildHost(player, terminal, locator);
+            WirelessTerminalMenuHost<?> host = buildHost(definition, player, locator);
             if (host == null) return null;
 
             if (!host.getLinkStatus().connected()) return null;
@@ -90,44 +98,20 @@ public class HandlerWirelessTerminal implements IContainerHandler {
         }
     }
 
-    private WirelessTerminalMenuHost<?> buildHost(ServerPlayer player, ItemStack terminal, ItemMenuHostLocator locator) {
+    private WirelessTerminalMenuHost<?> buildHost(WTDefinition definition, ServerPlayer player, ItemMenuHostLocator locator) {
         try {
-            if (terminal.getItem() instanceof WirelessCraftingTerminalItem crafting) {
-                return new WirelessTerminalMenuHost<>(crafting, player, locator, (p, menu) -> {});
-            } else if (terminal.getItem() instanceof WirelessTerminalItem wireless) {
+            var item = definition.item();
+            if (item instanceof WirelessTerminalItem wireless) {
                 return new WirelessTerminalMenuHost<>(wireless, player, locator, (p, menu) -> {});
             }
         } catch (Exception ignored) {}
         return null;
     }
 
-    static ItemMenuHostLocator resolveLocator(ServerPlayer player, ItemStack item) {
-        for (int i = 0; i < player.getInventory().getContainerSize(); i++) {
-            ItemStack slotStack = player.getInventory().getItem(i);
-            if (slotStack.getItem() == item.getItem()
-                    && ItemStack.isSameItemSameComponents(slotStack, item)) {
-                return MenuLocators.forInventorySlot(i);
-            }
+    private static WTDefinition definitionOf(ItemStack terminal) {
+        for (WTDefinition def : WTDefinition.wirelessTerminals()) {
+            if (def.item() == terminal.getItem()) return def;
         }
-
-        try {
-            var curiosInventory = CuriosApi.getCuriosInventory(player).orElse(null);
-            if (curiosInventory == null) return null;
-
-            int globalSlot = 0;
-            for (var entry : curiosInventory.getCurios().entrySet()) {
-                var stacks = entry.getValue().getStacks();
-                for (int i = 0; i < stacks.getSlots(); i++) {
-                    ItemStack slotStack = stacks.getStackInSlot(i);
-                    if (slotStack.getItem() == item.getItem()
-                            && ItemStack.isSameItemSameComponents(slotStack, item)) {
-                        return MenuLocators.forCurioSlot(globalSlot);
-                    }
-                    globalSlot++;
-                }
-            }
-        } catch (Exception ignored) {}
-
         return null;
     }
 }

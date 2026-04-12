@@ -9,6 +9,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.ShulkerBoxBlock;
 import nadiendev.constructionwand.api.IContainerHandler;
 import nadiendev.constructionwand.basics.WandUtil;
+import nadiendev.constructionwand.containers.ContainerTrace;
 
 import java.util.List;
 
@@ -22,11 +23,7 @@ public class HandlerShulkerbox implements IContainerHandler
     }
 
     @Override
-<<<<<<< Updated upstream
-    public int countItems(Player player, ItemStack itemStack, ItemStack inventoryStack) {
-=======
     public int countItems(Player player, ContainerTrace trace, ItemStack itemStack, ItemStack inventoryStack) {
->>>>>>> Stashed changes
         int count = 0;
         for(ItemStack stack : getItemList(inventoryStack)) {
             if(WandUtil.stackEquals(stack, itemStack)) count += stack.getCount();
@@ -35,7 +32,7 @@ public class HandlerShulkerbox implements IContainerHandler
     }
 
     @Override
-    public int useItems(Player player, ItemStack itemStack, ItemStack inventoryStack, int count) {
+    public int useItems(Player player, ContainerTrace trace, ItemStack itemStack, ItemStack inventoryStack, int count) {
         NonNullList<ItemStack> itemList = getItemList(inventoryStack);
         boolean changed = false;
 
@@ -59,10 +56,6 @@ public class HandlerShulkerbox implements IContainerHandler
         ItemContainerContents contents = itemStack.getOrDefault(DataComponents.CONTAINER, ItemContainerContents.EMPTY);
         List<ItemStack> contentList = contents.stream().toList();
 
-<<<<<<< Updated upstream
-        
-=======
->>>>>>> Stashed changes
         NonNullList<ItemStack> itemStacks = NonNullList.withSize(SLOTS, ItemStack.EMPTY);
         for (int i = 0; i < Math.min(contentList.size(), SLOTS); i++) {
             itemStacks.set(i, contentList.get(i));

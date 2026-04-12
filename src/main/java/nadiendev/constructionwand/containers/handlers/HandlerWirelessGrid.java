@@ -14,7 +14,6 @@ import com.refinedmods.refinedstorage.common.grid.WirelessGridItem;
 import com.refinedmods.refinedstorage.common.support.resource.ItemResource;
 import net.minecraft.core.GlobalPos;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
@@ -26,8 +25,6 @@ import nadiendev.constructionwand.api.IContainerHandler;
 import nadiendev.constructionwand.containers.ContainerTrace;
 
 public class HandlerWirelessGrid implements IContainerHandler {
-    // private static final String MSG_NOT_BOUND = "misc.refinedstorage.wireless_grid.not_bound";
-    // private static final String MSG_OUT_OF_ENERGY = "misc.refinedstorage.wireless_grid.out_of_energy";
 
     @Override
     public boolean matches(Player player, ItemStack itemStack, ItemStack inventoryStack) {
@@ -53,26 +50,21 @@ public class HandlerWirelessGrid implements IContainerHandler {
         Network network = resolveNetworkForItem(player, inventoryStack);
         if (network == null) return 0;
 
-        // Creative wireless grid doesn't require energy
-        if (!isCreativeWirelessGrid(inventoryStack)) {
-            long extractCost = getWirelessGridExtractEnergyUsage();
-            long energyStored = getItemEnergyStored(inventoryStack);
-            if (extractCost > 0 && energyStored <= 0) {
-                return 0;
-            }
-
-            long maxByEnergy = extractCost <= 0 ? Integer.MAX_VALUE : energyStored / extractCost;
-            if (maxByEnergy <= 0) {
-                return 0;
-            }
-
-            long canExtract = extractItemAmount(network, itemStack, maxByEnergy, Action.SIMULATE);
+        if (isCreativeWirelessGrid(inventoryStack)) {
+            long canExtract = extractItemAmount(network, itemStack, Integer.MAX_VALUE, Action.SIMULATE);
             if (canExtract <= 0) return 0;
             return canExtract > Integer.MAX_VALUE ? Integer.MAX_VALUE : (int) canExtract;
         }
 
-        // Creative grid: no energy limit
-        long canExtract = extractItemAmount(network, itemStack, Integer.MAX_VALUE, Action.SIMULATE);
+        long extractCost = getWirelessGridExtractEnergyUsage();
+        long energyStored = getItemEnergyStored(inventoryStack);
+
+        if (extractCost > 0 && energyStored <= 0) return 0;
+
+        long maxByEnergy = extractCost <= 0 ? Integer.MAX_VALUE : energyStored / extractCost;
+        if (maxByEnergy <= 0) return 0;
+
+        long canExtract = extractItemAmount(network, itemStack, maxByEnergy, Action.SIMULATE);
         if (canExtract <= 0) return 0;
         return canExtract > Integer.MAX_VALUE ? Integer.MAX_VALUE : (int) canExtract;
     }
@@ -82,12 +74,8 @@ public class HandlerWirelessGrid implements IContainerHandler {
         if (!(player instanceof ServerPlayer) || count <= 0) return count;
 
         Network network = resolveNetworkForItem(player, inventoryStack);
-        if (network == null) {
-            // player.displayClientMessage(Component.translatable(MSG_NOT_BOUND), true);
-            return count;
-        }
+        if (network == null) return count;
 
-        // Creative wireless grid doesn't require energy
         if (isCreativeWirelessGrid(inventoryStack)) {
             long canExtract = extractItemAmount(network, itemStack, count, Action.SIMULATE);
             if (canExtract <= 0) return count;
@@ -99,15 +87,11 @@ public class HandlerWirelessGrid implements IContainerHandler {
             return remaining <= 0 ? 0 : (remaining > Integer.MAX_VALUE ? Integer.MAX_VALUE : (int) remaining);
         }
 
-        // Regular wireless grid: enforce energy cost
         long extractCost = getWirelessGridExtractEnergyUsage();
         long energyStored = getItemEnergyStored(inventoryStack);
 
         long maxByEnergy = extractCost <= 0 ? count : energyStored / extractCost;
-        if (maxByEnergy <= 0) {
-            // player.displayClientMessage(Component.translatable(MSG_OUT_OF_ENERGY), true);
-            return count;
-        }
+        if (maxByEnergy <= 0) return count;
 
         long request = Math.min(count, maxByEnergy);
         long canExtract = extractItemAmount(network, itemStack, request, Action.SIMULATE);
@@ -117,8 +101,7 @@ public class HandlerWirelessGrid implements IContainerHandler {
         if (extracted <= 0) return count;
 
         if (extractCost > 0) {
-            long toDrain = extracted * extractCost;
-            drainItemEnergy(inventoryStack, toDrain);
+            drainItemEnergy(inventoryStack, extracted * extractCost);
         }
 
         long remaining = count - extracted;
@@ -139,7 +122,6 @@ public class HandlerWirelessGrid implements IContainerHandler {
         Network network = targetBlockEntity.getNetworkForItem();
         if (network == null) return null;
 
-        // Let RS2 validators decide if this player can access the network from current coords.
         return isNetworkValidForPlayer(network, player) ? network : null;
     }
 

@@ -28,11 +28,7 @@ runs {
         systemProperty 'forge.logging.console.level', 'debug'
 
         //Limit ram usage for the dev environment to 4GB
-<<<<<<< Updated upstream
-        jvmArgument '-Xmx4G'
-=======
         jvmArgument '-Xmx2G'
->>>>>>> Stashed changes
 
         modSource project.sourceSets.main
     }
@@ -79,8 +75,6 @@ repositories {
 		url = "https://maven.terraformersmc.com/"
 	}
     maven { url "https://maven.shedaniel.me" }
-<<<<<<< Updated upstream
-=======
     maven {
         name = "Curse Maven"
         url = "https://cursemaven.com"
@@ -88,7 +82,13 @@ repositories {
             includeGroup "curse.maven"
         }
     }
->>>>>>> Stashed changes
+    maven {
+        url = uri("https://modmaven.dev/")
+        content {
+            includeGroup "appeng"
+            includeGroup "de.mari_023"
+        }
+    }
 }
 
 dependencies {
@@ -98,8 +98,6 @@ dependencies {
     compileOnly "mezz.jei:jei-${mcversion}-common-api:${jei_version}"
     compileOnly "mezz.jei:jei-${mcversion}-neoforge-api:${jei_version}"
     runtimeOnly "mezz.jei:jei-${mcversion}-neoforge:${jei_version}"
-<<<<<<< Updated upstream
-=======
      
      // Applied Energistics 2
     compileOnly "org.appliedenergistics:appliedenergistics2:${ae2_version}"
@@ -108,16 +106,25 @@ dependencies {
 
     //refined Storage
     implementation "com.refinedmods.refinedstorage:refinedstorage-neoforge:${refinedstorage_version}"
->>>>>>> Stashed changes
 
+    //refined storage curios integration
+    implementation "curse.maven:refined-storage-curios-integration-1230729:${refinedstorage_curiosintegration_version_id}"
 
-<<<<<<< Updated upstream
-=======
+    //sophisticated backpacks
+    implementation "curse.maven:sophisticated-backpacks-422301:${sophisticatedbackpacks_version}"
+
     //sophisticated core
     implementation "curse.maven:sophisticated-core-618298:${sophisticatedcore_version}"
 
+    // Curios API
+    compileOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}:api"
+    runtimeOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}"
 
->>>>>>> Stashed changes
+    //Ae2 Wireless Terminals
+      implementation "de.mari_023:ae2wtlib_api:${ae2wtlib_version}"
+      runtimeOnly "de.mari_023:ae2wtlib:${ae2wtlib_version}"
+
+
 //    compileOnly ([
 //            group: "vazkii.botania",
 //            name: "Botania",
@@ -142,11 +149,6 @@ jar {
 
 tasks.withType(ProcessResources).configureEach {
     var replaceProperties = [
-<<<<<<< Updated upstream
-            mod_version            : mod_version,
-            modid                  : modid,
-            jei_version            : jei_version,
-=======
             mcversion              : mcversion,
             mod_version            : mod_version,
             modid                  : modid,
@@ -163,7 +165,9 @@ tasks.withType(ProcessResources).configureEach {
             refinedstorage_version : refinedstorage_version,
             sophisticatedbackpacks_version : sophisticatedbackpacks_version,
             sophisticatedcore_version : sophisticatedcore_version,
->>>>>>> Stashed changes
+            curios_version             : curios_version,
+            ae2wtlib_version          : ae2wtlib_version,
+            refinedstorage_curiosintegration_version_id : refinedstorage_curiosintegration_version_id,
             // rei_version            : rei_version,
             // emi_version            : emi_version,
     ]
@@ -197,8 +201,5 @@ idea {
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
-<<<<<<< Updated upstream
-=======
     options.getRelease().set(21)
->>>>>>> Stashed changes
 }

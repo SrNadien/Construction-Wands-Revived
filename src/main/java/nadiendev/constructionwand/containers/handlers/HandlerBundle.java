@@ -21,17 +21,13 @@ public class HandlerBundle implements IContainerHandler
     }
 
     @Override
-<<<<<<< Updated upstream
-    public int countItems(Player player, ItemStack itemStack, ItemStack inventoryStack) {
-=======
     public int countItems(Player player, ContainerTrace trace, ItemStack itemStack, ItemStack inventoryStack) {
->>>>>>> Stashed changes
         return getContents(inventoryStack).filter((stack) -> WandUtil.stackEquals(stack, itemStack))
                 .map(ItemStack::getCount).reduce(0, Integer::sum);
     }
 
     @Override
-    public int useItems(Player player, ItemStack itemStack, ItemStack inventoryStack, int count) {
+    public int useItems(Player player, ContainerTrace trace, ItemStack itemStack, ItemStack inventoryStack, int count) {
         AtomicInteger newCount = new AtomicInteger(count);
 
         List<ItemStack> itemStacks = getContents(inventoryStack).filter((stack -> {
@@ -51,12 +47,7 @@ public class HandlerBundle implements IContainerHandler
     private Stream<ItemStack> getContents(ItemStack bundleStack) {
         if(bundleStack.has(DataComponents.BUNDLE_CONTENTS)) {
             return Stream.empty();
-<<<<<<< Updated upstream
-        }
-        else {
-=======
         } else {
->>>>>>> Stashed changes
             BundleContents contents = bundleStack.getOrDefault(DataComponents.BUNDLE_CONTENTS, BundleContents.EMPTY);
             return contents.itemCopyStream();
         }

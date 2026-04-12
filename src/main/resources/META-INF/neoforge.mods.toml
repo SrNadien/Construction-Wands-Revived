@@ -1,48 +1,25 @@
 modLoader = "javafml"
-<<<<<<< Updated upstream
-loaderVersion = "[4,)"
-license = "MIT License"
-=======
 loaderVersion = "${loader_version}"
 license = "${license}"
->>>>>>> Stashed changes
 [[mods]]
 modId="${modid}"
 version="${mod_version}"
 displayName="Construction Wands Revived"
-<<<<<<< Updated upstream
-displayURL=""
-logoFile="logo.png"
-authors="ThetaDev, SrNadien"
-description='''
-Construction Wands make building easier!
-=======
 displayURL="https://www.curseforge.com/minecraft/mc-mods/construction-wands-revived"
 logoFile="logo.png"
 authors="${author}"
 description="${description}"
->>>>>>> Stashed changes
 
-With a Construction Wand you can place multiple blocks (up to 1024) at once, extending your build on the side you're
-facing. If that's not enough: you can upgrade your wand with additional cores, allowing you to place a block
-behind the block you are facing, conjure blocks in mid air or destroy lots of blocks very fast.
-
-This is my first minecraft mod. May the odds be ever in your favor.
-'''
 [[dependencies.${modid}]]
     modId="neoforge"
     type="required"
-<<<<<<< Updated upstream
-    versionRange="[21.1.1,)"
-=======
     versionRange="${neoversion}"
->>>>>>> Stashed changes
     ordering = "NONE"
     side="BOTH"
 [[dependencies.${modid}]]
     modId="minecraft"
     type="required"
-    versionRange="[1.21,1.22)"
+    versionRange="${mcversion}"
     ordering = "NONE"
     side="BOTH"
 
@@ -52,7 +29,7 @@ This is my first minecraft mod. May the odds be ever in your favor.
     type="optional"
     versionRange="${jei_version}"
     ordering="AFTER"
-    side="CLIENT"
+    side = "BOTH"
 
 # guideme dependency 
 [[dependencies.${modid}]]
@@ -60,7 +37,7 @@ This is my first minecraft mod. May the odds be ever in your favor.
     type="optional"
     versionRange="${guideme_version}"
     ordering="AFTER"
-    side="CLIENT"
+    side = "BOTH"
 
 # ae2 dependency 
 [[dependencies.${modid}]]
@@ -68,7 +45,7 @@ This is my first minecraft mod. May the odds be ever in your favor.
     type="optional"
     versionRange="${ae2_version}"
     ordering="AFTER"
-    side="CLIENT"
+    side = "BOTH"
 
 # refined storage dependency 
 [[dependencies.${modid}]]
@@ -76,7 +53,7 @@ This is my first minecraft mod. May the odds be ever in your favor.
     type="optional"
     versionRange="${refinedstorage_version}"
     ordering="AFTER"
-    side="CLIENT"
+    side = "BOTH"
 
 # sophisticated core dependency 
 [[dependencies.${modid}]]
@@ -84,7 +61,7 @@ This is my first minecraft mod. May the odds be ever in your favor.
     type="optional"
     versionRange="${sophisticatedcore_version}"
     ordering="AFTER"
-    side="CLIENT"
+    side = "BOTH"
 
 # sophisticated backpacks dependency 
 [[dependencies.${modid}]]
@@ -92,4 +69,18 @@ This is my first minecraft mod. May the odds be ever in your favor.
     type="optional"
     versionRange="${sophisticatedbackpacks_version}"
     ordering="AFTER"
-    side="CLIENT"
+    side = "BOTH"
+
+[[dependencies.${modid}]]
+modId = "curios"
+type="optional"
+versionRange = "${curios_version}"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.${modid}]]
+modId = "ae2wtlib"
+type="optional"
+versionRange = "${ae2wtlib_version}"
+ordering = "NONE"
+side = "BOTH"
