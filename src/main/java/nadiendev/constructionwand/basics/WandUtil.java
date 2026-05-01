@@ -25,6 +25,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.util.BlockSnapshot;
 import net.neoforged.neoforge.event.level.BlockEvent;
+import net.neoforged.neoforge.event.level.block.BreakBlockEvent;
 import nadiendev.constructionwand.ConstructionWand;
 import nadiendev.constructionwand.containers.ContainerManager;
 import nadiendev.constructionwand.containers.ContainerTrace;
@@ -159,7 +160,7 @@ public class WandUtil
                 if(!ReplacementRegistry.matchBlocks(currentBlock.getBlock(), block.getBlock())) return false;
         }
 
-        BlockEvent.BreakEvent breakEvent = new BlockEvent.BreakEvent(world, pos, currentBlock, player);
+        BreakBlockEvent breakEvent = new BreakBlockEvent(world, pos, currentBlock, player);
         NeoForge.EVENT_BUS.post(breakEvent);
         if(breakEvent.isCanceled()) return false;
 
