@@ -2,14 +2,12 @@ package nadiendev.constructionwand.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -39,9 +37,6 @@ public class RenderBlockPreview
         if(wand == null) return;
 
         if(!(player.isCrouching() && ClientEvents.isOptKeyDown())) {
-            // Use cached wandJob for previews of the same target pos/dir
-            // Exception: always update if blockCount < 2 to prevent 1-block previews when block updates
-            // from the last placement are lagging
             if(wandJob == null || !compareRTR(wandJob.rayTraceResult, rtr) || !(wandJob.wand.equals(wand))
                 || wandJob.blockCount() < 2) {
                 wandJob = ItemWand.getWandJob(player, player.level(), rtr, wand);
@@ -61,15 +56,57 @@ public class RenderBlockPreview
 
         double partialTicks = event.getDeltaTracker().getGameTimeDeltaPartialTick(false);
         double d0 = player.xOld + (player.getX() - player.xOld) * partialTicks;
-        double d1 = player.yOld + player.getEyeHeight() + (player.getY() - player.yOld) * partialTicks;
+        double d1 = player.yOld + (player.getY() - player.yOld) * partialTicks + player.getEyeHeight();
         double d2 = player.zOld + (player.getZ() - player.zOld) * partialTicks;
 
+        PoseStack.Pose pose = ms.last();
+        float alpha = 0.4F;
+
         for(BlockPos block : blocks) {
-            // TODO: Update rendering for 1.21.8 API - renderLineBox/addChainedFilledBoxVertices removed
-            // AABB aabb = new AABB(block).move(-d0, -d1, -d2);
+            float minX = (float)(block.getX() - d0);
+            float minY = (float)(block.getY() - d1);
+            float minZ = (float)(block.getZ() - d2);
+            float maxX = (float)(block.getX() + 1 - d0);
+            float maxY = (float)(block.getY() + 1 - d1);
+            float maxZ = (float)(block.getZ() + 1 - d2);
+            drawBox(lineBuilder, pose, minX, minY, minZ, maxX, maxY, maxZ, colorR, colorG, colorB, alpha);
         }
 
         event.setCanceled(true);
+    }
+
+    private void drawBox(VertexConsumer consumer, PoseStack.Pose pose,
+                         float minX, float minY, float minZ, float maxX, float maxY, float maxZ,
+                         float red, float green, float blue, float alpha) {
+        drawLine(consumer, pose, minX, minY, minZ, maxX, minY, minZ, red, green, blue, alpha);
+        drawLine(consumer, pose, maxX, minY, minZ, maxX, minY, maxZ, red, green, blue, alpha);
+        drawLine(consumer, pose, maxX, minY, maxZ, minX, minY, maxZ, red, green, blue, alpha);
+        drawLine(consumer, pose, minX, minY, maxZ, minX, minY, minZ, red, green, blue, alpha);
+
+        drawLine(consumer, pose, minX, maxY, minZ, maxX, maxY, minZ, red, green, blue, alpha);
+        drawLine(consumer, pose, maxX, maxY, minZ, maxX, maxY, maxZ, red, green, blue, alpha);
+        drawLine(consumer, pose, maxX, maxY, maxZ, minX, maxY, maxZ, red, green, blue, alpha);
+        drawLine(consumer, pose, minX, maxY, maxZ, minX, maxY, minZ, red, green, blue, alpha);
+
+        drawLine(consumer, pose, minX, minY, minZ, minX, maxY, minZ, red, green, blue, alpha);
+        drawLine(consumer, pose, maxX, minY, minZ, maxX, maxY, minZ, red, green, blue, alpha);
+        drawLine(consumer, pose, maxX, minY, maxZ, maxX, maxY, maxZ, red, green, blue, alpha);
+        drawLine(consumer, pose, minX, minY, maxZ, minX, maxY, maxZ, red, green, blue, alpha);
+    }
+
+    private void drawLine(VertexConsumer consumer, PoseStack.Pose pose,
+                          float x1, float y1, float z1, float x2, float y2, float z2,
+                          float red, float green, float blue, float alpha) {
+        float dx = x2 - x1;
+        float dy = y2 - y1;
+        float dz = z2 - z1;
+        float len = (float)Math.sqrt(dx * dx + dy * dy + dz * dz);
+        float nx = len > 0 ? dx / len : 0;
+        float ny = len > 0 ? dy / len : 0;
+        float nz = len > 0 ? dz / len : 0;
+
+        consumer.addVertex(pose, x1, y1, z1).setColor(red, green, blue, alpha).setNormal(pose, nx, ny, nz);
+        consumer.addVertex(pose, x2, y2, z2).setColor(red, green, blue, alpha).setNormal(pose, nx, ny, nz);
     }
 
     public void reset() {
