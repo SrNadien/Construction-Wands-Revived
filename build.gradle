@@ -36,6 +36,13 @@ runs {
     }
 }
 
+sourceSets.main.java {
+    exclude 'nadiendev/constructionwand/containers/handlers/HandlerPortableCell.java'
+    exclude 'nadiendev/constructionwand/containers/handlers/HandlerWirelessTerminal.java'
+    exclude 'nadiendev/constructionwand/containers/handlers/HandlerWirelessTerminalAE2WTLib.java'
+    exclude 'nadiendev/constructionwand/containers/handlers/HandlerWirelessGrid.java'
+}
+
 sourceSets.main.resources {
     srcDir 'src/generated/resources'
 }

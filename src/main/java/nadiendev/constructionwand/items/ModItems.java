@@ -2,7 +2,7 @@ package nadiendev.constructionwand.items;
 
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Tiers;
+import net.minecraft.world.item.Items;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -22,10 +22,10 @@ public class ModItems
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(ConstructionWand.MODID);
 
     // Wands
-    public static final DeferredItem<Item> WAND_STONE     = ITEMS.register("stone_wand",    () -> new ItemWandBasic(propWand(), Tiers.STONE));
-    public static final DeferredItem<Item> WAND_IRON      = ITEMS.register("iron_wand",     () -> new ItemWandBasic(propWand(), Tiers.IRON));
-    public static final DeferredItem<Item> WAND_DIAMOND   = ITEMS.register("diamond_wand",  () -> new ItemWandBasic(propWand(), Tiers.DIAMOND));
-    public static final DeferredItem<Item> WAND_NETHERITE = ITEMS.register("netherite_wand",() -> new ItemWandBasic(propWand().fireResistant(), Tiers.NETHERITE));
+    public static final DeferredItem<Item> WAND_STONE     = ITEMS.register("stone_wand",    () -> new ItemWandBasic(propWand(), 131, r -> r.is(Items.COBBLED_DEEPSLATE) || r.is(Items.COBBLESTONE) || r.is(Items.BLACKSTONE)));
+    public static final DeferredItem<Item> WAND_IRON      = ITEMS.register("iron_wand",     () -> new ItemWandBasic(propWand(), 250, r -> r.is(Items.IRON_INGOT)));
+    public static final DeferredItem<Item> WAND_DIAMOND   = ITEMS.register("diamond_wand",  () -> new ItemWandBasic(propWand(), 1561, r -> r.is(Items.DIAMOND)));
+    public static final DeferredItem<Item> WAND_NETHERITE = ITEMS.register("netherite_wand",() -> new ItemWandBasic(propWand().fireResistant(), 2031, r -> r.is(Items.NETHERITE_INGOT)));
     public static final DeferredItem<Item> WAND_INFINITY  = ITEMS.register("infinity_wand", () -> new ItemWandInfinity(propWand()));
 
     // Cores
