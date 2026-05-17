@@ -32,7 +32,7 @@ runs {
 
     server {
         systemProperty 'forge.enabledGameTestNamespaces', "${modid}"
-        programArgument '--nogui'
+        argument '--nogui'
     }
 }
 
@@ -41,6 +41,12 @@ sourceSets.main.java {
     exclude 'nadiendev/constructionwand/containers/handlers/HandlerWirelessTerminal.java'
     exclude 'nadiendev/constructionwand/containers/handlers/HandlerWirelessTerminalAE2WTLib.java'
     exclude 'nadiendev/constructionwand/containers/handlers/HandlerWirelessGrid.java'
+    exclude 'nadiendev/constructionwand/data/ModData.java'
+    exclude 'nadiendev/constructionwand/data/AdvancementGenerator.java'
+    exclude 'nadiendev/constructionwand/data/ItemModelGenerator.java'
+    exclude 'nadiendev/constructionwand/data/RecipeGenerator.java'
+    exclude 'nadiendev/constructionwand/data/Inp.java'
+    exclude 'nadiendev/constructionwand/data/ICustomItemModel.java'
 }
 
 sourceSets.main.resources {
@@ -106,10 +112,10 @@ dependencies {
     //implementation "curse.maven:refined-storage-curios-integration-1230729:${refinedstorage_curiosintegration_version_id}"
 
     // sophisticated backpacks
-    implementation "net.p3pp3rf1y:sophisticatedbackpacks:${sophisticatedbackpacks_version}"
+    compileOnly "curse.maven:sophisticatedbackpacks-422301:8034893"
 
     // sophisticated core
-    implementation "sophisticatedcore:sophisticatedcore:${sophisticatedcore_version}"
+    compileOnly "curse.maven:sophisticatedcore-618298:8039643"
 
     // Curios API
     compileOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}:api"

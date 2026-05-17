@@ -65,8 +65,8 @@ public class RenderBlockPreview
         double d2 = player.zOld + (player.getZ() - player.zOld) * partialTicks;
 
         for(BlockPos block : blocks) {
-            AABB aabb = new AABB(block).move(-d0, -d1, -d2);
-            LevelRenderer.renderLineBox(ms, lineBuilder, aabb.minX, aabb.minY, aabb.minZ, aabb.maxX, aabb.maxY, aabb.maxZ, colorR, colorG, colorB, 0.4F);
+            // TODO: Update rendering for 1.21.8 API - renderLineBox/addChainedFilledBoxVertices removed
+            // AABB aabb = new AABB(block).move(-d0, -d1, -d2);
         }
 
         event.setCanceled(true);

@@ -9,25 +9,23 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
-import net.neoforged.neoforge.client.model.generators.ModelFile;
 import nadiendev.constructionwand.ConstructionWand;
 import nadiendev.constructionwand.api.IWandCore;
 import nadiendev.constructionwand.basics.WandUtil;
 import nadiendev.constructionwand.basics.option.IOption;
 import nadiendev.constructionwand.basics.option.WandOptions;
-import nadiendev.constructionwand.data.ICustomItemModel;
-import nadiendev.constructionwand.data.ItemModelGenerator;
 import nadiendev.constructionwand.wand.WandJob;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.List;
+import java.util.function.Consumer;
 
-public abstract class ItemWand extends Item implements ICustomItemModel
+public abstract class ItemWand extends Item
 {
     public ItemWand(Properties properties) {
         super(properties);
@@ -74,51 +72,39 @@ public abstract class ItemWand extends Item implements ICustomItemModel
         return wandJob;
     }
 
-    @Override
-    public boolean isCorrectToolForDrops(ItemStack stack, BlockState state) {
-        return false;
-    }
-
-    @Override
-    public boolean isValidRepairItem(@Nonnull ItemStack toRepair, @Nonnull ItemStack repair) {
-        return false;
-    }
-
     public int remainingDurability(ItemStack stack) {
         return Integer.MAX_VALUE;
     }
 
     @Override
-    public void appendHoverText(@Nonnull ItemStack itemstack, @Nonnull Item.TooltipContext context, @Nonnull List<Component> lines, @Nonnull TooltipFlag extraInfo) {
+    public void appendHoverText(ItemStack itemstack, Item.TooltipContext context, TooltipDisplay display, Consumer<Component> lines, TooltipFlag flag) {
         WandOptions options = new WandOptions(itemstack);
         int limit = options.cores.get().getWandAction().getLimit(itemstack);
 
         String langTooltip = ConstructionWand.MODID + ".tooltip.";
 
-        // +SHIFT tooltip: show all options + installed cores
         if(Screen.hasShiftDown()) {
             for(int i = 1; i < options.allOptions.length; i++) {
                 IOption<?> opt = options.allOptions[i];
-                lines.add(Component.translatable(opt.getKeyTranslation()).withStyle(ChatFormatting.AQUA)
+                lines.accept(Component.translatable(opt.getKeyTranslation()).withStyle(ChatFormatting.AQUA)
                         .append(Component.translatable(opt.getValueTranslation()).withStyle(ChatFormatting.GRAY))
                 );
             }
             if(!options.cores.getUpgrades().isEmpty()) {
-                lines.add(Component.literal(""));
-                lines.add(Component.translatable(langTooltip + "cores").withStyle(ChatFormatting.GRAY));
+                lines.accept(Component.literal(""));
+                lines.accept(Component.translatable(langTooltip + "cores").withStyle(ChatFormatting.GRAY));
 
                 for(IWandCore core : options.cores.getUpgrades()) {
-                    lines.add(Component.translatable(options.cores.getKeyTranslation() + "." + core.getRegistryName().toString()));
+                    lines.accept(Component.translatable(options.cores.getKeyTranslation() + "." + core.getRegistryName().toString()));
                 }
             }
         }
-        // Default tooltip: show block limit + active wand core
         else {
             IOption<?> opt = options.allOptions[0];
-            lines.add(Component.translatable(langTooltip + "blocks", limit).withStyle(ChatFormatting.GRAY));
-            lines.add(Component.translatable(opt.getKeyTranslation()).withStyle(ChatFormatting.AQUA)
+            lines.accept(Component.translatable(langTooltip + "blocks", limit).withStyle(ChatFormatting.GRAY));
+            lines.accept(Component.translatable(opt.getKeyTranslation()).withStyle(ChatFormatting.AQUA)
                     .append(Component.translatable(opt.getValueTranslation()).withStyle(ChatFormatting.WHITE)));
-            lines.add(Component.translatable(langTooltip + "shift").withStyle(ChatFormatting.AQUA));
+            lines.accept(Component.translatable(langTooltip + "shift").withStyle(ChatFormatting.AQUA));
         }
     }
 
@@ -129,19 +115,5 @@ public abstract class ItemWand extends Item implements ICustomItemModel
                         .append(Component.literal(" - ").withStyle(ChatFormatting.GRAY))
                         .append(Component.translatable(option.getDescTranslation()).withStyle(ChatFormatting.WHITE))
                 , true);
-    }
-
-    @Override
-    public void generateCustomItemModel(ItemModelGenerator generator, String name) {
-        ModelFile wandWithCore = generator.withExistingParent(name + "_core", "item/handheld")
-                .texture("layer0", generator.modLoc("item/" + name))
-                .texture("layer1", generator.modLoc("item/overlay_core"));
-
-        generator.withExistingParent(name, "item/handheld")
-                .texture("layer0", generator.modLoc("item/" + name))
-                .override()
-                .predicate(generator.modLoc("using_core"), 1)
-                .model(wandWithCore).end();
-
     }
 }

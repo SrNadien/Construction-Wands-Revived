@@ -33,38 +33,28 @@ public class ActionDestruction implements IWandAction
     public List<ISnapshot> getSnapshots(Level world, Player player, BlockHitResult rayTraceResult,
                                         ItemStack wand, WandOptions options, IWandSupplier supplier, int limit) {
         LinkedList<ISnapshot> destroySnapshots = new LinkedList<>();
-        // Current list of block positions to process
         LinkedList<BlockPos> candidates = new LinkedList<>();
-        // All positions that were processed (dont process blocks multiple times)
         HashSet<BlockPos> allCandidates = new HashSet<>();
 
-        // Block face the wand was pointed at
         Direction breakFace = rayTraceResult.getDirection();
-        // Block the wand was pointed at
         BlockPos startingPoint = rayTraceResult.getBlockPos();
         BlockState targetBlock = world.getBlockState(rayTraceResult.getBlockPos());
 
-        // Is break direction allowed by lock?
-        // Tried to break blocks from top/bottom face, so the wand should allow breaking in NS/EW direction
         if(breakFace == Direction.UP || breakFace == Direction.DOWN) {
             if(options.testLock(WandOptions.LOCK.NORTHSOUTH) || options.testLock(WandOptions.LOCK.EASTWEST))
                 candidates.add(startingPoint);
         }
-        // Tried to break blocks from side face, so the wand should allow breaking in horizontal/vertical direction
         else if(options.testLock(WandOptions.LOCK.HORIZONTAL) || options.testLock(WandOptions.LOCK.VERTICAL))
             candidates.add(startingPoint);
 
-        // Process current candidates, stop when none are avaiable or block limit is reached
         while(!candidates.isEmpty() && destroySnapshots.size() < limit) {
             BlockPos currentCandidate = candidates.removeFirst();
 
-            // Only break blocks facing the player, with no collidable blocks in between
-            if(!WandUtil.isBlockPermeable(world, currentCandidate.offset(breakFace.getNormal()))) continue;
+            if(!WandUtil.isBlockPermeable(world, currentCandidate.relative(breakFace))) continue;
 
             try {
                 BlockState candidateBlock = world.getBlockState(currentCandidate);
 
-                // If target and candidate blocks match and the current candidate has not been processed
                 if(options.matchBlocks(targetBlock.getBlock(), candidateBlock.getBlock()) &&
                         allCandidates.add(currentCandidate)) {
                     DestroySnapshot snapshot = DestroySnapshot.get(world, player, currentCandidate);
@@ -75,59 +65,57 @@ public class ActionDestruction implements IWandAction
                         case DOWN:
                         case UP:
                             if(options.testLock(WandOptions.LOCK.NORTHSOUTH)) {
-                                candidates.add(currentCandidate.offset(Direction.NORTH.getNormal()));
-                                candidates.add(currentCandidate.offset(Direction.SOUTH.getNormal()));
+                                candidates.add(currentCandidate.relative(Direction.NORTH));
+                                candidates.add(currentCandidate.relative(Direction.SOUTH));
                             }
                             if(options.testLock(WandOptions.LOCK.EASTWEST)) {
-                                candidates.add(currentCandidate.offset(Direction.EAST.getNormal()));
-                                candidates.add(currentCandidate.offset(Direction.WEST.getNormal()));
+                                candidates.add(currentCandidate.relative(Direction.EAST));
+                                candidates.add(currentCandidate.relative(Direction.WEST));
                             }
                             if(options.testLock(WandOptions.LOCK.NORTHSOUTH) && options.testLock(WandOptions.LOCK.EASTWEST)) {
-                                candidates.add(currentCandidate.offset(Direction.NORTH.getNormal()).offset(Direction.EAST.getNormal()));
-                                candidates.add(currentCandidate.offset(Direction.NORTH.getNormal()).offset(Direction.WEST.getNormal()));
-                                candidates.add(currentCandidate.offset(Direction.SOUTH.getNormal()).offset(Direction.EAST.getNormal()));
-                                candidates.add(currentCandidate.offset(Direction.SOUTH.getNormal()).offset(Direction.WEST.getNormal()));
+                                candidates.add(currentCandidate.relative(Direction.NORTH).relative(Direction.EAST));
+                                candidates.add(currentCandidate.relative(Direction.NORTH).relative(Direction.WEST));
+                                candidates.add(currentCandidate.relative(Direction.SOUTH).relative(Direction.EAST));
+                                candidates.add(currentCandidate.relative(Direction.SOUTH).relative(Direction.WEST));
                             }
                             break;
                         case NORTH:
                         case SOUTH:
                             if(options.testLock(WandOptions.LOCK.HORIZONTAL)) {
-                                candidates.add(currentCandidate.offset(Direction.EAST.getNormal()));
-                                candidates.add(currentCandidate.offset(Direction.WEST.getNormal()));
+                                candidates.add(currentCandidate.relative(Direction.EAST));
+                                candidates.add(currentCandidate.relative(Direction.WEST));
                             }
                             if(options.testLock(WandOptions.LOCK.VERTICAL)) {
-                                candidates.add(currentCandidate.offset(Direction.UP.getNormal()));
-                                candidates.add(currentCandidate.offset(Direction.DOWN.getNormal()));
+                                candidates.add(currentCandidate.relative(Direction.UP));
+                                candidates.add(currentCandidate.relative(Direction.DOWN));
                             }
                             if(options.testLock(WandOptions.LOCK.HORIZONTAL) && options.testLock(WandOptions.LOCK.VERTICAL)) {
-                                candidates.add(currentCandidate.offset(Direction.UP.getNormal()).offset(Direction.EAST.getNormal()));
-                                candidates.add(currentCandidate.offset(Direction.UP.getNormal()).offset(Direction.WEST.getNormal()));
-                                candidates.add(currentCandidate.offset(Direction.DOWN.getNormal()).offset(Direction.EAST.getNormal()));
-                                candidates.add(currentCandidate.offset(Direction.DOWN.getNormal()).offset(Direction.WEST.getNormal()));
+                                candidates.add(currentCandidate.relative(Direction.UP).relative(Direction.EAST));
+                                candidates.add(currentCandidate.relative(Direction.UP).relative(Direction.WEST));
+                                candidates.add(currentCandidate.relative(Direction.DOWN).relative(Direction.EAST));
+                                candidates.add(currentCandidate.relative(Direction.DOWN).relative(Direction.WEST));
                             }
                             break;
                         case EAST:
                         case WEST:
                             if(options.testLock(WandOptions.LOCK.HORIZONTAL)) {
-                                candidates.add(currentCandidate.offset(Direction.NORTH.getNormal()));
-                                candidates.add(currentCandidate.offset(Direction.SOUTH.getNormal()));
+                                candidates.add(currentCandidate.relative(Direction.NORTH));
+                                candidates.add(currentCandidate.relative(Direction.SOUTH));
                             }
                             if(options.testLock(WandOptions.LOCK.VERTICAL)) {
-                                candidates.add(currentCandidate.offset(Direction.UP.getNormal()));
-                                candidates.add(currentCandidate.offset(Direction.DOWN.getNormal()));
+                                candidates.add(currentCandidate.relative(Direction.UP));
+                                candidates.add(currentCandidate.relative(Direction.DOWN));
                             }
                             if(options.testLock(WandOptions.LOCK.HORIZONTAL) && options.testLock(WandOptions.LOCK.VERTICAL)) {
-                                candidates.add(currentCandidate.offset(Direction.UP.getNormal()).offset(Direction.NORTH.getNormal()));
-                                candidates.add(currentCandidate.offset(Direction.UP.getNormal()).offset(Direction.SOUTH.getNormal()));
-                                candidates.add(currentCandidate.offset(Direction.DOWN.getNormal()).offset(Direction.NORTH.getNormal()));
-                                candidates.add(currentCandidate.offset(Direction.DOWN.getNormal()).offset(Direction.SOUTH.getNormal()));
+                                candidates.add(currentCandidate.relative(Direction.UP).relative(Direction.NORTH));
+                                candidates.add(currentCandidate.relative(Direction.UP).relative(Direction.SOUTH));
+                                candidates.add(currentCandidate.relative(Direction.DOWN).relative(Direction.NORTH));
+                                candidates.add(currentCandidate.relative(Direction.DOWN).relative(Direction.SOUTH));
                             }
                             break;
                     }
                 }
             } catch(Exception e) {
-                // Can't do anything, could be anything.
-                // Skip if anything goes wrong.
             }
         }
         return destroySnapshots;

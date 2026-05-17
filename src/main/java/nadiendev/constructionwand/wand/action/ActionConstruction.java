@@ -74,10 +74,10 @@ public class ActionConstruction implements IWandAction
                                 candidates.add(currentCandidate.relative(Direction.WEST));
                             }
                             if(options.testLock(WandOptions.LOCK.NORTHSOUTH) && options.testLock(WandOptions.LOCK.EASTWEST)) {
-                                candidates.add(currentCandidate.relative(Direction.NORTH.getNormal()).relative(Direction.EAST));
-                                candidates.add(currentCandidate.relative(Direction.NORTH.getNormal()).relative(Direction.WEST));
-                                candidates.add(currentCandidate.relative(Direction.SOUTH.getNormal()).relative(Direction.EAST));
-                                candidates.add(currentCandidate.relative(Direction.SOUTH.getNormal()).relative(Direction.WEST));
+                                candidates.add(currentCandidate.relative(Direction.NORTH).relative(Direction.EAST));
+                                candidates.add(currentCandidate.relative(Direction.NORTH).relative(Direction.WEST));
+                                candidates.add(currentCandidate.relative(Direction.SOUTH).relative(Direction.EAST));
+                                candidates.add(currentCandidate.relative(Direction.SOUTH).relative(Direction.WEST));
                             }
                             break;
                         case NORTH:
@@ -91,10 +91,10 @@ public class ActionConstruction implements IWandAction
                                 candidates.add(currentCandidate.relative(Direction.DOWN));
                             }
                             if(options.testLock(WandOptions.LOCK.HORIZONTAL) && options.testLock(WandOptions.LOCK.VERTICAL)) {
-                                candidates.add(currentCandidate.relative(Direction.UP.getNormal()).relative(Direction.EAST));
-                                candidates.add(currentCandidate.relative(Direction.UP.getNormal()).relative(Direction.WEST));
-                                candidates.add(currentCandidate.relative(Direction.DOWN.getNormal()).relative(Direction.EAST));
-                                candidates.add(currentCandidate.relative(Direction.DOWN.getNormal()).relative(Direction.WEST));
+                                candidates.add(currentCandidate.relative(Direction.UP).relative(Direction.EAST));
+                                candidates.add(currentCandidate.relative(Direction.UP).relative(Direction.WEST));
+                                candidates.add(currentCandidate.relative(Direction.DOWN).relative(Direction.EAST));
+                                candidates.add(currentCandidate.relative(Direction.DOWN).relative(Direction.WEST));
                             }
                             break;
                         case EAST:
@@ -108,10 +108,10 @@ public class ActionConstruction implements IWandAction
                                 candidates.add(currentCandidate.relative(Direction.DOWN));
                             }
                             if(options.testLock(WandOptions.LOCK.HORIZONTAL) && options.testLock(WandOptions.LOCK.VERTICAL)) {
-                                candidates.add(currentCandidate.relative(Direction.UP.getNormal()).relative(Direction.NORTH));
-                                candidates.add(currentCandidate.relative(Direction.UP.getNormal()).relative(Direction.SOUTH));
-                                candidates.add(currentCandidate.relative(Direction.DOWN.getNormal()).relative(Direction.NORTH));
-                                candidates.add(currentCandidate.relative(Direction.DOWN.getNormal()).relative(Direction.SOUTH));
+                                candidates.add(currentCandidate.relative(Direction.UP).relative(Direction.NORTH));
+                                candidates.add(currentCandidate.relative(Direction.UP).relative(Direction.SOUTH));
+                                candidates.add(currentCandidate.relative(Direction.DOWN).relative(Direction.NORTH));
+                                candidates.add(currentCandidate.relative(Direction.DOWN).relative(Direction.SOUTH));
                             }
                             break;
                     }
