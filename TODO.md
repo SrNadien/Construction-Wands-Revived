@@ -58,10 +58,11 @@ Parchment:      2025.07.20
 
 ### PENDIENTE
 
-- [ ] **Data Gen rewrite para 1.21.8**
-  - Archivos excluidos: `ModData.java`, `AdvancementGenerator.java`, `ItemModelGenerator.java`, `RecipeGenerator.java`, `Inp.java`, `ICustomItemModel.java`
-  - `GatherDataEvent` ahora tiene inner classes `Server` y `Client`
-  - Necesita rewrite completo con nueva API
+- [x] **Data Gen rewrite para 1.21.8**
+  - Archivos reescritos: `ModData.java`, `WandModelProvider.java`, `WandRecipeProvider.java`, `WandAdvancementSubProvider.java`
+  - `GatherDataEvent.Server` y `GatherDataEvent.Client` como subclases
+  - Item models creados manualmente en `assets/<modid>/items/` + `assets/<modid>/models/item/`
+  - Texturas de items visibles correctamente en el juego
 
 - [ ] **Item color registration**
   - `RegisterColorHandlersEvent.Item` reemplazado por `RegisterColorHandlersEvent.ItemTintSources`

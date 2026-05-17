@@ -1,27 +1,29 @@
 package nadiendev.constructionwand.data;
 
-import net.minecraft.core.HolderLookup;
-import net.minecraft.data.DataGenerator;
-import net.minecraft.data.PackOutput;
+import net.minecraft.client.data.models.ModelProvider;
+import net.minecraft.data.advancements.AdvancementProvider;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 import nadiendev.constructionwand.ConstructionWand;
 
-import java.util.concurrent.CompletableFuture;
+import java.util.List;
 
-@EventBusSubscriber(modid = ConstructionWand.MODID, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = ConstructionWand.MODID)
 public class ModData
 {
     @SubscribeEvent
-    public static void gatherData(GatherDataEvent event) {
-        DataGenerator generator = event.getGenerator();
-        PackOutput packOutput = generator.getPackOutput();
-        ExistingFileHelper fileHelper = event.getExistingFileHelper();
-        CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
+    public static void gatherData(GatherDataEvent.Server event) {
+        event.createProvider((GatherDataEvent.DataProviderFromOutputLookup<AdvancementProvider>) (output, lookup) ->
+                new AdvancementProvider(output, lookup, List.of(new WandAdvancementSubProvider())));
 
-        generator.addProvider(true, new RecipeGenerator(packOutput, lookupProvider));
-        generator.addProvider(true, new AdvancementGenerator(packOutput, lookupProvider, fileHelper));
-        generator.addProvider(true, new ItemModelGenerator(packOutput, fileHelper));
+        event.createProvider((GatherDataEvent.DataProviderFromOutputLookup<WandRecipeProvider>) (output, lookup) ->
+                new WandRecipeProvider(output, lookup));
+    }
+
+    @SubscribeEvent
+    public static void gatherClientData(GatherDataEvent.Client event) {
+        event.createProvider((GatherDataEvent.DataProviderFromOutput<ModelProvider>) output ->
+                new WandModelProvider(output));
     }
 }
