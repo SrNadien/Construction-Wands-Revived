@@ -8,6 +8,8 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
+import net.neoforged.neoforge.client.event.RegisterConditionalItemModelPropertyEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -15,6 +17,8 @@ import nadiendev.constructionwand.basics.ConfigClient;
 import nadiendev.constructionwand.basics.ConfigServer;
 import nadiendev.constructionwand.basics.ModStats;
 import nadiendev.constructionwand.client.ClientEvents;
+import nadiendev.constructionwand.client.CoreTintSource;
+import nadiendev.constructionwand.client.HasCoreProperty;
 import nadiendev.constructionwand.client.RenderBlockPreview;
 import nadiendev.constructionwand.component.ModDataComponents;
 import nadiendev.constructionwand.containers.ContainerManager;
@@ -46,6 +50,9 @@ public class ConstructionWand {
         eventBus.addListener(this::commonSetup);
         eventBus.addListener(this::clientSetup);
         eventBus.addListener(ModMessages::registerPayloads);
+        eventBus.addListener(ConstructionWand::registerTintSources);
+        eventBus.addListener(ConstructionWand::registerConditionalProperties);
+        eventBus.addListener(ModItems::addCreative);
 
         ModDataComponents.DATA_COMPONENT_TYPES.register(eventBus);
         ModItems.ITEMS.register(eventBus);
@@ -66,7 +73,14 @@ public class ConstructionWand {
         renderBlockPreview = new RenderBlockPreview();
         NeoForge.EVENT_BUS.register(renderBlockPreview);
         NeoForge.EVENT_BUS.register(new ClientEvents());
-        event.enqueueWork(ModItems::registerModelProperties);
+    }
+
+    private static void registerTintSources(RegisterColorHandlersEvent.ItemTintSources event) {
+        event.register(loc("core_tint"), CoreTintSource.CODEC);
+    }
+
+    private static void registerConditionalProperties(RegisterConditionalItemModelPropertyEvent event) {
+        event.register(loc("has_core"), HasCoreProperty.MAP_CODEC);
     }
 
     public static ResourceLocation loc(String name) {

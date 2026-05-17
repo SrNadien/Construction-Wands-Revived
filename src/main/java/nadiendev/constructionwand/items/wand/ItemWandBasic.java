@@ -6,8 +6,11 @@ import nadiendev.constructionwand.basics.ConfigServer;
 
 public class ItemWandBasic extends ItemWand
 {
+    private final int tierUses;
+
     public ItemWandBasic(Properties properties, int tierUses) {
         super(properties.component(DataComponents.MAX_DAMAGE, tierUses));
+        this.tierUses = tierUses;
     }
 
     @Override

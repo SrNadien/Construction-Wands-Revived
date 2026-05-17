@@ -1,6 +1,6 @@
 {
-    "parent": "minecraft:item/handheld",
-    "textures": {
-        "layer0": "constructionwand:item/infinity_wand"
-    }
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "constructionwand:item/infinity_wand"
+  }
 }
