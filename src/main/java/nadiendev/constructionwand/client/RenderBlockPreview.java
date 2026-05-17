@@ -66,7 +66,7 @@ public class RenderBlockPreview
 
         for(BlockPos block : blocks) {
             AABB aabb = new AABB(block).move(-d0, -d1, -d2);
-            LevelRenderer.renderLineBox(ms, lineBuilder, aabb, colorR, colorG, colorB, 0.4F);
+            LevelRenderer.renderLineBox(ms, lineBuilder, aabb.minX, aabb.minY, aabb.minZ, aabb.maxX, aabb.maxY, aabb.maxZ, colorR, colorG, colorB, 0.4F);
         }
 
         event.setCanceled(true);

@@ -5,7 +5,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.TooltipContext;
 import nadiendev.constructionwand.ConstructionWand;
 import nadiendev.constructionwand.api.IWandCore;
 
@@ -18,19 +17,8 @@ public abstract class ItemCore extends Item implements IWandCore
         super(properties);
     }
 
-   
     @Override
-    public boolean hasCraftingRemainingItem(ItemStack stack) {
-        return false;  
-    }
-
-    @Override
-    public ItemStack getCraftingRemainingItem(ItemStack itemStack) {
-        return ItemStack.EMPTY;  
-    }
-
-    @Override
-    public void appendHoverText(@Nonnull ItemStack itemstack, @Nonnull TooltipContext context, @Nonnull List<Component> lines, @Nonnull TooltipFlag extraInfo) {
+    public void appendHoverText(@Nonnull ItemStack itemstack, @Nonnull Item.TooltipContext context, @Nonnull List<Component> lines, @Nonnull TooltipFlag extraInfo) {
         lines.add(
                 Component.translatable(ConstructionWand.MODID + ".option.cores." + getRegistryName().toString() + ".desc")
                         .withStyle(ChatFormatting.GRAY)

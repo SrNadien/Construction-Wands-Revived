@@ -163,8 +163,6 @@ public class SupplierInventory implements IWandSupplier {
         int count = stack.getCount();
         Item item = stack.getItem();
 
-        if (player.getInventory().items == null)
-            return count;
         if (player.isCreative())
             return 0;
 

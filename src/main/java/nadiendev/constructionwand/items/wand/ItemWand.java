@@ -89,7 +89,7 @@ public abstract class ItemWand extends Item implements ICustomItemModel
     }
 
     @Override
-    public void appendHoverText(@Nonnull ItemStack itemstack, TooltipContext context, @Nonnull List<Component> lines, @Nonnull TooltipFlag extraInfo) {
+    public void appendHoverText(@Nonnull ItemStack itemstack, @Nonnull Item.TooltipContext context, @Nonnull List<Component> lines, @Nonnull TooltipFlag extraInfo) {
         WandOptions options = new WandOptions(itemstack);
         int limit = options.cores.get().getWandAction().getLimit(itemstack);
 

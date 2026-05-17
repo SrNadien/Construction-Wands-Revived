@@ -49,6 +49,11 @@ sourceSets.main.resources {
 
 repositories {
     mavenCentral()
+
+    maven {
+        url = "https://maven.su5ed.dev/releases"
+    }
+
     maven {
         url = 'https://maven.creeperhost.net'
         content {
@@ -100,11 +105,11 @@ dependencies {
     //implementation "com.refinedmods.refinedstorage:refinedstorage-neoforge:${refinedstorage_version}"
     //implementation "curse.maven:refined-storage-curios-integration-1230729:${refinedstorage_curiosintegration_version_id}"
 
-    // sophisticated backpacks (repo Maven pendiente de configurar)
-    //implementation "net.p3pp3rf1y:sophisticatedbackpacks:${sophisticatedbackpacks_version}"
+    // sophisticated backpacks
+    implementation "net.p3pp3rf1y:sophisticatedbackpacks:${sophisticatedbackpacks_version}"
 
-    // sophisticated core (repo Maven pendiente de configurar)
-    //implementation "sophisticatedcore:sophisticatedcore:${sophisticatedcore_version}"
+    // sophisticated core
+    implementation "sophisticatedcore:sophisticatedcore:${sophisticatedcore_version}"
 
     // Curios API
     compileOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}:api"

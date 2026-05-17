@@ -11,7 +11,8 @@ import net.minecraft.data.recipes.SpecialRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.crafting.SimpleCraftingRecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.SimpleRecipeSerializer;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.common.Tags;
 import nadiendev.constructionwand.ConstructionWand;
@@ -63,7 +64,7 @@ public class RecipeGenerator extends RecipeProvider {
                 .save(output);
     }
 
-    private void specialRecipe(RecipeOutput output, SimpleCraftingRecipeSerializer<?> serializer) {
+    private void specialRecipe(RecipeOutput output, SimpleRecipeSerializer<?> serializer) {
         ResourceLocation name = BuiltInRegistries.RECIPE_SERIALIZER.getKey(serializer);
         SpecialRecipeBuilder.special(RecipeWandUpgrade::new).save(output, ConstructionWand.loc("dynamic/" + name.getPath()).toString());
     }

@@ -67,7 +67,7 @@ public class RecipeWandUpgrade extends CustomRecipe
 
     @Nonnull
     @Override
-    public RecipeSerializer<?> getSerializer() {
+    public RecipeSerializer<? extends CustomRecipe> getSerializer() {
         return ModRecipes.WAND_UPGRADE.get();
     }
 }
