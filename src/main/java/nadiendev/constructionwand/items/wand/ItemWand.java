@@ -5,7 +5,6 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -56,18 +55,16 @@ public abstract class ItemWand extends Item implements ICustomItemModel
 
     @Nonnull
     @Override
-    public InteractionResultHolder<ItemStack> use(@Nonnull Level world, Player player, @Nonnull InteractionHand hand) {
-        ItemStack stack = player.getItemInHand(hand);
-
+    public InteractionResult use(@Nonnull Level world, Player player, @Nonnull InteractionHand hand) {
         if(!player.isCrouching()) {
-            if(world.isClientSide) return InteractionResultHolder.fail(stack);
+            if(world.isClientSide) return InteractionResult.FAIL;
 
-            // Right click: Place angel block
+            ItemStack stack = player.getItemInHand(hand);
             WandJob job = getWandJob(player, world, BlockHitResult.miss(player.getLookAngle(),
                     WandUtil.fromVector(player.getLookAngle()), player.blockPosition()), stack);
-            return job.doIt() ? InteractionResultHolder.success(stack) : InteractionResultHolder.fail(stack);
+            return job.doIt() ? InteractionResult.SUCCESS : InteractionResult.FAIL;
         }
-        return InteractionResultHolder.fail(stack);
+        return InteractionResult.FAIL;
     }
 
     public static WandJob getWandJob(Player player, Level world, @Nullable BlockHitResult rayTraceResult, ItemStack wand) {
