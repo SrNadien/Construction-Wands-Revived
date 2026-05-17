@@ -2,6 +2,7 @@ package nadiendev.constructionwand.network;
 
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.server.level.ServerPlayer;
+import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
@@ -22,10 +23,10 @@ public final class ModMessages {
     }
 
     public static void sendToServer(CustomPacketPayload message) {
-        PacketDistributor.sendToServer(message);
+        ClientPacketDistributor.sendToServer(message);
     }
 
     public static void sendToPlayer(CustomPacketPayload message, ServerPlayer player) {
-        player.connection.send(message);
+        PacketDistributor.sendToPlayer(player, message);
     }
 }

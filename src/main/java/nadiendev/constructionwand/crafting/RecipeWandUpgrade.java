@@ -60,14 +60,9 @@ public class RecipeWandUpgrade extends CustomRecipe
         return newWand;
     }
 
-    @Override
-    public boolean canCraftInDimensions(int width, int height) {
-        return width * height >= 2;
-    }
-
     @Nonnull
     @Override
-    public RecipeSerializer<?> getSerializer() {
+    public RecipeSerializer<? extends CustomRecipe> getSerializer() {
         return ModRecipes.WAND_UPGRADE.get();
     }
 }

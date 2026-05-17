@@ -1,18 +1,16 @@
 package nadiendev.constructionwand.items.wand;
 
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Tier;
 import nadiendev.constructionwand.basics.ConfigServer;
-
-import javax.annotation.Nonnull;
 
 public class ItemWandBasic extends ItemWand
 {
-    private final Tier tier;
+    private final int tierUses;
 
-    public ItemWandBasic(Properties properties, Tier tier) {
-        super(properties.durability(tier.getUses()));
-        this.tier = tier;
+    public ItemWandBasic(Properties properties, int tierUses) {
+        super(properties.component(DataComponents.MAX_DAMAGE, tierUses));
+        this.tierUses = tierUses;
     }
 
     @Override
@@ -23,10 +21,5 @@ public class ItemWandBasic extends ItemWand
     @Override
     public int remainingDurability(ItemStack stack) {
         return stack.getMaxDamage() - stack.getDamageValue();
-    }
-
-    @Override
-    public boolean isValidRepairItem(@Nonnull ItemStack toRepair, @Nonnull ItemStack repair) {
-        return this.tier.getRepairIngredient().test(repair);
     }
 }
