@@ -19,7 +19,7 @@ description="${description}"
 [[dependencies.${modid}]]
     modId="minecraft"
     type="required"
-    versionRange="${mcversion}"
+    versionRange="[1.21.8,1.21.9)"
     ordering = "NONE"
     side="BOTH"
 
@@ -39,21 +39,21 @@ description="${description}"
     ordering="AFTER"
     side = "BOTH"
 
-# ae2 dependency 
-[[dependencies.${modid}]]
-    modId="ae2"
-    type="optional"
-    versionRange="${ae2_version}"
-    ordering="AFTER"
-    side = "BOTH"
+# ae2 dependency (no disponible para 1.21.8)
+#[[dependencies.${modid}]]
+#    modId="ae2"
+#    type="optional"
+#    versionRange="${ae2_version}"
+#    ordering="AFTER"
+#    side = "BOTH"
 
-# refined storage dependency 
-[[dependencies.${modid}]]
-    modId="refinedstorage"
-    type="optional"
-    versionRange="${refinedstorage_version}"
-    ordering="AFTER"
-    side = "BOTH"
+# refined storage dependency (no disponible para 1.21.8)
+#[[dependencies.${modid}]]
+#    modId="refinedstorage"
+#    type="optional"
+#    versionRange="${refinedstorage_version}"
+#    ordering="AFTER"
+#    side = "BOTH"
 
 # sophisticated core dependency 
 [[dependencies.${modid}]]
@@ -78,9 +78,10 @@ versionRange = "${curios_version}"
 ordering = "NONE"
 side = "BOTH"
 
-[[dependencies.${modid}]]
-modId = "ae2wtlib"
-type="optional"
-versionRange = "${ae2wtlib_version}"
-ordering = "NONE"
-side = "BOTH"
+# ae2wtlib dependency (no disponible para 1.21.8)
+#[[dependencies.${modid}]]
+#modId = "ae2wtlib"
+#type="optional"
+#versionRange = "${ae2wtlib_version}"
+#ordering = "NONE"
+#side = "BOTH"

@@ -5,9 +5,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.level.Level;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
+import net.minecraft.world.item.TooltipContext;
 import nadiendev.constructionwand.ConstructionWand;
 import nadiendev.constructionwand.api.IWandCore;
 
@@ -20,7 +18,7 @@ public abstract class ItemCore extends Item implements IWandCore
         super(properties);
     }
 
-  
+   
     @Override
     public boolean hasCraftingRemainingItem(ItemStack stack) {
         return false;  
@@ -31,8 +29,8 @@ public abstract class ItemCore extends Item implements IWandCore
         return ItemStack.EMPTY;  
     }
 
-    @OnlyIn(Dist.CLIENT)
-    public void appendHoverText(@Nonnull ItemStack itemstack, Level worldIn, @Nonnull List<Component> lines, @Nonnull TooltipFlag extraInfo) {
+    @Override
+    public void appendHoverText(@Nonnull ItemStack itemstack, @Nonnull TooltipContext context, @Nonnull List<Component> lines, @Nonnull TooltipFlag extraInfo) {
         lines.add(
                 Component.translatable(ConstructionWand.MODID + ".option.cores." + getRegistryName().toString() + ".desc")
                         .withStyle(ChatFormatting.GRAY)

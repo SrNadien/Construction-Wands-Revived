@@ -31,7 +31,7 @@ public class WandUpgrades<T extends IWandUpgrade>
     }
 
     protected void deserialize() {
-        ListTag listnbt = tag.getList(key, Tag.TAG_STRING);
+        ListTag listnbt = tag.getListOrEmpty(key);
         boolean require_fix = false;
 
         for(int i = 0; i < listnbt.size(); i++) {
