@@ -22,11 +22,7 @@ runs {
     configureEach {
         systemProperty 'forge.logging.markers', 'REGISTRIES'
         systemProperty 'forge.logging.console.level', 'debug'
-<<<<<<< Updated upstream
-        jvmArgument '-Xmx2G'
-=======
         jvmArgument '-Xmx1G'
->>>>>>> Stashed changes
         modSource project.sourceSets.main
     }
 
@@ -37,13 +33,10 @@ runs {
     server {
         systemProperty 'forge.enabledGameTestNamespaces', "${modid}"
         argument '--nogui'
-<<<<<<< Updated upstream
-=======
     }
 
       clientData {
         arguments.addAll '--mod', "${modid}", '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
->>>>>>> Stashed changes
     }
 }
 
@@ -103,42 +96,18 @@ dependencies {
     compileOnly "mezz.jei:jei-${mcversion}-neoforge-api:${jei_version}"
     runtimeOnly "mezz.jei:jei-${mcversion}-neoforge:${jei_version}"
 
-<<<<<<< Updated upstream
-    // Applied Energistics 2 (no disponible para 1.21.8 - comentado)
-    //compileOnly "org.appliedenergistics:appliedenergistics2:${ae2_version}"
-    //implementation "org.appliedenergistics:appliedenergistics2:${ae2_version}"
-    // GuideME es dependencia de AE2 - no se necesita sin AE2
-    //implementation "org.appliedenergistics:guideme:${guideme_version}"
-
-    // Refined Storage (no disponible para 1.21.8 - comentado)
-    //implementation "com.refinedmods.refinedstorage:refinedstorage-neoforge:${refinedstorage_version}"
-    //implementation "curse.maven:refined-storage-curios-integration-1230729:${refinedstorage_curiosintegration_version_id}"
-
-    // sophisticated backpacks
-    compileOnly "curse.maven:sophisticatedbackpacks-422301:8034893"
-
-    // sophisticated core
-    compileOnly "curse.maven:sophisticatedcore-618298:8039643"
-=======
     
     // sophisticated backpacks
     compileOnly "curse.maven:sophisticatedbackpacks-422301:${sophisticatedbackpacks_version}"
 
     // sophisticated core
     compileOnly "curse.maven:sophisticatedcore-618298:${sophisticatedcore_version}"
->>>>>>> Stashed changes
 
     // Curios API
     compileOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}:api"
     runtimeOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}"
 
-<<<<<<< Updated upstream
-    //Ae2 Wireless Terminals (no disponible para 1.21.8 - comentado)
-    //implementation "de.mari_023:ae2wtlib_api:${ae2wtlib_version}"
-    //runtimeOnly "de.mari_023:ae2wtlib:${ae2wtlib_version}"
-=======
  
->>>>>>> Stashed changes
 
 
 //    compileOnly ([
@@ -176,22 +145,9 @@ tasks.withType(ProcessResources).configureEach {
             neoversion             : neoversion,
             loader_version        : loader_version,
             jei_version            : jei_version,
-<<<<<<< Updated upstream
-            guideme_version        : guideme_version,
-            ae2_version            : ae2_version,
-            refinedstorage_version : refinedstorage_version,
             sophisticatedbackpacks_version : sophisticatedbackpacks_version,
             sophisticatedcore_version : sophisticatedcore_version,
             curios_version             : curios_version,
-            ae2wtlib_version          : ae2wtlib_version,
-            refinedstorage_curiosintegration_version_id : refinedstorage_curiosintegration_version_id,
-            // rei_version            : rei_version,
-            // emi_version            : emi_version,
-=======
-            sophisticatedbackpacks_version : sophisticatedbackpacks_version,
-            sophisticatedcore_version : sophisticatedcore_version,
-            curios_version             : curios_version,
->>>>>>> Stashed changes
     ]
     inputs.properties replaceProperties
 

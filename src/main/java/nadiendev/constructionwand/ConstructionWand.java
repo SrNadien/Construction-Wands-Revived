@@ -25,10 +25,7 @@ import nadiendev.constructionwand.containers.ContainerManager;
 import nadiendev.constructionwand.containers.ContainerRegistrar;
 import nadiendev.constructionwand.crafting.ModRecipes;
 import nadiendev.constructionwand.creative.ModCreativeTabs;
-<<<<<<< Updated upstream
-=======
 import nadiendev.constructionwand.data.ModData;
->>>>>>> Stashed changes
 import nadiendev.constructionwand.items.ModItems;
 import nadiendev.constructionwand.network.ModMessages;
 import nadiendev.constructionwand.wand.undo.UndoHistory;
