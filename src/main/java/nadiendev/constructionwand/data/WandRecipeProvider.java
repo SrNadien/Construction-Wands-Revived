@@ -3,6 +3,7 @@ package nadiendev.constructionwand.data;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
@@ -52,20 +53,20 @@ public class WandRecipeProvider extends RecipeProvider {
                 .pattern(" # ")
                 .pattern("#  ")
                 .unlockedBy("has_item", inventoryTrigger(
-                        ItemPredicate.Builder.item().of(registries, material).build()))
+                        ItemPredicate.Builder.item().of(registries.lookupOrThrow(Registries.ITEM), material).build()))
                 .save(output);
     }
 
     private void coreRecipe(RecipeOutput output, ItemLike core, TagKey<Item> item1, TagKey<Item> item2) {
         shaped(RecipeCategory.MISC, core)
-                .define('O', Ingredient.of(item1))
-                .define('X', Ingredient.of(item2))
+                .define('O', item1)
+                .define('X', item2)
                 .define('#', Tags.Items.GLASS_PANES)
                 .pattern(" #X")
                 .pattern("#O#")
                 .pattern("X# ")
                 .unlockedBy("has_item", inventoryTrigger(
-                        ItemPredicate.Builder.item().of(registries, item1).build()))
+                        ItemPredicate.Builder.item().of(registries.lookupOrThrow(Registries.ITEM), item1).build()))
                 .save(output);
     }
 
