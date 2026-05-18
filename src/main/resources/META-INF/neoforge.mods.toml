@@ -39,6 +39,7 @@ description="${description}"
     ordering="AFTER"
     side = "BOTH"
 
+<<<<<<< Updated upstream
 # ae2 dependency (no disponible para 1.21.8)
 #[[dependencies.${modid}]]
 #    modId="ae2"
@@ -55,6 +56,8 @@ description="${description}"
 #    ordering="AFTER"
 #    side = "BOTH"
 
+=======
+>>>>>>> Stashed changes
 # sophisticated core dependency 
 [[dependencies.${modid}]]
     modId="sophisticatedcore"
@@ -78,6 +81,7 @@ versionRange = "${curios_version}"
 ordering = "NONE"
 side = "BOTH"
 
+<<<<<<< Updated upstream
 # ae2wtlib dependency (no disponible para 1.21.8)
 #[[dependencies.${modid}]]
 #modId = "ae2wtlib"
@@ -85,3 +89,5 @@ side = "BOTH"
 #versionRange = "${ae2wtlib_version}"
 #ordering = "NONE"
 #side = "BOTH"
+=======
+>>>>>>> Stashed changes

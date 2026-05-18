@@ -38,6 +38,7 @@ public class WandAdvancementSubProvider implements AdvancementSubProvider
                 .addCriterion("wand", InventoryChangeTrigger.TriggerInstance.hasItems(
                         ItemPredicate.Builder.item().of(itemGetter, ModItems.WAND_STONE.get()).build()
                 ))
+<<<<<<< Updated upstream
                 .save(consumer, rootID("root"));
 
         onHasItem(consumer, itemGetter, ModItems.WAND_STONE,     AdvancementType.TASK, root);
@@ -45,18 +46,38 @@ public class WandAdvancementSubProvider implements AdvancementSubProvider
         onHasItem(consumer, itemGetter, ModItems.WAND_DIAMOND,   AdvancementType.TASK, root);
         onHasItem(consumer, itemGetter, ModItems.WAND_NETHERITE, AdvancementType.TASK, root);
         onHasItem(consumer, itemGetter, ModItems.WAND_INFINITY,  AdvancementType.GOAL, root);
+=======
+                .save(consumer, ConstructionWand.loc("root"));
+
+        onHasItem(consumer, itemGetter, ModItems.WAND_STONE,      AdvancementType.TASK, root);
+        onHasItem(consumer, itemGetter, ModItems.WAND_IRON,       AdvancementType.TASK, root);
+        onHasItem(consumer, itemGetter, ModItems.WAND_DIAMOND,    AdvancementType.TASK, root);
+        onHasItem(consumer, itemGetter, ModItems.WAND_NETHERITE,  AdvancementType.TASK, root);
+        onHasItem(consumer, itemGetter, ModItems.WAND_INFINITY,   AdvancementType.GOAL, root);
+>>>>>>> Stashed changes
         onHasItem(consumer, itemGetter, ModItems.CORE_ANGEL,      AdvancementType.TASK, root);
         onHasItem(consumer, itemGetter, ModItems.CORE_DESTRUCTION, AdvancementType.TASK, root);
     }
 
+<<<<<<< Updated upstream
     private static void onHasItem(Consumer<AdvancementHolder> consumer, net.minecraft.core.HolderGetter<Item> itemGetter,
                                   DeferredItem<Item> item, AdvancementType type, AdvancementHolder parent) {
+=======
+    private static void onHasItem(Consumer<AdvancementHolder> consumer,
+                                   net.minecraft.core.HolderGetter<Item> itemGetter,
+                                   DeferredItem<Item> item, AdvancementType type, AdvancementHolder parent) {
+>>>>>>> Stashed changes
         String path = item.getId().getPath();
         Advancement.Builder.advancement()
                 .display(simpleDisplay(item.get(), path, type))
                 .parent(parent)
                 .addCriterion(path, InventoryChangeTrigger.TriggerInstance.hasItems(item.get()))
+<<<<<<< Updated upstream
                 .save(consumer, rootID(path));
+=======
+                // FIX: usar ConstructionWand.loc(path) para garantizar namespace correcto
+                .save(consumer, ConstructionWand.loc(path));
+>>>>>>> Stashed changes
     }
 
     private static DisplayInfo rootDisplay(ItemLike icon, String titleKey, String descKey, ResourceLocation background) {
@@ -82,6 +103,7 @@ public class WandAdvancementSubProvider implements AdvancementSubProvider
         return "advancement." + ConstructionWand.MODID + "." + name;
     }
 
+<<<<<<< Updated upstream
     private static String rootID(String name) {
         return ConstructionWand.loc(name).toString();
     }
@@ -90,3 +112,9 @@ public class WandAdvancementSubProvider implements AdvancementSubProvider
         return ResourceLocation.withDefaultNamespace(path);
     }
 }
+=======
+    private static ResourceLocation mcLoc(String path) {
+        return ResourceLocation.withDefaultNamespace(path);
+    }
+}
+>>>>>>> Stashed changes

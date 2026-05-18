@@ -25,6 +25,10 @@ import nadiendev.constructionwand.containers.ContainerManager;
 import nadiendev.constructionwand.containers.ContainerRegistrar;
 import nadiendev.constructionwand.crafting.ModRecipes;
 import nadiendev.constructionwand.creative.ModCreativeTabs;
+<<<<<<< Updated upstream
+=======
+import nadiendev.constructionwand.data.ModData;
+>>>>>>> Stashed changes
 import nadiendev.constructionwand.items.ModItems;
 import nadiendev.constructionwand.network.ModMessages;
 import nadiendev.constructionwand.wand.undo.UndoHistory;
@@ -59,6 +63,7 @@ public class ConstructionWand {
         ModRecipes.RECIPE_SERIALIZERS.register(eventBus);
         ModCreativeTabs.register(eventBus);
         ModStats.CUSTOM_STATS.register(eventBus);
+        ModData.register(eventBus);
 
         container.registerConfig(ModConfig.Type.SERVER, ConfigServer.SPEC);
         container.registerConfig(ModConfig.Type.CLIENT, ConfigClient.SPEC);
