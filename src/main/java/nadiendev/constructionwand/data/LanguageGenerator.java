@@ -4,7 +4,7 @@ import nadiendev.constructionwand.ConstructionWand;
 import nadiendev.constructionwand.items.ModItems;
 import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.common.data.LanguageProvider;
-
+//language provider 
 public class LanguageGenerator extends LanguageProvider {
 
     public LanguageGenerator(PackOutput packOutput) {
