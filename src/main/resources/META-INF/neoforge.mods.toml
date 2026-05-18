@@ -39,25 +39,6 @@ description="${description}"
     ordering="AFTER"
     side = "BOTH"
 
-<<<<<<< Updated upstream
-# ae2 dependency (no disponible para 1.21.8)
-#[[dependencies.${modid}]]
-#    modId="ae2"
-#    type="optional"
-#    versionRange="${ae2_version}"
-#    ordering="AFTER"
-#    side = "BOTH"
-
-# refined storage dependency (no disponible para 1.21.8)
-#[[dependencies.${modid}]]
-#    modId="refinedstorage"
-#    type="optional"
-#    versionRange="${refinedstorage_version}"
-#    ordering="AFTER"
-#    side = "BOTH"
-
-=======
->>>>>>> Stashed changes
 # sophisticated core dependency 
 [[dependencies.${modid}]]
     modId="sophisticatedcore"
@@ -80,14 +61,3 @@ type="optional"
 versionRange = "${curios_version}"
 ordering = "NONE"
 side = "BOTH"
-
-<<<<<<< Updated upstream
-# ae2wtlib dependency (no disponible para 1.21.8)
-#[[dependencies.${modid}]]
-#modId = "ae2wtlib"
-#type="optional"
-#versionRange = "${ae2wtlib_version}"
-#ordering = "NONE"
-#side = "BOTH"
-=======
->>>>>>> Stashed changes
