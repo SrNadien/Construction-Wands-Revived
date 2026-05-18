@@ -1,14 +1,13 @@
 package nadiendev.constructionwand.basics.option;
 
-import net.minecraft.core.registries.BuiltInRegistries;
+import nadiendev.constructionwand.ConstructionWand;
+import nadiendev.constructionwand.api.IWandUpgrade;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.StringTag;
-import net.minecraft.nbt.Tag;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
-import nadiendev.constructionwand.ConstructionWand;
-import nadiendev.constructionwand.api.IWandUpgrade;
+import net.minecraft.core.registries.BuiltInRegistries;
 
 import java.util.ArrayList;
 
@@ -18,11 +17,13 @@ public class WandUpgrades<T extends IWandUpgrade>
     protected final String key;
     protected final ArrayList<T> upgrades;
     protected final T dval;
+    protected final Runnable onChanged;
 
-    public WandUpgrades(CompoundTag tag, String key, T dval) {
+    public WandUpgrades(CompoundTag tag, String key, T dval, Runnable onChanged) {
         this.tag = tag;
         this.key = key;
         this.dval = dval;
+        this.onChanged = onChanged;
 
         upgrades = new ArrayList<>();
         if(dval != null) upgrades.add(0, dval);
@@ -30,13 +31,23 @@ public class WandUpgrades<T extends IWandUpgrade>
         deserialize();
     }
 
+    public WandUpgrades(CompoundTag tag, String key, T dval) {
+        this(tag, key, dval, null);
+    }
+
     protected void deserialize() {
-        ListTag listnbt = tag.getList(key, Tag.TAG_STRING);
+        ListTag listnbt = tag.getList(key).orElseGet(ListTag::new);
         boolean require_fix = false;
 
         for(int i = 0; i < listnbt.size(); i++) {
-            String str = listnbt.getString(i);
-            Item item = BuiltInRegistries.ITEM.get(ResourceLocation.tryParse(str));
+            String str = listnbt.getString(i).orElse("");
+            Item item = BuiltInRegistries.ITEM.get(Identifier.tryParse(str))
+                    .map(holder -> holder.value())
+                    .orElse(null);
+            if (item == null) {
+                require_fix = true;
+                continue;
+            }
 
             T data;
             try {
@@ -59,6 +70,7 @@ public class WandUpgrades<T extends IWandUpgrade>
             listnbt.add(StringTag.valueOf(item.getRegistryName().toString()));
         }
         tag.put(key, listnbt);
+        if (onChanged != null) onChanged.run();
     }
 
     public boolean addUpgrade(T upgrade) {

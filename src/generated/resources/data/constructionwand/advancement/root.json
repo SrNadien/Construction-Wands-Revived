@@ -1,6 +1,6 @@
 {
   "criteria": {
-    "wand": {
+    "stone_wand": {
       "conditions": {
         "items": [
           {
@@ -13,7 +13,7 @@
   },
   "display": {
     "announce_to_chat": false,
-    "background": "minecraft:textures/block/oak_planks.png",
+    "background": "minecraft:textures/block/stone.png",
     "description": {
       "translate": "advancement.constructionwand.root.desc"
     },
@@ -28,7 +28,7 @@
   },
   "requirements": [
     [
-      "wand"
+      "stone_wand"
     ]
   ],
   "sends_telemetry_event": true

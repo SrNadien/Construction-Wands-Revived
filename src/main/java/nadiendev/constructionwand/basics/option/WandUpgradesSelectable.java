@@ -1,26 +1,26 @@
 package nadiendev.constructionwand.basics.option;
 
-import net.minecraft.core.component.DataComponentType;
+import nadiendev.constructionwand.api.IWandUpgrade;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.core.component.DataComponentType;
 import nadiendev.constructionwand.api.IWandUpgrade;
 
 public class WandUpgradesSelectable<T extends IWandUpgrade> extends WandUpgrades<T> implements IOption<T>
 {
-    private final ItemStack stack;
-    private final DataComponentType<CompoundTag> componentType;
     private byte selector;
 
-    public WandUpgradesSelectable(ItemStack stack, DataComponentType<CompoundTag> componentType, String key, T dval) {
-        super(stack.getOrDefault(componentType, new CompoundTag()), key, dval);
-        this.stack = stack;
-        this.componentType = componentType;
+    public WandUpgradesSelectable(CompoundTag tag, String key, T dval, Runnable onChanged) {
+        super(tag, key, dval, onChanged);
+    }
+
+    public WandUpgradesSelectable(CompoundTag tag, String key, T dval) {
+        super(tag, key, dval);
     }
 
     @Override
     public DataComponentType<?> getComponentType() {
-        return componentType;
-    }
+    return null;
+   }
 
     @Override
     public String getKey() {
@@ -74,10 +74,10 @@ public class WandUpgradesSelectable<T extends IWandUpgrade> extends WandUpgrades
     }
 
     @Override
-    protected void deserialize() {;
+    protected void deserialize() {
         super.deserialize();
 
-        selector = tag.getByte(key + "_sel");
+        selector = tag.getByte(key + "_sel").orElse((byte) 0);
         fixSelector();
     }
 
@@ -90,6 +90,6 @@ public class WandUpgradesSelectable<T extends IWandUpgrade> extends WandUpgrades
 
     private void serializeSelector() {
         tag.putByte(key + "_sel", selector);
-        stack.set(componentType, tag);
+        if (onChanged != null) onChanged.run();
     }
 }

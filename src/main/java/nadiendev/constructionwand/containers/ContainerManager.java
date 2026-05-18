@@ -3,6 +3,7 @@ package nadiendev.constructionwand.containers;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import nadiendev.constructionwand.api.IContainerHandler;
+import nadiendev.constructionwand.containers.ContainerTrace;
 
 import java.util.ArrayList;
 
@@ -18,23 +19,16 @@ public class ContainerManager
         return handlers.add(handler);
     }
 
-    /**
-     * Devuelve true si algún handler registrado reconoce inventoryStack como
-     * un container válido. Funciona en cliente y servidor.
-     */
-    public boolean hasHandler(Player player, ItemStack itemStack, ItemStack inventoryStack) {
-        for (IContainerHandler handler : handlers) {
-            if (handler.matches(player, itemStack, inventoryStack)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     public int countItems(Player player, ContainerTrace trace, ItemStack itemStack, ItemStack inventoryStack) {
         for(IContainerHandler handler : handlers) {
             if(handler.matches(player, itemStack, inventoryStack)) {
-                return handler.countItems(player, trace, itemStack, inventoryStack);
+                int sig = handler.getSignature(player, inventoryStack);
+                if (trace.push(sig)) {
+                    int count = handler.countItems(player, trace, itemStack, inventoryStack);
+                    return count;
+                } else {
+                    return 0;
+                }
             }
         }
         return 0;
@@ -43,12 +37,13 @@ public class ContainerManager
     public int useItems(Player player, ContainerTrace trace, ItemStack itemStack, ItemStack inventoryStack, int count) {
         for(IContainerHandler handler : handlers) {
             if(handler.matches(player, itemStack, inventoryStack)) {
-                int prevCount = count;
-                int remainingCount = handler.useItems(player, trace, itemStack, inventoryStack, count);
-                if(remainingCount < prevCount) {
-                    player.getInventory().setChanged();
+                int sig = handler.getSignature(player, inventoryStack);
+                if (trace.push(sig)) {
+                    int remaining = handler.useItems(player, trace, itemStack, inventoryStack, count);
+                    return remaining;
+                } else {
+                    return count;
                 }
-                return remainingCount;
             }
         }
         return count;

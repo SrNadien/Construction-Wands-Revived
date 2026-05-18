@@ -7,11 +7,12 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.ShulkerBoxBlock;
+import nadiendev.constructionwand.ConstructionWand;
+import nadiendev.constructionwand.api.IContainerHandler;
 import nadiendev.constructionwand.api.IContainerHandler;
 import nadiendev.constructionwand.basics.WandUtil;
 import nadiendev.constructionwand.containers.ContainerTrace;
 
-import java.util.List;
 
 public class HandlerShulkerbox implements IContainerHandler
 {
@@ -23,11 +24,22 @@ public class HandlerShulkerbox implements IContainerHandler
     }
 
     @Override
+    public int getSignature(Player player, ItemStack inventoryStack) {
+        return inventoryStack.hashCode();
+    }
+
+    @Override
     public int countItems(Player player, ContainerTrace trace, ItemStack itemStack, ItemStack inventoryStack) {
         int count = 0;
+
         for(ItemStack stack : getItemList(inventoryStack)) {
-            if(WandUtil.stackEquals(stack, itemStack)) count += stack.getCount();
+            if(WandUtil.stackEquals(stack, itemStack)) {
+                count += stack.getCount();
+            } else {
+                count += ConstructionWand.containerManager.countItems(player, trace, itemStack, stack);
+            }
         }
+
         return count;
     }
 
@@ -43,23 +55,27 @@ public class HandlerShulkerbox implements IContainerHandler
                 count -= toTake;
                 changed = true;
                 if(count == 0) break;
+            } else {
+                int before = count;
+                count = ConstructionWand.containerManager.useItems(player, trace, itemStack, stack, count);
+                if(count < before) {
+                    changed = true;
+                    if(count == 0) break;
+                }
             }
         }
         if(changed) {
             setItemList(inventoryStack, itemList);
             player.getInventory().setChanged();
         }
+
         return count;
     }
 
     private NonNullList<ItemStack> getItemList(ItemStack itemStack) {
-        ItemContainerContents contents = itemStack.getOrDefault(DataComponents.CONTAINER, ItemContainerContents.EMPTY);
-        List<ItemStack> contentList = contents.stream().toList();
-
         NonNullList<ItemStack> itemStacks = NonNullList.withSize(SLOTS, ItemStack.EMPTY);
-        for (int i = 0; i < Math.min(contentList.size(), SLOTS); i++) {
-            itemStacks.set(i, contentList.get(i));
-        }
+        ItemContainerContents contents = itemStack.getOrDefault(DataComponents.CONTAINER, ItemContainerContents.EMPTY);
+        contents.copyInto(itemStacks);
         return itemStacks;
     }
 

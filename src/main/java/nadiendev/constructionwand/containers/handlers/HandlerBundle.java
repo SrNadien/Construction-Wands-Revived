@@ -6,8 +6,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.BundleContents;
 import nadiendev.constructionwand.api.IContainerHandler;
-import nadiendev.constructionwand.basics.WandUtil;
 import nadiendev.constructionwand.containers.ContainerTrace;
+import nadiendev.constructionwand.basics.WandUtil;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -18,6 +18,11 @@ public class HandlerBundle implements IContainerHandler
     @Override
     public boolean matches(Player player, ItemStack itemStack, ItemStack inventoryStack) {
         return inventoryStack != null && inventoryStack.getCount() == 1 && inventoryStack.getItem() == Items.BUNDLE;
+    }
+
+    @Override
+    public int getSignature(Player player, ItemStack inventoryStack) {
+        return inventoryStack.hashCode();
     }
 
     @Override
@@ -45,12 +50,8 @@ public class HandlerBundle implements IContainerHandler
     }
 
     private Stream<ItemStack> getContents(ItemStack bundleStack) {
-        if(bundleStack.has(DataComponents.BUNDLE_CONTENTS)) {
-            return Stream.empty();
-        } else {
-            BundleContents contents = bundleStack.getOrDefault(DataComponents.BUNDLE_CONTENTS, BundleContents.EMPTY);
-            return contents.itemCopyStream();
-        }
+        BundleContents contents = bundleStack.getOrDefault(DataComponents.BUNDLE_CONTENTS, BundleContents.EMPTY);
+        return contents.itemCopyStream();
     }
 
     private void setItemList(ItemStack itemStack, List<ItemStack> itemStacks) {

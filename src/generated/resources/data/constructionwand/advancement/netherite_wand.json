@@ -1,5 +1,5 @@
 {
-  "parent": "constructionwand:root",
+  "parent": "constructionwand:diamond_wand",
   "criteria": {
     "netherite_wand": {
       "conditions": {

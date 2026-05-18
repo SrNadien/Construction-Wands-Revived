@@ -1,8 +1,8 @@
 package nadiendev.constructionwand.api;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public interface IWandUpgrade
 {
-    ResourceLocation getRegistryName();
+    Identifier getRegistryName();
 }

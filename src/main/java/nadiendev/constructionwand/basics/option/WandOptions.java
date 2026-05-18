@@ -1,159 +1,109 @@
 package nadiendev.constructionwand.basics.option;
 
-import com.mojang.serialization.Codec;
-import io.netty.buffer.ByteBuf;
-import net.minecraft.network.codec.ByteBufCodecs;
-import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.util.ByIdMap;
-import net.minecraft.util.StringRepresentable;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.item.component.CustomData;
+import net.minecraft.world.item.component.CustomModelData;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import nadiendev.constructionwand.api.IWandCore;
 import nadiendev.constructionwand.api.IWandUpgrade;
 import nadiendev.constructionwand.basics.ReplacementRegistry;
-import nadiendev.constructionwand.component.ModDataComponents;
 import nadiendev.constructionwand.items.core.CoreDefault;
 
+import java.util.List;
 import javax.annotation.Nullable;
-import java.util.Locale;
-import java.util.function.IntFunction;
 
 public class WandOptions
 {
-    public enum LOCK implements StringRepresentable
-    {
-        HORIZONTAL(0),
-        VERTICAL(1),
-        NORTHSOUTH(2),
-        EASTWEST(3),
-        NOLOCK(4);
+    public final CompoundTag tag;
 
-        public static final Codec<LOCK> CODEC = StringRepresentable.fromEnum(LOCK::values);
-        private static final IntFunction<LOCK> BY_ID = ByIdMap.continuous(LOCK::getId, values(), ByIdMap.OutOfBoundsStrategy.ZERO);
-        public static final StreamCodec<ByteBuf, LOCK> STREAM_CODEC = ByteBufCodecs.idMapper(BY_ID, LOCK::getId);
+    private static final String TAG_ROOT = "wand_options";
 
-        private final int id;
-
-        LOCK(int id) {
-            this.id = id;
-        }
-
-        public int getId() {
-            return this.id;
-        }
-
-        @Override
-        public String getSerializedName() {
-            return name().toLowerCase(Locale.ROOT);
-        }
-    }
-
-    public enum DIRECTION implements StringRepresentable
-    {
-        TARGET(0),
-        PLAYER(1);
-
-        public static final Codec<DIRECTION> CODEC = StringRepresentable.fromEnum(DIRECTION::values);
-        private static final IntFunction<DIRECTION> BY_ID = ByIdMap.continuous(DIRECTION::getId, values(), ByIdMap.OutOfBoundsStrategy.ZERO);
-        public static final StreamCodec<ByteBuf, DIRECTION> STREAM_CODEC = ByteBufCodecs.idMapper(BY_ID, DIRECTION::getId);
-
-        private final int id;
-
-        DIRECTION(int id) {
-            this.id = id;
-        }
-
-        public int getId() {
-            return this.id;
-        }
-
-        @Override
-        public String getSerializedName() {
-            return name().toLowerCase(Locale.ROOT);
-        }
-    }
-
-    public enum MATCH implements StringRepresentable
-    {
-        EXACT(0),
-        SIMILAR(1),
-        ANY(2);
-
-        public static final Codec<MATCH> CODEC = StringRepresentable.fromEnum(MATCH::values);
-        private static final IntFunction<MATCH> BY_ID = ByIdMap.continuous(MATCH::getId, values(), ByIdMap.OutOfBoundsStrategy.ZERO);
-        public static final StreamCodec<ByteBuf, MATCH> STREAM_CODEC = ByteBufCodecs.idMapper(BY_ID, MATCH::getId);
-
-        private final int id;
-
-        MATCH(int id) {
-            this.id = id;
-        }
-
-        public int getId() {
-            return this.id;
-        }
-
-        @Override
-        public String getSerializedName() {
-            return name().toLowerCase(Locale.ROOT);
-        }
-    }
+    public enum LOCK { HORIZONTAL, VERTICAL, NORTHSOUTH, EASTWEST, NOLOCK }
+    public enum DIRECTION { TARGET, PLAYER }
+    public enum MATCH { EXACT, SIMILAR, ANY }
 
     public final WandUpgradesSelectable<IWandCore> cores;
-
     public final OptionEnum<LOCK> lock;
     public final OptionEnum<DIRECTION> direction;
     public final OptionBoolean replace;
     public final OptionEnum<MATCH> match;
     public final OptionBoolean random;
-
     public final IOption<?>[] allOptions;
 
     public WandOptions(ItemStack wandStack) {
-        cores = new WandUpgradesSelectable<>(wandStack, ModDataComponents.CORES.get(), "cores", new CoreDefault());
+        CompoundTag root = wandStack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
+        if (!root.contains(TAG_ROOT)) {
+            root.put(TAG_ROOT, new CompoundTag());
+        }
+        tag = root.getCompound(TAG_ROOT).orElse(new CompoundTag());
 
-        lock = new OptionEnum<>(wandStack, ModDataComponents.LOCK.get(),"lock", LOCK.class, LOCK.NOLOCK);
-        direction = new OptionEnum<>(wandStack, ModDataComponents.DIRECTION.get(),"direction", DIRECTION.class, DIRECTION.TARGET);
-        replace = new OptionBoolean(wandStack, ModDataComponents.REPLACE.get(),"replace", true);
-        match = new OptionEnum<>(wandStack, ModDataComponents.MATCH.get(),"match", MATCH.class, MATCH.SIMILAR);
-        random = new OptionBoolean(wandStack, ModDataComponents.RANDOM.get(),"random", false);
+        Runnable persist = () -> {
+            wandStack.set(DataComponents.CUSTOM_DATA, CustomData.of(root));
+            updateModelData(wandStack);
+        };
+
+        cores      = new WandUpgradesSelectable<>(tag, "cores", new CoreDefault(), persist);
+        lock       = new OptionEnum<>(tag, "lock", LOCK.class, LOCK.NOLOCK, persist);
+        direction  = new OptionEnum<>(tag, "direction", DIRECTION.class, DIRECTION.TARGET, persist);
+        replace    = new OptionBoolean(tag, "replace", true, persist);
+        match      = new OptionEnum<>(tag, "match", MATCH.class, MATCH.SIMILAR, persist);
+        random     = new OptionBoolean(tag, "random", false, persist);
 
         allOptions = new IOption[]{cores, lock, direction, replace, match, random};
+
+        // Solo actualiza el modelo visual, NO toca CustomData → evita el tooltip doble
+        updateModelData(wandStack);
+    }
+
+    public void updateModelData(ItemStack stack) {
+        boolean hasActiveCore = !(cores.get() instanceof CoreDefault);
+        String coreId = "";
+        if (hasActiveCore) {
+            String path = cores.get().getRegistryName().getPath(); // "core_angel" / "core_destruction"
+            coreId = path.startsWith("core_") ? path.substring(5) : path; // → "angel" / "destruction"
+        }
+        stack.set(DataComponents.CUSTOM_MODEL_DATA,
+            new CustomModelData(
+                List.of(),
+                List.of(),
+                List.of(coreId),
+                List.of()
+            )
+        );
     }
 
     @Nullable
     public IOption<?> get(String key) {
-        for(IOption<?> option : allOptions) {
-            if(option.getKey().equals(key)) return option;
+        for (IOption<?> option : allOptions) {
+            if (option.getKey().equals(key)) return option;
         }
         return null;
     }
 
     public boolean testLock(LOCK l) {
-        if(lock.get() == LOCK.NOLOCK) return true;
+        if (lock.get() == LOCK.NOLOCK) return true;
         return lock.get() == l;
     }
 
     public boolean matchBlocks(Block b1, Block b2) {
-        switch(match.get()) {
-            case EXACT:
-                return b1 == b2;
-            case SIMILAR:
-                return ReplacementRegistry.matchBlocks(b1, b2);
-            case ANY:
-                return b1 != Blocks.AIR && b2 != Blocks.AIR;
+        switch (match.get()) {
+            case EXACT:   return b1 == b2;
+            case SIMILAR: return ReplacementRegistry.matchBlocks(b1, b2);
+            case ANY:     return b1 != Blocks.AIR && b2 != Blocks.AIR;
         }
         return false;
     }
 
     public boolean hasUpgrade(IWandUpgrade upgrade) {
-        if(upgrade instanceof IWandCore) return cores.hasUpgrade((IWandCore) upgrade);
+        if (upgrade instanceof IWandCore) return cores.hasUpgrade((IWandCore) upgrade);
         return false;
     }
 
     public boolean addUpgrade(IWandUpgrade upgrade) {
-        if(upgrade instanceof IWandCore) return cores.addUpgrade((IWandCore) upgrade);
+        if (upgrade instanceof IWandCore) return cores.addUpgrade((IWandCore) upgrade);
         return false;
     }
 }

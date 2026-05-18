@@ -1,5 +1,5 @@
 {
-  "parent": "constructionwand:root",
+  "parent": "constructionwand:netherite_wand",
   "criteria": {
     "infinity_wand": {
       "conditions": {
@@ -16,7 +16,7 @@
     "description": {
       "translate": "advancement.constructionwand.infinity_wand.desc"
     },
-    "frame": "goal",
+    "frame": "challenge",
     "icon": {
       "count": 1,
       "id": "constructionwand:infinity_wand"

@@ -1,0 +1,26 @@
+{
+  "model": {
+    "type": "minecraft:select",
+    "cases": [
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "constructionwand:item/stone_wand_angel"
+        },
+        "when": "angel"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "constructionwand:item/stone_wand_destruction"
+        },
+        "when": "destruction"
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "constructionwand:item/stone_wand"
+    },
+    "property": "constructionwand:wand_core"
+  }
+}

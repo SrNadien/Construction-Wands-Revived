@@ -1,5 +1,5 @@
 {
-  "parent": "constructionwand:root",
+  "parent": "constructionwand:stone_wand",
   "criteria": {
     "core_angel": {
       "conditions": {

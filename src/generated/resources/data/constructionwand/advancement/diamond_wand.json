@@ -1,5 +1,5 @@
 {
-  "parent": "constructionwand:root",
+  "parent": "constructionwand:iron_wand",
   "criteria": {
     "diamond_wand": {
       "conditions": {
