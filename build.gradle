@@ -47,6 +47,8 @@ sourceSets {
             exclude 'nadiendev/constructionwand/containers/handlers/HandlerWirelessTerminal.java'
             exclude 'nadiendev/constructionwand/containers/handlers/HandlerWirelessTerminalAE2WTLib.java'
             exclude 'nadiendev/constructionwand/containers/handlers/HandlerWirelessGrid.java'
+            exclude 'src/generated/resources/.cache/*'
+            exclude 'src/generated/resources/.cache'
         }
     }
 }
