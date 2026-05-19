@@ -23,7 +23,6 @@ public class WandModelProvider extends ModelProvider {
         super(output, ConstructionWand.MODID);
     }
 
-    // Template handheld de 2 capas
     public static final ModelTemplate TWO_LAYERED_HANDHELD =
             ModelTemplates.createItem("handheld", TextureSlot.LAYER0, TextureSlot.LAYER1);
 
@@ -41,35 +40,34 @@ public class WandModelProvider extends ModelProvider {
         Item wand = wandItem.get();
         ResourceLocation location = ModelLocationUtils.getModelLocation(wand);
 
-        // Modelo base: sin core (handheld normal)
+        // Modelo base: sin core
         ItemModel.Unbaked base = ItemModelUtils.plainModel(
                 itemModels.createFlatItemModel(wand, ModelTemplates.FLAT_HANDHELD_ITEM)
         );
 
-        // Modelo con core "angel"
+        // Sufijos coinciden con getRegistryName().getPath(): "core_angel", "core_destruction"
         ItemModel.Unbaked angelModel = ItemModelUtils.plainModel(
                 generateLayeredItem(
                         itemModels,
-                        location.withSuffix("_angel"),
+                        location.withSuffix("_core_angel"),
                         location,
                         ResourceLocation.fromNamespaceAndPath(ConstructionWand.MODID, "item/overlay_core")
                 )
         );
 
-        // Modelo con core "destruction"
         ItemModel.Unbaked destructionModel = ItemModelUtils.plainModel(
                 generateLayeredItem(
                         itemModels,
-                        location.withSuffix("_destruction"),
+                        location.withSuffix("_core_destruction"),
                         location,
                         ResourceLocation.fromNamespaceAndPath(ConstructionWand.MODID, "item/overlay_core")
                 )
         );
 
-        // Select por string
+        // Strings exactos que retorna SelectWandCore.get()
         List<SelectItemModel.SwitchCase<String>> cases = new ArrayList<>();
-        cases.add(ItemModelUtils.when("angel", angelModel));
-        cases.add(ItemModelUtils.when("destruction", destructionModel));
+        cases.add(ItemModelUtils.when("core_angel", angelModel));
+        cases.add(ItemModelUtils.when("core_destruction", destructionModel));
 
         itemModels.itemModelOutput.accept(
                 wand,
@@ -77,9 +75,6 @@ public class WandModelProvider extends ModelProvider {
         );
     }
 
-    /**
-     * Crea un modelo handheld de 2 capas dado layer0 y layer1.
-     */
     public ResourceLocation generateLayeredItem(ItemModelGenerators itemModels,
                                                 ResourceLocation modelLocation,
                                                 ResourceLocation layer0,

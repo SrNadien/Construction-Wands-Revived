@@ -4,7 +4,11 @@ import nadiendev.constructionwand.ConstructionWand;
 import nadiendev.constructionwand.items.ModItems;
 import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.common.data.LanguageProvider;
-//language provider 
+
+/*
+*Language Provider
+* By NadienDev
+*/
 public class LanguageGenerator extends LanguageProvider {
 
     public LanguageGenerator(PackOutput packOutput) {
@@ -14,6 +18,7 @@ public class LanguageGenerator extends LanguageProvider {
     @Override
     protected void addTranslations() {
         add("itemGroup.constructionwand", "Construction Wands Revived");
+        add("itemGroup.constructionwand.construction_wand_tab", "Construction Wands Revived");
 
         addItem(ModItems.WAND_STONE, "Stone Wand");
         addItem(ModItems.WAND_IRON, "Iron Wand");
@@ -23,7 +28,7 @@ public class LanguageGenerator extends LanguageProvider {
         addItem(ModItems.CORE_ANGEL, "Angel Wand Core");
         addItem(ModItems.CORE_DESTRUCTION, "Destruction Wand Core");
 
-        add("advancement.constructionwand.root.title", "Construction Wands Revived");
+ add("advancement.constructionwand.root.title", "Construction Wands Revived");
 add("advancement.constructionwand.root.desc", "Get your first wand");
 add("advancement.constructionwand.stone_wand.title", "Stone Wand");
 add("advancement.constructionwand.stone_wand.desc", "Obtain a Stone Wand");
@@ -112,6 +117,7 @@ add("advancement.constructionwand.core_destruction.desc", "Obtain a Destruction 
         @Override
         protected void addTranslations() {
         add("itemGroup.constructionwand", "Varitas de Construcción Revividas");
+        add("itemGroup.constructionwand.construction_wand_tab", "Varitas de Construcción Revividas");
 
         addItem(ModItems.WAND_STONE, "Varita de Piedra");
         addItem(ModItems.WAND_IRON, "Varita de Hierro");
@@ -201,6 +207,7 @@ add("advancement.constructionwand.core_destruction.desc", "Obtené un Núcleo de
         @Override
         protected void addTranslations() {
         add("itemGroup.constructionwand", "Varitas de Construcción Revividas");
+        add("itemGroup.constructionwand.construction_wand_tab", "Varitas de Construcción Revividas");
 
         addItem(ModItems.WAND_STONE, "Varita de piedra");
         addItem(ModItems.WAND_IRON, "Varita de hierro");
@@ -273,6 +280,7 @@ add("advancement.constructionwand.core_destruction.desc", "Obtené un Núcleo de
         @Override
         protected void addTranslations() {
         add("itemGroup.constructionwand", "Varitas de Construcción Revividas");
+        add("itemGroup.constructionwand.construction_wand_tab", "Varitas de Construcción Revividas");
 
         addItem(ModItems.WAND_STONE, "Varita de piedra");
         addItem(ModItems.WAND_IRON, "Varita de hierro");
@@ -362,6 +370,7 @@ add("advancement.constructionwand.core_destruction.desc", "Obtené un Núcleo de
         @Override
         protected void addTranslations() {
         add("itemGroup.constructionwand", "Varitas de Construcción Revividas");
+        add("itemGroup.constructionwand.construction_wand_tab", "Varitas de Construcción Revividas");
 
         addItem(ModItems.WAND_STONE, "Varita de piedra");
         addItem(ModItems.WAND_IRON, "Varita de hierro");
@@ -451,6 +460,7 @@ add("advancement.constructionwand.core_destruction.desc", "Obtené un Núcleo de
         @Override
         protected void addTranslations() {
         add("itemGroup.constructionwand", "Varitas de Construcción Revividas");
+        add("itemGroup.constructionwand.construction_wand_tab", "Varitas de Construcción Revividas");
 
         addItem(ModItems.WAND_STONE, "Varita de piedra");
         addItem(ModItems.WAND_IRON, "Varita de hierro");
@@ -540,6 +550,7 @@ add("advancement.constructionwand.core_destruction.desc", "Obtené un Núcleo de
         @Override
         protected void addTranslations() {
         add("itemGroup.constructionwand", "建築の杖リバイバル");
+        add("itemGroup.constructionwand.construction_wand_tab", "建築の杖リバイバル");
 
         addItem(ModItems.WAND_STONE, "石の杖");
         addItem(ModItems.WAND_IRON, "鉄の杖");
@@ -629,6 +640,7 @@ add("advancement.constructionwand.core_destruction.desc", "破壊の杖のコア
         @Override
         protected void addTranslations() {
         add("itemGroup.constructionwand", "건축 완드 리바이벌");
+        add("itemGroup.constructionwand.construction_wand_tab", "건축 완드 리바이벌");
 
         addItem(ModItems.WAND_STONE, "돌 완드");
         addItem(ModItems.WAND_IRON, "철 완드");
@@ -718,6 +730,7 @@ add("advancement.constructionwand.core_destruction.desc", "파괴 지팡이 코�
         @Override
         protected void addTranslations() {
         add("itemGroup.constructionwand", "Varinhas de Construção Revividas");
+        add("itemGroup.constructionwand.construction_wand_tab", "Varinhas de Construção Revividas");
 
         addItem(ModItems.WAND_STONE, "Varinha de pedra");
         addItem(ModItems.WAND_IRON, "Varinha de ferro");
@@ -790,6 +803,7 @@ add("advancement.constructionwand.core_destruction.desc", "파괴 지팡이 코�
         @Override
         protected void addTranslations() {
         add("itemGroup.constructionwand", "Волшебные жезлы для строительства - Возрождение");
+        add("itemGroup.constructionwand.construction_wand_tab", "Волшебные жезлы для строительства - Возрождение");
 
         addItem(ModItems.WAND_STONE, "Каменный жезл");
         addItem(ModItems.WAND_IRON, "Железный жезл");
@@ -879,6 +893,7 @@ add("advancement.constructionwand.core_destruction.desc", "Получите яд
         @Override
         protected void addTranslations() {
         add("itemGroup.constructionwand", "Byggstavar Återupplivade");
+        add("itemGroup.constructionwand.construction_wand_tab", "Byggstavar Återupplivade");
 
         addItem(ModItems.WAND_STONE, "Stenstav");
         addItem(ModItems.WAND_IRON, "Järnstav");
@@ -968,6 +983,7 @@ add("advancement.constructionwand.core_destruction.desc", "Skaffa en rivningssta
         @Override
         protected void addTranslations() {
         add("itemGroup.constructionwand", "Yeniden Canlandırılmış İnşaat Asaları");
+        add("itemGroup.constructionwand.construction_wand_tab", "Yeniden Canlandırılmış İnşaat Asaları");
 
         addItem(ModItems.WAND_STONE, "Taş Asa");
         addItem(ModItems.WAND_IRON, "Demir Asa");
@@ -977,7 +993,7 @@ add("advancement.constructionwand.core_destruction.desc", "Skaffa en rivningssta
         addItem(ModItems.CORE_ANGEL, "Melek Asa Çekirdeği");
         addItem(ModItems.CORE_DESTRUCTION, "Yıkım Asa Çekirdeği");
   
-       add("advancement.constructionwand.root.title", "Yeniden Canlandırılmış İnşaat Asaları");
+add("advancement.constructionwand.root.title", "Yeniden Canlandırılmış İnşaat Asaları");
 add("advancement.constructionwand.root.desc", "İlk asanı edin");
 add("advancement.constructionwand.stone_wand.title", "Taş Asa");
 add("advancement.constructionwand.stone_wand.desc", "Bir Taş Asa edin");
@@ -1057,6 +1073,7 @@ add("advancement.constructionwand.core_destruction.desc", "Bir Yıkım Asa Çeki
         @Override
         protected void addTranslations() {
         add("itemGroup.constructionwand", "建筑手杖复兴版");
+        add("itemGroup.constructionwand.construction_wand_tab", "建筑手杖复兴版");
 
         addItem(ModItems.WAND_STONE, "石制手杖");
         addItem(ModItems.WAND_IRON, "铁制手杖");
@@ -1066,7 +1083,7 @@ add("advancement.constructionwand.core_destruction.desc", "Bir Yıkım Asa Çeki
         addItem(ModItems.CORE_ANGEL, "天使手杖核心");
         addItem(ModItems.CORE_DESTRUCTION, "破坏手杖核心");
 
-        add("advancement.constructionwand.root.title", "建筑手杖复兴版");
+add("advancement.constructionwand.root.title", "建筑手杖复兴版");
 add("advancement.constructionwand.root.desc", "获得你的第一根手杖");
 add("advancement.constructionwand.stone_wand.title", "石制手杖");
 add("advancement.constructionwand.stone_wand.desc", "获得一根石制手杖");
@@ -1146,6 +1163,7 @@ add("advancement.constructionwand.core_destruction.desc", "获得一个破坏手
         @Override
         protected void addTranslations() {
         add("itemGroup.constructionwand", "Baustäbe Wiederbelebt");
+        add("itemGroup.constructionwand.construction_wand_tab", "Baustäbe Wiederbelebt");
 
         addItem(ModItems.WAND_STONE, "Steinerner Stab");
         addItem(ModItems.WAND_IRON, "Eiserner Stab");
@@ -1155,7 +1173,7 @@ add("advancement.constructionwand.core_destruction.desc", "获得一个破坏手
         addItem(ModItems.CORE_ANGEL, "Kristall der Engel");
         addItem(ModItems.CORE_DESTRUCTION, "Kristall der Zerstörung");
 
-        add("advancement.constructionwand.root.title", "Baustäbe Wiederbelebt");
+add("advancement.constructionwand.root.title", "Baustäbe Wiederbelebt");
 add("advancement.constructionwand.root.desc", "Erhalte deinen ersten Stab");
 add("advancement.constructionwand.stone_wand.title", "Steinerner Stab");
 add("advancement.constructionwand.stone_wand.desc", "Erhalte einen steinernen Stab");

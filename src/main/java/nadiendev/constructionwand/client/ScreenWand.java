@@ -46,9 +46,10 @@ public class ScreenWand extends Screen {
 
     @Override
     public void render(@Nonnull GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
-        renderBackground(guiGraphics, mouseX, mouseY, partialTicks);
-        guiGraphics.drawCenteredString(font, wand.getDisplayName(), width / 2, height / 2 - FIELD_HEIGHT / 2 - SPACING_HEIGHT, 16777215);
+        // En 1.21.8 super.render() ya llama renderBackground internamente.
+        // Llamarlo manualmente antes causa "Can only blur once per frame".
         super.render(guiGraphics, mouseX, mouseY, partialTicks);
+        guiGraphics.drawCenteredString(font, wand.getDisplayName(), width / 2, height / 2 - FIELD_HEIGHT / 2 - SPACING_HEIGHT, 16777215);
     }
 
     @Override

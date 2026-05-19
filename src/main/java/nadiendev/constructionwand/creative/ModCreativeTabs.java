@@ -17,7 +17,7 @@ public class ModCreativeTabs {
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> CONSTRUCTION_WAND_TAB =
             CREATIVE_TABS.register("construction_wand_tab", () -> CreativeModeTab.builder()
-                    .title(Component.translatable("itemGroup." + ConstructionWand.MODID))
+                    .title(Component.translatable("itemGroup." + ConstructionWand.MODID + ".construction_wand_tab"))
                     .icon(() -> new ItemStack(ModItems.WAND_INFINITY.get()))
                     .displayItems((parameters, output) -> {
                         output.accept(ModItems.WAND_STONE.get());

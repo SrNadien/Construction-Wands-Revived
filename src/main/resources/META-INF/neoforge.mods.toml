@@ -5,7 +5,7 @@ license = "${license}"
 modId="${modid}"
 version="${mod_version}"
 displayName="Construction Wands Revived"
-displayURL="https://www.curseforge.com/minecraft/mc-mods/construction-wands-revived"
+displayURL="${url}"
 logoFile="logo.png"
 authors="${author}"
 description="${description}"
@@ -19,7 +19,7 @@ description="${description}"
 [[dependencies.${modid}]]
     modId="minecraft"
     type="required"
-    versionRange="[1.21.8,1.21.9)"
+    versionRange="${mcversion}"
     ordering = "NONE"
     side="BOTH"
 
@@ -28,14 +28,6 @@ description="${description}"
     modId="jei"
     type="optional"
     versionRange="${jei_version}"
-    ordering="AFTER"
-    side = "BOTH"
-
-# guideme dependency 
-[[dependencies.${modid}]]
-    modId="guideme"
-    type="optional"
-    versionRange="${guideme_version}"
     ordering="AFTER"
     side = "BOTH"
 

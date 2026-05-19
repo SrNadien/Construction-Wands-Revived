@@ -8,6 +8,7 @@ import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 import nadiendev.constructionwand.ConstructionWand;
+import nadiendev.constructionwand.client.ClientHandler;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -31,7 +32,6 @@ public record PacketUndoBlocks(HashSet<BlockPos> undoBlocks) implements CustomPa
 
     private static HashSet<BlockPos> getSet(FriendlyByteBuf buffer) {
         HashSet<BlockPos> undoBlocks = new HashSet<>();
-
         while (buffer.isReadable()) {
             undoBlocks.add(buffer.readBlockPos());
         }
@@ -51,7 +51,6 @@ public record PacketUndoBlocks(HashSet<BlockPos> undoBlocks) implements CustomPa
 
     public static PacketUndoBlocks decode(FriendlyByteBuf buffer) {
         HashSet<BlockPos> undoBlocks = new HashSet<>();
-
         while(buffer.isReadable()) {
             undoBlocks.add(buffer.readBlockPos());
         }
@@ -62,15 +61,12 @@ public record PacketUndoBlocks(HashSet<BlockPos> undoBlocks) implements CustomPa
     {
         public static void handle(final PacketUndoBlocks msg, final IPayloadContext ctx) {
             ctx.enqueueWork(() -> {
-                //ConstructionWand.LOGGER.debug("PacketUndoBlocks received, Blocks: " + msg.undoBlocks.size());
-                ConstructionWand.instance.renderBlockPreview.undoBlocks = msg.undoBlocks;
+                ClientHandler.renderBlockPreview.undoBlocks = msg.undoBlocks;
             })
             .exceptionally(e -> {
-                // Handle exception
                 ctx.disconnect(Component.translatable("constructionwand.networking.undo_blocks.failed", e.getMessage()));
                 return null;
             });
-
         }
     }
 }

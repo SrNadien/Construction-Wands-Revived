@@ -13,9 +13,9 @@ import net.minecraft.data.advancements.AdvancementSubProvider;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.registries.DeferredItem;
-import net.minecraft.world.item.Item;
 import nadiendev.constructionwand.ConstructionWand;
 import nadiendev.constructionwand.items.ModItems;
 
@@ -40,24 +40,24 @@ public class WandAdvancementSubProvider implements AdvancementSubProvider
                 ))
                 .save(consumer, ConstructionWand.loc("root"));
 
-        onHasItem(consumer, itemGetter, ModItems.WAND_STONE,      AdvancementType.TASK, root);
-        onHasItem(consumer, itemGetter, ModItems.WAND_IRON,       AdvancementType.TASK, root);
-        onHasItem(consumer, itemGetter, ModItems.WAND_DIAMOND,    AdvancementType.TASK, root);
-        onHasItem(consumer, itemGetter, ModItems.WAND_NETHERITE,  AdvancementType.TASK, root);
-        onHasItem(consumer, itemGetter, ModItems.WAND_INFINITY,   AdvancementType.GOAL, root);
-        onHasItem(consumer, itemGetter, ModItems.CORE_ANGEL,      AdvancementType.TASK, root);
+        // Usar getId().getPath() para obtener el path correcto del item registrado
+        onHasItem(consumer, itemGetter, ModItems.WAND_STONE,       AdvancementType.TASK, root);
+        onHasItem(consumer, itemGetter, ModItems.WAND_IRON,        AdvancementType.TASK, root);
+        onHasItem(consumer, itemGetter, ModItems.WAND_DIAMOND,     AdvancementType.TASK, root);
+        onHasItem(consumer, itemGetter, ModItems.WAND_NETHERITE,   AdvancementType.TASK, root);
+        onHasItem(consumer, itemGetter, ModItems.WAND_INFINITY,    AdvancementType.GOAL, root);
+        onHasItem(consumer, itemGetter, ModItems.CORE_ANGEL,       AdvancementType.TASK, root);
         onHasItem(consumer, itemGetter, ModItems.CORE_DESTRUCTION, AdvancementType.TASK, root);
     }
 
     private static void onHasItem(Consumer<AdvancementHolder> consumer,
-                                   net.minecraft.core.HolderGetter<Item> itemGetter,
+                                   HolderLookup.RegistryLookup<Item> itemGetter,
                                    DeferredItem<Item> item, AdvancementType type, AdvancementHolder parent) {
         String path = item.getId().getPath();
         Advancement.Builder.advancement()
                 .display(simpleDisplay(item.get(), path, type))
                 .parent(parent)
                 .addCriterion(path, InventoryChangeTrigger.TriggerInstance.hasItems(item.get()))
-                // FIX: usar ConstructionWand.loc(path) para garantizar namespace correcto
                 .save(consumer, ConstructionWand.loc(path));
     }
 
