@@ -128,6 +128,20 @@ public class ActionDestruction implements IWandAction
             } catch(Exception e) {
                 // Can't do anything, could be anything.
                 // Skip if anything goes wrong.
+<<<<<<< Updated upstream
+=======
+            }
+        }
+
+        // Envolver snapshots con el contexto del Void Sack si hay uno en el inventario
+        if (!world.isClientSide && player instanceof ServerPlayer serverPlayer) {
+            ItemStack voidSack = findSack(serverPlayer);
+            if (!voidSack.isEmpty()) {
+                List<ISnapshot> wrapped = new ArrayList<>(destroySnapshots.size());
+                for (ISnapshot s : destroySnapshots)
+                    wrapped.add(new VoidSackCapturingSnapshot(s, (ServerLevel) world, voidSack));
+                return wrapped;
+>>>>>>> Stashed changes
             }
         }
         return destroySnapshots;

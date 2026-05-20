@@ -37,6 +37,11 @@ public class RecipeGenerator extends RecipeProvider {
         coreRecipe(output, ModItems.CORE_ANGEL.get(), Inp.fromTag(Tags.Items.FEATHERS), Inp.fromTag(Tags.Items.INGOTS_GOLD));
         coreRecipe(output, ModItems.CORE_DESTRUCTION.get(), Inp.fromTag(Tags.Items.STORAGE_BLOCKS_DIAMOND), Inp.fromItem(Items.DIAMOND_PICKAXE));
 
+<<<<<<< Updated upstream
+=======
+        voidSackRecipe(output);
+
+>>>>>>> Stashed changes
         specialRecipe(output, ModRecipes.WAND_UPGRADE.get());
     }
 
@@ -63,6 +68,23 @@ public class RecipeGenerator extends RecipeProvider {
                 .save(output);
     }
 
+<<<<<<< Updated upstream
+=======
+    private void voidSackRecipe(RecipeOutput output) {
+        Inp coreDestruction = Inp.fromItem(ModItems.CORE_DESTRUCTION.get());
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.VOID_SACK.get())
+                .define('C', coreDestruction.ingredient)
+                .define('E', Items.DIAMOND)
+                .define('O', Items.NETHERITE_INGOT)
+                .define('D', Items.EMERALD)
+                .pattern("EDE")
+                .pattern("OCO")
+                .pattern("EDE")
+                .unlockedBy("has_core_destruction", inventoryTrigger(coreDestruction.predicate))
+                .save(output);
+    }
+
+>>>>>>> Stashed changes
     private void specialRecipe(RecipeOutput output, SimpleCraftingRecipeSerializer<?> serializer) {
         ResourceLocation name = BuiltInRegistries.RECIPE_SERIALIZER.getKey(serializer);
         SpecialRecipeBuilder.special(RecipeWandUpgrade::new).save(output, ConstructionWand.loc("dynamic/" + name.getPath()).toString());

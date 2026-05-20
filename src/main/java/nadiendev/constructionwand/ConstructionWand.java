@@ -16,11 +16,20 @@ import nadiendev.constructionwand.basics.ConfigServer;
 import nadiendev.constructionwand.basics.ModStats;
 import nadiendev.constructionwand.client.ClientEvents;
 import nadiendev.constructionwand.client.RenderBlockPreview;
+<<<<<<< Updated upstream
+=======
+import nadiendev.constructionwand.client.property.SelectWandCore;
+>>>>>>> Stashed changes
 import nadiendev.constructionwand.component.ModDataComponents;
 import nadiendev.constructionwand.containers.ContainerManager;
 import nadiendev.constructionwand.containers.ContainerRegistrar;
 import nadiendev.constructionwand.crafting.ModRecipes;
 import nadiendev.constructionwand.creative.ModCreativeTabs;
+<<<<<<< Updated upstream
+=======
+import nadiendev.constructionwand.events.VoidSackDropHandler;
+import nadiendev.constructionwand.events.VoidSackPickupHandler;
+>>>>>>> Stashed changes
 import nadiendev.constructionwand.items.ModItems;
 import nadiendev.constructionwand.network.ModMessages;
 import nadiendev.constructionwand.wand.undo.UndoHistory;
@@ -51,10 +60,17 @@ public class ConstructionWand {
         ModItems.ITEMS.register(eventBus);
         ModRecipes.RECIPE_SERIALIZERS.register(eventBus);
         ModCreativeTabs.register(eventBus);
+<<<<<<< Updated upstream
+=======
+        ModMenuTypes.register(eventBus);
+>>>>>>> Stashed changes
         ModStats.CUSTOM_STATS.register(eventBus);
 
         container.registerConfig(ModConfig.Type.SERVER, ConfigServer.SPEC);
         container.registerConfig(ModConfig.Type.CLIENT, ConfigClient.SPEC);
+
+        NeoForge.EVENT_BUS.register(new VoidSackDropHandler());
+        NeoForge.EVENT_BUS.register(new VoidSackPickupHandler());
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
@@ -66,7 +82,13 @@ public class ConstructionWand {
         renderBlockPreview = new RenderBlockPreview();
         NeoForge.EVENT_BUS.register(renderBlockPreview);
         NeoForge.EVENT_BUS.register(new ClientEvents());
+<<<<<<< Updated upstream
         event.enqueueWork(ModItems::registerModelProperties);
+=======
+
+        // Register wand core item property predicate
+        SelectWandCore.onClientSetup(event);
+>>>>>>> Stashed changes
     }
 
     public static ResourceLocation loc(String name) {

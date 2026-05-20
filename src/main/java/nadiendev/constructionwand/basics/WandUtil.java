@@ -148,8 +148,12 @@ public class WandUtil
         BlockEvent.BreakEvent breakEvent = new BlockEvent.BreakEvent(world, pos, currentBlock, player);
         NeoForge.EVENT_BUS.post(breakEvent);
         if(breakEvent.isCanceled()) return false;
+<<<<<<< Updated upstream
 
         world.removeBlock(pos, false);
+=======
+        world.removeBlock(pos, true);
+>>>>>>> Stashed changes
         return true;
     }
 
@@ -221,6 +225,7 @@ public class WandUtil
         return false;
     }
 
+    
     public static Direction fromVector(Vec3 vector) {
         return Direction.getNearest(vector.x, vector.y, vector.z);
     }

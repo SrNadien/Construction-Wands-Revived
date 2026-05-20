@@ -1,12 +1,16 @@
 package nadiendev.constructionwand.items;
 
 import net.minecraft.world.item.Item;
+<<<<<<< Updated upstream
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tiers;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
+=======
+import net.minecraft.world.item.Tiers;
+>>>>>>> Stashed changes
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import nadiendev.constructionwand.ConstructionWand;
@@ -21,6 +25,7 @@ public class ModItems
 {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(ConstructionWand.MODID);
 
+<<<<<<< Updated upstream
     // Wands
     public static final DeferredItem<Item> WAND_STONE     = ITEMS.register("stone_wand",    () -> new ItemWandBasic(propWand(), Tiers.STONE));
     public static final DeferredItem<Item> WAND_IRON      = ITEMS.register("iron_wand",     () -> new ItemWandBasic(propWand(), Tiers.IRON));
@@ -31,6 +36,19 @@ public class ModItems
     // Cores
     public static final DeferredItem<Item> CORE_ANGEL      = ITEMS.register("core_angel",      () -> new ItemCoreAngel(propUpgrade()));
     public static final DeferredItem<Item> CORE_DESTRUCTION = ITEMS.register("core_destruction", () -> new ItemCoreDestruction(propUpgrade()));
+=======
+    public static final DeferredItem<Item> WAND_STONE     = ITEMS.register("stone_wand",     () -> new ItemWandBasic(new Item.Properties().stacksTo(1), Tiers.STONE));
+    public static final DeferredItem<Item> WAND_IRON      = ITEMS.register("iron_wand",      () -> new ItemWandBasic(new Item.Properties().stacksTo(1), Tiers.IRON));
+    public static final DeferredItem<Item> WAND_DIAMOND   = ITEMS.register("diamond_wand",   () -> new ItemWandBasic(new Item.Properties().stacksTo(1), Tiers.DIAMOND));
+    public static final DeferredItem<Item> WAND_NETHERITE = ITEMS.register("netherite_wand", () -> new ItemWandBasic(new Item.Properties().stacksTo(1).fireResistant(), Tiers.NETHERITE));
+    public static final DeferredItem<Item> WAND_INFINITY  = ITEMS.register("infinity_wand",  () -> new ItemWandInfinity(new Item.Properties().stacksTo(1)));
+
+    public static final DeferredItem<Item> CORE_ANGEL       = ITEMS.register("core_angel",       () -> new ItemCoreAngel(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> CORE_DESTRUCTION = ITEMS.register("core_destruction", () -> new ItemCoreDestruction(new Item.Properties().stacksTo(1)));
+
+    public static final DeferredItem<Item> VOID_SACK = ITEMS.register("void_sack",
+            () -> new ItemVoidSack(new Item.Properties().stacksTo(64).fireResistant(), 0));
+>>>>>>> Stashed changes
 
     // Collections
     @SuppressWarnings("unchecked")
