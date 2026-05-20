@@ -40,7 +40,7 @@ public class WandAdvancementSubProvider implements AdvancementSubProvider
                 ))
                 .save(consumer, ConstructionWand.loc("root"));
 
-        // Usar getId().getPath() para obtener el path correcto del item registrado
+        
         onHasItem(consumer, itemGetter, ModItems.WAND_STONE,       AdvancementType.TASK, root);
         onHasItem(consumer, itemGetter, ModItems.WAND_IRON,        AdvancementType.TASK, root);
         onHasItem(consumer, itemGetter, ModItems.WAND_DIAMOND,     AdvancementType.TASK, root);
@@ -48,6 +48,7 @@ public class WandAdvancementSubProvider implements AdvancementSubProvider
         onHasItem(consumer, itemGetter, ModItems.WAND_INFINITY,    AdvancementType.GOAL, root);
         onHasItem(consumer, itemGetter, ModItems.CORE_ANGEL,       AdvancementType.TASK, root);
         onHasItem(consumer, itemGetter, ModItems.CORE_DESTRUCTION, AdvancementType.TASK, root);
+        onHasItem(consumer, itemGetter, ModItems.VOID_SACK,        AdvancementType.TASK, root);
     }
 
     private static void onHasItem(Consumer<AdvancementHolder> consumer,

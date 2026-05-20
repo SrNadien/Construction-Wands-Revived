@@ -24,11 +24,12 @@ import nadiendev.constructionwand.creative.ModCreativeTabs;
 import nadiendev.constructionwand.data.ModData;
 import nadiendev.constructionwand.items.ModItems;
 import nadiendev.constructionwand.network.ModMessages;
+import nadiendev.constructionwand.registry.ModMenuTypes;
 import nadiendev.constructionwand.wand.undo.UndoHistory;
 
 @Mod(ConstructionWand.MODID)
 public class ConstructionWand {
-    public static final String MODID = "constructionwand";
+    public static final String MODID   = "constructionwand";
     public static final String MODNAME = "ConstructionWandRevived";
 
     public static ConstructionWand instance;
@@ -41,18 +42,19 @@ public class ConstructionWand {
         instance = this;
 
         containerManager = new ContainerManager();
-        undoHistory = new UndoHistory();
+        undoHistory      = new UndoHistory();
 
         eventBus.addListener(this::commonSetup);
         eventBus.addListener(ModMessages::registerPayloads);
         eventBus.addListener(ConstructionWand::registerTintSources);
         eventBus.addListener(ConstructionWand::registerConditionalProperties);
-        eventBus.addListener(ModItems::addCreative);
+        //eventBus.addListener(ModItems::addCreative);
 
         ModDataComponents.DATA_COMPONENT_TYPES.register(eventBus);
         ModItems.ITEMS.register(eventBus);
         ModRecipes.RECIPE_SERIALIZERS.register(eventBus);
         ModCreativeTabs.register(eventBus);
+        ModMenuTypes.register(eventBus);   // ← nuevo: registrar el MenuType del Void Sack
         ModStats.CUSTOM_STATS.register(eventBus);
         ModData.register(eventBus);
 

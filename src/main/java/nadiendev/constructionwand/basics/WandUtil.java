@@ -160,7 +160,7 @@ public class WandUtil
         NeoForge.EVENT_BUS.post(breakEvent);
         if(breakEvent.isCanceled()) return false;
 
-        world.removeBlock(pos, false);
+        world.removeBlock(pos, true);
         return true;
     }
 

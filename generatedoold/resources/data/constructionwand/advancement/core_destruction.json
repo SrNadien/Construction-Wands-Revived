@@ -1,0 +1,33 @@
+{
+  "parent": "constructionwand:root",
+  "criteria": {
+    "core_destruction": {
+      "conditions": {
+        "items": [
+          {
+            "items": "constructionwand:core_destruction"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.constructionwand.core_destruction.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "constructionwand:core_destruction"
+    },
+    "title": {
+      "translate": "advancement.constructionwand.core_destruction.title"
+    }
+  },
+  "requirements": [
+    [
+      "core_destruction"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

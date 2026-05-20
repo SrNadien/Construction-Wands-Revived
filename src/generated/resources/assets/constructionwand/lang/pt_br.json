@@ -60,5 +60,21 @@
   "item.constructionwand.stone_wand": "Varinha de pedra",
   "itemGroup.constructionwand": "Varinhas de Construção Revividas",
   "itemGroup.constructionwand.construction_wand_tab": "Varinhas de Construção Revividas",
-  "stat.constructionwand.use_wand": "Blocos colocados usando varinha"
+  "stat.constructionwand.use_wand": "Blocos colocados usando varinha",
+  "constructionwand.description.void_sack": "A Bolsa do Vazio intercepta os itens que você coleta e os armazena em seu inventário interno de 4×4.\n\n§5§nATIVAÇÃO§0§r\nPressione %1$s para ativar ou desativar a bolsa. Enquanto estiver inativa, os itens vão para o seu inventário normal.\n\n§5§nVINCULAR UM CONTÊINER§0§r\nClique com o botão direito em qualquer contêiner (baú, barril, caixa de shulker...) com a bolsa na mão para vinculá-lo. Uma vez vinculada, os itens vão primeiro para o contêiner quando a bolsa estiver ativa. Se o contêiner estiver cheio, o excesso vai para o armazenamento interno da bolsa.\n\n§5§nMODO§0§r\nPressione %1$s para alternar entre §aEnviando§0 (itens → contêiner) e §eGuardando§0 (itens → espaços internos). Você também pode usar o botão de alternância dentro da GUI.",
+  "gui.constructionwand.void_sack.sending": "Enviando →",
+  "gui.constructionwand.void_sack.storing": "Guardando",
+  "gui.constructionwand.void_sack.toggle_tooltip": "Alternar: enviar para o contêiner / guardar internamente",
+  "item.constructionwand.void_sack": "Bolsa do Vazio",
+  "item.constructionwand.void_sack.activated": "Bolsa do Vazio ativada",
+  "item.constructionwand.void_sack.active": "§aAtiva §7(pressione §6%1$s§7 para alterar)",
+  "item.constructionwand.void_sack.deactivated": "Bolsa do Vazio desativada",
+  "item.constructionwand.void_sack.inactive": "§7Inativa §7(pressione §6%1$s§7 para alterar)",
+  "item.constructionwand.void_sack.linked": "Vinculada a: %d, %d, %d",
+  "item.constructionwand.void_sack.linked_msg": "Bolsa vinculada a %d, %d, %d",
+  "item.constructionwand.void_sack.no_link": "Sem contêiner vinculado",
+  "item.constructionwand.void_sack.sending": "Enviando para o contêiner",
+  "item.constructionwand.void_sack.slots_used": "Espaços usados: %d / %d",
+  "item.constructionwand.void_sack.storing": "Guardando internamente",
+  "key.constructionwand.void_sack_toggle": "Alternar Bolsa do Vazio"
 }

@@ -76,5 +76,21 @@
   "item.constructionwand.stone_wand": "Stenstav",
   "itemGroup.constructionwand": "Byggstavar Återupplivade",
   "itemGroup.constructionwand.construction_wand_tab": "Byggstavar Återupplivade",
-  "stat.constructionwand.use_wand": "Block placerade med stavar"
+  "stat.constructionwand.use_wand": "Block placerade med stavar",
+  "constructionwand.description.void_sack": "Void-säcken fångar upp föremål du plockar upp och förvarar dem i dess interna 4×4-inventering.\n\n§5§nAKTIVERING§0§r\nTryck på %1$s för att aktivera eller inaktivera säcken. När den är inaktiv går föremål till ditt vanliga inventering.\n\n§5§nLÄNKA EN BEHÅLLARE§0§r\nHögerklicka på valfri behållare (kista, tunna, shulkerbox...) med säcken i handen för att länka den. När den är länkad går föremål först till behållaren när säcken är aktiv. Om behållaren är full hamnar överskottet i säckens interna förvaring.\n\n§5§nLÄGE§0§r\nTryck på %1$s för att växla mellan §aSänder§0 (föremål → behållare) och §eFörvarar§0 (föremål → interna platser). Du kan också använda växlingsknappen i gränssnittet.",
+  "gui.constructionwand.void_sack.sending": "Sänder →",
+  "gui.constructionwand.void_sack.storing": "Förvarar",
+  "gui.constructionwand.void_sack.toggle_tooltip": "Växla: skicka till behållare / förvara internt",
+  "item.constructionwand.void_sack": "Void-säck",
+  "item.constructionwand.void_sack.activated": "Void-säck aktiverad",
+  "item.constructionwand.void_sack.active": "§aAktiv §7(tryck på §6%1$s§7 för att ändra)",
+  "item.constructionwand.void_sack.deactivated": "Void-säck inaktiverad",
+  "item.constructionwand.void_sack.inactive": "§7Inaktiv §7(tryck på §6%1$s§7 för att ändra)",
+  "item.constructionwand.void_sack.linked": "Länkad till: %d, %d, %d",
+  "item.constructionwand.void_sack.linked_msg": "Säck länkad till %d, %d, %d",
+  "item.constructionwand.void_sack.no_link": "Ingen länkad behållare",
+  "item.constructionwand.void_sack.sending": "Sänder till behållare",
+  "item.constructionwand.void_sack.slots_used": "Använda platser: %d / %d",
+  "item.constructionwand.void_sack.storing": "Förvarar internt",
+  "key.constructionwand.void_sack_toggle": "Växla Void-säck"
 }

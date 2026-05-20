@@ -76,5 +76,21 @@
   "item.constructionwand.stone_wand": "石の杖",
   "itemGroup.constructionwand": "建築の杖リバイバル",
   "itemGroup.constructionwand.construction_wand_tab": "建築の杖リバイバル",
-  "stat.constructionwand.use_wand": "杖を用いてブロックを設置"
+  "stat.constructionwand.use_wand": "杖を用いてブロックを設置",
+  "constructionwand.description.void_sack": "ヴォイドサックは拾ったアイテムをインターセプトし、内部の 4×4 インベントリに保管します。\n\n§5§n有効化§0§r\n%1$s を押すと、サックの有効・無効を切り替えます。無効化されている間、アイテムは通常のインベントリに入ります。\n\n§5§nコンテナの紐付け§0§r\nサックを持った状態で任意のコンテナ（チェスト、樽、シュルカーボックスなど）を右クリックすると紐付けが行われます。紐付け後、サックが有効な場合はアイテムが優先的にコンテナへ送られます。コンテナが満杯の場合、溢れた分はサックの内部ストレージに保管されます。\n\n§5§nモード§0§r\n%1$s を押すと、§a送信中§0（アイテム → コンテナ）と §e保管中§0（アイテム → 内部スロット）を切り替えます。GUI内の切り替えボタンを使用することもできます。",
+  "gui.constructionwand.void_sack.sending": "送信中 →",
+  "gui.constructionwand.void_sack.storing": "保管中",
+  "gui.constructionwand.void_sack.toggle_tooltip": "切り替え: コンテナへ送信 / 内部に保管",
+  "item.constructionwand.void_sack": "ヴォイドサック",
+  "item.constructionwand.void_sack.activated": "ヴォイドサックが有効になりました",
+  "item.constructionwand.void_sack.active": "§a有効 §7（§6%1$s§7 を押して切り替え）",
+  "item.constructionwand.void_sack.deactivated": "ヴォイドサックが無効になりました",
+  "item.constructionwand.void_sack.inactive": "§7無効 §7（§6%1$s§7 を押して切り替え）",
+  "item.constructionwand.void_sack.linked": "紐付け先: %d, %d, %d",
+  "item.constructionwand.void_sack.linked_msg": "サックを %d, %d, %d に紐付けました",
+  "item.constructionwand.void_sack.no_link": "コンテナが紐付けられていません",
+  "item.constructionwand.void_sack.sending": "コンテナへ送信中",
+  "item.constructionwand.void_sack.slots_used": "使用スロット: %d / %d",
+  "item.constructionwand.void_sack.storing": "内部に保管中",
+  "key.constructionwand.void_sack_toggle": "ヴォイドサックを切り替え"
 }

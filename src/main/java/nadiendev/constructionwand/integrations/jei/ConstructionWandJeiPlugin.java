@@ -16,6 +16,7 @@ import org.jetbrains.annotations.NotNull;
 import nadiendev.constructionwand.ConstructionWand;
 import nadiendev.constructionwand.basics.ConfigClient;
 import nadiendev.constructionwand.basics.ConfigServer;
+import nadiendev.constructionwand.client.KeybindHandler;
 import nadiendev.constructionwand.items.ModItems;
 
 import javax.annotation.Nonnull;
@@ -24,7 +25,7 @@ import javax.annotation.Nonnull;
 public class ConstructionWandJeiPlugin implements IModPlugin
 {
     private static final ResourceLocation pluginId = ResourceLocation.fromNamespaceAndPath(ConstructionWand.MODID, ConstructionWand.MODID);
-    private static final String baseKey = ConstructionWand.MODID + ".description.";
+    private static final String baseKey     = ConstructionWand.MODID + ".description.";
     private static final String baseKeyItem = "item." + ConstructionWand.MODID + ".";
 
     @Nonnull
@@ -35,37 +36,52 @@ public class ConstructionWandJeiPlugin implements IModPlugin
 
     private Component keyComboComponent(boolean shiftOpt, Component optkeyComponent) {
         String key = shiftOpt ? "sneak_opt" : "sneak";
-        return Component.translatable(baseKey + "key." + key, optkeyComponent).withStyle(ChatFormatting.BLUE);
+        return Component.translatable(baseKey + "key." + key, optkeyComponent)
+                .withStyle(ChatFormatting.BLUE);
     }
 
     @Override
     public void registerRecipes(@NotNull IRecipeRegistration registration) {
-        Component optkeyComponent = Component.translatable(InputConstants.getKey(ConfigClient.OPT_KEY.get(), -1).getName())
+        Component optkeyComponent = Component.translatable(
+                InputConstants.getKey(ConfigClient.OPT_KEY.get(), -1).getName())
                 .withStyle(ChatFormatting.BLUE);
         Component wandModeComponent = keyComboComponent(ConfigClient.SHIFTOPT_MODE.get(), optkeyComponent);
-        Component wandGuiComponent = keyComboComponent(ConfigClient.SHIFTOPT_GUI.get(), optkeyComponent);
+        Component wandGuiComponent  = keyComboComponent(ConfigClient.SHIFTOPT_GUI.get(),  optkeyComponent);
 
-        for(DeferredItem<Item> wandSupplier : ModItems.WANDS) {
+        // ── Wands ─────────────────────────────────────────────────────────────
+        for (DeferredItem<Item> wandSupplier : ModItems.WANDS) {
             Item wand = wandSupplier.get();
             ConfigServer.WandProperties wandProperties = ConfigServer.getWandProperties(wand);
 
             String durabilityKey = wand == ModItems.WAND_INFINITY.get() ? "unlimited" : "limited";
-            Component durabilityComponent = Component.translatable(baseKey + "durability." + durabilityKey, wandProperties.getDurability());
+            Component durabilityComponent = Component.translatable(
+                    baseKey + "durability." + durabilityKey, wandProperties.getDurability());
 
             registration.addIngredientInfo(new ItemStack(wand), VanillaTypes.ITEM_STACK,
                     Component.translatable(baseKey + "wand",
                             Component.translatable(baseKeyItem + BuiltInRegistries.ITEM.getKey(wand).getPath()),
-                            wandProperties.getLimit(), durabilityComponent, optkeyComponent, wandModeComponent, wandGuiComponent)
-            );
+                            wandProperties.getLimit(), durabilityComponent,
+                            optkeyComponent, wandModeComponent, wandGuiComponent));
         }
 
-        for(DeferredItem<Item> coreSupplier : ModItems.CORES) {
+        // ── Cores ─────────────────────────────────────────────────────────────
+        for (DeferredItem<Item> coreSupplier : ModItems.CORES) {
             Item core = coreSupplier.get();
             registration.addIngredientInfo(new ItemStack(core), VanillaTypes.ITEM_STACK,
-                    Component.translatable(baseKey + BuiltInRegistries.ITEM.getKey(core).getPath())
+                    Component.translatable(
+                            baseKey + BuiltInRegistries.ITEM.getKey(core).getPath())
                             .append("\n\n")
-                            .append(Component.translatable(baseKey + "core", wandModeComponent))
-            );
+                            .append(Component.translatable(baseKey + "core", wandModeComponent)));
         }
+
+        // ── Void Sack ─────────────────────────────────────────────────────────
+        Component mKeyComponent = KeybindHandler.KEY_VOID_SACK_TOGGLE
+                .getTranslatedKeyMessage()
+                .copy().withStyle(ChatFormatting.GOLD);
+
+        registration.addIngredientInfo(
+                new ItemStack(ModItems.VOID_SACK.get()),
+                VanillaTypes.ITEM_STACK,
+                Component.translatable(baseKey + "void_sack", mKeyComponent));
     }
 }

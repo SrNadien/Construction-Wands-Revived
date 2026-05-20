@@ -76,5 +76,21 @@
   "item.constructionwand.stone_wand": "Taş Asa",
   "itemGroup.constructionwand": "Yeniden Canlandırılmış İnşaat Asaları",
   "itemGroup.constructionwand.construction_wand_tab": "Yeniden Canlandırılmış İnşaat Asaları",
-  "stat.constructionwand.use_wand": "Asa kullanılarak yerleştirilen bloklar"
+  "stat.constructionwand.use_wand": "Asa kullanılarak yerleştirilen bloklar",
+  "constructionwand.description.void_sack": "Boşluk Kesesi, topladığınız eşyaları yakalar ve bunları kendi 4×4 boyutundaki dahili envanterinde saklar.\n\n§5§nAKTİVASYON§0§r\nKeseyi etkinleştirmek veya devre dışı bırakmak için %1$s tuşuna basın. Kese devre dışıyken, eşyalar normal envanterinize gider.\n\n§5§nBİR KONTEYNER BAĞLAMA§0§r\nKeseyi bağlamak için elinizde kese varken herhangi bir konteynere (sandık, varil, shulker kutusu...) sağ tıklayın. Bağlandıktan sonra, kese etkinken eşyalar önce konteynere gider. Konteyner doluysa, fazlalık kesenin dahili deposuna aktarılır.\n\n§5§nMOD§0§r\n§aGönderiliyor§0 (eşyalar → konteyner) ve §eSaklanıyor§0 (eşyalar → dahili yuvalar) modları arasında geçiş yapmak için %1$s tuşuna basın. Bu ayarı arayüzün (GUI) içindeki düğmeyi kullanarak da değiştirebilirsiniz.",
+  "gui.constructionwand.void_sack.sending": "Gönderiliyor →",
+  "gui.constructionwand.void_sack.storing": "Saklanıyor",
+  "gui.constructionwand.void_sack.toggle_tooltip": "Değiştir: konteynere gönder / dahili olarak sakla",
+  "item.constructionwand.void_sack": "Boşluk Kesesi",
+  "item.constructionwand.void_sack.activated": "Boşluk Kesesi etkinleştirildi",
+  "item.constructionwand.void_sack.active": "§aEtkin §7(değiştirmek için §6%1$s§7 bas)",
+  "item.constructionwand.void_sack.deactivated": "Boşluk Kesesi devre dışı bırakıldı",
+  "item.constructionwand.void_sack.inactive": "§7Etkin Değil §7(değiştirmek için §6%1$s§7 bas)",
+  "item.constructionwand.void_sack.linked": "Bağlanan yer: %d, %d, %d",
+  "item.constructionwand.void_sack.linked_msg": "Kese şuraya bağlandı: %d, %d, %d",
+  "item.constructionwand.void_sack.no_link": "Bağlı konteyner yok",
+  "item.constructionwand.void_sack.sending": "Konteynere gönderiliyor",
+  "item.constructionwand.void_sack.slots_used": "Kullanılan yuvalar: %d / %d",
+  "item.constructionwand.void_sack.storing": "Dahili olarak saklanıyor",
+  "key.constructionwand.void_sack_toggle": "Boşluk Kesesini Değiştir"
 }

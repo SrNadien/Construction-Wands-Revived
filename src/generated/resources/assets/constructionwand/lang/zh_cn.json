@@ -76,5 +76,21 @@
   "item.constructionwand.stone_wand": "石制手杖",
   "itemGroup.constructionwand": "建筑手杖复兴版",
   "itemGroup.constructionwand.construction_wand_tab": "建筑手杖复兴版",
-  "stat.constructionwand.use_wand": "使用建筑手杖所放置的方块"
+  "stat.constructionwand.use_wand": "使用建筑手杖所放置的方块",
+  "constructionwand.description.void_sack": "虚空袋会拦截你捡起的物品，并将它们存放在其内部的 4×4 物品栏中。\n\n§5§n启用§0§r\n按下 %1$s 来启用或禁用虚空袋。当 it 未启用时，物品将正常进入你的普通物品栏。\n\n§5§n绑定容器§0§r\n手持虚空袋右键点击任何容器（箱子、木桶、潜影盒等）即可将其绑定。绑定后，在虚空袋启用的情况下，物品会优先进入该容器。如果容器满了，溢出的物品则会存入虚空袋的内部存储中。\n\n§5§n模式§0§r\n按下 %1$s 可以在 §a发送中§0（物品 → 容器）和 §e储存中§0（物品 → 内部槽位）之间切换。你也可以使用 GUI 内部的切换按钮。",
+  "gui.constructionwand.void_sack.sending": "发送中 →",
+  "gui.constructionwand.void_sack.storing": "储存中",
+  "gui.constructionwand.void_sack.toggle_tooltip": "切换：发送至容器 / 内部储存",
+  "item.constructionwand.void_sack": "虚空袋",
+  "item.constructionwand.void_sack.activated": "虚空袋已启用",
+  "item.constructionwand.void_sack.active": "§a已启用 §7（按 §6%1$s§7 切换）",
+  "item.constructionwand.void_sack.deactivated": "虚空袋已禁用",
+  "item.constructionwand.void_sack.inactive": "§7未启用 §7（按 §6%1$s§7 切换）",
+  "item.constructionwand.void_sack.linked": "已绑定至： %d, %d, %d",
+  "item.constructionwand.void_sack.linked_msg": "虚空袋已绑定至 %d, %d, %d",
+  "item.constructionwand.void_sack.no_link": "未绑定容器",
+  "item.constructionwand.void_sack.sending": "正在发送至容器",
+  "item.constructionwand.void_sack.slots_used": "已用槽位： %d / %d",
+  "item.constructionwand.void_sack.storing": "正在内部储存",
+  "key.constructionwand.void_sack_toggle": "切换虚空袋"
 }

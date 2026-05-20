@@ -4,6 +4,7 @@ import org.lwjgl.glfw.GLFW;
 
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.client.network.ClientPacketDistributor;
@@ -15,14 +16,22 @@ import nadiendev.constructionwand.ConstructionWand;
 import nadiendev.constructionwand.basics.ConfigClient;
 import nadiendev.constructionwand.basics.WandUtil;
 import nadiendev.constructionwand.basics.option.WandOptions;
+import nadiendev.constructionwand.items.containeritems.ItemVoidSack;
 import nadiendev.constructionwand.items.wand.ItemWand;
 import nadiendev.constructionwand.network.PacketQueryUndo;
+import nadiendev.constructionwand.network.PacketToggleVoidSackActive;
 import nadiendev.constructionwand.network.PacketWandOption;
 
 public class KeybindHandler {
     public static final KeyMapping KEY_OPT = new KeyMapping(
             getKey("wand_option"),
             GLFW.GLFW_KEY_LEFT_CONTROL,
+            getCategory("constructionwand")
+    );
+
+    public static final KeyMapping KEY_VOID_SACK_TOGGLE = new KeyMapping(
+            getKey("void_sack_toggle"),
+            GLFW.GLFW_KEY_M,
             getCategory("constructionwand")
     );
 
@@ -46,6 +55,18 @@ public class KeybindHandler {
     public void KeyEvent(InputEvent.Key event) {
         Player player = Minecraft.getInstance().player;
         if (player == null) return;
+
+        // Toggle Void Sack con tecla M
+        if (KEY_VOID_SACK_TOGGLE.consumeClick()) {
+            for (InteractionHand hand : InteractionHand.values()) {
+                ItemStack stack = player.getItemInHand(hand);
+                if (stack.getItem() instanceof ItemVoidSack) {
+                    PacketToggleVoidSackActive.send(hand);
+                    break;
+                }
+            }
+        }
+
         if (WandUtil.holdingWand(player) == null) return;
 
         boolean optState = isOptKeyDown();

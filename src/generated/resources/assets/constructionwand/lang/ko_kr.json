@@ -76,5 +76,21 @@
   "item.constructionwand.stone_wand": "돌 완드",
   "itemGroup.constructionwand": "건축 완드 리바이벌",
   "itemGroup.constructionwand.construction_wand_tab": "건축 완드 리바이벌",
-  "stat.constructionwand.use_wand": "완드로 배치한 블록 수"
+  "stat.constructionwand.use_wand": "완드로 배치한 블록 수",
+  "constructionwand.description.void_sack": "공허 주머니는 주운 아이템을 가로채서 내부의 4×4 인벤토리에 저장합니다.\n\n§5§n활성화§0§r\n%1$s 키를 누르면 주머니를 활성화하거나 비활성화합니다. 비활성 상태일 때 아이템은 일반 인벤토리로 들어갑니다.\n\n§5§n보관함 연결§0§r\n주머니를 손에 든 채로 임의의 보관함(상자, 통, 셔커 상자 등)을 우클릭하면 연결됩니다. 연결되면 주머니가 활성화되어 있을 때 아이템이 보관함으로 먼저 들어갑니다. 보관함이 가득 차면 넘치는 아이템은 주머니의 내부 저장소에 보관됩니다.\n\n§5§n모드§0§r\n%1$s 키를 누르면 §a전송 중§0(아이템 → 보관함)과 §e보관 중§0(아이템 → 내부 슬롯) 모드 사이를 전환합니다. GUI 내부의 전환 버튼을 사용할 수도 있습니다.",
+  "gui.constructionwand.void_sack.sending": "전송 중 →",
+  "gui.constructionwand.void_sack.storing": "보관 중",
+  "gui.constructionwand.void_sack.toggle_tooltip": "전환: 보관함으로 전송 / 내부에 보관",
+  "item.constructionwand.void_sack": "공허 주머니",
+  "item.constructionwand.void_sack.activated": "공허 주머니 활성화됨",
+  "item.constructionwand.void_sack.active": "§a활성 §7(변경하려면 §6%1$s§7 누름)",
+  "item.constructionwand.void_sack.deactivated": "공허 주머니 비활성화됨",
+  "item.constructionwand.void_sack.inactive": "§7비활성 §7(변경하려면 §6%1$s§7 누름)",
+  "item.constructionwand.void_sack.linked": "연결된 위치: %d, %d, %d",
+  "item.constructionwand.void_sack.linked_msg": "주머니가 %d, %d, %d 위치에 연결됨",
+  "item.constructionwand.void_sack.no_link": "연결된 보관함 없음",
+  "item.constructionwand.void_sack.sending": "보관함으로 전송 중",
+  "item.constructionwand.void_sack.slots_used": "사용된 슬롯: %d / %d",
+  "item.constructionwand.void_sack.storing": "내부에 보관 중",
+  "key.constructionwand.void_sack_toggle": "공허 주머니 전환"
 }

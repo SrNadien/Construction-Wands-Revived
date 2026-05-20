@@ -1,0 +1,33 @@
+{
+  "parent": "constructionwand:root",
+  "criteria": {
+    "core_angel": {
+      "conditions": {
+        "items": [
+          {
+            "items": "constructionwand:core_angel"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.constructionwand.core_angel.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "constructionwand:core_angel"
+    },
+    "title": {
+      "translate": "advancement.constructionwand.core_angel.title"
+    }
+  },
+  "requirements": [
+    [
+      "core_angel"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

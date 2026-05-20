@@ -76,5 +76,21 @@
   "item.constructionwand.stone_wand": "Каменный жезл",
   "itemGroup.constructionwand": "Волшебные жезлы для строительства - Возрождение",
   "itemGroup.constructionwand.construction_wand_tab": "Волшебные жезлы для строительства - Возрождение",
-  "stat.constructionwand.use_wand": "Блоки, размещённые при помощи Жезла"
+  "stat.constructionwand.use_wand": "Блоки, размещённые при помощи Жезла",
+  "constructionwand.description.void_sack": "Мешок пустоты перехватывает подбираемые вами предметы и сохраняет их во внутреннем инвентаре 4×4.\n\n§5§nАКТИВАЦИЯ§0§r\nНажмите %1$s, чтобы включить или отключить мешок. Когда он неактивен, предметы попадают в ваш обычный инвентарь.\n\n§5§nПРИВЯЗКА КОНТЕЙНЕРА§0§r\nНажмите правой кнопкой мыши по любому контейнеру (сундук, бочка, шалкеровый ящик...), держа мешок в руке, чтобы привязать его. После привязки предметы будут отправляться сначала в контейнер, если мешок активен. Если контейнер заполнен, излишки переместятся во внутреннее хранилище мешка.\n\n§5§nРЕЖИМ§0§r\nНажмите %1$s, чтобы переключиться между режимами §aОтправка§0 (предметы → контейнер) и §eХранение§0 (предметы → внутренние слоты). Вы также можете использовать кнопку переключения внутри интерфейса (GUI).",
+  "gui.constructionwand.void_sack.sending": "Отправка →",
+  "gui.constructionwand.void_sack.storing": "Хранение",
+  "gui.constructionwand.void_sack.toggle_tooltip": "Переключить: отправка в контейнер / хранение внутри",
+  "item.constructionwand.void_sack": "Мешок пустоты",
+  "item.constructionwand.void_sack.activated": "Мешок пустоты активирован",
+  "item.constructionwand.void_sack.active": "§aАктивен §7(нажмите §6%1$s§7 для изменения)",
+  "item.constructionwand.void_sack.deactivated": "Мешок пустоты деактивирован",
+  "item.constructionwand.void_sack.inactive": "§7Неактивен §7(нажмите §6%1$s§7 для изменения)",
+  "item.constructionwand.void_sack.linked": "Привязан к: %d, %d, %d",
+  "item.constructionwand.void_sack.linked_msg": "Мешок привязан к %d, %d, %d",
+  "item.constructionwand.void_sack.no_link": "Нет привязанного контейнера",
+  "item.constructionwand.void_sack.sending": "Отправка в контейнер",
+  "item.constructionwand.void_sack.slots_used": "Использовано слотов: %d / %d",
+  "item.constructionwand.void_sack.storing": "Хранение внутри",
+  "key.constructionwand.void_sack_toggle": "Переключить мешок пустоты"
 }

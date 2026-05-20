@@ -102,6 +102,23 @@ add("advancement.constructionwand.core_destruction.desc", "Obtain a Destruction 
         add("constructionwand.description.core_angel", "The angel core places a block on the opposite side of the block (or row of blocks) you are facing. Maximum distance depends on wand tier. Right click empty space to place a block in midair. To do that, you'll need to have the block you want to place in your offhand.");
         add("constructionwand.description.core_destruction", "The destruction core destroys blocks (no tile entities) on the side facing you. Maximum number of blocks depends on wand tier. Destroyed blocks disappear into the void, you can use the undo feature if you've made a mistake.");
 
+        add("item.constructionwand.void_sack", "Void Sack");
+        add("item.constructionwand.void_sack.active", "§aActive §7(press §6%1$s§7 to toggle)");
+        add("item.constructionwand.void_sack.inactive", "§7Inactive §7(press §6%1$s§7 to toggle)");
+        add("item.constructionwand.void_sack.linked", "Linked to: %d, %d, %d");
+        add("item.constructionwand.void_sack.no_link", "Not linked to any container");
+        add("item.constructionwand.void_sack.sending", "Sending to container");
+        add("item.constructionwand.void_sack.storing", "Storing internally");
+        add("item.constructionwand.void_sack.slots_used", "Slots used: %d / %d");
+        add("item.constructionwand.void_sack.linked_msg", "Void Sack linked to %d, %d, %d");
+        add("item.constructionwand.void_sack.activated", "Void Sack activated");
+        add("item.constructionwand.void_sack.deactivated", "Void Sack deactivated");
+        add("gui.constructionwand.void_sack.toggle_tooltip", "Toggle: send to container / store internally");
+        add("gui.constructionwand.void_sack.sending", "Sending →");
+        add("gui.constructionwand.void_sack.storing", "Storing");
+        add("key.constructionwand.void_sack_toggle", "Toggle Void Sack");
+        add("constructionwand.description.void_sack", "The Void Sack intercepts items you pick up and stores them in its 4×4 internal inventory.\n\n§5§nACTIVATION§0§r\nPress %1$s to activate or deactivate the sack. While inactive, items go to your normal inventory as usual.\n\n§5§nLINKING A CONTAINER§0§r\nRight-click any container (chest, barrel, shulker...) while holding the sack to link it. Once linked, items go to that container first when the sack is active. If the container is full, the overflow goes to the sack's internal storage.\n\n§5§nTOGGLE MODE§0§r\nPress %1$s to switch between §aSending§0 (items → container) and §eStoring§0 (items → internal slots). You can also click the toggle button inside the sack GUI.");
+
         add("stat.constructionwand.use_wand", "Blocks placed using Wand");
     }
 
@@ -196,6 +213,23 @@ add("advancement.constructionwand.core_destruction.desc", "Obtené un Núcleo de
         add("constructionwand.description.core", "§5§nINSTALACIÓN§0§r\nPon tu nuevo núcleo junto con tu varita en una rejilla de crafteo para instalarlo. Para cambiar entre núcleos, mantén presionado %s y haz clic izquierdo en el aire con tu varita o usa la pantalla de opciones.");
         add("constructionwand.description.core_angel", "El núcleo angelical coloca un bloque en el lado opuesto del bloque (o fila de bloques) al que estás mirando. La distancia máxima depende del nivel de la varita. Clic derecho en el aire para colocar un bloque en el aire. Para eso, necesitarás tener el bloque que quieras colocar en la mano secundaria.");
         add("constructionwand.description.core_destruction", "El núcleo de destrucción destruye bloques (no entidades de bloque) en el lado que estás mirando. El número máximo de bloques depende del nivel de la varita. Los bloques destruidos desaparecen en el vacío; podés usar la función deshacer si te equivocás.");
+        add("item.constructionwand.void_sack", "Bolsa del Vacío");
+        add("item.constructionwand.void_sack.active", "§aActiva §7(presioná §6%1$s§7 para cambiar)");
+        add("item.constructionwand.void_sack.inactive", "§7Inactiva §7(presioná §6%1$s§7 para cambiar)");
+        add("item.constructionwand.void_sack.linked", "Vinculada a: %d, %d, %d");
+        add("item.constructionwand.void_sack.no_link", "Sin container vinculado");
+        add("item.constructionwand.void_sack.sending", "Enviando al container");
+        add("item.constructionwand.void_sack.storing", "Guardando internamente");
+        add("item.constructionwand.void_sack.slots_used", "Espacios usados: %d / %d");
+        add("item.constructionwand.void_sack.linked_msg", "Bolsa vinculada a %d, %d, %d");
+        add("item.constructionwand.void_sack.activated", "Bolsa del Vacío activada");
+        add("item.constructionwand.void_sack.deactivated", "Bolsa del Vacío desactivada");
+        add("gui.constructionwand.void_sack.toggle_tooltip", "Cambiar: enviar al container / guardar internamente");
+        add("gui.constructionwand.void_sack.sending", "Enviando →");
+        add("gui.constructionwand.void_sack.storing", "Guardando");
+        add("key.constructionwand.void_sack_toggle", "Alternar Bolsa del Vacío");
+        add("constructionwand.description.void_sack", "La Bolsa del Vacío intercepta los ítems que recogés y los guarda en su inventario interno de 4×4.\n\n§5§nACTIVACIÓN§0§r\nPresioná %1$s para activar o desactivar la bolsa. Mientras está inactiva, los ítems van a tu inventario normal.\n\n§5§nVINCULAR UN CONTAINER§0§r\nHacé clic derecho sobre cualquier container (cofre, barril, shulker...) con la bolsa en mano para vincularlo. Una vez vinculada, los ítems van primero al container cuando la bolsa está activa. Si el container está lleno, el exceso va al almacenamiento interno de la bolsa.\n\n§5§nMODO§0§r\nPresioná %1$s para alternar entre §aEnviando§0 (ítems → container) y §eGuardando§0 (ítems → espacios internos). También podés usar el botón de cambio dentro de la GUI.");
+
         add("stat.constructionwand.use_wand", "Bloques colocados usando la Varita");
         }
     }

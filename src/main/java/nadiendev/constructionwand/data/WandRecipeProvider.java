@@ -41,6 +41,8 @@ public class WandRecipeProvider extends RecipeProvider {
         coreRecipe(output, ModItems.CORE_ANGEL.get(),       Tags.Items.FEATHERS,              Tags.Items.INGOTS_GOLD);
         coreRecipe(output, ModItems.CORE_DESTRUCTION.get(), Tags.Items.STORAGE_BLOCKS_DIAMOND, asTag(Items.DIAMOND_PICKAXE));
 
+        voidSackRecipe(output);
+
         ResourceLocation id = ConstructionWand.loc("dynamic/wand_upgrade");
         SpecialRecipeBuilder.special(RecipeWandUpgrade::new).save(output, id.toString());
     }
@@ -67,6 +69,21 @@ public class WandRecipeProvider extends RecipeProvider {
                 .pattern("X# ")
                 .unlockedBy("has_item", inventoryTrigger(
                         ItemPredicate.Builder.item().of(registries.lookupOrThrow(Registries.ITEM), item1).build()))
+                .save(output);
+    }
+
+    private void voidSackRecipe(RecipeOutput output) {
+        shaped(RecipeCategory.MISC, ModItems.VOID_SACK.get())
+                .define('C', ModItems.CORE_DESTRUCTION.get())
+                .define('E', Items.DIAMOND)
+                .define('O', Items.NETHERITE_INGOT)
+                .define('D', Items.EMERALD)
+                .pattern("EDE")
+                .pattern("OCO")
+                .pattern("EDE")
+                .unlockedBy("has_ender_chest", inventoryTrigger(
+                        ItemPredicate.Builder.item().of(registries.lookupOrThrow(Registries.ITEM),
+                                Tags.Items.CHESTS_ENDER).build()))
                 .save(output);
     }
 

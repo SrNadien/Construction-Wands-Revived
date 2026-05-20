@@ -34,18 +34,29 @@ public class WandModelProvider extends ModelProvider {
         for (DeferredItem<Item> core : ModItems.CORES) {
             itemModels.generateFlatItem(core.get(), ModelTemplates.FLAT_ITEM);
         }
+
+        // Void Sack — textura: textures/item/backpack_void.png
+        itemModels.itemModelOutput.accept(
+                ModItems.VOID_SACK.get(),
+                ItemModelUtils.plainModel(
+                        ModelTemplates.FLAT_ITEM.create(
+                                ModelLocationUtils.getModelLocation(ModItems.VOID_SACK.get()),
+                                new TextureMapping().put(TextureSlot.LAYER0,
+                                        ResourceLocation.fromNamespaceAndPath(ConstructionWand.MODID, "item/backpack_void")),
+                                itemModels.modelOutput
+                        )
+                )
+        );
     }
 
     private void generateWandModel(ItemModelGenerators itemModels, DeferredItem<Item> wandItem) {
         Item wand = wandItem.get();
         ResourceLocation location = ModelLocationUtils.getModelLocation(wand);
 
-        // Modelo base: sin core
         ItemModel.Unbaked base = ItemModelUtils.plainModel(
                 itemModels.createFlatItemModel(wand, ModelTemplates.FLAT_HANDHELD_ITEM)
         );
 
-        // Sufijos coinciden con getRegistryName().getPath(): "core_angel", "core_destruction"
         ItemModel.Unbaked angelModel = ItemModelUtils.plainModel(
                 generateLayeredItem(
                         itemModels,
@@ -64,7 +75,6 @@ public class WandModelProvider extends ModelProvider {
                 )
         );
 
-        // Strings exactos que retorna SelectWandCore.get()
         List<SelectItemModel.SwitchCase<String>> cases = new ArrayList<>();
         cases.add(ItemModelUtils.when("core_angel", angelModel));
         cases.add(ItemModelUtils.when("core_destruction", destructionModel));
