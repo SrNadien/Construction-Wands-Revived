@@ -16,6 +16,7 @@ import org.jetbrains.annotations.NotNull;
 import nadiendev.constructionwand.ConstructionWand;
 import nadiendev.constructionwand.basics.ConfigClient;
 import nadiendev.constructionwand.basics.ConfigServer;
+import nadiendev.constructionwand.client.KeybindHandler;
 import nadiendev.constructionwand.items.ModItems;
 
 import javax.annotation.Nonnull;
@@ -67,5 +68,15 @@ public class ConstructionWandJeiPlugin implements IModPlugin
                             .append(Component.translatable(baseKey + "core", wandModeComponent))
             );
         }
+
+        // ── Void Sack ─────────────────────────────────────────────────────────
+        Component mKeyComponent = KeybindHandler.KEY_VOID_SACK_TOGGLE
+                .getTranslatedKeyMessage()
+                .copy().withStyle(ChatFormatting.GOLD);
+
+        registration.addIngredientInfo(
+                new ItemStack(ModItems.VOID_SACK.get()),
+                VanillaTypes.ITEM_STACK,
+                Component.translatable(baseKey + "void_sack", mKeyComponent));
     }
 }

@@ -50,9 +50,6 @@ public class ModDataComponents
                     .persistent(CompoundTag.CODEC)
                     .networkSynchronized(ByteBufCodecs.COMPOUND_TAG)
                     .build());
-<<<<<<< Updated upstream
-}
-=======
 
     // ── Void Sack ─────────────────────────────────────────────────────────────
     public static final Supplier<DataComponentType<CompoundTag>> VOID_SACK_DATA =
@@ -62,4 +59,3 @@ public class ModDataComponents
                             .networkSynchronized(ByteBufCodecs.COMPOUND_TAG)
                             .build());
 }
->>>>>>> Stashed changes

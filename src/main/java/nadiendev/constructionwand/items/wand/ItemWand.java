@@ -14,7 +14,6 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
-import net.neoforged.neoforge.client.model.generators.ModelFile;
 import nadiendev.constructionwand.ConstructionWand;
 import nadiendev.constructionwand.api.IWandCore;
 import nadiendev.constructionwand.basics.WandUtil;
@@ -62,11 +61,7 @@ public abstract class ItemWand extends Item implements ICustomItemModel
         if(!player.isCrouching()) {
             if(world.isClientSide) return InteractionResultHolder.fail(stack);
 
-<<<<<<< Updated upstream
-            // Right click: Place angel block
-=======
             // Right click in air: place angel block
->>>>>>> Stashed changes
             WandJob job = getWandJob(player, world, BlockHitResult.miss(player.getLookAngle(),
                     WandUtil.fromVector(player.getLookAngle()), player.blockPosition()), stack);
             return job.doIt() ? InteractionResultHolder.success(stack) : InteractionResultHolder.fail(stack);
@@ -101,11 +96,7 @@ public abstract class ItemWand extends Item implements ICustomItemModel
 
         String langTooltip = ConstructionWand.MODID + ".tooltip.";
 
-<<<<<<< Updated upstream
-        // +SHIFT tooltip: show all options + installed cores
-=======
         // +SHIFT tooltip: show all options and installed cores
->>>>>>> Stashed changes
         if(Screen.hasShiftDown()) {
             for(int i = 1; i < options.allOptions.length; i++) {
                 IOption<?> opt = options.allOptions[i];
@@ -122,11 +113,7 @@ public abstract class ItemWand extends Item implements ICustomItemModel
                 }
             }
         }
-<<<<<<< Updated upstream
-        // Default tooltip: show block limit + active wand core
-=======
         // Default tooltip: show block limit and active core
->>>>>>> Stashed changes
         else {
             IOption<?> opt = options.allOptions[0];
             lines.add(Component.translatable(langTooltip + "blocks", limit).withStyle(ChatFormatting.GRAY));
@@ -147,20 +134,6 @@ public abstract class ItemWand extends Item implements ICustomItemModel
 
     @Override
     public void generateCustomItemModel(ItemModelGenerator generator, String name) {
-<<<<<<< Updated upstream
-        ModelFile wandWithCore = generator.withExistingParent(name + "_core", "item/handheld")
-                .texture("layer0", generator.modLoc("item/" + name))
-                .texture("layer1", generator.modLoc("item/overlay_core"));
-
-        generator.withExistingParent(name, "item/handheld")
-                .texture("layer0", generator.modLoc("item/" + name))
-                .override()
-                .predicate(generator.modLoc("using_core"), 1)
-                .model(wandWithCore).end();
-
-    }
-}
-=======
         // Sub-model for core_angel overlay
         generator.withExistingParent(name + "_core_angel", "item/handheld")
                 .texture("layer0", generator.modLoc("item/" + name))
@@ -184,4 +157,3 @@ public abstract class ItemWand extends Item implements ICustomItemModel
                 .end();
     }
 }
->>>>>>> Stashed changes

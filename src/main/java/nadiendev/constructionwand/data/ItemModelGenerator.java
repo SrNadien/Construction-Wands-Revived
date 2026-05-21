@@ -36,8 +36,4 @@ public class ItemModelGenerator extends ItemModelProvider
     public String getName() {
         return ConstructionWand.MODNAME + " item models";
     }
-<<<<<<< Updated upstream
 }
-=======
-}
->>>>>>> Stashed changes

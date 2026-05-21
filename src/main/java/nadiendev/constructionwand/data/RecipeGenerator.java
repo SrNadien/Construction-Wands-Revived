@@ -7,7 +7,9 @@ import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
+import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.SpecialRecipeBuilder;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
@@ -24,6 +26,9 @@ import java.util.concurrent.CompletableFuture;
 public class RecipeGenerator extends RecipeProvider {
     public RecipeGenerator(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> lookupProvider) {
         super(packOutput, lookupProvider);
+public class RecipeGenerator extends RecipeProvider {
+    public RecipeGenerator(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> lookupProvider) {
+        super(packOutput, lookupProvider);
     }
 
     @Override
@@ -37,11 +42,8 @@ public class RecipeGenerator extends RecipeProvider {
         coreRecipe(output, ModItems.CORE_ANGEL.get(), Inp.fromTag(Tags.Items.FEATHERS), Inp.fromTag(Tags.Items.INGOTS_GOLD));
         coreRecipe(output, ModItems.CORE_DESTRUCTION.get(), Inp.fromTag(Tags.Items.STORAGE_BLOCKS_DIAMOND), Inp.fromItem(Items.DIAMOND_PICKAXE));
 
-<<<<<<< Updated upstream
-=======
         voidSackRecipe(output);
 
->>>>>>> Stashed changes
         specialRecipe(output, ModRecipes.WAND_UPGRADE.get());
     }
 
@@ -68,8 +70,6 @@ public class RecipeGenerator extends RecipeProvider {
                 .save(output);
     }
 
-<<<<<<< Updated upstream
-=======
     private void voidSackRecipe(RecipeOutput output) {
         Inp coreDestruction = Inp.fromItem(ModItems.CORE_DESTRUCTION.get());
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.VOID_SACK.get())
@@ -84,7 +84,6 @@ public class RecipeGenerator extends RecipeProvider {
                 .save(output);
     }
 
->>>>>>> Stashed changes
     private void specialRecipe(RecipeOutput output, SimpleCraftingRecipeSerializer<?> serializer) {
         ResourceLocation name = BuiltInRegistries.RECIPE_SERIALIZER.getKey(serializer);
         SpecialRecipeBuilder.special(RecipeWandUpgrade::new).save(output, ConstructionWand.loc("dynamic/" + name.getPath()).toString());

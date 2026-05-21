@@ -1,10 +1,6 @@
 package nadiendev.constructionwand.wand.undo;
 
 import net.minecraft.core.BlockPos;
-<<<<<<< Updated upstream
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
-=======
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -15,7 +11,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
->>>>>>> Stashed changes
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluids;
@@ -37,10 +32,6 @@ public class DestroySnapshot implements ISnapshot
     @Nullable
     public static DestroySnapshot get(Level world, Player player, BlockPos pos) {
         if(!WandUtil.isBlockRemovable(world, player, pos)) return null;
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
         return new DestroySnapshot(world.getBlockState(pos), pos);
     }
 
@@ -61,9 +52,6 @@ public class DestroySnapshot implements ISnapshot
 
     @Override
     public boolean execute(Level world, Player player, BlockHitResult rayTraceResult) {
-<<<<<<< Updated upstream
-        return WandUtil.removeBlock(world, player, block, pos);
-=======
         if (!(world instanceof ServerLevel serverLevel)) {
             return WandUtil.removeBlock(world, player, block, pos);
         }
@@ -82,30 +70,14 @@ public class DestroySnapshot implements ISnapshot
         } else {
             return serverLevel.destroyBlock(pos, true, null, 512);
         }
->>>>>>> Stashed changes
     }
 
     @Override
     public boolean canRestore(Level world, Player player) {
-<<<<<<< Updated upstream
-        // Is position out of world?
-        if(!world.isInWorldBounds(pos)) return false;
-
-        // Is block modifiable?
-        if(!world.mayInteract(player, pos)) return false;
-
-        // Ignore blocks and entities when in creative
-        if(player.isCreative()) return true;
-
-        // Is block empty or fluid?
-        if(!world.isEmptyBlock(pos) && !world.getBlockState(pos).canBeReplaced(Fluids.EMPTY)) return false;
-
-=======
         if(!world.isInWorldBounds(pos)) return false;
         if(!world.mayInteract(player, pos)) return false;
         if(player.isCreative()) return true;
         if(!world.isEmptyBlock(pos) && !world.getBlockState(pos).canBeReplaced(Fluids.EMPTY)) return false;
->>>>>>> Stashed changes
         return !WandUtil.entitiesCollidingWithBlock(world, block, pos);
     }
 

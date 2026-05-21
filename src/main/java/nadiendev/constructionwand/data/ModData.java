@@ -10,10 +10,7 @@ import net.neoforged.neoforge.data.event.GatherDataEvent;
 
 import java.util.concurrent.CompletableFuture;
 
-<<<<<<< Updated upstream
-=======
 @SuppressWarnings("removal")
->>>>>>> Stashed changes
 @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
 public class ModData
 {
@@ -31,8 +28,6 @@ public class ModData
 
         if(event.includeClient()) {
             generator.addProvider(true, new ItemModelGenerator(packOutput, fileHelper));
-<<<<<<< Updated upstream
-=======
             generator.addProvider(true, new LanguageGenerator(packOutput)); // Default (en_us)
             generator.addProvider(true, new LanguageGenerator.ESAR(packOutput)); // Argentine Spanish
             generator.addProvider(true, new LanguageGenerator.ESCL(packOutput)); // Chilean Spanish
@@ -47,7 +42,6 @@ public class ModData
             generator.addProvider(true, new LanguageGenerator.TRTR(packOutput)); // Turkish
             generator.addProvider(true, new LanguageGenerator.ZHCN(packOutput)); // Chinese Simplified
             generator.addProvider(true, new LanguageGenerator.DEDE(packOutput)); // German
->>>>>>> Stashed changes
         }
     }
 }
