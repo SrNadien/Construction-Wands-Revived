@@ -32,7 +32,7 @@ public class ModItems {
     public static final DeferredItem<Item> CORE_DESTRUCTION = ITEMS.register("core_destruction", () -> new ItemCoreDestruction(new Item.Properties().stacksTo(1)));
 
    public static final DeferredItem<Item> VOID_SACK =
-            ITEMS.registerItem("void_sack", props -> new ItemVoidSack(props.stacksTo(1).fireResistant()));
+            ITEMS.registerItem("void_sack", props -> new ItemVoidSack(props.stacksTo(64).fireResistant()));
 
 
     @SuppressWarnings("unchecked")
