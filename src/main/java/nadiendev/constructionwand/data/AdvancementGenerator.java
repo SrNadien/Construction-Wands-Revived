@@ -52,6 +52,7 @@ public class AdvancementGenerator extends AdvancementProvider {
 
             AdvancementHolder angelCore       = onHasItem(consumer, ModItems.CORE_ANGEL,       AdvancementType.TASK, stoneWand);
             AdvancementHolder destructionCore = onHasItem(consumer, ModItems.CORE_DESTRUCTION, AdvancementType.TASK, stoneWand);
+            AdvancementHolder voidSack        = onHasItem(consumer, ModItems.VOID_SACK,        AdvancementType.TASK, root);
         }
 
         protected static AdvancementHolder onHasItem(Consumer<AdvancementHolder> consumer,

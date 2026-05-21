@@ -75,5 +75,9 @@
   "item.constructionwand.netherite_wand": "Netherit Stab",
   "item.constructionwand.stone_wand": "Steinerner Stab",
   "itemGroup.constructionwand": "Baustäbe Wiederbelebt",
+<<<<<<< Updated upstream
+=======
+  "itemGroup.constructionwand.construction_wand_tab": "Baustäbe Wiederbelebt",
+>>>>>>> Stashed changes
   "stat.constructionwand.use_wand": "Blöcke mithilfe des Stabs platziert"
 }

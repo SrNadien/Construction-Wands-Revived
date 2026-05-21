@@ -22,6 +22,10 @@
   "constructionwand.description.durability.unlimited": "forever",
   "constructionwand.description.key.sneak": "Sneak",
   "constructionwand.description.key.sneak_opt": "Sneak+%s",
+<<<<<<< Updated upstream
+=======
+  "constructionwand.description.void_sack": "The Void Sack intercepts items you pick up and stores them in its 4×4 internal inventory.\n\n§5§nACTIVATION§0§r\nPress %1$s to activate or deactivate the sack. While inactive, items go to your normal inventory as usual.\n\n§5§nLINKING A CONTAINER§0§r\nRight-click any container (chest, barrel, shulker...) while holding the sack to link it. Once linked, items go to that container first when the sack is active. If the container is full, the overflow goes to the sack's internal storage.\n\n§5§nTOGGLE MODE§0§r\nPress %1$s to switch between §aSending§0 (items → container) and §eStoring§0 (items → internal slots). You can also click the toggle button inside the sack GUI.",
+>>>>>>> Stashed changes
   "constructionwand.description.wand": "The %1$s can place up to %2$d blocks at the side of a building facing you and lasts %3$s.\n\nHold down %5$s and scroll to change placement restriction (Horizontal, Vertical, North/South, East/West, No lock).\n\nOpen the option screen with %6$s§9+Right click§0.\n\n§5§nUNDO§0§r\nHolding down §9Sneak+§0%4$s while looking at a blocks will show you the last blocks you placed with a green border around them. §9Sneak+§0%4$s§9+Right clicking§0 any of them will undo the operation, giving you all the items back. If you used the Destruction core, it will restore the blocks.\n\n§5§nCONTAINERS§0§r\nShulker boxes, bundles and many containers from other mods can provide building blocks for the wand.\n\n§5§nOFFHAND PRIORITY§0§r\nHaving blocks in your offhand will place them instead of the block you're looking at.",
   "constructionwand.option.cores": "",
   "constructionwand.option.cores.constructionwand:core_angel": "§6Angel Core",
@@ -67,6 +71,12 @@
   "constructionwand.tooltip.core_tip": "Combine the core with your wand in a crafting grid",
   "constructionwand.tooltip.cores": "Wand cores:",
   "constructionwand.tooltip.shift": "Press [SHIFT]",
+<<<<<<< Updated upstream
+=======
+  "gui.constructionwand.void_sack.sending": "Sending →",
+  "gui.constructionwand.void_sack.storing": "Storing",
+  "gui.constructionwand.void_sack.toggle_tooltip": "Toggle: send to container / store internally",
+>>>>>>> Stashed changes
   "item.constructionwand.core_angel": "Angel Wand Core",
   "item.constructionwand.core_destruction": "Destruction Wand Core",
   "item.constructionwand.diamond_wand": "Diamond Wand",
@@ -74,6 +84,23 @@
   "item.constructionwand.iron_wand": "Iron Wand",
   "item.constructionwand.netherite_wand": "Netherite Wand",
   "item.constructionwand.stone_wand": "Stone Wand",
+<<<<<<< Updated upstream
   "itemGroup.constructionwand": "Construction Wands Revived",
+=======
+  "item.constructionwand.void_sack": "Void Sack",
+  "item.constructionwand.void_sack.activated": "Void Sack activated",
+  "item.constructionwand.void_sack.active": "§aActive §7(press §6%1$s§7 to toggle)",
+  "item.constructionwand.void_sack.deactivated": "Void Sack deactivated",
+  "item.constructionwand.void_sack.inactive": "§7Inactive §7(press §6%1$s§7 to toggle)",
+  "item.constructionwand.void_sack.linked": "Linked to: %d, %d, %d",
+  "item.constructionwand.void_sack.linked_msg": "Void Sack linked to %d, %d, %d",
+  "item.constructionwand.void_sack.no_link": "Not linked to any container",
+  "item.constructionwand.void_sack.sending": "Sending to container",
+  "item.constructionwand.void_sack.slots_used": "Slots used: %d / %d",
+  "item.constructionwand.void_sack.storing": "Storing internally",
+  "itemGroup.constructionwand": "Construction Wands Revived",
+  "itemGroup.constructionwand.construction_wand_tab": "Construction Wands Revived",
+  "key.constructionwand.void_sack_toggle": "Toggle Void Sack",
+>>>>>>> Stashed changes
   "stat.constructionwand.use_wand": "Blocks placed using Wand"
 }

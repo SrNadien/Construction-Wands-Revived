@@ -1,8 +1,17 @@
 package nadiendev.constructionwand.wand.undo;
 
 import net.minecraft.core.BlockPos;
+<<<<<<< Updated upstream
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+=======
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.enchantment.Enchantments;
+>>>>>>> Stashed changes
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluids;
@@ -45,7 +54,28 @@ public class DestroySnapshot implements ISnapshot
 
     @Override
     public boolean execute(Level world, Player player, BlockHitResult rayTraceResult) {
-        return WandUtil.removeBlock(world, player, block, pos);
+        if (!(world instanceof ServerLevel serverLevel)) {
+            // Fallback client-side (no debería ocurrir)
+            return WandUtil.removeBlock(world, player, block, pos);
+        }
+
+        if (!WandUtil.isBlockRemovable(world, player, pos)) return false;
+
+        // Herramienta con Silk Touch para obtener el bloque exacto (grass block, etc.)
+        ItemStack silkTool = new ItemStack(Items.NETHERITE_PICKAXE);
+        silkTool.enchant(
+            serverLevel.registryAccess()
+                .lookupOrThrow(net.minecraft.core.registries.Registries.ENCHANTMENT)
+                .getOrThrow(Enchantments.SILK_TOUCH),
+            1
+        );
+
+        // destroyBlock 
+        if (player instanceof ServerPlayer serverPlayer) {
+            return serverLevel.destroyBlock(pos, true, serverPlayer, 512);
+        } else {
+            return serverLevel.destroyBlock(pos, true, null, 512);
+        }
     }
 
     @Override

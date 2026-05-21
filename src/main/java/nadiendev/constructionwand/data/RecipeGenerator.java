@@ -41,6 +41,8 @@ public class RecipeGenerator extends RecipeProvider
         coreRecipe(ModItems.CORE_ANGEL.get(), Inp.fromTag(registries, Tags.Items.FEATHERS), Inp.fromTag(registries, Tags.Items.INGOTS_GOLD));
         coreRecipe(ModItems.CORE_DESTRUCTION.get(), Inp.fromTag(registries, Tags.Items.STORAGE_BLOCKS_DIAMOND), Inp.fromItem(registries, Items.DIAMOND_PICKAXE));
 
+        voidSackRecipe();
+
         specialRecipe(RecipeWandUpgrade::new, ModRecipes.WAND_UPGRADE.get());
     }
 
@@ -64,6 +66,19 @@ public class RecipeGenerator extends RecipeProvider
                 .pattern("#O#")
                 .pattern("X# ")
                 .unlockedBy("has_item", inventoryTrigger(item1.predicate()))
+                .save(output);
+    }
+
+    private void voidSackRecipe() {
+        shaped(RecipeCategory.MISC, ModItems.VOID_SACK.get())
+                .define('C', ModItems.CORE_DESTRUCTION.get())
+                .define('E', Items.DIAMOND)
+                .define('O', Items.NETHERITE_INGOT)
+                .define('D', Items.EMERALD)
+                .pattern("EDE")
+                .pattern("OCO")
+                .pattern("EDE")
+                .unlockedBy("has_ender_chest", inventoryTrigger(Inp.fromTag(registries, Tags.Items.CHESTS_ENDER).predicate()))
                 .save(output);
     }
 

@@ -35,6 +35,19 @@ public class ItemModelGenerator extends ModelProvider {
         for (DeferredItem<Item> core : ModItems.CORES) {
             itemModels.generateFlatItem(core.get(), ModelTemplates.FLAT_ITEM);
         }
+
+        // Void Sack — textura: textures/item/backpack_void.png
+        itemModels.itemModelOutput.accept(
+                ModItems.VOID_SACK.get(),
+                ItemModelUtils.plainModel(
+                        ModelTemplates.FLAT_ITEM.create(
+                                ModelLocationUtils.getModelLocation(ModItems.VOID_SACK.get()),
+                                new TextureMapping().put(TextureSlot.LAYER0,
+                                        Identifier.fromNamespaceAndPath(ConstructionWand.MODID, "item/backpack_void")),
+                                itemModels.modelOutput
+                        )
+                )
+        );
     }
 
     private void generateWandModel(ItemModelGenerators itemModels, DeferredItem<Item> wandItem) {

@@ -2,6 +2,8 @@ package nadiendev.constructionwand.client;
 
 import nadiendev.constructionwand.ConstructionWand;
 import nadiendev.constructionwand.client.property.SelectWandCore;
+import nadiendev.constructionwand.client.screen.ScreenVoidSack;
+import nadiendev.constructionwand.registry.ModMenuTypes;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -9,6 +11,7 @@ import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import net.neoforged.neoforge.client.event.RegisterSelectItemModelPropertyEvent;
 import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 
 @EventBusSubscriber(modid = ConstructionWand.MODID, value = Dist.CLIENT)
 public class ClientHandler {
@@ -24,6 +27,10 @@ public class ClientHandler {
     @SubscribeEvent
     public static void registerKeymapping(final RegisterKeyMappingsEvent event) {
         event.register(KeybindHandler.KEY_OPT);
+    }
+       @SubscribeEvent
+    public static void registerMenuScreens(RegisterMenuScreensEvent event) {
+        event.register(ModMenuTypes.VOID_SACK.get(), ScreenVoidSack::new);
     }
 
     @SubscribeEvent

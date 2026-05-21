@@ -1,11 +1,19 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
+<<<<<<<< Updated upstream:src/generated/resources/data/constructionwand/advancement/recipes/misc/core_angel.json
     "has_item": {
       "conditions": {
         "items": [
           {
             "items": "#c:feathers"
+========
+    "has_ender_chest": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#c:chests/ender"
+>>>>>>>> Stashed changes:src/generated/resources/data/constructionwand/advancement/recipes/misc/void_sack.json
           }
         ]
       },
@@ -21,7 +29,11 @@
   "requirements": [
     [
       "has_the_recipe",
+<<<<<<<< Updated upstream:src/generated/resources/data/constructionwand/advancement/recipes/misc/core_angel.json
       "has_item"
+========
+      "has_ender_chest"
+>>>>>>>> Stashed changes:src/generated/resources/data/constructionwand/advancement/recipes/misc/void_sack.json
     ]
   ],
   "rewards": {

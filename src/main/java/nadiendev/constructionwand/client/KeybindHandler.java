@@ -6,6 +6,7 @@ import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.InteractionHand;
 import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 import net.neoforged.neoforge.client.event.InputEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
@@ -18,11 +19,19 @@ import nadiendev.constructionwand.basics.option.WandOptions;
 import nadiendev.constructionwand.items.wand.ItemWand;
 import nadiendev.constructionwand.network.PacketQueryUndo;
 import nadiendev.constructionwand.network.PacketWandOption;
+import nadiendev.constructionwand.items.containeritems.ItemVoidSack;
+import nadiendev.constructionwand.network.PacketToggleVoidSackActive;
 
 public class KeybindHandler {
     // TODO: Need a lang
     public static final KeyMapping.Category CATEGORY = new KeyMapping.Category(ConstructionWand.loc("category"));
     public static final KeyMapping KEY_OPT = new KeyMapping(getKey("wand_option"), GLFW.GLFW_KEY_LEFT_CONTROL, CATEGORY);
+
+     public static final KeyMapping KEY_VOID_SACK_TOGGLE = new KeyMapping(
+            getKey("void_sack_toggle"),
+            GLFW.GLFW_KEY_M,
+            CATEGORY
+    );
 
     private static String getKey(String name) {
 		return String.join(".", "key", ConstructionWand.MODID, name);
@@ -40,6 +49,17 @@ public class KeybindHandler {
     public void KeyEvent(InputEvent.Key event) {
         Player player = Minecraft.getInstance().player;
         if(player == null) return;
+        
+         // Toggle Void Sack con tecla M
+        if (KEY_VOID_SACK_TOGGLE.consumeClick()) {
+            for (InteractionHand hand : InteractionHand.values()) {
+                ItemStack stack = player.getItemInHand(hand);
+                if (stack.getItem() instanceof ItemVoidSack) {
+                    PacketToggleVoidSackActive.send(hand);
+                    break;
+                }
+            }
+        }
         if(WandUtil.holdingWand(player) == null) return;
 
         boolean optState = isOptKeyDown();
@@ -116,4 +136,8 @@ public class KeybindHandler {
     public static boolean guiKeyCombDown() {
         return isOptKeyDown() && (isLeftShiftKeyDown() || !ConfigClient.SHIFTOPT_GUI.get());
     }
+<<<<<<< Updated upstream
 }
+=======
+}
+>>>>>>> Stashed changes

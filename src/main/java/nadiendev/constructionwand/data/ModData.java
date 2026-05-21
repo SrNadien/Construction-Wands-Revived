@@ -1,42 +1,54 @@
 package nadiendev.constructionwand.data;
 
 import nadiendev.constructionwand.ConstructionWand;
+<<<<<<< Updated upstream
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+=======
+import nadiendev.constructionwand.data.AdvancementGenerator;
+import nadiendev.constructionwand.data.ItemModelGenerator;
+import net.minecraft.data.advancements.AdvancementProvider;
+import net.neoforged.bus.api.IEventBus;
+>>>>>>> Stashed changes
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 
-import java.util.concurrent.CompletableFuture;
+import java.util.List;
 
-@EventBusSubscriber(modid = ConstructionWand.MODID)
 public class ModData {
 
-    @SubscribeEvent
+    public static void register(IEventBus modEventBus) {
+        modEventBus.addListener(ModData::gatherData);
+    }
+
     public static void gatherData(GatherDataEvent.Client event) {
-        DataGenerator generator = event.getGenerator();
-        PackOutput packOutput = generator.getPackOutput();
-        CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
+        // Advancements
+        event.createProvider((output, lookup) ->
+                new AdvancementProvider(output, lookup, List.of(new AdvancementGenerator.WandAdvancementGenerator())));
 
-        generator.addProvider(true, new RecipeGenerator.Runner(packOutput, lookupProvider));
-        generator.addProvider(true, new AdvancementGenerator(packOutput, lookupProvider));
+        // Recetas
+        event.createProvider((output, lookup) ->
+                new RecipeGenerator.Runner(output, lookup));
 
-        generator.addProvider(true, new ItemModelGenerator(packOutput));
+        // Modelos 
+         event.createProvider(output -> new ItemModelGenerator(output));
 
-        generator.addProvider(true, new LanguageGenerator(packOutput));
-        generator.addProvider(true, new LanguageGenerator.ESAR(packOutput));
-        generator.addProvider(true, new LanguageGenerator.ESCL(packOutput));
-        generator.addProvider(true, new LanguageGenerator.ESCO(packOutput));
-        generator.addProvider(true, new LanguageGenerator.ESES(packOutput));
-        generator.addProvider(true, new LanguageGenerator.ESMX(packOutput));
-        generator.addProvider(true, new LanguageGenerator.JAJP(packOutput));
-        generator.addProvider(true, new LanguageGenerator.KOKR(packOutput));
-        generator.addProvider(true, new LanguageGenerator.PTBR(packOutput));
-        generator.addProvider(true, new LanguageGenerator.RURU(packOutput));
-        generator.addProvider(true, new LanguageGenerator.SVSE(packOutput));
-        generator.addProvider(true, new LanguageGenerator.TRTR(packOutput));
-        generator.addProvider(true, new LanguageGenerator.ZHCN(packOutput));
-        generator.addProvider(true, new LanguageGenerator.DEDE(packOutput));
+        // Lenguajes
+        event.createProvider((output, lookup) -> new LanguageGenerator(output));
+        event.createProvider((output, lookup) -> new LanguageGenerator.ESAR(output));
+        event.createProvider((output, lookup) -> new LanguageGenerator.ESCL(output));
+        event.createProvider((output, lookup) -> new LanguageGenerator.ESCO(output));
+        event.createProvider((output, lookup) -> new LanguageGenerator.ESES(output));
+        event.createProvider((output, lookup) -> new LanguageGenerator.ESMX(output));
+        event.createProvider((output, lookup) -> new LanguageGenerator.JAJP(output));
+        event.createProvider((output, lookup) -> new LanguageGenerator.KOKR(output));
+        event.createProvider((output, lookup) -> new LanguageGenerator.PTBR(output));
+        event.createProvider((output, lookup) -> new LanguageGenerator.RURU(output));
+        event.createProvider((output, lookup) -> new LanguageGenerator.SVSE(output));
+        event.createProvider((output, lookup) -> new LanguageGenerator.TRTR(output));
+        event.createProvider((output, lookup) -> new LanguageGenerator.ZHCN(output));
+        event.createProvider((output, lookup) -> new LanguageGenerator.DEDE(output));
     }
 }

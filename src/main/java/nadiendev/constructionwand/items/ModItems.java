@@ -9,6 +9,7 @@ import nadiendev.constructionwand.items.core.ItemCoreAngel;
 import nadiendev.constructionwand.items.core.ItemCoreDestruction;
 import nadiendev.constructionwand.items.wand.ItemWandBasic;
 import nadiendev.constructionwand.items.wand.ItemWandInfinity;
+import nadiendev.constructionwand.items.containeritems.ItemVoidSack;
 
 public class ModItems {
 
@@ -31,10 +32,17 @@ public class ModItems {
     public static final DeferredItem<Item> CORE_DESTRUCTION =
             ITEMS.registerItem("core_destruction", props -> new ItemCoreDestruction(props.stacksTo(1)));
 
+   public static final DeferredItem<Item> VOID_SACK =
+            ITEMS.registerItem("void_sack", props -> new ItemVoidSack(props.stacksTo(1).fireResistant()));
+
+
     @SuppressWarnings("unchecked")
     public static final DeferredItem<Item>[] WANDS =
             new DeferredItem[]{WAND_STONE, WAND_IRON, WAND_DIAMOND, WAND_NETHERITE, WAND_INFINITY};
     @SuppressWarnings("unchecked")
     public static final DeferredItem<Item>[] CORES =
             new DeferredItem[]{CORE_ANGEL, CORE_DESTRUCTION};
+    @SuppressWarnings("unchecked")
+    public static final DeferredItem<Item>[] CONTAINERITEMS =
+            new DeferredItem[]{VOID_SACK};
 }

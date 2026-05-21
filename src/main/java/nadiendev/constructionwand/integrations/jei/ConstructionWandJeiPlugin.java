@@ -55,6 +55,7 @@ public class ConstructionWandJeiPlugin implements IModPlugin
             );
         }
 
+        // ── CORES ───────────────────────────────────────────────────────────
         for(DeferredHolder<Item, Item> coreSupplier : ModItems.CORES) {
             Item core = coreSupplier.get();
             registration.addIngredientInfo(new ItemStack(core), VanillaTypes.ITEM_STACK,
@@ -63,5 +64,15 @@ public class ConstructionWandJeiPlugin implements IModPlugin
                             .append(Component.translatable(baseKey + "core", wandModeComponent))
             );
         }
+
+        // ── Void Sack ───────────────────────────────────────────────────────────
+        Component mKeyComponent = KeybindHandler.KEY_VOID_SACK_TOGGLE
+                .getTranslatedKeyMessage()
+                .copy().withStyle(ChatFormatting.GOLD);
+
+        registration.addIngredientInfo(
+                new ItemStack(ModItems.VOID_SACK.get()),
+                VanillaTypes.ITEM_STACK,
+                Component.translatable(baseKey + "void_sack", mKeyComponent));
     }
 }

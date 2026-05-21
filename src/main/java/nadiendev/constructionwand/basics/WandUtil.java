@@ -132,7 +132,7 @@ public class WandUtil
         BlockEvent.EntityPlaceEvent placeEvent = new BlockEvent.EntityPlaceEvent(snapshot, block, player);
         NeoForge.EVENT_BUS.post(placeEvent);
         if(placeEvent.isCanceled()) {
-            world.removeBlock(pos, false);
+            world.removeBlock(pos, true);
             return false;
         }
 
