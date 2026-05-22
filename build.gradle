@@ -48,6 +48,8 @@ sourceSets.main.resources {
 }
 
 repositories {
+    mavenLocal()
+    mavenCentral()
     maven {
         url = "https://maven.blamejared.com"
     }
@@ -55,15 +57,16 @@ repositories {
         url = "https://maven.theillusivec4.top/"
     }
     maven {
-        name = "TerraformersMC"
-        url = "https://maven.terraformersmc.com/"
-    }
-    maven { url "https://maven.shedaniel.me" } 
-    maven {
         name = "Curse Maven"
         url = "https://cursemaven.com"
         content {
             includeGroup "curse.maven"
+        }
+    }
+     maven {
+        url = 'https://maven.creeperhost.net'
+        content {
+            includeGroup("com.refinedmods.refinedstorage")
         }
     }
 }
@@ -72,10 +75,6 @@ dependencies {
     implementation "net.neoforged:neoforge:${neo_version}"
 
     //jei
-    // compileOnly "mezz.jei:jei-${mcversion}-common-api:${jei_version}"
-    // compileOnly "mezz.jei:jei-${mcversion}-neoforge-api:${jei_version}"
-    // runtimeOnly "mezz.jei:jei-${mcversion}-neoforge:${jei_version}"
-    // compileOnly "mezz.jei:jei-${mcversion}-pre-3-common-api:${jei_version}"
     implementation "mezz.jei:jei-${mcversion}-neoforge:${jei_version}"
 
     //sophisticated backpacks
@@ -83,6 +82,22 @@ dependencies {
 
     //sophisticated core
     implementation "curse.maven:sophisticated-core-618298:${sophisticatedcore_version}"
+
+    // Applied Energistics 2
+    implementation "curse.maven:applied-energistics-2-223794:${ae2_version_id}"
+    implementation "curse.maven:guideme-1173950:${guideme_version_id}"
+
+    //refined Storage
+    // implementation "com.refinedmods.refinedstorage:refinedstorage-neoforge:${refinedstorage_version}"
+    implementation "curse.maven:refined-storage-243076:${refinedstorage_version_id}"
+
+    //refined storage curios integration
+    implementation "curse.maven:refined-storage-curios-integration-1230729:${refinedstorage_curiosintegration_version_id}"
+
+     // Curios API
+    compileOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}:api"
+    runtimeOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}"
+
 }
 
 jar {

@@ -5,6 +5,10 @@ import nadiendev.constructionwand.items.ModItems;
 import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.common.data.LanguageProvider;
 
+/*
+*Language Provider
+* By NadienDev
+*/
 public class LanguageGenerator extends LanguageProvider {
 
     public LanguageGenerator(PackOutput packOutput) {
@@ -14,6 +18,7 @@ public class LanguageGenerator extends LanguageProvider {
     @Override
     protected void addTranslations() {
         add("itemGroup.constructionwand", "Construction Wands Revived");
+        add("itemGroup.constructionwand.construction_wand_tab", "Construction Wands Revived");
 
         addItem(ModItems.WAND_STONE, "Stone Wand");
         addItem(ModItems.WAND_IRON, "Iron Wand");
@@ -23,7 +28,7 @@ public class LanguageGenerator extends LanguageProvider {
         addItem(ModItems.CORE_ANGEL, "Angel Wand Core");
         addItem(ModItems.CORE_DESTRUCTION, "Destruction Wand Core");
 
-        add("advancement.constructionwand.root.title", "Construction Wands Revived");
+ add("advancement.constructionwand.root.title", "Construction Wands Revived");
 add("advancement.constructionwand.root.desc", "Get your first wand");
 add("advancement.constructionwand.stone_wand.title", "Stone Wand");
 add("advancement.constructionwand.stone_wand.desc", "Obtain a Stone Wand");
@@ -97,6 +102,23 @@ add("advancement.constructionwand.core_destruction.desc", "Obtain a Destruction 
         add("constructionwand.description.core_angel", "The angel core places a block on the opposite side of the block (or row of blocks) you are facing. Maximum distance depends on wand tier. Right click empty space to place a block in midair. To do that, you'll need to have the block you want to place in your offhand.");
         add("constructionwand.description.core_destruction", "The destruction core destroys blocks (no tile entities) on the side facing you. Maximum number of blocks depends on wand tier. Destroyed blocks disappear into the void, you can use the undo feature if you've made a mistake.");
 
+        add("item.constructionwand.void_sack", "Void Sack");
+        add("item.constructionwand.void_sack.active", "§aActive §7(press §6%1$s§7 to toggle)");
+        add("item.constructionwand.void_sack.inactive", "§7Inactive §7(press §6%1$s§7 to toggle)");
+        add("item.constructionwand.void_sack.linked", "Linked to: %d, %d, %d");
+        add("item.constructionwand.void_sack.no_link", "Not linked to any container");
+        add("item.constructionwand.void_sack.sending", "Sending to container");
+        add("item.constructionwand.void_sack.storing", "Storing internally");
+        add("item.constructionwand.void_sack.slots_used", "Slots used: %d / %d");
+        add("item.constructionwand.void_sack.linked_msg", "Void Sack linked to %d, %d, %d");
+        add("item.constructionwand.void_sack.activated", "Void Sack activated");
+        add("item.constructionwand.void_sack.deactivated", "Void Sack deactivated");
+        add("gui.constructionwand.void_sack.toggle_tooltip", "Toggle: send to container / store internally");
+        add("gui.constructionwand.void_sack.sending", "Sending →");
+        add("gui.constructionwand.void_sack.storing", "Storing");
+        add("key.constructionwand.void_sack_toggle", "Toggle Void Sack");
+        add("constructionwand.description.void_sack", "The Void Sack intercepts items you pick up and stores them in its 4×4 internal inventory.\n\n§5§nACTIVATION§0§r\nPress %1$s to activate or deactivate the sack. While inactive, items go to your normal inventory as usual.\n\n§5§nLINKING A CONTAINER§0§r\nRight-click any container (chest, barrel, shulker...) while holding the sack to link it. Once linked, items go to that container first when the sack is active. If the container is full, the overflow goes to the sack's internal storage.\n\n§5§nTOGGLE MODE§0§r\nPress %1$s to switch between §aSending§0 (items → container) and §eStoring§0 (items → internal slots). You can also click the toggle button inside the sack GUI.");
+
         add("stat.constructionwand.use_wand", "Blocks placed using Wand");
     }
 
@@ -112,6 +134,7 @@ add("advancement.constructionwand.core_destruction.desc", "Obtain a Destruction 
         @Override
         protected void addTranslations() {
         add("itemGroup.constructionwand", "Varitas de Construcción Revividas");
+        add("itemGroup.constructionwand.construction_wand_tab", "Varitas de Construcción Revividas");
 
         addItem(ModItems.WAND_STONE, "Varita de Piedra");
         addItem(ModItems.WAND_IRON, "Varita de Hierro");
@@ -190,6 +213,26 @@ add("advancement.constructionwand.core_destruction.desc", "Obtené un Núcleo de
         add("constructionwand.description.core", "§5§nINSTALACIÓN§0§r\nPon tu nuevo núcleo junto con tu varita en una rejilla de crafteo para instalarlo. Para cambiar entre núcleos, mantén presionado %s y haz clic izquierdo en el aire con tu varita o usa la pantalla de opciones.");
         add("constructionwand.description.core_angel", "El núcleo angelical coloca un bloque en el lado opuesto del bloque (o fila de bloques) al que estás mirando. La distancia máxima depende del nivel de la varita. Clic derecho en el aire para colocar un bloque en el aire. Para eso, necesitarás tener el bloque que quieras colocar en la mano secundaria.");
         add("constructionwand.description.core_destruction", "El núcleo de destrucción destruye bloques (no entidades de bloque) en el lado que estás mirando. El número máximo de bloques depende del nivel de la varita. Los bloques destruidos desaparecen en el vacío; podés usar la función deshacer si te equivocás.");
+<<<<<<< Updated upstream
+=======
+        add("item.constructionwand.void_sack", "Bolsa del Vacío");
+        add("item.constructionwand.void_sack.active", "§aActiva §7(presioná §6%1$s§7 para cambiar)");
+        add("item.constructionwand.void_sack.inactive", "§7Inactiva §7(presioná §6%1$s§7 para cambiar)");
+        add("item.constructionwand.void_sack.linked", "Vinculada a: %d, %d, %d");
+        add("item.constructionwand.void_sack.no_link", "Sin container vinculado");
+        add("item.constructionwand.void_sack.sending", "Enviando al container");
+        add("item.constructionwand.void_sack.storing", "Guardando internamente");
+        add("item.constructionwand.void_sack.slots_used", "Espacios usados: %d / %d");
+        add("item.constructionwand.void_sack.linked_msg", "Bolsa vinculada a %d, %d, %d");
+        add("item.constructionwand.void_sack.activated", "Bolsa del Vacío activada");
+        add("item.constructionwand.void_sack.deactivated", "Bolsa del Vacío desactivada");
+        add("gui.constructionwand.void_sack.toggle_tooltip", "Cambiar: enviar al container / guardar internamente");
+        add("gui.constructionwand.void_sack.sending", "Enviando →");
+        add("gui.constructionwand.void_sack.storing", "Guardando");
+        add("key.constructionwand.void_sack_toggle", "Alternar Bolsa del Vacío");
+        add("constructionwand.description.void_sack", "La Bolsa del Vacío intercepta los ítems que recogés y los guarda en su inventario interno de 4×4.\n\n§5§nACTIVACIÓN§0§r\nPresioná %1$s para activar o desactivar la bolsa. Mientras está inactiva, los ítems van a tu inventario normal.\n\n§5§nVINCULAR UN CONTAINER§0§r\nHacé clic derecho sobre cualquier container (cofre, barril, shulker...) con la bolsa en mano para vincularlo. Una vez vinculada, los ítems van primero al container cuando la bolsa está activa. Si el container está lleno, el exceso va al almacenamiento interno de la bolsa.\n\n§5§nMODO§0§r\nPresioná %1$s para alternar entre §aEnviando§0 (ítems → container) y §eGuardando§0 (ítems → espacios internos). También podés usar el botón de cambio dentro de la GUI.");
+
+>>>>>>> Stashed changes
         add("stat.constructionwand.use_wand", "Bloques colocados usando la Varita");
         }
     }
@@ -201,6 +244,7 @@ add("advancement.constructionwand.core_destruction.desc", "Obtené un Núcleo de
         @Override
         protected void addTranslations() {
         add("itemGroup.constructionwand", "Varitas de Construcción Revividas");
+        add("itemGroup.constructionwand.construction_wand_tab", "Varitas de Construcción Revividas");
 
         addItem(ModItems.WAND_STONE, "Varita de piedra");
         addItem(ModItems.WAND_IRON, "Varita de hierro");
@@ -273,6 +317,7 @@ add("advancement.constructionwand.core_destruction.desc", "Obtené un Núcleo de
         @Override
         protected void addTranslations() {
         add("itemGroup.constructionwand", "Varitas de Construcción Revividas");
+        add("itemGroup.constructionwand.construction_wand_tab", "Varitas de Construcción Revividas");
 
         addItem(ModItems.WAND_STONE, "Varita de piedra");
         addItem(ModItems.WAND_IRON, "Varita de hierro");
@@ -362,6 +407,7 @@ add("advancement.constructionwand.core_destruction.desc", "Obtené un Núcleo de
         @Override
         protected void addTranslations() {
         add("itemGroup.constructionwand", "Varitas de Construcción Revividas");
+        add("itemGroup.constructionwand.construction_wand_tab", "Varitas de Construcción Revividas");
 
         addItem(ModItems.WAND_STONE, "Varita de piedra");
         addItem(ModItems.WAND_IRON, "Varita de hierro");
@@ -451,6 +497,10 @@ add("advancement.constructionwand.core_destruction.desc", "Obtené un Núcleo de
         @Override
         protected void addTranslations() {
         add("itemGroup.constructionwand", "Varitas de Construcción Revividas");
+<<<<<<< Updated upstream
+=======
+        add("itemGroup.constructionwand.construction_wand_tab", "Varitas de Construcción Revividas");
+>>>>>>> Stashed changes
 
         addItem(ModItems.WAND_STONE, "Varita de piedra");
         addItem(ModItems.WAND_IRON, "Varita de hierro");
@@ -540,6 +590,7 @@ add("advancement.constructionwand.core_destruction.desc", "Obtené un Núcleo de
         @Override
         protected void addTranslations() {
         add("itemGroup.constructionwand", "建築の杖リバイバル");
+        add("itemGroup.constructionwand.construction_wand_tab", "建築の杖リバイバル");
 
         addItem(ModItems.WAND_STONE, "石の杖");
         addItem(ModItems.WAND_IRON, "鉄の杖");
@@ -629,6 +680,7 @@ add("advancement.constructionwand.core_destruction.desc", "破壊の杖のコア
         @Override
         protected void addTranslations() {
         add("itemGroup.constructionwand", "건축 완드 리바이벌");
+        add("itemGroup.constructionwand.construction_wand_tab", "건축 완드 리바이벌");
 
         addItem(ModItems.WAND_STONE, "돌 완드");
         addItem(ModItems.WAND_IRON, "철 완드");
@@ -718,6 +770,7 @@ add("advancement.constructionwand.core_destruction.desc", "파괴 지팡이 코�
         @Override
         protected void addTranslations() {
         add("itemGroup.constructionwand", "Varinhas de Construção Revividas");
+        add("itemGroup.constructionwand.construction_wand_tab", "Varinhas de Construção Revividas");
 
         addItem(ModItems.WAND_STONE, "Varinha de pedra");
         addItem(ModItems.WAND_IRON, "Varinha de ferro");
@@ -790,6 +843,7 @@ add("advancement.constructionwand.core_destruction.desc", "파괴 지팡이 코�
         @Override
         protected void addTranslations() {
         add("itemGroup.constructionwand", "Волшебные жезлы для строительства - Возрождение");
+        add("itemGroup.constructionwand.construction_wand_tab", "Волшебные жезлы для строительства - Возрождение");
 
         addItem(ModItems.WAND_STONE, "Каменный жезл");
         addItem(ModItems.WAND_IRON, "Железный жезл");
@@ -879,6 +933,7 @@ add("advancement.constructionwand.core_destruction.desc", "Получите яд
         @Override
         protected void addTranslations() {
         add("itemGroup.constructionwand", "Byggstavar Återupplivade");
+        add("itemGroup.constructionwand.construction_wand_tab", "Byggstavar Återupplivade");
 
         addItem(ModItems.WAND_STONE, "Stenstav");
         addItem(ModItems.WAND_IRON, "Järnstav");
@@ -968,6 +1023,7 @@ add("advancement.constructionwand.core_destruction.desc", "Skaffa en rivningssta
         @Override
         protected void addTranslations() {
         add("itemGroup.constructionwand", "Yeniden Canlandırılmış İnşaat Asaları");
+        add("itemGroup.constructionwand.construction_wand_tab", "Yeniden Canlandırılmış İnşaat Asaları");
 
         addItem(ModItems.WAND_STONE, "Taş Asa");
         addItem(ModItems.WAND_IRON, "Demir Asa");
@@ -977,7 +1033,7 @@ add("advancement.constructionwand.core_destruction.desc", "Skaffa en rivningssta
         addItem(ModItems.CORE_ANGEL, "Melek Asa Çekirdeği");
         addItem(ModItems.CORE_DESTRUCTION, "Yıkım Asa Çekirdeği");
   
-       add("advancement.constructionwand.root.title", "Yeniden Canlandırılmış İnşaat Asaları");
+add("advancement.constructionwand.root.title", "Yeniden Canlandırılmış İnşaat Asaları");
 add("advancement.constructionwand.root.desc", "İlk asanı edin");
 add("advancement.constructionwand.stone_wand.title", "Taş Asa");
 add("advancement.constructionwand.stone_wand.desc", "Bir Taş Asa edin");
@@ -1057,6 +1113,7 @@ add("advancement.constructionwand.core_destruction.desc", "Bir Yıkım Asa Çeki
         @Override
         protected void addTranslations() {
         add("itemGroup.constructionwand", "建筑手杖复兴版");
+        add("itemGroup.constructionwand.construction_wand_tab", "建筑手杖复兴版");
 
         addItem(ModItems.WAND_STONE, "石制手杖");
         addItem(ModItems.WAND_IRON, "铁制手杖");
@@ -1066,7 +1123,7 @@ add("advancement.constructionwand.core_destruction.desc", "Bir Yıkım Asa Çeki
         addItem(ModItems.CORE_ANGEL, "天使手杖核心");
         addItem(ModItems.CORE_DESTRUCTION, "破坏手杖核心");
 
-        add("advancement.constructionwand.root.title", "建筑手杖复兴版");
+add("advancement.constructionwand.root.title", "建筑手杖复兴版");
 add("advancement.constructionwand.root.desc", "获得你的第一根手杖");
 add("advancement.constructionwand.stone_wand.title", "石制手杖");
 add("advancement.constructionwand.stone_wand.desc", "获得一根石制手杖");
@@ -1146,6 +1203,7 @@ add("advancement.constructionwand.core_destruction.desc", "获得一个破坏手
         @Override
         protected void addTranslations() {
         add("itemGroup.constructionwand", "Baustäbe Wiederbelebt");
+        add("itemGroup.constructionwand.construction_wand_tab", "Baustäbe Wiederbelebt");
 
         addItem(ModItems.WAND_STONE, "Steinerner Stab");
         addItem(ModItems.WAND_IRON, "Eiserner Stab");
@@ -1155,7 +1213,7 @@ add("advancement.constructionwand.core_destruction.desc", "获得一个破坏手
         addItem(ModItems.CORE_ANGEL, "Kristall der Engel");
         addItem(ModItems.CORE_DESTRUCTION, "Kristall der Zerstörung");
 
-        add("advancement.constructionwand.root.title", "Baustäbe Wiederbelebt");
+add("advancement.constructionwand.root.title", "Baustäbe Wiederbelebt");
 add("advancement.constructionwand.root.desc", "Erhalte deinen ersten Stab");
 add("advancement.constructionwand.stone_wand.title", "Steinerner Stab");
 add("advancement.constructionwand.stone_wand.desc", "Erhalte einen steinernen Stab");

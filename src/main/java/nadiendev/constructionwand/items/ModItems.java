@@ -31,6 +31,9 @@ public class ModItems {
     public static final DeferredItem<Item> CORE_DESTRUCTION =
             ITEMS.registerItem("core_destruction", props -> new ItemCoreDestruction(props.stacksTo(1)));
 
+    public static final DeferredItem<Item> VOID_SACK =
+            ITEMS.registerItem("void_sack", props -> new ItemVoidSack(props.stacksTo(64).fireResistant()));
+
     @SuppressWarnings("unchecked")
     public static final DeferredItem<Item>[] WANDS =
             new DeferredItem[]{WAND_STONE, WAND_IRON, WAND_DIAMOND, WAND_NETHERITE, WAND_INFINITY};

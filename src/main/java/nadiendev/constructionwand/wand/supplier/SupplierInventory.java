@@ -27,11 +27,9 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-/**
- * Default WandSupplier. Takes items from player inventory.
- */
-public class SupplierInventory implements IWandSupplier
-{
+
+public class SupplierInventory implements IWandSupplier {
+
     protected final Player player;
     protected final WandOptions options;
 
@@ -50,17 +48,17 @@ public class SupplierInventory implements IWandSupplier
         itemPool = new OrderedPool<>();
 
         // Block in offhand -> override
-        if(!offhandStack.isEmpty() && offhandStack.getItem() instanceof BlockItem) {
-            addBlockItem((BlockItem) offhandStack.getItem());
+        if (!offhandStack.isEmpty() && offhandStack.getItem() instanceof BlockItem blockItem) {
+            addBlockItem(blockItem);
         }
         // Otherwise use target block
-        else if(target != null && target != Items.AIR) {
+        else if (target != null && target != Items.AIR) {
             addBlockItem(target);
 
             // Add replacement items
-            if(options.match.get() != WandOptions.MATCH.EXACT) {
-                for(Item it : ReplacementRegistry.getMatchingSet(target)) {
-                    if(it instanceof BlockItem) addBlockItem((BlockItem) it);
+            if (options.match.get() != WandOptions.MATCH.EXACT) {
+                for (Item it : ReplacementRegistry.getMatchingSet(target)) {
+                    if (it instanceof BlockItem blockItem) addBlockItem(blockItem);
                 }
             }
         }
@@ -68,34 +66,50 @@ public class SupplierInventory implements IWandSupplier
 
     protected void addBlockItem(BlockItem item) {
         int count = WandUtil.countItem(player, item);
-        if(count > 0) {
+        if (count > 0) {
             itemCounts.put(item, count);
             itemPool.add(item);
         }
     }
 
+    // -------------------------------------------------------------------------
+    // Helpers de inventario de Curios
+    // -------------------------------------------------------------------------
+
+    /**
+     * Devuelve los stacks del inventario de Curios del jugador.
+     * Si Curios no está instalado, retorna una lista vacía sin coste alguno.
+     */
+    private List<ItemStack> getCuriosInv() {
+        return CuriosCompat.getStacks(player);
+    }
+
+    // -------------------------------------------------------------------------
+    // IWandSupplier
+    // -------------------------------------------------------------------------
+
     @Override
     @Nullable
     public PlaceSnapshot getPlaceSnapshot(Level world, BlockPos pos, BlockHitResult rayTraceResult,
                                           @Nullable BlockState supportingBlock) {
-        if(!WandUtil.isPositionPlaceable(world, player, pos, options.replace.get())) return null;
+        if (!WandUtil.isPositionPlaceable(world, player, pos, options.replace.get())) return null;
         itemPool.reset();
 
-        while(true) {
+        while (true) {
             // Draw item from pool (returns null if none are left)
             BlockItem item = itemPool.draw();
-            if(item == null) return null;
+            if (item == null) return null;
 
             int count = itemCounts.get(item);
-            if(count == 0) continue;
+            if (count == 0) continue;
 
             PlaceSnapshot placeSnapshot = PlaceSnapshot.get(world, player, rayTraceResult, pos, item, supportingBlock, options);
-            if(placeSnapshot != null) {
+            if (placeSnapshot != null) {
                 int ncount = count - 1;
                 itemCounts.put(item, ncount);
 
                 // Remove item from pool if there are no items left
-                if(ncount == 0) itemPool.remove(item);
+                if (ncount == 0) itemPool.remove(item);
 
                 return placeSnapshot;
             }
@@ -107,13 +121,13 @@ public class SupplierInventory implements IWandSupplier
         int count = stack.getCount();
         Item item = stack.getItem();
 
-        if(player.getInventory().getNonEquipmentItems().isEmpty()) return count;
-        if(player.isCreative()) return 0;
+        if (player.getInventory().getNonEquipmentItems().isEmpty()) return count;
+        if (player.isCreative()) return 0;
 
-        List<ItemStack> hotbar = WandUtil.getHotbarWithOffhand(player);
+        List<ItemStack> hotbar  = WandUtil.getHotbarWithOffhand(player);
         List<ItemStack> mainInv = WandUtil.getMainInv(player);
-        List<ItemStack> armor = WandUtil.getArmor(player);
-    
+        List<ItemStack> armor   = WandUtil.getArmor(player);
+        List<ItemStack> curios  = getCuriosInv(); 
 
         // Take items from main inv, loose items first
         count = takeItemsInvList(count, item, mainInv, false);
@@ -124,34 +138,38 @@ public class SupplierInventory implements IWandSupplier
         count = takeItemsInvList(count, item, hotbar, false);
 
         count = takeItemsInvList(count, item, armor, true);
-        count = takeItemsInvList(count, item, armor, false);    
+        count = takeItemsInvList(count, item, armor, false);
 
-        
+        // Take items from Curios slots (containers only; los curio slots
+        count = takeItemsInvList(count, item, curios, true);
 
         return count;
     }
 
-    private int takeItemsInvList(int count, Item item, List<ItemStack> inv, boolean container) {
-        if (count == 0) return count;
-        if (player instanceof ServerPlayer serverPlayer) {
+    // -------------------------------------------------------------------------
+    // Helpers privados
+    // -------------------------------------------------------------------------
 
-            ContainerManager containerManager = ConstructionWand.containerManager;
-            // In use, ContainerTrace is just a placeholder
-            ContainerTrace trace = new ContainerTrace(serverPlayer);
+    private int takeItemsInvList(int count, Item item, List<ItemStack> inv, boolean container) {
+        if (count == 0) return 0;
+        if (!(player instanceof ServerPlayer serverPlayer)) return count;
+
+        ContainerManager containerManager = ConstructionWand.containerManager;
+        // ContainerTrace is just a placeholder for tracking purposes
+        ContainerTrace trace = new ContainerTrace(serverPlayer);
 
             for(ItemStack stack : inv) {
                 if(count == 0) break;
 
-                if(container) {
-                    count = containerManager.useItems(serverPlayer, trace, new ItemStack(item), stack, count);
-                }
+            if (container) {
+                count = containerManager.useItems(serverPlayer, trace, new ItemStack(item), stack, count);
+            }
 
-                if(!container && WandUtil.stackEquals(stack, item)) {
-                    int toTake = Math.min(count, stack.getCount());
-                    stack.shrink(toTake);
-                    count -= toTake;
-                    serverPlayer.getInventory().setChanged();
-                }
+            if (!container && WandUtil.stackEquals(stack, item)) {
+                int toTake = Math.min(count, stack.getCount());
+                stack.shrink(toTake);
+                count -= toTake;
+                serverPlayer.getInventory().setChanged();
             }
         }
         return count;

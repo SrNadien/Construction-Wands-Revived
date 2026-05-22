@@ -24,7 +24,7 @@ public class ItemModelGenerator extends ModelProvider {
         super(output, ConstructionWand.MODID);
     }
 
-    // Template handheld de 2 capas 
+    // Template handheld de 2 capas
     public static final ModelTemplate TWO_LAYERED_HANDHELD =
             ModelTemplates.createItem("handheld", TextureSlot.LAYER0, TextureSlot.LAYER1);
 
@@ -36,6 +36,22 @@ public class ItemModelGenerator extends ModelProvider {
         for (DeferredItem<Item> core : ModItems.CORES) {
             itemModels.generateFlatItem(core.get(), ModelTemplates.FLAT_ITEM);
         }
+
+        // Void Sack
+        itemModels.itemModelOutput.accept(
+                ModItems.VOID_SACK.get(),
+                ItemModelUtils.plainModel(
+                        ModelTemplates.FLAT_ITEM.create(
+                                ModelLocationUtils.getModelLocation(ModItems.VOID_SACK.get()),
+                                TextureMapping.layer0(
+                                        new Material(
+                                                Identifier.fromNamespaceAndPath(ConstructionWand.MODID, "item/backpack_void")
+                                        )
+                                ),
+                                itemModels.modelOutput
+                        )
+                )
+        );
     }
 
     private void generateWandModel(ItemModelGenerators itemModels, DeferredItem<Item> wandItem) {
@@ -47,27 +63,35 @@ public class ItemModelGenerator extends ModelProvider {
                 itemModels.createFlatItemModel(wand, ModelTemplates.FLAT_HANDHELD_ITEM)
         );
 
-        // Modelo con core "angel": capa base + overlay_angel
+        // TextureMapping.getItemTexture(Item) devuelve directamente un Material en 26.1
+        Material wandTexture = TextureMapping.getItemTexture(wand);
+
+        // Overlay: con core "destruction"
+        Material overlayMaterial = new Material(
+                Identifier.fromNamespaceAndPath(ConstructionWand.MODID, "item/overlay_core")
+        );
+
+        // Modelo con core "angel": layer0 = textura del wand + layer1 = overlay_core
         ItemModel.Unbaked angelModel = ItemModelUtils.plainModel(
                 generateLayeredItem(
                         itemModels,
                         location.withSuffix("_angel"),
-                        location,
-                        Identifier.fromNamespaceAndPath(ConstructionWand.MODID, "item/overlay_core")
+                        wandTexture,
+                        overlayMaterial
                 )
         );
 
-        // Modelo con core "destruction": capa base + overlay_destruction
+        // Modelo con core "destruction": layer0 = textura del wand + layer1 = overlay_core
         ItemModel.Unbaked destructionModel = ItemModelUtils.plainModel(
                 generateLayeredItem(
                         itemModels,
                         location.withSuffix("_destruction"),
-                        location,
-                        Identifier.fromNamespaceAndPath(ConstructionWand.MODID, "item/overlay_core")
+                        wandTexture,
+                        overlayMaterial
                 )
         );
 
-        // Select por string 
+        // Select por string
         List<SelectItemModel.SwitchCase<String>> cases = new ArrayList<>();
         cases.add(ItemModelUtils.when("angel", angelModel));
         cases.add(ItemModelUtils.when("destruction", destructionModel));
@@ -78,16 +102,13 @@ public class ItemModelGenerator extends ModelProvider {
         );
     }
 
-    /**
-     * Crea un modelo handheld de 2 capas dado layer0 y layer1.
-     */
     public Identifier generateLayeredItem(ItemModelGenerators itemModels,
                                            Identifier modelLocation,
-                                           Identifier layer0,
-                                           Identifier layer1) {
+                                           Material layer0,
+                                           Material layer1) {
         return TWO_LAYERED_HANDHELD.create(
                 modelLocation,
-                TextureMapping.layered(new Material(layer0), new Material(layer1)),
+                TextureMapping.layered(layer0, layer1),
                 itemModels.modelOutput
         );
     }
