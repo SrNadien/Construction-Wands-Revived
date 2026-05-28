@@ -3,6 +3,7 @@ package nadiendev.constructionwand;
 import nadiendev.constructionwand.basics.ConfigClient;
 import nadiendev.constructionwand.basics.ConfigServer;
 import nadiendev.constructionwand.basics.ModStats;
+import nadiendev.constructionwand.component.ModDataComponents;
 import nadiendev.constructionwand.containers.ContainerManager;
 import nadiendev.constructionwand.containers.ContainerRegistrar;
 import nadiendev.constructionwand.crafting.ModRecipes;
@@ -38,13 +39,13 @@ public class ConstructionWand {
         eventBus.addListener(this::commonSetup);
         eventBus.addListener(ModMessages::registerPayloads);
 
+        // ── Registros al mod event bus ────────────────────────────────────
+        ModDataComponents.register(eventBus);
         ModItems.ITEMS.register(eventBus);
         ModCreativeTabs.CREATIVE_TABS.register(eventBus);
         ModMenuTypes.register(eventBus);
         ModRecipes.RECIPE_SERIALIZERS.register(eventBus);
         ModStats.CUSTOM_STATS.register(eventBus);
-
-       
 
         container.registerConfig(ModConfig.Type.SERVER, ConfigServer.SPEC);
         container.registerConfig(ModConfig.Type.CLIENT, ConfigClient.SPEC);

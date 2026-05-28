@@ -2,10 +2,6 @@ package nadiendev.constructionwand.items.containeritems;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
-import net.minecraft.nbt.NbtOps;
-import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
@@ -16,7 +12,6 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
-import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -26,170 +21,101 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import nadiendev.constructionwand.component.ModDataComponents;
+import nadiendev.constructionwand.component.VoidSackData;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
 
-/**
- * Void Sack 
- * 
- * By NadienDev
- * 
- */
 public class ItemVoidSack extends Item
 {
-    // ── Claves NBT ────────────────────────────────────────────────────────────
-    public static final String TAG_ITEMS        = "Items";
-    public static final String TAG_LINKED_POS   = "LinkedPos";
-    public static final String TAG_LINKED_DIM   = "LinkedDim";
-    public static final String TAG_SEND_TO_CONT = "SendToContainer";
-    public static final String TAG_ACTIVE       = "Active";
-
     public static final int ROWS = 4;
     public static final int COLS = 4;
-    public static final int SIZE = ROWS * COLS; // 16 slots
+    public static final int SIZE = ROWS * COLS; 
 
     public ItemVoidSack(Properties properties) {
         super(properties);
     }
 
     // ─────────────────────────────────────────────────────────────────────────
-    //  Acceso al DataComponent
+    //  DataComponent Access
     // ─────────────────────────────────────────────────────────────────────────
 
-    public static CompoundTag getData(ItemStack sack) {
+    public static VoidSackData getData(ItemStack sack) {
         return sack.getOrDefault(
-                nadiendev.constructionwand.component.ModDataComponents.VOID_SACK_DATA.get(),
-                new CompoundTag());
+                ModDataComponents.VOID_SACK_DATA.get(),
+                VoidSackData.EMPTY);
     }
 
-    public static void setData(ItemStack sack, CompoundTag tag) {
-        sack.set(
-                nadiendev.constructionwand.component.ModDataComponents.VOID_SACK_DATA.get(),
-                tag);
+    public static void setData(ItemStack sack, VoidSackData data) {
+        sack.set(ModDataComponents.VOID_SACK_DATA.get(), data);
     }
 
     // ─────────────────────────────────────────────────────────────────────────
-    //  Inventario interno (4×4)
+    //  Internal Inventory (4×4)
     // ─────────────────────────────────────────────────────────────────────────
 
     public static SimpleContainer loadInventory(ItemStack sack) {
-        SimpleContainer inv = new SimpleContainer(SIZE);
-        CompoundTag tag = getData(sack);
-        if (!tag.contains(TAG_ITEMS)) return inv;
-
-        ListTag list = tag.getList(TAG_ITEMS).orElse(null);
-        if (list == null) return inv;
-
-        for (int i = 0; i < list.size(); i++) {
-            CompoundTag slot = list.getCompound(i).orElse(null);
-            if (slot == null) continue;
-
-            int slotIdx = slot.getByte("Slot").orElse((byte) 0) & 0xFF;
-            if (slotIdx >= SIZE) continue;
-
-            final int finalSlot = slotIdx;
-            ItemStack.OPTIONAL_CODEC
-                    .parse(NbtOps.INSTANCE, slot)
-                    .result()
-                    .ifPresent(s -> inv.setItem(finalSlot, s));
-        }
-        return inv;
+        return getData(sack).loadInventory(SIZE);
     }
 
     public static void saveInventory(ItemStack sack, SimpleContainer inv) {
-        CompoundTag tag = getData(sack).copy();
-        ListTag list = new ListTag();
-
-        for (int i = 0; i < inv.getContainerSize(); i++) {
-            ItemStack s = inv.getItem(i);
-            if (s.isEmpty()) continue;
-
-            Tag encoded = ItemStack.CODEC
-                    .encodeStart(NbtOps.INSTANCE, s)
-                    .result()
-                    .orElse(null);
-
-            if (encoded instanceof CompoundTag slot) {
-                slot.putByte("Slot", (byte) i);
-                list.add(slot);
-            }
-        }
-
-        tag.put(TAG_ITEMS, list);
-        setData(sack, tag);
+        VoidSackData updated = getData(sack).saveInventory(inv);
+        setData(sack, updated);
     }
 
     // ─────────────────────────────────────────────────────────────────────────
-    //  Container linkeado
+    //  Linked Container 
     // ─────────────────────────────────────────────────────────────────────────
 
     @Nullable
     public static BlockPos getLinkedPos(ItemStack sack) {
-        CompoundTag tag = getData(sack);
-        if (!tag.contains(TAG_LINKED_POS)) return null;
-        return BlockPos.of(tag.getLong(TAG_LINKED_POS).orElse(0L));
+        return getData(sack).getLinkedBlockPos();
     }
 
-    // Extrae "namespace:path" del toString() de un ResourceKey, que tiene formato
-    // "ResourceKey[registry_id / namespace:path]"
+    @Nullable
+    public static Identifier getLinkedDim(ItemStack sack) {
+        String dim = getData(sack).linkedDim();
+        return dim.isEmpty() ? null : Identifier.tryParse(dim);
+    }
+
     private static String dimensionKeyToString(ResourceKey<Level> key) {
-        String s = key.toString(); // ej: "ResourceKey[minecraft:dimension / minecraft:overworld]"
+        String s = key.toString();
         int slash = s.lastIndexOf('/');
         int bracket = s.lastIndexOf(']');
         if (slash >= 0 && bracket > slash) {
             return s.substring(slash + 1, bracket).trim();
         }
-        return s; // fallback
-    }
-
-    @Nullable
-    public static Identifier getLinkedDim(ItemStack sack) {
-        CompoundTag tag = getData(sack);
-        if (!tag.contains(TAG_LINKED_DIM)) return null;
-        return Identifier.tryParse(tag.getString(TAG_LINKED_DIM).orElse(""));
+        return s;
     }
 
     public static void setLinkedPos(ItemStack sack, @Nullable BlockPos pos,
                                     @Nullable ResourceKey<Level> dim) {
-        CompoundTag tag = getData(sack).copy();
-        if (pos == null) {
-            tag.remove(TAG_LINKED_POS);
-            tag.remove(TAG_LINKED_DIM);
-        } else {
-            tag.putLong(TAG_LINKED_POS, pos.asLong());
-            tag.putString(TAG_LINKED_DIM,
-                    dim != null ? dimensionKeyToString(dim) : "minecraft:overworld");
-        }
-        setData(sack, tag);
+        VoidSackData current = getData(sack);
+        VoidSackData updated = pos == null
+                ? current.withNoLink()
+                : current.withLinkedPos(pos.asLong(),
+                        dim != null ? dimensionKeyToString(dim) : "minecraft:overworld");
+        setData(sack, updated);
     }
 
     // ─────────────────────────────────────────────────────────────────────────
-    //  Toggle "enviar al container"
+    //  Toggles
     // ─────────────────────────────────────────────────────────────────────────
 
     public static boolean isSendToContainer(ItemStack sack) {
-        return getData(sack).getBoolean(TAG_SEND_TO_CONT).orElse(false);
+        return getData(sack).sendToContainer();
     }
 
     public static void setSendToContainer(ItemStack sack, boolean value) {
-        CompoundTag tag = getData(sack).copy();
-        tag.putBoolean(TAG_SEND_TO_CONT, value);
-        setData(sack, tag);
+        setData(sack, getData(sack).withSendToContainer(value));
     }
 
-    // ─────────────────────────────────────────────────────────────────────────
-    //  Toggle "sack activo" (intercepta pickups con tecla M)
-    // ─────────────────────────────────────────────────────────────────────────
-
     public static boolean isActive(ItemStack sack) {
-        return getData(sack).getBoolean(TAG_ACTIVE).orElse(false);
+        return getData(sack).active();
     }
 
     public static void setActive(ItemStack sack, boolean value) {
-        CompoundTag tag = getData(sack).copy();
-        tag.putBoolean(TAG_ACTIVE, value);
-        setData(sack, tag);
+        setData(sack, getData(sack).withActive(value));
     }
 
     // ─────────────────────────────────────────────────────────────────────────
@@ -227,14 +153,12 @@ public class ItemVoidSack extends Item
         if (pos == null) return toInsert.getCount();
 
         Identifier dim = getLinkedDim(sack);
-        // Comparamos el id de la dimensión guardado como string con el del nivel actual
         if (dim != null && !dim.toString().equals(dimensionKeyToString(level.dimension())))
             return toInsert.getCount();
 
         BlockEntity be = level.getBlockEntity(pos);
         if (!(be instanceof Container container)) return toInsert.getCount();
 
-        // Containers
         ItemStack remaining = toInsert.copy();
         for (int i = 0; i < container.getContainerSize() && !remaining.isEmpty(); i++) {
             ItemStack inSlot = container.getItem(i);

@@ -3,12 +3,14 @@ package nadiendev.constructionwand.data;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.SpecialRecipeBuilder;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Recipe;
@@ -32,19 +34,32 @@ public class RecipeGenerator extends RecipeProvider
 
     @Override
     protected void buildRecipes() {
-        wandRecipe(ModItems.WAND_STONE.get(), Inp.fromTag(registries, ItemTags.STONE_TOOL_MATERIALS));
-        wandRecipe(ModItems.WAND_IRON.get(), Inp.fromTag(registries, Tags.Items.INGOTS_IRON));
-        wandRecipe(ModItems.WAND_DIAMOND.get(), Inp.fromTag(registries, Tags.Items.GEMS_DIAMOND));
-        wandRecipe(ModItems.WAND_NETHERITE.get(), Inp.fromTag(registries, Tags.Items.INGOTS_NETHERITE));
-        wandRecipe(ModItems.WAND_INFINITY.get(), Inp.fromTag(registries, Tags.Items.NETHER_STARS));
+        wandRecipe(ModItems.WAND_STONE.get(),      Inp.fromTag(registries, ItemTags.STONE_TOOL_MATERIALS));
+        wandRecipeAlt1(ModItems.WAND_STONE.get(),  Inp.fromTag(registries, ItemTags.STONE_TOOL_MATERIALS));
+        wandRecipeAlt2(ModItems.WAND_STONE.get(),  Inp.fromTag(registries, ItemTags.STONE_TOOL_MATERIALS));
+        wandRecipe(ModItems.WAND_IRON.get(),       Inp.fromTag(registries, Tags.Items.INGOTS_IRON));
+        wandRecipeAlt1(ModItems.WAND_IRON.get(),   Inp.fromTag(registries, Tags.Items.INGOTS_IRON));
+        wandRecipeAlt2(ModItems.WAND_IRON.get(),   Inp.fromTag(registries, Tags.Items.INGOTS_IRON));
+        wandRecipe(ModItems.WAND_DIAMOND.get(),    Inp.fromTag(registries, Tags.Items.GEMS_DIAMOND));
+        wandRecipeAlt1(ModItems.WAND_DIAMOND.get(), Inp.fromTag(registries, Tags.Items.GEMS_DIAMOND));
+        wandRecipeAlt2(ModItems.WAND_DIAMOND.get(), Inp.fromTag(registries, Tags.Items.GEMS_DIAMOND));
+        wandRecipe(ModItems.WAND_NETHERITE.get(),  Inp.fromTag(registries, Tags.Items.INGOTS_NETHERITE));
+        wandRecipeAlt1(ModItems.WAND_NETHERITE.get(), Inp.fromTag(registries, Tags.Items.INGOTS_NETHERITE));
+        wandRecipeAlt2(ModItems.WAND_NETHERITE.get(), Inp.fromTag(registries, Tags.Items.INGOTS_NETHERITE));
+        wandRecipe(ModItems.WAND_INFINITY.get(),   Inp.fromTag(registries, Tags.Items.NETHER_STARS));
+        wandRecipeAlt1(ModItems.WAND_INFINITY.get(), Inp.fromTag(registries, Tags.Items.NETHER_STARS));
+        wandRecipeAlt2(ModItems.WAND_INFINITY.get(), Inp.fromTag(registries, Tags.Items.NETHER_STARS));
 
-        coreRecipe(ModItems.CORE_ANGEL.get(), Inp.fromTag(registries, Tags.Items.FEATHERS), Inp.fromTag(registries, Tags.Items.INGOTS_GOLD));
-        coreRecipe(ModItems.CORE_DESTRUCTION.get(), Inp.fromTag(registries, Tags.Items.STORAGE_BLOCKS_DIAMOND), Inp.fromItem(registries, Items.DIAMOND_PICKAXE));
+        coreRecipe(ModItems.CORE_ANGEL.get(),
+                Inp.fromTag(registries, Tags.Items.FEATHERS),
+                Inp.fromTag(registries, Tags.Items.INGOTS_GOLD));
+        coreRecipe(ModItems.CORE_DESTRUCTION.get(),
+                Inp.fromTag(registries, Tags.Items.STORAGE_BLOCKS_DIAMOND),
+                Inp.fromItem(registries, Items.DIAMOND_PICKAXE));
 
-          voidSackRecipe();
+        voidSackRecipe();
 
         specialRecipe(RecipeWandUpgrade::new, ModRecipes.WAND_UPGRADE.get());
-
     }
 
     private void wandRecipe(ItemLike wand, Inp material) {
@@ -56,6 +71,35 @@ public class RecipeGenerator extends RecipeProvider
                 .pattern("#  ")
                 .unlockedBy("has_item", inventoryTrigger(material.predicate()))
                 .save(output);
+    }
+
+    private void wandRecipeAlt1(ItemLike wand, Inp material) {
+        shaped(RecipeCategory.TOOLS, wand)
+                .define('X', material.ingredient())
+                .define('#', Tags.Items.RODS_WOODEN)
+                .pattern("X  ")
+                .pattern(" # ")
+                .pattern("  #")
+                .unlockedBy("has_item", inventoryTrigger(material.predicate()))
+                .save(output, ResourceKey.create(Registries.RECIPE,
+                        ConstructionWand.loc(wandSuffix(wand) + "_alt1")));
+    }
+
+    private void wandRecipeAlt2(ItemLike wand, Inp material) {
+        shaped(RecipeCategory.TOOLS, wand)
+                .define('X', material.ingredient())
+                .define('#', Tags.Items.RODS_WOODEN)
+                .pattern("#  ")
+                .pattern(" # ")
+                .pattern("  X")
+                .unlockedBy("has_item", inventoryTrigger(material.predicate()))
+                .save(output, ResourceKey.create(Registries.RECIPE,
+                        ConstructionWand.loc(wandSuffix(wand) + "_alt2")));
+    }
+
+    private static String wandSuffix(ItemLike wand) {
+        Identifier id = BuiltInRegistries.ITEM.getKey(wand.asItem());
+        return id != null ? id.getPath() : wand.asItem().toString();
     }
 
     private void coreRecipe(ItemLike core, Inp item1, Inp item2) {
@@ -70,7 +114,7 @@ public class RecipeGenerator extends RecipeProvider
                 .save(output);
     }
 
-        private void voidSackRecipe() {
+    private void voidSackRecipe() {
         shaped(RecipeCategory.MISC, ModItems.VOID_SACK.get())
                 .define('C', ModItems.CORE_DESTRUCTION.get())
                 .define('E', Items.DIAMOND)
@@ -79,18 +123,19 @@ public class RecipeGenerator extends RecipeProvider
                 .pattern("EDE")
                 .pattern("OCO")
                 .pattern("EDE")
-                .unlockedBy("has_ender_chest", inventoryTrigger(Inp.fromTag(registries, Tags.Items.CHESTS_ENDER).predicate()))
+                .unlockedBy("has_ender_chest",
+                        inventoryTrigger(Inp.fromTag(registries, Tags.Items.CHESTS_ENDER).predicate()))
                 .save(output);
     }
 
     private void specialRecipe(Supplier<Recipe<?>> factory, RecipeSerializer<?> serializer) {
         Identifier name = BuiltInRegistries.RECIPE_SERIALIZER.getKey(serializer);
-        if (name == null) {
-            return;
-        }
-
-        SpecialRecipeBuilder.special(factory).save(output, ConstructionWand.loc("dynamic/" + name.getPath()).toString());
+        if (name == null) return;
+        SpecialRecipeBuilder.special(factory).save(output,
+                ConstructionWand.loc("dynamic/" + name.getPath()).toString());
     }
+
+    // ── Runner ────────────────────────────────────────────────────────────────
 
     public static class Runner extends RecipeProvider.Runner {
         public Runner(PackOutput output, CompletableFuture<Provider> completableFuture) {
@@ -98,7 +143,8 @@ public class RecipeGenerator extends RecipeProvider
         }
 
         @Override
-        protected RecipeProvider createRecipeProvider(HolderLookup.Provider provider, RecipeOutput recipeOutput) {
+        protected RecipeProvider createRecipeProvider(HolderLookup.Provider provider,
+                                                      RecipeOutput recipeOutput) {
             return new RecipeGenerator(provider, recipeOutput);
         }
 

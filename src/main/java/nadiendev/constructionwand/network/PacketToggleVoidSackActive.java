@@ -13,8 +13,8 @@ import nadiendev.constructionwand.items.containeritems.ItemVoidSack;
 
 /**
  * Paquete C→S: el cliente presionó M → toggle del estado activo del Void Sack.
- * 
- *PacketToggleVoidSackActive
+ * También puede usarse para toggle de SendToContainer desde la tecla M
+ * (dependiendo del modo).
  *
  * By NadienDev
  */

@@ -213,8 +213,6 @@ add("advancement.constructionwand.core_destruction.desc", "Obtené un Núcleo de
         add("constructionwand.description.core", "§5§nINSTALACIÓN§0§r\nPon tu nuevo núcleo junto con tu varita en una rejilla de crafteo para instalarlo. Para cambiar entre núcleos, mantén presionado %s y haz clic izquierdo en el aire con tu varita o usa la pantalla de opciones.");
         add("constructionwand.description.core_angel", "El núcleo angelical coloca un bloque en el lado opuesto del bloque (o fila de bloques) al que estás mirando. La distancia máxima depende del nivel de la varita. Clic derecho en el aire para colocar un bloque en el aire. Para eso, necesitarás tener el bloque que quieras colocar en la mano secundaria.");
         add("constructionwand.description.core_destruction", "El núcleo de destrucción destruye bloques (no entidades de bloque) en el lado que estás mirando. El número máximo de bloques depende del nivel de la varita. Los bloques destruidos desaparecen en el vacío; podés usar la función deshacer si te equivocás.");
-<<<<<<< Updated upstream
-=======
         add("item.constructionwand.void_sack", "Bolsa del Vacío");
         add("item.constructionwand.void_sack.active", "§aActiva §7(presioná §6%1$s§7 para cambiar)");
         add("item.constructionwand.void_sack.inactive", "§7Inactiva §7(presioná §6%1$s§7 para cambiar)");
@@ -232,7 +230,6 @@ add("advancement.constructionwand.core_destruction.desc", "Obtené un Núcleo de
         add("key.constructionwand.void_sack_toggle", "Alternar Bolsa del Vacío");
         add("constructionwand.description.void_sack", "La Bolsa del Vacío intercepta los ítems que recogés y los guarda en su inventario interno de 4×4.\n\n§5§nACTIVACIÓN§0§r\nPresioná %1$s para activar o desactivar la bolsa. Mientras está inactiva, los ítems van a tu inventario normal.\n\n§5§nVINCULAR UN CONTAINER§0§r\nHacé clic derecho sobre cualquier container (cofre, barril, shulker...) con la bolsa en mano para vincularlo. Una vez vinculada, los ítems van primero al container cuando la bolsa está activa. Si el container está lleno, el exceso va al almacenamiento interno de la bolsa.\n\n§5§nMODO§0§r\nPresioná %1$s para alternar entre §aEnviando§0 (ítems → container) y §eGuardando§0 (ítems → espacios internos). También podés usar el botón de cambio dentro de la GUI.");
 
->>>>>>> Stashed changes
         add("stat.constructionwand.use_wand", "Bloques colocados usando la Varita");
         }
     }
@@ -497,10 +494,7 @@ add("advancement.constructionwand.core_destruction.desc", "Obtené un Núcleo de
         @Override
         protected void addTranslations() {
         add("itemGroup.constructionwand", "Varitas de Construcción Revividas");
-<<<<<<< Updated upstream
-=======
         add("itemGroup.constructionwand.construction_wand_tab", "Varitas de Construcción Revividas");
->>>>>>> Stashed changes
 
         addItem(ModItems.WAND_STONE, "Varita de piedra");
         addItem(ModItems.WAND_IRON, "Varita de hierro");

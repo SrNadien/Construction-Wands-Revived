@@ -12,7 +12,11 @@ final class CuriosHelper {
 
     private CuriosHelper() {}
 
-    
+    /**
+     * Devuelve todos los ItemStacks no vacíos de los slots de Curios del jugador.
+     * Si el jugador no tiene inventario de Curios (entidad sin capability),
+     * retorna una lista vacía sin lanzar excepción.
+     */
     static List<ItemStack> getCuriosStacks(Player player) {
         List<ItemStack> result = new ArrayList<>();
 

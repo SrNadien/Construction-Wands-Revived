@@ -20,6 +20,8 @@ public class ContainerRegistrar {
 
         // Mod Integrations
         registerSophisticatedBackpacks();
+        registerAppliedEnergistics();
+        registerRefinedStorage();
     }
 
     // -------------------------------------------------------------------------

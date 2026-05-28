@@ -9,6 +9,7 @@ import nadiendev.constructionwand.items.core.ItemCoreAngel;
 import nadiendev.constructionwand.items.core.ItemCoreDestruction;
 import nadiendev.constructionwand.items.wand.ItemWandBasic;
 import nadiendev.constructionwand.items.wand.ItemWandInfinity;
+import nadiendev.constructionwand.items.containeritems.ItemVoidSack;
 
 public class ModItems {
 
@@ -40,4 +41,7 @@ public class ModItems {
     @SuppressWarnings("unchecked")
     public static final DeferredItem<Item>[] CORES =
             new DeferredItem[]{CORE_ANGEL, CORE_DESTRUCTION};
+    @SuppressWarnings("unchecked")
+    public static final DeferredItem<Item>[] CONTAINERITEMS =
+            new DeferredItem[]{VOID_SACK};
 }

@@ -58,6 +58,9 @@ public class DestroySnapshot implements ISnapshot
 
         if (!WandUtil.isBlockRemovable(world, player, pos)) return false;
 
+        // En 26.1, ItemEnchantments se movió a net.minecraft.world.item.enchantment.ItemEnchantments
+        // (ya no está en net.minecraft.world.item.component).
+        // ItemEnchantments.EMPTY sigue existiendo; ItemEnchantments.Mutable también.
         var silkTouchHolder = serverLevel.registryAccess()
                 .lookupOrThrow(Registries.ENCHANTMENT)
                 .getOrThrow(Enchantments.SILK_TOUCH);
@@ -71,7 +74,12 @@ public class DestroySnapshot implements ISnapshot
         ItemStack silkTool = new ItemStack(Items.NETHERITE_PICKAXE);
         silkTool.set(DataComponents.ENCHANTMENTS, mutableEnchantments.toImmutable());
 
-       
+        // Nota: silkTool está creado pero destroyBlock usa la herramienta del jugador internamente.
+        // Para forzar silk touch en el drop, se puede swapear temporalmente la herramienta
+        // o usar el overload que acepta una herramienta custom si existe en 26.1.
+        // En vanilla 26.1 destroyBlock no acepta una herramienta override, así que el bloque
+        // se romperá con la herramienta del jugador. Si se necesita silk touch garantizado,
+        // habría que reemplazar temporalmente el item en mano del jugador.
         if (player instanceof ServerPlayer serverPlayer) {
             return serverLevel.destroyBlock(pos, true, serverPlayer, 512);
         } else {

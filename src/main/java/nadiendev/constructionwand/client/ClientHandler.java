@@ -24,14 +24,18 @@ public class ClientHandler {
         NeoForge.EVENT_BUS.register(new KeybindHandler());
     }
 
+    // ─────────────────────────────────────────────────────────────────────────
+    // RegisterKeyMappingsEvent
+    // ─────────────────────────────────────────────────────────────────────────
     @SubscribeEvent
     public static void registerKeymapping(final RegisterKeyMappingsEvent event) {
         event.register(KeybindHandler.KEY_OPT);
+        event.register(KeybindHandler.KEY_VOID_SACK_TOGGLE);
     }
 
     @SubscribeEvent
-    public static void registerModelProperties(RegisterSelectItemModelPropertyEvent event) {
-        event.register(ConstructionWand.loc("wand_core"), SelectWandCore.TYPE);
+    public static void registerMenuScreens(RegisterMenuScreensEvent event) {
+        event.register(ModMenuTypes.VOID_SACK.get(), ScreenVoidSack::new);
     }
 
     @SubscribeEvent

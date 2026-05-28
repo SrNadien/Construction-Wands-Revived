@@ -63,7 +63,6 @@ public class ItemModelGenerator extends ModelProvider {
                 itemModels.createFlatItemModel(wand, ModelTemplates.FLAT_HANDHELD_ITEM)
         );
 
-        // TextureMapping.getItemTexture(Item) devuelve directamente un Material en 26.1
         Material wandTexture = TextureMapping.getItemTexture(wand);
 
         // Overlay: con core "destruction"

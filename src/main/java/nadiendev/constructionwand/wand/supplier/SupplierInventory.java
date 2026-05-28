@@ -158,8 +158,8 @@ public class SupplierInventory implements IWandSupplier {
         // ContainerTrace is just a placeholder for tracking purposes
         ContainerTrace trace = new ContainerTrace(serverPlayer);
 
-            for(ItemStack stack : inv) {
-                if(count == 0) break;
+        for (ItemStack stack : inv) {
+            if (count == 0) break;
 
             if (container) {
                 count = containerManager.useItems(serverPlayer, trace, new ItemStack(item), stack, count);

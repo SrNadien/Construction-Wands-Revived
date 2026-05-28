@@ -27,7 +27,7 @@ public class ModCreativeTabs {
                                 output.accept(ModItems.WAND_INFINITY.get());
                                 output.accept(ModItems.CORE_ANGEL.get());
                                 output.accept(ModItems.CORE_DESTRUCTION.get());
-                                output.accept(ModItems.VOID_SACK.get());
+                                output.accept(ModItems.VOID_SACK.get()); 
                             })
                             .build());
 }

@@ -1,25 +1,28 @@
 package nadiendev.constructionwand.component;
 
-import com.mojang.serialization.Codec;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.codec.ByteBufCodecs;
-import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import nadiendev.constructionwand.ConstructionWand;
 
+import java.util.function.Supplier;
 
 public class ModDataComponents
 {
-    public static final DeferredRegister<DataComponentType<?>> DATA_COMPONENT_TYPES =
-            DeferredRegister.create(Registries.DATA_COMPONENT_TYPE, ConstructionWand.MODID);
+    public static final DeferredRegister.DataComponents DATA_COMPONENT_TYPES =
+            DeferredRegister.createDataComponents(Registries.DATA_COMPONENT_TYPE, ConstructionWand.MODID);
 
     // ── Void Sack ─────────────────────────────────────────────────────────────
-    public static final DeferredHolder<DataComponentType<?>, DataComponentType<CompoundTag>> VOID_SACK_DATA =
-            DATA_COMPONENT_TYPES.register("void_sack_data", () ->
-                    DataComponentType.<CompoundTag>builder()
-                            .persistent(CompoundTag.CODEC)
-                            .networkSynchronized(ByteBufCodecs.COMPOUND_TAG)
-                            .build());
+    public static final Supplier<DataComponentType<VoidSackData>> VOID_SACK_DATA =
+            DATA_COMPONENT_TYPES.registerComponentType(
+                    "void_sack_data",
+                    builder -> builder
+                            .persistent(VoidSackData.CODEC)
+                            .networkSynchronized(VoidSackData.STREAM_CODEC)
+            );
+
+    public static void register(IEventBus modBus) {
+        DATA_COMPONENT_TYPES.register(modBus);
+    }
 }
