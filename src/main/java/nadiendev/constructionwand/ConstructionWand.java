@@ -12,6 +12,7 @@ import nadiendev.constructionwand.wand.undo.UndoHistory;
 import nadiendev.constructionwand.creative.ModCreativeTabs;
 import nadiendev.constructionwand.registry.ModMenuTypes;
 import nadiendev.constructionwand.data.ModData;
+import nadiendev.constructionwand.component.ModDataComponents;
 import net.minecraft.resources.Identifier;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
@@ -45,6 +46,7 @@ public class ConstructionWand {
         ModRecipes.RECIPE_SERIALIZERS.register(eventBus);
         ModStats.CUSTOM_STATS.register(eventBus);
 
+        ModDataComponents.DATA_COMPONENT_TYPES.register(eventBus);
         ModData.register(eventBus);  
 
         container.registerConfig(ModConfig.Type.SERVER, ConfigServer.SPEC);

@@ -20,7 +20,6 @@ public class ClientHandler {
     @SubscribeEvent
     public static void onClientSetup(final FMLClientSetupEvent event) {
         renderBlockPreview = new RenderBlockPreview();
-        NeoForge.EVENT_BUS.register(renderBlockPreview);
         NeoForge.EVENT_BUS.register(new KeybindHandler());
     }
 

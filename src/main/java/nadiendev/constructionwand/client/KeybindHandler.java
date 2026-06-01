@@ -10,6 +10,7 @@ import net.minecraft.world.InteractionHand;
 import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 import net.neoforged.neoforge.client.event.InputEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
+import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import nadiendev.constructionwand.ConstructionWand;
@@ -23,35 +24,34 @@ import nadiendev.constructionwand.items.containeritems.ItemVoidSack;
 import nadiendev.constructionwand.network.PacketToggleVoidSackActive;
 
 public class KeybindHandler {
-    // TODO: Need a lang
     public static final KeyMapping.Category CATEGORY = new KeyMapping.Category(ConstructionWand.loc("category"));
     public static final KeyMapping KEY_OPT = new KeyMapping(getKey("wand_option"), GLFW.GLFW_KEY_LEFT_CONTROL, CATEGORY);
 
-     public static final KeyMapping KEY_VOID_SACK_TOGGLE = new KeyMapping(
+    public static final KeyMapping KEY_VOID_SACK_TOGGLE = new KeyMapping(
             getKey("void_sack_toggle"),
             GLFW.GLFW_KEY_M,
             CATEGORY
     );
 
     private static String getKey(String name) {
-		return String.join(".", "key", ConstructionWand.MODID, name);
-	}
+        return String.join(".", "key", ConstructionWand.MODID, name);
+    }
 
-	public KeybindHandler() {
+    public KeybindHandler() {
         leftShiftPressed = false;
         optPressed = false;
-	}
+    }
 
     private boolean leftShiftPressed;
     private boolean optPressed;
 
     @SubscribeEvent
-    public void KeyEvent(InputEvent.Key event) {
+    public void onClientTick(ClientTickEvent.Post event) {
         Player player = Minecraft.getInstance().player;
-        if(player == null) return;
-        
-         // Toggle Void Sack con tecla M
-        if (KEY_VOID_SACK_TOGGLE.consumeClick()) {
+        if (player == null) return;
+
+        // consumeClick() en el tick — correcto según la doc de 26.1
+        while (KEY_VOID_SACK_TOGGLE.consumeClick()) {
             for (InteractionHand hand : InteractionHand.values()) {
                 ItemStack stack = player.getItemInHand(hand);
                 if (stack.getItem() instanceof ItemVoidSack) {
@@ -60,15 +60,21 @@ public class KeybindHandler {
                 }
             }
         }
-        if(WandUtil.holdingWand(player) == null) return;
+    }
+
+    @SubscribeEvent
+    public void KeyEvent(InputEvent.Key event) {
+        Player player = Minecraft.getInstance().player;
+        if (player == null) return;
+
+        if (WandUtil.holdingWand(player) == null) return;
 
         boolean optState = isOptKeyDown();
         boolean leftShiftState = isLeftShiftKeyDown();
-        if(optPressed != optState || leftShiftPressed != leftShiftState) {
+        if (optPressed != optState || leftShiftPressed != leftShiftState) {
             optPressed = optState;
             leftShiftPressed = leftShiftState;
             ClientPacketDistributor.sendToServer(new PacketQueryUndo(optPressed, leftShiftPressed));
-            //ConstructionWand.LOGGER.debug("OPT key update: " + optPressed);
         }
     }
 
@@ -81,10 +87,10 @@ public class KeybindHandler {
             scroll = event.getScrollDeltaX();
         }
 
-        if(!modeKeyCombDown() || scroll == 0) return;
+        if (!modeKeyCombDown() || scroll == 0) return;
 
         ItemStack wand = WandUtil.holdingWand(player);
-        if(wand == null) return;
+        if (wand == null) return;
 
         WandOptions wandOptions = new WandOptions(wand);
         wandOptions.lock.next(scroll < 0);
@@ -97,10 +103,10 @@ public class KeybindHandler {
     public void onLeftClickEmpty(PlayerInteractEvent.LeftClickEmpty event) {
         Player player = event.getEntity();
 
-        if(!modeKeyCombDown()) return;
+        if (!modeKeyCombDown()) return;
 
         ItemStack wand = event.getItemStack();
-        if(!(wand.getItem() instanceof ItemWand)) return;
+        if (!(wand.getItem() instanceof ItemWand)) return;
 
         WandOptions wandOptions = new WandOptions(wand);
         wandOptions.cores.next();
@@ -110,12 +116,12 @@ public class KeybindHandler {
     // (Sneak)+OPT+Right click wand to open GUI
     @SubscribeEvent
     public void onRightClickItem(PlayerInteractEvent.RightClickItem event) {
-        if(event.getSide().isServer()) return;
+        if (event.getSide().isServer()) return;
 
-        if(!guiKeyCombDown()) return;
+        if (!guiKeyCombDown()) return;
 
         ItemStack wand = event.getItemStack();
-        if(!(wand.getItem() instanceof ItemWand)) return;
+        if (!(wand.getItem() instanceof ItemWand)) return;
 
         Minecraft.getInstance().setScreen(new ScreenWand(wand));
         event.setCanceled(true);
@@ -136,8 +142,4 @@ public class KeybindHandler {
     public static boolean guiKeyCombDown() {
         return isOptKeyDown() && (isLeftShiftKeyDown() || !ConfigClient.SHIFTOPT_GUI.get());
     }
-<<<<<<< Updated upstream
 }
-=======
-}
->>>>>>> Stashed changes

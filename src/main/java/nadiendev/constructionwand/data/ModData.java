@@ -1,18 +1,10 @@
 package nadiendev.constructionwand.data;
 
 import nadiendev.constructionwand.ConstructionWand;
-<<<<<<< Updated upstream
-import net.minecraft.core.HolderLookup;
-import net.minecraft.data.DataGenerator;
-import net.minecraft.data.PackOutput;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-=======
 import nadiendev.constructionwand.data.AdvancementGenerator;
 import nadiendev.constructionwand.data.ItemModelGenerator;
 import net.minecraft.data.advancements.AdvancementProvider;
 import net.neoforged.bus.api.IEventBus;
->>>>>>> Stashed changes
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 
 import java.util.List;
