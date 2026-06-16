@@ -15,6 +15,8 @@
   "advancement.constructionwand.root.title": "Construction Wands Revived",
   "advancement.constructionwand.stone_wand.desc": "Obtain a Stone Wand",
   "advancement.constructionwand.stone_wand.title": "Stone Wand",
+  "advancement.constructionwand.void_sack.desc": "Void Sack",
+  "advancement.constructionwand.void_sack.title": "Store items from the Destruction Core inside the Void Sack or linked containers",
   "constructionwand.description.core": "§5§nINSTALLATION§0§r\nPut your new core together with your wand in a crafting grid to install it. To switch between cores, hold down %s and left click empty space with your wand or use the option screen.",
   "constructionwand.description.core_angel": "The angel core places a block on the opposite side of the block (or row of blocks) you are facing. Maximum distance depends on wand tier. Right click empty space to place a block in midair. To do that, you'll need to have the block you want to place in your offhand.",
   "constructionwand.description.core_destruction": "The destruction core destroys blocks (no tile entities) on the side facing you. Maximum number of blocks depends on wand tier. Destroyed blocks disappear into the void, you can use the undo feature if you've made a mistake.",

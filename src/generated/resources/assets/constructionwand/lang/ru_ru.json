@@ -15,6 +15,8 @@
   "advancement.constructionwand.root.title": "Строительные Жезлы Возрождены",
   "advancement.constructionwand.stone_wand.desc": "Получите каменный жезл",
   "advancement.constructionwand.stone_wand.title": "Каменный жезл",
+  "advancement.constructionwand.void_sack.desc": "Мешок Пустоты",
+  "advancement.constructionwand.void_sack.title": "Сохраняйте предметы из Destruction Core в Мешке Пустоты или связанных контейнерах",
   "constructionwand.description.core": "§5§nУСТАНОВКА§0§r\nПоложите своё новое ядро вместе со своим жезлом в сетку создания для его установки. Для того, чтобы переключаться между ядрами, удерживайте %s и нажмите левую кнопку мыши по пустому пространству с жезлом в руке или используйте экран настроек.",
   "constructionwand.description.core_angel": "Ангельское ядро размещает блоки на противоположной стороне блока (или ряда блоков), обращённые к Вам. Максимальное расстояние зависит от уровня жезла. Щелчок правой кнопкой мыши по пустому воздуху разместит блок в воздухе. Чтобы это сделать, Вам нужно иметь необходимые блоки в левой руке, чтобы разместить их.",
   "constructionwand.description.core_destruction": "Ядро разрушения разрушает блоки (не функциональные блоки), обращённые к Вам. Максимально количество блоков зависит от уровня жезла. Разрушенные блоки исчезают в пустоту, можно использовать функцию отмены в случае допущенной ошибки.",
@@ -67,6 +69,9 @@
   "constructionwand.tooltip.core_tip": "Объедините ядро со своим жезлом в сетке создания.",
   "constructionwand.tooltip.cores": "Ядер жезла:",
   "constructionwand.tooltip.shift": "Нажмите [SHIFT]",
+  "gui.constructionwand.void_sack.sending": "Отправка →",
+  "gui.constructionwand.void_sack.storing": "Хранение",
+  "gui.constructionwand.void_sack.toggle_tooltip": "Переключить: отправка в контейнер / внутреннее хранение",
   "item.constructionwand.core_angel": "Ангельское ядро для жезла",
   "item.constructionwand.core_destruction": "Ядро разрушения для жезла",
   "item.constructionwand.diamond_wand": "Алмазный жезл",
@@ -74,7 +79,22 @@
   "item.constructionwand.iron_wand": "Железный жезл",
   "item.constructionwand.netherite_wand": "Незеритовый жезл",
   "item.constructionwand.stone_wand": "Каменный жезл",
+  "item.constructionwand.void_sack": "Мешок Пустоты",
+  "item.constructionwand.void_sack.activated": "Мешок Пустоты активирован",
+  "item.constructionwand.void_sack.active": "§aАктивен §7(нажмите §6%1$s§7 для переключения)",
+  "item.constructionwand.void_sack.deactivated": "Мешок Пустоты деактивирован",
+  "item.constructionwand.void_sack.inactive": "§7Неактивен §7(нажмите §6%1$s§7 для переключения)",
+  "item.constructionwand.void_sack.linked": "Связан с: %d, %d, %d",
+  "item.constructionwand.void_sack.linked_msg": "Мешок связан с %d, %d, %d",
+  "item.constructionwand.void_sack.no_link": "Нет связанного контейнера",
+  "item.constructionwand.void_sack.sending": "Отправка в контейнер",
+  "item.constructionwand.void_sack.slots_used": "Использовано слотов: %d / %d",
+  "item.constructionwand.void_sack.storing": "Внутреннее хранение",
   "itemGroup.constructionwand": "Волшебные жезлы для строительства - Возрождение",
   "itemGroup.constructionwand.construction_wand_tab": "Волшебные жезлы для строительства - Возрождение",
+<<<<<<< Updated upstream
+=======
+  "key.constructionwand.void_sack_toggle": "Переключить Мешок Пустоты",
+>>>>>>> Stashed changes
   "stat.constructionwand.use_wand": "Блоки, размещённые при помощи Жезла"
 }

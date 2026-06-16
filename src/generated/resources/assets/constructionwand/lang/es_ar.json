@@ -15,6 +15,8 @@
   "advancement.constructionwand.root.title": "Varitas de Construcción Revividas",
   "advancement.constructionwand.stone_wand.desc": "Obtené una Varita de Piedra",
   "advancement.constructionwand.stone_wand.title": "Varita de Piedra",
+  "advancement.constructionwand.void_sack.desc": "Bolsa del Vacío",
+  "advancement.constructionwand.void_sack.title": "Guarda items del Destruction Core dentro de la Bolsa del Vacío o en contenedores vinculados",
   "constructionwand.description.core": "§5§nINSTALACIÓN§0§r\nPon tu nuevo núcleo junto con tu varita en una rejilla de crafteo para instalarlo. Para cambiar entre núcleos, mantén presionado %s y haz clic izquierdo en el aire con tu varita o usa la pantalla de opciones.",
   "constructionwand.description.core_angel": "El núcleo angelical coloca un bloque en el lado opuesto del bloque (o fila de bloques) al que estás mirando. La distancia máxima depende del nivel de la varita. Clic derecho en el aire para colocar un bloque en el aire. Para eso, necesitarás tener el bloque que quieras colocar en la mano secundaria.",
   "constructionwand.description.core_destruction": "El núcleo de destrucción destruye bloques (no entidades de bloque) en el lado que estás mirando. El número máximo de bloques depende del nivel de la varita. Los bloques destruidos desaparecen en el vacío; podés usar la función deshacer si te equivocás.",

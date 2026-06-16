@@ -1,4 +1,6 @@
 {
+  "advancement.constructionwand.void_sack.desc": "Saco do Vazio",
+  "advancement.constructionwand.void_sack.title": "Armazene itens do Destruction Core dentro do Saco do Vazio ou em contêineres vinculados",
   "constructionwand.description.core": "§5§nINSTALAÇÃO§0§r\nColoque seu novo núcleo junto com sua varinha em uma grade de criação para instalá -la.Para alternar entre núcleos, mantenha pressionado %s e o clique esquerdo, esvazie o espaço com sua varinha ou use a tela de opção.",
   "constructionwand.description.core_angel": "O núcleo do anjo coloca um bloco no lado oposto do bloco (ou fileira de blocos) que você está enfrentando.A distância máxima depende da camada de varinha.Clique com o botão direito do mouse em espaço vazio para colocar um bloco no ar.Para fazer isso, você precisará ter o bloco que deseja colocar em sua mão.",
   "constructionwand.description.core_destruction": "O núcleo de destruição destrói blocos (sem entidades de ladrilhos) do lado de frente para você.O número máximo de blocos depende da camada de varinha.Blocos destruídos desaparecem no vazio, você pode usar o recurso de desfazer se cometer um erro.",
@@ -51,6 +53,9 @@
   "constructionwand.tooltip.core_tip": "Combine o núcleo com sua varinha em uma grade de criação",
   "constructionwand.tooltip.cores": "Núcleos de varinhas:",
   "constructionwand.tooltip.shift": "Pressione Shift]",
+  "gui.constructionwand.void_sack.sending": "Enviando →",
+  "gui.constructionwand.void_sack.storing": "Armazenando",
+  "gui.constructionwand.void_sack.toggle_tooltip": "Alternar: enviar para o contêiner / armazenar internamente",
   "item.constructionwand.core_angel": "Núcleo de Varita Angelical",
   "item.constructionwand.core_destruction": "Núcleo de Varita de Destruição",
   "item.constructionwand.diamond_wand": "Varinha de Diamante",
@@ -58,7 +63,22 @@
   "item.constructionwand.iron_wand": "Varinha de ferro",
   "item.constructionwand.netherite_wand": "Varinha de Netjerita",
   "item.constructionwand.stone_wand": "Varinha de pedra",
+  "item.constructionwand.void_sack": "Saco do Vazio",
+  "item.constructionwand.void_sack.activated": "Saco do Vazio ativado",
+  "item.constructionwand.void_sack.active": "§aAtivo §7(pressione §6%1$s§7 para alternar)",
+  "item.constructionwand.void_sack.deactivated": "Saco do Vazio desativado",
+  "item.constructionwand.void_sack.inactive": "§7Inativo §7(pressione §6%1$s§7 para alternar)",
+  "item.constructionwand.void_sack.linked": "Vinculado a: %d, %d, %d",
+  "item.constructionwand.void_sack.linked_msg": "Saco vinculado a %d, %d, %d",
+  "item.constructionwand.void_sack.no_link": "Nenhum contêiner vinculado",
+  "item.constructionwand.void_sack.sending": "Enviando para o contêiner",
+  "item.constructionwand.void_sack.slots_used": "Espaços usados: %d / %d",
+  "item.constructionwand.void_sack.storing": "Armazenando internamente",
   "itemGroup.constructionwand": "Varinhas de Construção Revividas",
   "itemGroup.constructionwand.construction_wand_tab": "Varinhas de Construção Revividas",
+<<<<<<< Updated upstream
+=======
+  "key.constructionwand.void_sack_toggle": "Alternar Saco do Vazio",
+>>>>>>> Stashed changes
   "stat.constructionwand.use_wand": "Blocos colocados usando varinha"
 }

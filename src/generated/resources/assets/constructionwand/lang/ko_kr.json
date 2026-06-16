@@ -15,6 +15,8 @@
   "advancement.constructionwand.root.title": "건설 지팡이 부활",
   "advancement.constructionwand.stone_wand.desc": "돌 지팡이를 획득하세요",
   "advancement.constructionwand.stone_wand.title": "돌 지팡이",
+  "advancement.constructionwand.void_sack.desc": "공허 자루",
+  "advancement.constructionwand.void_sack.title": "Destruction Core의 아이템을 공허 자루 또는 연결된 컨테이너에 저장하세요",
   "constructionwand.description.core": "§5§n설치§0§r\n새 코어를 완드와 함께 조합창에 넣어 설치하세요. 코어 간에 전환하려면 %s 키를 누른 상태에서 완드로 빈 공간을 좌클릭하거나 옵션 화면을 사용하십시오.",
   "constructionwand.description.core_angel": "엔젤 코어는 마주보고 있는 블록(또는 블록 행)의 반대쪽에 블록을 배치합니다. 최대 거리는 완드의 티어에 따라 다릅니다. 빈 공간을 우클릭하면 공중에 블록을 배치할 수 있습니다. 그렇게 하려면 보조 손에 배치하려는 블록이 있어야 합니다.",
   "constructionwand.description.core_destruction": "파괴 코어는 당신 쪽의 (타일 엔티티가 없는)블록을 파괴합니다. 최대 블록 수는 완드의 티어에 따라 다릅니다. 파괴된 블록은 공허로 사라지며 실수를 했다면 실행 취소 기능을 사용할 수 있습니다.",
@@ -67,6 +69,9 @@
   "constructionwand.tooltip.core_tip": "조합창에서 코어와 완드를 합치세요.",
   "constructionwand.tooltip.cores": "완드 코어:",
   "constructionwand.tooltip.shift": "[SHIFT]를 누르세요.",
+  "gui.constructionwand.void_sack.sending": "전송 중 →",
+  "gui.constructionwand.void_sack.storing": "저장 중",
+  "gui.constructionwand.void_sack.toggle_tooltip": "전환: 컨테이너로 전송 / 내부 저장",
   "item.constructionwand.core_angel": "천사 완드 코어",
   "item.constructionwand.core_destruction": "파괴 완드 코어",
   "item.constructionwand.diamond_wand": "다이아몬드 완드",
@@ -74,7 +79,22 @@
   "item.constructionwand.iron_wand": "철 완드",
   "item.constructionwand.netherite_wand": "네더라이트 지팡이",
   "item.constructionwand.stone_wand": "돌 완드",
+  "item.constructionwand.void_sack": "공허 자루",
+  "item.constructionwand.void_sack.activated": "공허 자루 활성화됨",
+  "item.constructionwand.void_sack.active": "§a활성화됨 §7(§6%1$s§7 키로 전환)",
+  "item.constructionwand.void_sack.deactivated": "공허 자루 비활성화됨",
+  "item.constructionwand.void_sack.inactive": "§7비활성화됨 §7(§6%1$s§7 키로 전환)",
+  "item.constructionwand.void_sack.linked": "연결됨: %d, %d, %d",
+  "item.constructionwand.void_sack.linked_msg": "자루가 %d, %d, %d 에 연결됨",
+  "item.constructionwand.void_sack.no_link": "연결된 컨테이너 없음",
+  "item.constructionwand.void_sack.sending": "컨테이너로 전송 중",
+  "item.constructionwand.void_sack.slots_used": "사용된 슬롯: %d / %d",
+  "item.constructionwand.void_sack.storing": "내부 저장 중",
   "itemGroup.constructionwand": "건축 완드 리바이벌",
   "itemGroup.constructionwand.construction_wand_tab": "건축 완드 리바이벌",
+<<<<<<< Updated upstream
+=======
+  "key.constructionwand.void_sack_toggle": "공허 자루 전환",
+>>>>>>> Stashed changes
   "stat.constructionwand.use_wand": "완드로 배치한 블록 수"
 }
