@@ -76,5 +76,9 @@
   "item.constructionwand.stone_wand": "Steinerner Stab",
   "itemGroup.constructionwand": "Baustäbe Wiederbelebt",
   "itemGroup.constructionwand.construction_wand_tab": "Baustäbe Wiederbelebt",
+<<<<<<< Updated upstream
+=======
+  "key.constructionwand.void_sack_toggle": "Leerenbeutel umschalten",
+>>>>>>> Stashed changes
   "stat.constructionwand.use_wand": "Blöcke mithilfe des Stabs platziert"
 }

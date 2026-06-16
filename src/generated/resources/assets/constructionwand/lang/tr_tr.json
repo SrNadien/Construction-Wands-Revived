@@ -76,5 +76,9 @@
   "item.constructionwand.stone_wand": "Taş Asa",
   "itemGroup.constructionwand": "Yeniden Canlandırılmış İnşaat Asaları",
   "itemGroup.constructionwand.construction_wand_tab": "Yeniden Canlandırılmış İnşaat Asaları",
+<<<<<<< Updated upstream
+=======
+  "key.constructionwand.void_sack_toggle": "Boşluk Çantasını Değiştir",
+>>>>>>> Stashed changes
   "stat.constructionwand.use_wand": "Asa kullanılarak yerleştirilen bloklar"
 }

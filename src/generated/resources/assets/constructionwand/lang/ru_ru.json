@@ -76,5 +76,9 @@
   "item.constructionwand.stone_wand": "Каменный жезл",
   "itemGroup.constructionwand": "Волшебные жезлы для строительства - Возрождение",
   "itemGroup.constructionwand.construction_wand_tab": "Волшебные жезлы для строительства - Возрождение",
+<<<<<<< Updated upstream
+=======
+  "key.constructionwand.void_sack_toggle": "Переключить Мешок Пустоты",
+>>>>>>> Stashed changes
   "stat.constructionwand.use_wand": "Блоки, размещённые при помощи Жезла"
 }

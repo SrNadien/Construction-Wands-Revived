@@ -76,5 +76,9 @@
   "item.constructionwand.stone_wand": "Stenstav",
   "itemGroup.constructionwand": "Byggstavar Återupplivade",
   "itemGroup.constructionwand.construction_wand_tab": "Byggstavar Återupplivade",
+<<<<<<< Updated upstream
+=======
+  "key.constructionwand.void_sack_toggle": "Växla Tomhetspåse",
+>>>>>>> Stashed changes
   "stat.constructionwand.use_wand": "Block placerade med stavar"
 }

@@ -76,5 +76,9 @@
   "item.constructionwand.stone_wand": "돌 완드",
   "itemGroup.constructionwand": "건축 완드 리바이벌",
   "itemGroup.constructionwand.construction_wand_tab": "건축 완드 리바이벌",
+<<<<<<< Updated upstream
+=======
+  "key.constructionwand.void_sack_toggle": "공허 자루 전환",
+>>>>>>> Stashed changes
   "stat.constructionwand.use_wand": "완드로 배치한 블록 수"
 }

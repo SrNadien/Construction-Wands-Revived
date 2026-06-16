@@ -76,5 +76,9 @@
   "item.constructionwand.stone_wand": "石制手杖",
   "itemGroup.constructionwand": "建筑手杖复兴版",
   "itemGroup.constructionwand.construction_wand_tab": "建筑手杖复兴版",
+<<<<<<< Updated upstream
+=======
+  "key.constructionwand.void_sack_toggle": "切换虚空袋",
+>>>>>>> Stashed changes
   "stat.constructionwand.use_wand": "使用建筑手杖所放置的方块"
 }

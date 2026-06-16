@@ -76,5 +76,9 @@
   "item.constructionwand.stone_wand": "Varita de piedra",
   "itemGroup.constructionwand": "Varitas de Construcción Revividas",
   "itemGroup.constructionwand.construction_wand_tab": "Varitas de Construcción Revividas",
+<<<<<<< Updated upstream
+=======
+  "key.constructionwand.void_sack_toggle": "Alternar Bolsa del Vacío",
+>>>>>>> Stashed changes
   "stat.constructionwand.use_wand": "Bloques colocados usando la varita"
 }

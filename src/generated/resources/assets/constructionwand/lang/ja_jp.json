@@ -76,5 +76,9 @@
   "item.constructionwand.stone_wand": "石の杖",
   "itemGroup.constructionwand": "建築の杖リバイバル",
   "itemGroup.constructionwand.construction_wand_tab": "建築の杖リバイバル",
+<<<<<<< Updated upstream
+=======
+  "key.constructionwand.void_sack_toggle": "ボイドサック切り替え",
+>>>>>>> Stashed changes
   "stat.constructionwand.use_wand": "杖を用いてブロックを設置"
 }

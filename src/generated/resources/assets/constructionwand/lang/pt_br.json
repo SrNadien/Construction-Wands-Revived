@@ -60,5 +60,9 @@
   "item.constructionwand.stone_wand": "Varinha de pedra",
   "itemGroup.constructionwand": "Varinhas de Construção Revividas",
   "itemGroup.constructionwand.construction_wand_tab": "Varinhas de Construção Revividas",
+<<<<<<< Updated upstream
+=======
+  "key.constructionwand.void_sack_toggle": "Alternar Saco do Vazio",
+>>>>>>> Stashed changes
   "stat.constructionwand.use_wand": "Blocos colocados usando varinha"
 }
