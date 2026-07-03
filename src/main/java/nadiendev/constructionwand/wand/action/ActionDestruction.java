@@ -2,6 +2,8 @@ package nadiendev.constructionwand.wand.action;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -12,6 +14,7 @@ import nadiendev.constructionwand.api.IWandSupplier;
 import nadiendev.constructionwand.basics.ConfigServer;
 import nadiendev.constructionwand.basics.WandUtil;
 import nadiendev.constructionwand.basics.option.WandOptions;
+import nadiendev.constructionwand.items.containeritems.ItemVoidSack;
 import nadiendev.constructionwand.wand.undo.DestroySnapshot;
 import nadiendev.constructionwand.wand.undo.ISnapshot;
 
@@ -23,6 +26,14 @@ import java.util.List;
 
 public class ActionDestruction implements IWandAction
 {
+    /**
+     * Contexto activo para VoidSackDropHandler.
+     * Se setea en VoidSackCapturingSnapshot.execute() y se limpia en finally.
+     */
+    public static final ThreadLocal<VoidSackDropContext> ACTIVE_CONTEXT = new ThreadLocal<>();
+
+    public record VoidSackDropContext(BlockPos pos, ServerLevel level, ItemStack sack) {}
+
     @Override
     public int getLimit(ItemStack wand) {
         return ConfigServer.getWandProperties(wand.getItem()).getDestruction();
@@ -128,8 +139,6 @@ public class ActionDestruction implements IWandAction
             } catch(Exception e) {
                 // Can't do anything, could be anything.
                 // Skip if anything goes wrong.
-<<<<<<< Updated upstream
-=======
             }
         }
 
@@ -141,10 +150,59 @@ public class ActionDestruction implements IWandAction
                 for (ISnapshot s : destroySnapshots)
                     wrapped.add(new VoidSackCapturingSnapshot(s, (ServerLevel) world, voidSack));
                 return wrapped;
->>>>>>> Stashed changes
             }
         }
+
         return destroySnapshots;
+    }
+
+    /** Busca el primer Void Sack en el inventario completo del jugador. */
+    public static ItemStack findSack(Player player) {
+        ItemStack main = player.getMainHandItem();
+        if (main.getItem() instanceof ItemVoidSack) return main;
+
+        ItemStack off = player.getOffhandItem();
+        if (off.getItem() instanceof ItemVoidSack) return off;
+
+        for (int i = 0; i < player.getInventory().getContainerSize(); i++) {
+            ItemStack s = player.getInventory().getItem(i);
+            if (s.getItem() instanceof ItemVoidSack) return s;
+        }
+        return ItemStack.EMPTY;
+    }
+
+    /**
+     * Wrapper de ISnapshot que setea ACTIVE_CONTEXT antes de ejecutar,
+     * para que VoidSackDropHandler pueda interceptar los drops del destroyBlock.
+     */
+    private static class VoidSackCapturingSnapshot implements ISnapshot
+    {
+        private final ISnapshot delegate;
+        private final ServerLevel level;
+        private final ItemStack sack;
+
+        VoidSackCapturingSnapshot(ISnapshot delegate, ServerLevel level, ItemStack sack) {
+            this.delegate = delegate;
+            this.level = level;
+            this.sack = sack;
+        }
+
+        @Override public BlockPos getPos()                          { return delegate.getPos(); }
+        @Override public BlockState getBlockState()                 { return delegate.getBlockState(); }
+        @Override public ItemStack getRequiredItems()               { return delegate.getRequiredItems(); }
+        @Override public boolean canRestore(Level w, Player p)     { return delegate.canRestore(w, p); }
+        @Override public void forceRestore(Level w)                 { delegate.forceRestore(w); }
+        @Override public boolean restore(Level w, Player p)         { return delegate.restore(w, p); }
+
+        @Override
+        public boolean execute(Level world, Player player, BlockHitResult ray) {
+            ACTIVE_CONTEXT.set(new VoidSackDropContext(delegate.getPos(), level, sack));
+            try {
+                return delegate.execute(world, player, ray);
+            } finally {
+                ACTIVE_CONTEXT.remove();
+            }
+        }
     }
 
     @Nonnull

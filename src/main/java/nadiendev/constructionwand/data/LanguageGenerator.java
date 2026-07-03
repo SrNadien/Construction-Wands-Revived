@@ -121,8 +121,12 @@ add("advancement.constructionwand.void_sack.title", "Store items from the Destru
         add("gui.constructionwand.void_sack.storing", "Storing");
         add("key.constructionwand.void_sack_toggle", "Toggle Void Sack");
         add("constructionwand.description.void_sack", "The Void Sack intercepts items you pick up and stores them in its 4×4 internal inventory.\n\n§5§nACTIVATION§0§r\nPress %1$s to activate or deactivate the sack. While inactive, items go to your normal inventory as usual.\n\n§5§nLINKING A CONTAINER§0§r\nRight-click any container (chest, barrel, shulker...) while holding the sack to link it. Once linked, items go to that container first when the sack is active. If the container is full, the overflow goes to the sack's internal storage.\n\n§5§nTOGGLE MODE§0§r\nPress %1$s to switch between §aSending§0 (items → container) and §eStoring§0 (items → internal slots). You can also click the toggle button inside the sack GUI.");
-
-        add("stat.constructionwand.use_wand", "Blocks placed using Wand");
+     add("stat.constructionwand.use_wand", "Blocks placed using Wand");
+     add("key.constructionwand.wand_undo", "Undo Wand Action");
+    add("constructionwand.undo.success",  "Wand action undone");
+    add("constructionwand.undo.nothing",  "Nothing to undo");
+    add("constructionwand.networking.wand_undo.failed",  "Failed to undo wand action");
+    add("key.categories.constructionwand", "Construction Wands Revived");
     }
 
     private void addCoreInfo(String core, String name, String desc) {
@@ -234,7 +238,12 @@ add("advancement.constructionwand.core_destruction.desc", "Obtené un Núcleo de
         add("constructionwand.description.void_sack", "La Bolsa del Vacío intercepta los ítems que recogés y los guarda en su inventario interno de 4×4.\n\n§5§nACTIVACIÓN§0§r\nPresioná %1$s para activar o desactivar la bolsa. Mientras está inactiva, los ítems van a tu inventario normal.\n\n§5§nVINCULAR UN CONTAINER§0§r\nHacé clic derecho sobre cualquier container (cofre, barril, shulker...) con la bolsa en mano para vincularlo. Una vez vinculada, los ítems van primero al container cuando la bolsa está activa. Si el container está lleno, el exceso va al almacenamiento interno de la bolsa.\n\n§5§nMODO§0§r\nPresioná %1$s para alternar entre §aEnviando§0 (ítems → container) y §eGuardando§0 (ítems → espacios internos). También podés usar el botón de cambio dentro de la GUI.");
         add("stat.constructionwand.use_wand", "Bloques colocados usando la Varita");
         add("advancement.constructionwand.void_sack.desc", "Bolsa del Vacío");
-       add("advancement.constructionwand.void_sack.title", "Guarda items del Destruction Core dentro de la Bolsa del Vacío o en contenedores vinculados");
+        add("advancement.constructionwand.void_sack.title", "Guarda items del Destruction Core dentro de la Bolsa del Vacío o en contenedores vinculados");
+        add("key.constructionwand.wand_undo", "Deshacer acción de varita");
+       add("constructionwand.undo.success",  "Acción de varita deshecha");
+       add("constructionwand.undo.nothing",  "Nada para deshacer");
+       add("constructionwand.networking.wand_undo.failed",  "No se pudo deshacer la acción de la varita");
+       add("key.categories.constructionwand", "Varitas de Construcción Revividas");
         }
     }
 
@@ -309,7 +318,12 @@ add("advancement.constructionwand.core_destruction.desc", "Obtené un Núcleo de
         add("constructionwand.description.core_destruction", "El núcleo de destrucción destruye bloques (no entidades de bloque) en el lado que estás mirando. El número máximo de bloques depende del nivel de la varita. Los bloques destruidos desaparecen en el vacío, puedes usar la función de deshacer si cometiste un error.");
         add("stat.constructionwand.use_wand", "Bloques colocados usando la varita");
         add("advancement.constructionwand.void_sack.desc", "Bolsa del Vacío");
-add("advancement.constructionwand.void_sack.title", "Guarda items del Destruction Core dentro de la Bolsa del Vacío o en contenedores vinculados");
+        add("advancement.constructionwand.void_sack.title", "Guarda items del Destruction Core dentro de la Bolsa del Vacío o en contenedores vinculados");
+        add("key.constructionwand.wand_undo", "Deshacer acción de varita");
+       add("constructionwand.undo.success",  "Acción de varita deshecha");
+       add("constructionwand.undo.nothing",  "Nada para deshacer");
+       add("constructionwand.networking.wand_undo.failed",  "No se pudo deshacer la acción de la varita");
+       add("key.categories.constructionwand", "Varitas de Construcción Revividas");
         }
     }
 
@@ -401,7 +415,12 @@ add("advancement.constructionwand.core_destruction.desc", "Obtené un Núcleo de
         add("constructionwand.description.core_destruction", "El núcleo de destrucción destruye bloques (no entidades de bloque) en el lado que estás mirando. El número máximo de bloques depende del nivel de la varita. Los bloques destruidos desaparecen en el vacío, puedes usar la función de deshacer si cometiste un error.");
         add("stat.constructionwand.use_wand", "Bloques colocados usando la varita");
         add("advancement.constructionwand.void_sack.desc", "Bolsa del Vacío");
-add("advancement.constructionwand.void_sack.title", "Guarda items del Destruction Core dentro de la Bolsa del Vacío o en contenedores vinculados");
+        add("advancement.constructionwand.void_sack.title", "Guarda items del Destruction Core dentro de la Bolsa del Vacío o en contenedores vinculados");
+        add("constructionwand.networking.wand_undo.failed",  "Failed to undo wand action");
+        add("key.constructionwand.wand_undo", "Deshacer acción de varita");
+        add("constructionwand.undo.success",  "Acción de varita deshecha");
+        add("constructionwand.undo.nothing",  "Nada para deshacer");
+        add("key.categories.constructionwand", "Varitas de Construcción Revividas");
         }
     }
 
@@ -508,7 +527,12 @@ add("advancement.constructionwand.core_destruction.desc", "Obtené un Núcleo de
         add("gui.constructionwand.void_sack.storing", "Guardando");
         add("key.constructionwand.void_sack_toggle", "Alternar Bolsa del Vacío");
         add("advancement.constructionwand.void_sack.desc", "Bolsa del Vacío");
-add("advancement.constructionwand.void_sack.title", "Guarda items del Destruction Core dentro de la Bolsa del Vacío o en contenedores vinculados");
+        add("advancement.constructionwand.void_sack.title", "Guarda items del Destruction Core dentro de la Bolsa del Vacío o en contenedores vinculados");
+        add("key.constructionwand.wand_undo", "Deshacer acción de varita");
+       add("constructionwand.undo.success",  "Acción de varita deshecha");
+       add("constructionwand.undo.nothing",  "Nada para deshacer");
+       add("constructionwand.networking.wand_undo.failed",  "No se pudo deshacer la acción de la varita");
+        add("key.categories.constructionwand", "Varitas de Construcción Revividas");
         }
     }
 
@@ -616,6 +640,11 @@ add("advancement.constructionwand.core_destruction.desc", "Obtené un Núcleo de
         add("key.constructionwand.void_sack_toggle", "Alternar Bolsa del Vacío");
         add("advancement.constructionwand.void_sack.desc", "Bolsa del Vacío");
         add("advancement.constructionwand.void_sack.title", "Guarda items del Destruction Core dentro de la Bolsa del Vacío o en contenedores vinculados");
+        add("key.constructionwand.wand_undo", "Deshacer acción de varita");
+       add("constructionwand.undo.success",  "Acción de varita deshecha");
+       add("constructionwand.undo.nothing",  "Nada para deshacer");
+       add("constructionwand.networking.wand_undo.failed",  "No se pudo deshacer la acción de la varita");
+        add("key.categories.constructionwand", "Varitas de Construcción Revividas");
         }
     }
 
@@ -724,7 +753,13 @@ add("gui.constructionwand.void_sack.toggle_tooltip", "切り替え: コンテナ
 add("gui.constructionwand.void_sack.sending", "送信中 →");
 add("gui.constructionwand.void_sack.storing", "保存中");
 add("key.constructionwand.void_sack_toggle", "ボイドサック切り替え");
-
+add("key.constructionwand.wand_undo", "杖の操作を取り消す");
+add("constructionwand.undo.success",  "杖の操作を取り消しました");
+add("constructionwand.undo.nothing",  "取り消す操作はありません");
+add("constructionwand.networking.wand_undo.failed",  "杖の操作を取り消せませんでした");
+add("constructionwand.description.wand_undo", "§5§n取り消し§0§r\nスニークしながら杖を使用すると、最後に設置したブロックが緑の境界線で表示されます。スニークしながら杖を使用して右クリックすると、処理を取り消すことができ、すべてのブロックはインベントリに戻ります。破壊の杖を使用していた場合もブロックはもとに戻ります。");
+add("constructionwand.description.wand_undo_key", "§5§n取り消し§0§r\nスニークしながら杖を使用すると、最後に設置したブロックが緑の境界線で表示されます。スニークしながら杖を使用して右クリックすると、処理を取り消すことができ、すべてのブロックはインベントリに戻ります。破壊の杖を使用していた場合もブロックはもとに戻ります。");
+add("key.categories.constructionwand", "建築の杖リバイバル");       
         }
     }
 
@@ -833,6 +868,13 @@ add("gui.constructionwand.void_sack.toggle_tooltip", "전환: 컨테이너로 �
 add("gui.constructionwand.void_sack.sending", "전송 중 →");
 add("gui.constructionwand.void_sack.storing", "저장 중");
 add("key.constructionwand.void_sack_toggle", "공허 자루 전환");
+add("key.constructionwand.wand_undo", "완드 작업 실행 취소");
+add("constructionwand.undo.success",  "완드 작업 실행 취소됨");
+add("constructionwand.undo.nothing",  "실행 취소할 작업이 없습니다");
+add("constructionwand.networking.wand_undo.failed",  "완드 작업을 실행 취소할 수 없습니다");
+add("constructionwand.description.wand_undo", "§5§n실행 취소§0§r\n웅크린 상태에서 완드를 사용하면 마지막으로 배치한 블록이 녹색 테두리로 표시됩니다. 웅크린 상태에서 완드를 사용하여 우클릭하면 작업을 실행 취소할 수 있으며, 모든 블록이 인벤토리로 돌아갑니다. 파괴 코어를 사용했다면 블록도 원래대로 돌아갑니다.");
+add("constructionwand.description.wand_undo_key", "§5§n실행 취소§0§r\n웅크린 상태에서 완드를 사용하면 마지막으로 배치한 블록이 녹색 테두리로 표시됩니다. 웅크린 상태에서 완드를 사용하여 우클릭하면 작업을 실행 취소할 수 있으며, 모든 블록이 인벤토리로 돌아갑니다. 파괴 코어를 사용했다면 블록도 원래대로 돌아갑니다.");
+add("key.categories.constructionwand", "건축 완드 리바이벌");       
         }
     }
 
@@ -925,6 +967,13 @@ add("gui.constructionwand.void_sack.toggle_tooltip", "Alternar: enviar para o co
 add("gui.constructionwand.void_sack.sending", "Enviando →");
 add("gui.constructionwand.void_sack.storing", "Armazenando");
 add("key.constructionwand.void_sack_toggle", "Alternar Saco do Vazio");
+add("key.constructionwand.wand_undo", "Desfazer ação da varinha");
+add("constructionwand.undo.success",  "Ação da varinha desfeita");
+add("constructionwand.undo.nothing",  "Nenhuma ação para desfazer");
+add("constructionwand.networking.wand_undo.failed",  "Falha ao desfazer ação da varinha");
+add("constructionwand.description.wand_undo", "§5§nDESFAZER§0§r\nMantendo pressionada §9Esgueirar-se+§0%4$s Enquanto olha para um bloco, mostrará os últimos blocos que você colocou com uma borda verde ao redor deles. §9Esgueirar-se+§0%4$s§9+Certa clicando§0 Qualquer um deles desfazerá a operação, oferecendo todos os itens de volta.Se você usou o núcleo de destruição, ele restaurará os blocos.");
+add("constructionwand.description.wand_undo_key", "§5§nDESFAZER§0§r\nMantendo pressionada §9Esgueirar-se+§0%4$s Enquanto olha para um bloco, mostrará os últimos blocos que você colocou com uma borda verde ao redor deles. §9Esgueirar-se+§0%4$s§9+Certa clicando§0 Qualquer um deles desfazerá a operação, oferecendo todos os itens de volta.Se você usou o núcleo de destruição, ele restaurará os blocos.");
+add("key.categories.constructionwand", "Varinhas de Construção Revividas");       
         }
     }
 
@@ -1034,6 +1083,13 @@ add("gui.constructionwand.void_sack.toggle_tooltip", "Переключить: о
 add("gui.constructionwand.void_sack.sending", "Отправка →");
 add("gui.constructionwand.void_sack.storing", "Хранение");
 add("key.constructionwand.void_sack_toggle", "Переключить Мешок Пустоты");
+add("key.constructionwand.wand_undo", "Отменить действие жезла");
+add("constructionwand.undo.success",  "Действие жезла отменено");
+add("constructionwand.undo.nothing",  "Нет действий для отмены");
+add("constructionwand.networking.wand_undo.failed",  "Не удалось отменить действие жезла");
+add("constructionwand.description.wand_undo", "§5§nОТМЕНА§0§r\nУдерживая §9Приседание+§0%4$s пока смотрите на блоки, установленные Вами, они будут выделены зелёным контуром. §9Приседание+§0%4$s§9+щелчок правой кнопкой мыши§0 на любой из них отменит операцию, вернув Вам все предметы обратно. Если использовать Ядро разрушения, то он вернёт блоки.");
+add("constructionwand.description.wand_undo_key", "§5§nОТМЕНА§0§r\nУдерживая §9Приседание+§0%4$s пока смотрите на блоки, установленные Вами, они будут выделены зелёным контуром. §9Приседание+§0%4$s§9+щелчок правой кнопкой мыши§0 на любой из них отменит операцию, вернув Вам все предметы обратно. Если использовать Ядро разрушения, то он вернёт блоки.");
+add("key.categories.constructionwand", "Волшебные жезлы для строительства - Возрождение");        
         }
     }
 
@@ -1142,8 +1198,14 @@ add("gui.constructionwand.void_sack.toggle_tooltip", "Växla: skicka till behål
 add("gui.constructionwand.void_sack.sending", "Skickar →");
 add("gui.constructionwand.void_sack.storing", "Lagring");
 add("key.constructionwand.void_sack_toggle", "Växla Tomhetspåse");
-
 add("constructionwand.description.void_sack", "Tomhetspåsen fångar upp föremål du plockar upp och lagrar dem i sitt interna 4×4-inventarie.\n\n§5§nAKTIVERING§0§r\nTryck på %1$s för att aktivera eller avaktivera påsen. När den är avaktiverad hamnar föremål i ditt vanliga inventarie.\n\n§5§nLÄNKA EN BEHÅLLARE§0§r\nHögerklicka på valfri behållare (kista, tunna, shulkerlåda...) medan du håller påsen för att länka den. När den är länkad skickas föremål först till behållaren när påsen är aktiv. Om behållaren är full lagras överskottet i påsens interna lagring.\n\n§5§nLÄGE§0§r\nTryck på %1$s för att växla mellan §aSkickar§0 (föremål → behållare) och §eLagrar§0 (föremål → interna platser). Du kan även använda växlingsknappen i GUI:t.");
+add("key.constructionwand.wand_undo", "Ångra stavens åtgärd");
+add("constructionwand.undo.success",  "Stavens åtgärd ångrades");
+add("constructionwand.undo.nothing",  "Inga åtgärder att ångra");
+add("constructionwand.networking.wand_undo.failed",  "Misslyckades med att ångra stavens åtgärd");
+add("constructionwand.description.wand_undo", "§5§nÅNGRA§0§r\nNär du håller ned §9Smyga+§0%4$s medan du tittar på ett block kommer du se de senaste blocken du placerade omgivna av en grön ram. §9Smyg+§0%4$s§9+högerklicka§0 på något av dem för att ångra handlingen och få tillbaka alla föremål. Om du har använt rivningskärnan kommer blocken att återställas.");
+add("constructionwand.description.wand_undo_key", "§5§nÅNGRA§0§r\nNär du håller ned §9Smyga+§0%4$s medan du tittar på ett block kommer du se de senaste blocken du placerade omgivna av en grön ram. §9Smyg+§0%4$s§9+högerklicka§0 på något av dem för att ångra handlingen och få tillbaka alla föremål. Om du har använt rivningskärnan kommer blocken att återställas.");
+add("key.categories.constructionwand", "Byggstavar Återupplivade");
         }
     }
 
@@ -1251,8 +1313,14 @@ add("gui.constructionwand.void_sack.toggle_tooltip", "Geçiş yap: konteynere g�
 add("gui.constructionwand.void_sack.sending", "Gönderiliyor →");
 add("gui.constructionwand.void_sack.storing", "Depolama");
 add("key.constructionwand.void_sack_toggle", "Boşluk Çantasını Değiştir");
-
 add("constructionwand.description.void_sack", "Boşluk Çantası topladığınız eşyaları yakalar ve dahili 4×4 envanterinde saklar.\n\n§5§nETKİNLEŞTİRME§0§r\nÇantayı etkinleştirmek veya devre dışı bırakmak için %1$s tuşuna basın. Devre dışıyken eşyalar normal envanterinize gider.\n\n§5§nKONTEYNER BAĞLAMA§0§r\nÇantayı elinizde tutarken herhangi bir konteynere (sandık, varil, shulker kutusu...) sağ tıklayarak bağlayın. Bağlandıktan sonra, çanta etkin durumdayken eşyalar önce konteynere gönderilir. Konteyner doluysa fazla eşyalar çantanın dahili deposuna aktarılır.\n\n§5§nMOD§0§r\n§aGönderme§0 (eşyalar → konteyner) ve §eDepolama§0 (eşyalar → dahili yuvalar) modları arasında geçiş yapmak için %1$s tuşuna basın. Ayrıca GUI içindeki geçiş düğmesini de kullanabilirsiniz.");
+add("key.constructionwand.wand_undo", "Asa eylemini geri al");
+add("constructionwand.undo.success",  "Asa eylemi geri alındı");
+add("constructionwand.undo.nothing",  "Geri alınacak eylem yok");
+add("constructionwand.networking.wand_undo.failed",  "Asa eylemi geri alınamadı");
+add("constructionwand.description.wand_undo", "§5§nGERİ AL§0§r\nBir bloğa bakarken §9Eğil+§0%4$s tuşunu basılı tuttuğunuzda, yerleştirdiğiniz son bloklar, çevresinde yeşil bir çerçeveyle gösterilecektir. §9Eğil+§0%4$s§9+Bunlardan herhangi birine sağ tıklama§0 işlemi geri alacak ve tüm öğeleri size geri verecektir. Yıkım çekirdeğini kullandıysanız blokları geri koyacaktır.");
+add("constructionwand.description.wand_undo_key", "§5§nGERİ AL§0§r\nBir bloğa bakarken §9Eğil+§0%4$s tuşunu basılı tuttuğunuzda, yerleştirdiğiniz son bloklar, çevresinde yeşil bir çerçeveyle gösterilecektir. §9Eğil+§0%4$s§9+Bunlardan herhangi birine sağ tıklama§0 işlemi geri alacak ve tüm öğeleri size geri verecektir. Yıkım çekirdeğini kullandıysanız blokları geri koyacaktır.");
+add("key.categories.constructionwand", "Yeniden Canlandırılmış İnşaat Asaları");      
         }
     }
 
@@ -1361,8 +1429,11 @@ add("gui.constructionwand.void_sack.toggle_tooltip", "切换：发送到容器 /
 add("gui.constructionwand.void_sack.sending", "发送 →");
 add("gui.constructionwand.void_sack.storing", "存储");
 add("key.constructionwand.void_sack_toggle", "切换虚空袋");
-
-add("constructionwand.description.void_sack", "虚空袋会拦截你拾取的物品，并将其存储在内部的 4×4 背包空间中。\n\n§5§n启用§0§r\n按下 %1$s 以启用或禁用虚空袋。禁用时，物品会进入你的普通背包。\n\n§5§n绑定容器§0§r\n手持虚空袋右键点击任意容器（箱子、木桶、潜影盒等）即可进行绑定。绑定后，当虚空袋处于启用状态时，物品会优先存入该容器。如果容器已满，多余的物品将存入虚空袋的内部存储空间。\n\n§5§n模式§0§r\n按下 %1$s 可在 §a发送模式§0（物品 → 容器）和 §e存储模式§0（物品 → 内部槽位）之间切换。你也可以在 GUI 中使用切换按钮进行更改。");
+add("key.constructionwand.wand_undo", "撤销手杖操作");
+add("constructionwand.undo.success",  "手杖操作已撤销");
+add("constructionwand.undo.nothing",  "没有可撤销的操作");
+add("constructionwand.networking.wand_undo.failed",  "无法撤销手�  杖操作");
+add("constructionwand.description.void_sack", "虚空袋会拦截你拾取的物品，并将其存储在内部的 4×4 背包空间中。\n\n§5§n启用§0§r\n按下 %1$s 以启用或禁用虚空袋。禁用时，物品会进入你的普通背包。\n\n§5§n绑定容器§0§r\n手持虚空袋右键点击任意容器（箱子、木桶、潜影盒等）即可进行绑定。绑定后，当虚空袋处于启用状态时，物品会优先存入该容器。如果容器已满，多余的物品将存入虚空袋的内部存储空间。\n\n§5§n模式§0§r\n按下 %1$s 可在 §a发送模式§0（物品 → 容器）和 §e存储模式§0（物品 → 内部槽位）之间切换。你也可以在 GUI 中使用切换按钮进行更改。");     
         }
     }
 
@@ -1471,8 +1542,11 @@ add("gui.constructionwand.void_sack.toggle_tooltip", "Umschalten: an Behälter s
 add("gui.constructionwand.void_sack.sending", "Senden →");
 add("gui.constructionwand.void_sack.storing", "Lagerung");
 add("key.constructionwand.void_sack_toggle", "Leerenbeutel umschalten");
-
-add("constructionwand.description.void_sack", "Der Leerenbeutel fängt aufgesammelte Gegenstände ab und speichert sie in seinem internen 4×4-Inventar.\n\n§5§nAKTIVIERUNG§0§r\nDrücke %1$s, um den Beutel zu aktivieren oder zu deaktivieren. Wenn er deaktiviert ist, werden Gegenstände in dein normales Inventar gelegt.\n\n§5§nBEHÄLTER VERKNÜPFEN§0§r\nKlicke mit der rechten Maustaste auf einen beliebigen Behälter (Truhe, Fass, Shulkerkiste usw.), während du den Beutel hältst, um ihn zu verknüpfen. Nach der Verknüpfung werden Gegenstände bei aktiviertem Beutel zuerst in den Behälter gesendet. Ist der Behälter voll, werden überschüssige Gegenstände im internen Speicher des Beutels abgelegt.\n\n§5§nMODUS§0§r\nDrücke %1$s, um zwischen §aSenden§0 (Gegenstände → Behälter) und §eLagern§0 (Gegenstände → interne Plätze) umzuschalten. Alternativ kannst du auch die Umschalttaste in der GUI verwenden.");
+add("key.constructionwand.wand_undo", "Stabaktion rückgängig machen");
+add("constructionwand.undo.success",  "Stabaktion rückgängig gemacht");
+add("constructionwand.undo.nothing",  "Keine Aktion zum Rückgängigmachen");
+add("constructionwand.networking.wand_undo.failed",  "Stabaktion konnte nicht rückgängig gemacht werden");
+add("constructionwand.description.void_sack", "Der Leerenbeutel fängt aufgesammelte Gegenstände ab und speichert sie in seinem internen 4×4-Inventar.\n\n§5§nAKTIVIERUNG§0§r\nDrücke %1$s, um den Beutel zu aktivieren oder zu deaktivieren. Wenn er deaktiviert ist, werden Gegenstände in dein normales Inventar gelegt.\n\n§5§nBEHÄLTER VERKNÜPFEN§0§r\nKlicke mit der rechten Maustaste auf einen beliebigen Behälter (Truhe, Fass, Shulkerkiste usw.), während du den Beutel hältst, um ihn zu verknüpfen. Nach der Verknüpfung werden Gegenstände bei aktiviertem Beutel zuerst in den Behälter gesendet. Ist der Behälter voll, werden überschüssige Gegenstände im internen Speicher des Beutels abgelegt.\n\n§5§nMODUS§0§r\nDrücke %1$s, um zwischen §aSenden§0 (Gegenstände → Behälter) und §eLagern§0 (Gegenstände → interne Plätze) umzuschalten. Alternativ kannst du auch die Umschalttaste in der GUI verwenden.");    
         }
     }
 

@@ -25,6 +25,9 @@
   "constructionwand.description.key.sneak": "Приседание",
   "constructionwand.description.key.sneak_opt": "Приседание+%s",
   "constructionwand.description.wand": "%1$s может размещать до %2$d блоков сбоку от строения, обращённое к Вам и его хватит на %3$s блоков.\n\nУдерживайте %5$s и прокрутите колёсиком для изменения ограничения по размещении (Горизонтально, Вертикально, Север/Юг, Восток/Запад, Без ограничивания).\n\nОткройте экран настроек при помощи %6$s§9+щелчок правой кнопкой мыши§0.\n\n§5§nОТМЕНА§0§r\nУдерживайте §9Приседание+§0%4$s пока смотрите на блоки, установленные Вами, они будут выделены зелёным контуром. §9Приседание+§0%4$s§9+щелчок правой кнопкой мыши§0 на любой из них отменит операцию, вернув Вам все предметы обратно. Если использовать Ядро разрушения, то он вернёт блоки.\n\n§5§nКОНТЕЙНЕР§0§r\nШалкеровые ящики, мешки и множество контейнеров из других модов могут предоставлять строительные блоки в жезл.\n\n§5§nПРИОРИТЕТ ЛЕВОЙ РУКИ§0§r\nЕсли у Вас в левой руке находятся блоки, то они будут размещаться вместо блока, на который Вы смотрите.",
+  "constructionwand.description.wand_undo": "§5§nОТМЕНА§0§r\nУдерживая §9Приседание+§0%4$s пока смотрите на блоки, установленные Вами, они будут выделены зелёным контуром. §9Приседание+§0%4$s§9+щелчок правой кнопкой мыши§0 на любой из них отменит операцию, вернув Вам все предметы обратно. Если использовать Ядро разрушения, то он вернёт блоки.",
+  "constructionwand.description.wand_undo_key": "§5§nОТМЕНА§0§r\nУдерживая §9Приседание+§0%4$s пока смотрите на блоки, установленные Вами, они будут выделены зелёным контуром. §9Приседание+§0%4$s§9+щелчок правой кнопкой мыши§0 на любой из них отменит операцию, вернув Вам все предметы обратно. Если использовать Ядро разрушения, то он вернёт блоки.",
+  "constructionwand.networking.wand_undo.failed": "Не удалось отменить действие жезла",
   "constructionwand.option.cores": "",
   "constructionwand.option.cores.constructionwand:core_angel": "§6Ангельское ядро",
   "constructionwand.option.cores.constructionwand:core_angel.desc": "Размещает за блоками и в воздухе.",
@@ -69,6 +72,8 @@
   "constructionwand.tooltip.core_tip": "Объедините ядро со своим жезлом в сетке создания.",
   "constructionwand.tooltip.cores": "Ядер жезла:",
   "constructionwand.tooltip.shift": "Нажмите [SHIFT]",
+  "constructionwand.undo.nothing": "Нет действий для отмены",
+  "constructionwand.undo.success": "Действие жезла отменено",
   "gui.constructionwand.void_sack.sending": "Отправка →",
   "gui.constructionwand.void_sack.storing": "Хранение",
   "gui.constructionwand.void_sack.toggle_tooltip": "Переключить: отправка в контейнер / внутреннее хранение",
@@ -92,9 +97,8 @@
   "item.constructionwand.void_sack.storing": "Внутреннее хранение",
   "itemGroup.constructionwand": "Волшебные жезлы для строительства - Возрождение",
   "itemGroup.constructionwand.construction_wand_tab": "Волшебные жезлы для строительства - Возрождение",
-<<<<<<< Updated upstream
-=======
+  "key.categories.constructionwand": "Волшебные жезлы для строительства - Возрождение",
   "key.constructionwand.void_sack_toggle": "Переключить Мешок Пустоты",
->>>>>>> Stashed changes
+  "key.constructionwand.wand_undo": "Отменить действие жезла",
   "stat.constructionwand.use_wand": "Блоки, размещённые при помощи Жезла"
 }

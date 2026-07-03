@@ -21,6 +21,12 @@ public class KeybindHandler {
             getCategory("constructionwand")
     );
 
+    public static final KeyMapping KEY_WAND_UNDO = new KeyMapping(
+            getKey("wand_undo"),
+            GLFW.GLFW_KEY_K,
+            getCategory("constructionwand")
+    );
+
     private static String getKey(String name) {
         return String.join(".", "key", ConstructionWand.MODID, name);
     }
@@ -42,6 +48,14 @@ public class KeybindHandler {
                     PacketToggleVoidSackActive.send(hand);
                     break;
                 }
+            }
+        }
+
+        // Undo de varita con tecla K
+        if (KEY_WAND_UNDO.consumeClick()) {
+            if (nadiendev.constructionwand.basics.WandUtil.holdingWand(player) != null) {
+                nadiendev.constructionwand.network.ModMessages.sendToServer(
+                        new nadiendev.constructionwand.network.PacketWandUndo());
             }
         }
     }

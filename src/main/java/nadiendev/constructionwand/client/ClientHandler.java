@@ -27,6 +27,7 @@ public class ClientHandler {
     @SubscribeEvent
     public static void registerKeymapping(final RegisterKeyMappingsEvent event) {
         event.register(KeybindHandler.KEY_VOID_SACK_TOGGLE);
+        event.register(KeybindHandler.KEY_WAND_UNDO);
     }
 
     @SubscribeEvent

@@ -26,6 +26,9 @@
   "constructionwand.description.key.sneak_opt": "Eğil+%s",
   "constructionwand.description.void_sack": "Boşluk Çantası topladığınız eşyaları yakalar ve dahili 4×4 envanterinde saklar.\n\n§5§nETKİNLEŞTİRME§0§r\nÇantayı etkinleştirmek veya devre dışı bırakmak için %1$s tuşuna basın. Devre dışıyken eşyalar normal envanterinize gider.\n\n§5§nKONTEYNER BAĞLAMA§0§r\nÇantayı elinizde tutarken herhangi bir konteynere (sandık, varil, shulker kutusu...) sağ tıklayarak bağlayın. Bağlandıktan sonra, çanta etkin durumdayken eşyalar önce konteynere gönderilir. Konteyner doluysa fazla eşyalar çantanın dahili deposuna aktarılır.\n\n§5§nMOD§0§r\n§aGönderme§0 (eşyalar → konteyner) ve §eDepolama§0 (eşyalar → dahili yuvalar) modları arasında geçiş yapmak için %1$s tuşuna basın. Ayrıca GUI içindeki geçiş düğmesini de kullanabilirsiniz.",
   "constructionwand.description.wand": "%1$s, bir yapının size bakan tarafına en fazla %2$d blok yerleştirebilir ve %3$s dayanıklılığı vardır.\n\n%5$s tuşunu basılı tutun ve yerleştirme sınırlamasını değiştirmek için kaydırın (Yatay, Dikey, Kuzey/Güney, Doğu/Batı, Kilitsiz).\n\n%6$s§9+Sağ tıklama ile seçenek ekranını açın§0.\n\n§5§nGERİ ALMA§0§r\nBir bloğa bakarken §9Eğil+§0%4$s tuşunu basılı tuttuğunuzda, yerleştirdiğiniz son bloklar, çevresinde yeşil bir çerçeveyle gösterilecektir. §9Eğil+§0%4$s§9+Bunlardan herhangi birine sağ tıklama§0 işlemi geri alacak ve tüm öğeleri size geri verecektir. Yıkım çekirdeğini kullandıysanız blokları geri koyacaktır.\n\n§5§nKONTEYNERLER§0§r\nShulker kutuları, paketler ve diğer modlardan birçok konteyner, asa için yapı taşları sağlar.\n\n§5§nBOŞTAKİ EL ÖNCELİĞİ§0§r\nBoştaki elinizde blok olduğunda, baktığınız blok yerine boştaki elinizdekini yerleştirirsiniz.",
+  "constructionwand.description.wand_undo": "§5§nGERİ AL§0§r\nBir bloğa bakarken §9Eğil+§0%4$s tuşunu basılı tuttuğunuzda, yerleştirdiğiniz son bloklar, çevresinde yeşil bir çerçeveyle gösterilecektir. §9Eğil+§0%4$s§9+Bunlardan herhangi birine sağ tıklama§0 işlemi geri alacak ve tüm öğeleri size geri verecektir. Yıkım çekirdeğini kullandıysanız blokları geri koyacaktır.",
+  "constructionwand.description.wand_undo_key": "§5§nGERİ AL§0§r\nBir bloğa bakarken §9Eğil+§0%4$s tuşunu basılı tuttuğunuzda, yerleştirdiğiniz son bloklar, çevresinde yeşil bir çerçeveyle gösterilecektir. §9Eğil+§0%4$s§9+Bunlardan herhangi birine sağ tıklama§0 işlemi geri alacak ve tüm öğeleri size geri verecektir. Yıkım çekirdeğini kullandıysanız blokları geri koyacaktır.",
+  "constructionwand.networking.wand_undo.failed": "Asa eylemi geri alınamadı",
   "constructionwand.option.cores": "",
   "constructionwand.option.cores.constructionwand:core_angel": "§6Melek Çekirdeği",
   "constructionwand.option.cores.constructionwand:core_angel.desc": "Blokların arkasına ve havaya yerleştirir",
@@ -70,6 +73,8 @@
   "constructionwand.tooltip.core_tip": "Çekirdeği asanızla birlikte üretim ızgarasında birleştirin",
   "constructionwand.tooltip.cores": "Asa çekirdekleri:",
   "constructionwand.tooltip.shift": "[SHIFT] bas",
+  "constructionwand.undo.nothing": "Geri alınacak eylem yok",
+  "constructionwand.undo.success": "Asa eylemi geri alındı",
   "gui.constructionwand.void_sack.sending": "Gönderiliyor →",
   "gui.constructionwand.void_sack.storing": "Depolama",
   "gui.constructionwand.void_sack.toggle_tooltip": "Geçiş yap: konteynere gönder / dahili depolama",
@@ -93,9 +98,8 @@
   "item.constructionwand.void_sack.storing": "Dahili depolama",
   "itemGroup.constructionwand": "Yeniden Canlandırılmış İnşaat Asaları",
   "itemGroup.constructionwand.construction_wand_tab": "Yeniden Canlandırılmış İnşaat Asaları",
-<<<<<<< Updated upstream
-=======
+  "key.categories.constructionwand": "Yeniden Canlandırılmış İnşaat Asaları",
   "key.constructionwand.void_sack_toggle": "Boşluk Çantasını Değiştir",
->>>>>>> Stashed changes
+  "key.constructionwand.wand_undo": "Asa eylemini geri al",
   "stat.constructionwand.use_wand": "Asa kullanılarak yerleştirilen bloklar"
 }

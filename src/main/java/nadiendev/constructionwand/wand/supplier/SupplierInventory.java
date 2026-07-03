@@ -64,10 +64,17 @@ public class SupplierInventory implements IWandSupplier {
 
     protected void addBlockItem(BlockItem item) {
         int count = WandUtil.countItem(player, item);
-        count += countItemInContainers(item);
 
-        if (count == 0 && hasContainerWithItem(item)) {
+        // Si hay algún container handler que reconoce este item, usamos MAX_VALUE
+        // para no limitar por el stock real de la red (que se decrementaría incorrectamente
+        // en getPlaceSnapshot). El verdadero consumo ocurre en takeItemStack().
+        // Esto también corrige el bug en modo creativo con terminales wireless:
+        // countItemInContainers devuelve el stock real de la red, pero getPlaceSnapshot
+        // lo va decrementando y se queda "sin stock" aunque la red tenga miles.
+        if (hasContainerWithItem(item)) {
             count = Integer.MAX_VALUE;
+        } else {
+            count += countItemInContainers(item);
         }
 
         if (count > 0) {

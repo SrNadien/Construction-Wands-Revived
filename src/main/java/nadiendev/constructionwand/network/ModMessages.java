@@ -19,6 +19,9 @@ public final class ModMessages {
         registrar.playToClient(PacketUndoBlocks.ID, PacketUndoBlocks.CODEC, PacketUndoBlocks.Handler::handle);
         registrar.playToServer(PacketQueryUndo.ID, PacketQueryUndo.CODEC, PacketQueryUndo.Handler::handle);
         registrar.playToServer(PacketWandOption.ID, PacketWandOption.CODEC, PacketWandOption.Handler::handle);
+        registrar.playToServer(PacketToggleVoidSack.TYPE, PacketToggleVoidSack.CODEC, PacketToggleVoidSack::handle);
+        registrar.playToServer(PacketToggleVoidSackActive.TYPE, PacketToggleVoidSackActive.CODEC, PacketToggleVoidSackActive::handle);
+        registrar.playToServer(PacketWandUndo.ID, PacketWandUndo.CODEC, PacketWandUndo.Handler::handle);
     }
 
     public static void sendToServer(CustomPacketPayload message) {

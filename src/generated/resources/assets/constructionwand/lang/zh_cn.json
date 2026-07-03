@@ -26,6 +26,7 @@
   "constructionwand.description.key.sneak_opt": "潜行+%s",
   "constructionwand.description.void_sack": "虚空袋会拦截你拾取的物品，并将其存储在内部的 4×4 背包空间中。\n\n§5§n启用§0§r\n按下 %1$s 以启用或禁用虚空袋。禁用时，物品会进入你的普通背包。\n\n§5§n绑定容器§0§r\n手持虚空袋右键点击任意容器（箱子、木桶、潜影盒等）即可进行绑定。绑定后，当虚空袋处于启用状态时，物品会优先存入该容器。如果容器已满，多余的物品将存入虚空袋的内部存储空间。\n\n§5§n模式§0§r\n按下 %1$s 可在 §a发送模式§0（物品 → 容器）和 §e存储模式§0（物品 → 内部槽位）之间切换。你也可以在 GUI 中使用切换按钮进行更改。",
   "constructionwand.description.wand": "%1$s可以在建筑物面向你的一侧放置最多%2$d个方块，持续时间为%3$s。\n\n按住%5$s并滚动以更改放置限制（水平、垂直、北/南、东/西、无锁定）。\n\n在选项配置GUI上打开%6$s§9+右键单击§0。\n\n§5§nUNDO§0§r\n在查看方块时向下折叠§9Sneak+§0%4$s将显示你放置的最后一个方块,并在其周围加上绿色边框。§9潜行+§0%4$s§9+右键单击其中任何一个方块将撤消操作,并将所有以此法放置的方块重返至玩家背包。如果你使用了破坏核心,它将恢复方块。\n\n§5§n容器§0§r\n潜影盒、收纳袋和许多其它模组存在于玩家背包内的容器都可以为建筑手杖提供构建所需的方块。\n\n§5§非即时优先级§0§r\n如果玩家在使用手杖时副手栏持有所需方块将被放置,而不是只是在你的手里放着。",
+  "constructionwand.networking.wand_undo.failed": "无法撤销手�  杖操作",
   "constructionwand.option.cores": "",
   "constructionwand.option.cores.constructionwand:core_angel": "§6天使核心",
   "constructionwand.option.cores.constructionwand:core_angel.desc": "在面向你的方块的背面放置方块，还可以悬空放置方块",
@@ -70,6 +71,8 @@
   "constructionwand.tooltip.core_tip": "将手杖核心与手杖组合在一起",
   "constructionwand.tooltip.cores": "手杖核心:",
   "constructionwand.tooltip.shift": "按 [SHIFT]",
+  "constructionwand.undo.nothing": "没有可撤销的操作",
+  "constructionwand.undo.success": "手杖操作已撤销",
   "gui.constructionwand.void_sack.sending": "发送 →",
   "gui.constructionwand.void_sack.storing": "存储",
   "gui.constructionwand.void_sack.toggle_tooltip": "切换：发送到容器 / 内部存储",
@@ -93,9 +96,7 @@
   "item.constructionwand.void_sack.storing": "内部存储",
   "itemGroup.constructionwand": "建筑手杖复兴版",
   "itemGroup.constructionwand.construction_wand_tab": "建筑手杖复兴版",
-<<<<<<< Updated upstream
-=======
   "key.constructionwand.void_sack_toggle": "切换虚空袋",
->>>>>>> Stashed changes
+  "key.constructionwand.wand_undo": "撤销手杖操作",
   "stat.constructionwand.use_wand": "使用建筑手杖所放置的方块"
 }

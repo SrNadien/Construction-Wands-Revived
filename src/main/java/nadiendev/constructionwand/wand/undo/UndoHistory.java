@@ -65,6 +65,26 @@ public class UndoHistory
         return getEntryFromPlayer(player).undoActive;
     }
 
+    /**
+     * Deshace la última operación de la varita sin requerir apuntar a un bloque.
+     * Usado por la tecla K (PacketWandUndo).
+     */
+    public boolean undoLast(Player player, Level world) {
+        PlayerEntry playerEntry = getEntryFromPlayer(player);
+        LinkedList<HistoryEntry> historyEntries = playerEntry.entries;
+        if (historyEntries.isEmpty()) return false;
+
+        HistoryEntry entry = historyEntries.getLast();
+        if (!entry.world.equals(world)) return false;
+
+        if (entry.undo(player)) {
+            historyEntries.remove(entry);
+            updateClient(player, playerEntry.undoActive);
+            return true;
+        }
+        return false;
+    }
+
     public boolean undo(Player player, Level world, BlockPos pos) {
         // If CTRL key is not pressed, return
         PlayerEntry playerEntry = getEntryFromPlayer(player);
