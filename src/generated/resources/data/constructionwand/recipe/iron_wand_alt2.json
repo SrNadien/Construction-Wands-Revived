@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": "#c:rods/wooden",
+    "X": "#c:ingots/iron"
+  },
+  "pattern": [
+    "#  ",
+    " # ",
+    "  X"
+  ],
+  "result": {
+    "id": "constructionwand:iron_wand"
+  }
+}

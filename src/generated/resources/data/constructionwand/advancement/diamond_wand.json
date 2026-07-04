@@ -1,0 +1,32 @@
+{
+  "parent": "constructionwand:iron_wand",
+  "criteria": {
+    "diamond_wand": {
+      "conditions": {
+        "items": [
+          {
+            "items": "constructionwand:diamond_wand"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.constructionwand.diamond_wand.desc"
+    },
+    "icon": {
+      "id": "constructionwand:diamond_wand"
+    },
+    "title": {
+      "translate": "advancement.constructionwand.diamond_wand.title"
+    }
+  },
+  "requirements": [
+    [
+      "diamond_wand"
+    ]
+  ],
+  "sends_telemetry_event": true
+}
