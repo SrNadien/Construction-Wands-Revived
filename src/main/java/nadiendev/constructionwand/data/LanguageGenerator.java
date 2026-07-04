@@ -118,8 +118,13 @@ add("advancement.constructionwand.core_destruction.desc", "Obtain a Destruction 
         add("gui.constructionwand.void_sack.storing", "Storing");
         add("key.constructionwand.void_sack_toggle", "Toggle Void Sack");
         add("constructionwand.description.void_sack", "The Void Sack intercepts items you pick up and stores them in its 4×4 internal inventory.\n\n§5§nACTIVATION§0§r\nPress %1$s to activate or deactivate the sack. While inactive, items go to your normal inventory as usual.\n\n§5§nLINKING A CONTAINER§0§r\nRight-click any container (chest, barrel, shulker...) while holding the sack to link it. Once linked, items go to that container first when the sack is active. If the container is full, the overflow goes to the sack's internal storage.\n\n§5§nTOGGLE MODE§0§r\nPress %1$s to switch between §aSending§0 (items → container) and §eStoring§0 (items → internal slots). You can also click the toggle button inside the sack GUI.");
-
         add("stat.constructionwand.use_wand", "Blocks placed using Wand");
+        add("key.category.constructionwand.category", "Construction Wands Revived");
+        add("constructionwand.undo.success", "Wand action undone");
+        add("constructionwand.undo.nothing", "Nothing to undo");
+        add("constructionwand.networking.wand_undo.failed", "Failed to undo wand action");
+        add("key.constructionwand.wand_option", "Wand Option");
+        add("key.constructionwand.wand_undo", "Undo Wand");
     }
 
     private void addCoreInfo(String core, String name, String desc) {
@@ -231,6 +236,14 @@ add("advancement.constructionwand.core_destruction.desc", "Obtené un Núcleo de
         add("constructionwand.description.void_sack", "La Bolsa del Vacío intercepta los ítems que recogés y los guarda en su inventario interno de 4×4.\n\n§5§nACTIVACIÓN§0§r\nPresioná %1$s para activar o desactivar la bolsa. Mientras está inactiva, los ítems van a tu inventario normal.\n\n§5§nVINCULAR UN CONTAINER§0§r\nHacé clic derecho sobre cualquier container (cofre, barril, shulker...) con la bolsa en mano para vincularlo. Una vez vinculada, los ítems van primero al container cuando la bolsa está activa. Si el container está lleno, el exceso va al almacenamiento interno de la bolsa.\n\n§5§nMODO§0§r\nPresioná %1$s para alternar entre §aEnviando§0 (ítems → container) y §eGuardando§0 (ítems → espacios internos). También podés usar el botón de cambio dentro de la GUI.");
 
         add("stat.constructionwand.use_wand", "Bloques colocados usando la Varita");
+        add("advancement.constructionwand.void_sack.desc", "Bolsa del Vacío");
+        add("advancement.constructionwand.void_sack.title", "Guarda items del Destruction Core dentro de la Bolsa del Vacío o en contenedores vinculados");
+        add("key.category.constructionwand.category", "Construction Wands Revived");
+        add("constructionwand.undo.success", "Acción de la varita deshecha");
+        add("constructionwand.undo.nothing", "No hay nada para deshacer");
+        add("constructionwand.networking.wand_undo.failed", "No se pudo deshacer la acción de la varita");
+        add("key.constructionwand.wand_option", "Opción de varita");
+        add("key.constructionwand.wand_undo", "Deshacer varita");
         }
     }
 
@@ -304,6 +317,14 @@ add("advancement.constructionwand.core_destruction.desc", "Obtené un Núcleo de
         add("constructionwand.description.core_angel", "El núcleo angelical coloca un bloque en el lado opuesto del bloque (o fila de bloques) que estás mirando. La distancia máxima depende del nivel de la varita. Haz clic derecho en un espacio vacío para colocar un bloque en el aire. Para hacer eso, necesitarás tener el bloque que deseas colocar en tu mano secundaria.");
         add("constructionwand.description.core_destruction", "El núcleo de destrucción destruye bloques (no entidades de bloque) en el lado que estás mirando. El número máximo de bloques depende del nivel de la varita. Los bloques destruidos desaparecen en el vacío, puedes usar la función de deshacer si cometiste un error.");
         add("stat.constructionwand.use_wand", "Bloques colocados usando la varita");
+        add("advancement.constructionwand.void_sack.desc", "Bolsa del Vacío");
+        add("advancement.constructionwand.void_sack.title", "Guarda items del Destruction Core dentro de la Bolsa del Vacío o en contenedores vinculados");
+        add("key.category.constructionwand.category", "Construction Wands Revived");
+        add("constructionwand.undo.success", "Acción de la varita deshecha");
+        add("constructionwand.undo.nothing", "No hay nada para deshacer");
+        add("constructionwand.networking.wand_undo.failed", "No se pudo deshacer la acción de la varita");
+        add("key.constructionwand.wand_option", "Opción de varita");
+        add("key.constructionwand.wand_undo", "Deshacer varita");
         }
     }
 
@@ -394,6 +415,14 @@ add("advancement.constructionwand.core_destruction.desc", "Obtené un Núcleo de
         add("constructionwand.description.core_angel", "El núcleo angelical coloca un bloque en el lado opuesto del bloque (o fila de bloques) que estás mirando. La distancia máxima depende del nivel de la varita. Haz clic derecho en un espacio vacío para colocar un bloque en el aire. Para hacer eso, necesitarás tener el bloque que deseas colocar en tu mano secundaria.");
         add("constructionwand.description.core_destruction", "El núcleo de destrucción destruye bloques (no entidades de bloque) en el lado que estás mirando. El número máximo de bloques depende del nivel de la varita. Los bloques destruidos desaparecen en el vacío, puedes usar la función de deshacer si cometiste un error.");
         add("stat.constructionwand.use_wand", "Bloques colocados usando la varita");
+        add("advancement.constructionwand.void_sack.desc", "Bolsa del Vacío");
+        add("advancement.constructionwand.void_sack.title", "Guarda items del Destruction Core dentro de la Bolsa del Vacío o en contenedores vinculados");
+        add("key.category.constructionwand.category", "Construction Wands Revived");
+        add("constructionwand.undo.success", "Acción de la varita deshecha");
+        add("constructionwand.undo.nothing", "No hay nada para deshacer");
+        add("constructionwand.networking.wand_undo.failed", "No se pudo deshacer la acción de la varita");
+        add("key.constructionwand.wand_option", "Opción de varita");
+        add("key.constructionwand.wand_undo", "Deshacer varita");
         }
     }
 
@@ -484,6 +513,29 @@ add("advancement.constructionwand.core_destruction.desc", "Obtené un Núcleo de
         add("constructionwand.description.core_angel", "El núcleo angelical coloca un bloque en el lado opuesto del bloque (o fila de bloques) que estás mirando. La distancia máxima depende del nivel de la varita. Haz clic derecho en un espacio vacío para colocar un bloque en el aire. Para hacer eso, necesitarás tener el bloque que deseas colocar en tu mano secundaria.");
         add("constructionwand.description.core_destruction", "El núcleo de destrucción destruye bloques (no entidades de bloque) en el lado que estás mirando. El número máximo de bloques depende del nivel de la varita. Los bloques destruidos desaparecen en el vacío, puedes usar la función de deshacer si cometiste un error.");
         add("stat.constructionwand.use_wand", "Bloques colocados usando la varita");
+        add("item.constructionwand.void_sack", "Bolsa del Vacío");
+        add("item.constructionwand.void_sack.active", "§aActiva §7(presioná §6%1$s§7 para cambiar)");
+        add("item.constructionwand.void_sack.inactive", "§7Inactiva §7(presioná §6%1$s§7 para cambiar)");
+        add("item.constructionwand.void_sack.linked", "Vinculada a: %d, %d, %d");
+        add("item.constructionwand.void_sack.no_link", "Sin container vinculado");
+        add("item.constructionwand.void_sack.sending", "Enviando al container");
+        add("item.constructionwand.void_sack.storing", "Guardando internamente");
+        add("item.constructionwand.void_sack.slots_used", "Espacios usados: %d / %d");
+        add("item.constructionwand.void_sack.linked_msg", "Bolsa vinculada a %d, %d, %d");
+        add("item.constructionwand.void_sack.activated", "Bolsa del Vacío activada");
+        add("item.constructionwand.void_sack.deactivated", "Bolsa del Vacío desactivada");
+        add("gui.constructionwand.void_sack.toggle_tooltip", "Cambiar: enviar al container / guardar internamente");
+        add("gui.constructionwand.void_sack.sending", "Enviando →");
+        add("gui.constructionwand.void_sack.storing", "Guardando");
+        add("key.constructionwand.void_sack_toggle", "Alternar Bolsa del Vacío");
+        add("advancement.constructionwand.void_sack.desc", "Bolsa del Vacío");
+        add("advancement.constructionwand.void_sack.title", "Guarda items del Destruction Core dentro de la Bolsa del Vacío o en contenedores vinculados");
+        add("key.category.constructionwand.category", "Construction Wands Revived");
+        add("constructionwand.undo.success", "Acción de la varita deshecha");
+        add("constructionwand.undo.nothing", "No hay nada para deshacer");
+        add("constructionwand.networking.wand_undo.failed", "No se pudo deshacer la acción de la varita");
+        add("key.constructionwand.wand_option", "Opción de varita");
+        add("key.constructionwand.wand_undo", "Deshacer varita");
         }
     }
 
@@ -574,6 +626,29 @@ add("advancement.constructionwand.core_destruction.desc", "Obtené un Núcleo de
         add("constructionwand.description.core_angel", "El núcleo angelical coloca un bloque en el lado opuesto del bloque (o fila de bloques) que estás mirando. La distancia máxima depende del nivel de la varita. Haz clic derecho en un espacio vacío para colocar un bloque en el aire. Para hacer eso, necesitarás tener el bloque que deseas colocar en tu mano secundaria.");
         add("constructionwand.description.core_destruction", "El núcleo de destrucción destruye bloques (no entidades de bloque) en el lado que estás mirando. El número máximo de bloques depende del nivel de la varita. Los bloques destruidos desaparecen en el vacío, puedes usar la función de deshacer si cometiste un error.");
         add("stat.constructionwand.use_wand", "Bloques colocados usando la varita");
+        add("item.constructionwand.void_sack", "Bolsa del Vacío");
+        add("item.constructionwand.void_sack.active", "§aActiva §7(presioná §6%1$s§7 para cambiar)");
+        add("item.constructionwand.void_sack.inactive", "§7Inactiva §7(presioná §6%1$s§7 para cambiar)");
+        add("item.constructionwand.void_sack.linked", "Vinculada a: %d, %d, %d");
+        add("item.constructionwand.void_sack.no_link", "Sin container vinculado");
+        add("item.constructionwand.void_sack.sending", "Enviando al container");
+        add("item.constructionwand.void_sack.storing", "Guardando internamente");
+        add("item.constructionwand.void_sack.slots_used", "Espacios usados: %d / %d");
+        add("item.constructionwand.void_sack.linked_msg", "Bolsa vinculada a %d, %d, %d");
+        add("item.constructionwand.void_sack.activated", "Bolsa del Vacío activada");
+        add("item.constructionwand.void_sack.deactivated", "Bolsa del Vacío desactivada");
+        add("gui.constructionwand.void_sack.toggle_tooltip", "Cambiar: enviar al container / guardar internamente");
+        add("gui.constructionwand.void_sack.sending", "Enviando →");
+        add("gui.constructionwand.void_sack.storing", "Guardando");
+        add("key.constructionwand.void_sack_toggle", "Alternar Bolsa del Vacío");
+        add("advancement.constructionwand.void_sack.desc", "Bolsa del Vacío");
+        add("advancement.constructionwand.void_sack.title", "Guarda items del Destruction Core dentro de la Bolsa del Vacío o en contenedores vinculados");
+        add("key.category.constructionwand.category", "Construction Wands Revived");
+        add("constructionwand.undo.success", "Acción de la varita deshecha");
+        add("constructionwand.undo.nothing", "No hay nada para deshacer");
+        add("constructionwand.networking.wand_undo.failed", "No se pudo deshacer la acción de la varita");
+        add("key.constructionwand.wand_option", "Opción de varita");
+        add("key.constructionwand.wand_undo", "Deshacer varita");
         }
     }
 
@@ -664,6 +739,30 @@ add("advancement.constructionwand.core_destruction.desc", "破壊の杖のコア
         add("constructionwand.description.core_angel", "天使のコアはブロックの反対側にブロックを設置します。最大距離は杖の段階に依存します。オフハンドにブロックを持った状態で、何もない空間に使用すると空中にそのブロックを設置できます。");
         add("constructionwand.description.core_destruction", "破壊のコアは正面のブロック(タイルエンティティは不可)を破壊できます。破壊できる最大ブロック数は杖の段階に依存します。破壊されたブロックは消滅しますが、間違えたときは取り消すことができます。");
         add("stat.constructionwand.use_wand", "杖を用いてブロックを設置");
+        add("advancement.constructionwand.void_sack.desc", "ボイドサック");
+add("advancement.constructionwand.void_sack.title", "Destruction Coreのアイテムをボイドサックまたはリンクされたコンテナに保存する");
+
+add("item.constructionwand.void_sack", "ボイドサック");
+add("item.constructionwand.void_sack.active", "§a有効 §7(§6%1$s§7で切り替え)");
+add("item.constructionwand.void_sack.inactive", "§7無効 §7(§6%1$s§7で切り替え)");
+add("item.constructionwand.void_sack.linked", "リンク先: %d, %d, %d");
+add("item.constructionwand.void_sack.no_link", "リンクされたコンテナなし");
+add("item.constructionwand.void_sack.sending", "コンテナへ送信中");
+add("item.constructionwand.void_sack.storing", "内部保存中");
+add("item.constructionwand.void_sack.slots_used", "使用スロット: %d / %d");
+add("item.constructionwand.void_sack.linked_msg", "サックを %d, %d, %d にリンクしました");
+add("item.constructionwand.void_sack.activated", "ボイドサックを有効化しました");
+add("item.constructionwand.void_sack.deactivated", "ボイドサックを無効化しました");
+add("gui.constructionwand.void_sack.toggle_tooltip", "切り替え: コンテナへ送信 / 内部保存");
+add("gui.constructionwand.void_sack.sending", "送信中 →");
+add("gui.constructionwand.void_sack.storing", "保存中");
+add("key.constructionwand.void_sack_toggle", "ボイドサック切り替え");
+add("key.category.constructionwand.category", "Construction Wands Revived");
+add("constructionwand.undo.success", "ワンドの操作を元に戻しました");
+add("constructionwand.undo.nothing", "元に戻す操作がありません");
+add("constructionwand.networking.wand_undo.failed", "ワンドの操作を元に戻せませんでした");
+add("key.constructionwand.wand_option", "ワンドオプション");
+add("key.constructionwand.wand_undo", "ワンドを元に戻す");
         }
     }
 
@@ -754,6 +853,30 @@ add("advancement.constructionwand.core_destruction.desc", "파괴 지팡이 코�
         add("constructionwand.description.core_angel", "엔젤 코어는 마주보고 있는 블록(또는 블록 행)의 반대쪽에 블록을 배치합니다. 최대 거리는 완드의 티어에 따라 다릅니다. 빈 공간을 우클릭하면 공중에 블록을 배치할 수 있습니다. 그렇게 하려면 보조 손에 배치하려는 블록이 있어야 합니다.");
         add("constructionwand.description.core_destruction", "파괴 코어는 당신 쪽의 (타일 엔티티가 없는)블록을 파괴합니다. 최대 블록 수는 완드의 티어에 따라 다릅니다. 파괴된 블록은 공허로 사라지며 실수를 했다면 실행 취소 기능을 사용할 수 있습니다.");
         add("stat.constructionwand.use_wand", "완드로 배치한 블록 수");
+        add("advancement.constructionwand.void_sack.desc", "공허 자루");
+add("advancement.constructionwand.void_sack.title", "Destruction Core의 아이템을 공허 자루 또는 연결된 컨테이너에 저장하세요");
+
+add("item.constructionwand.void_sack", "공허 자루");
+add("item.constructionwand.void_sack.active", "§a활성화됨 §7(§6%1$s§7 키로 전환)");
+add("item.constructionwand.void_sack.inactive", "§7비활성화됨 §7(§6%1$s§7 키로 전환)");
+add("item.constructionwand.void_sack.linked", "연결됨: %d, %d, %d");
+add("item.constructionwand.void_sack.no_link", "연결된 컨테이너 없음");
+add("item.constructionwand.void_sack.sending", "컨테이너로 전송 중");
+add("item.constructionwand.void_sack.storing", "내부 저장 중");
+add("item.constructionwand.void_sack.slots_used", "사용된 슬롯: %d / %d");
+add("item.constructionwand.void_sack.linked_msg", "자루가 %d, %d, %d 에 연결됨");
+add("item.constructionwand.void_sack.activated", "공허 자루 활성화됨");
+add("item.constructionwand.void_sack.deactivated", "공허 자루 비활성화됨");
+add("gui.constructionwand.void_sack.toggle_tooltip", "전환: 컨테이너로 전송 / 내부 저장");
+add("gui.constructionwand.void_sack.sending", "전송 중 →");
+add("gui.constructionwand.void_sack.storing", "저장 중");
+add("key.constructionwand.void_sack_toggle", "공허 자루 전환");
+add("key.category.constructionwand.category", "Construction Wands Revived");
+add("constructionwand.undo.success", "지팡이 동작을 실행 취소했습니다");
+add("constructionwand.undo.nothing", "실행 취소할 내용이 없습니다");
+add("constructionwand.networking.wand_undo.failed", "지팡이 동작 실행 취소에 실패했습니다");
+add("key.constructionwand.wand_option", "지팡이 옵션");
+add("key.constructionwand.wand_undo", "지팡이 실행 취소");
         }
     }
 
@@ -827,6 +950,31 @@ add("advancement.constructionwand.core_destruction.desc", "파괴 지팡이 코�
         add("constructionwand.description.core_angel", "O núcleo do anjo coloca um bloco no lado oposto do bloco (ou fileira de blocos) que você está enfrentando.A distância máxima depende da camada de varinha.Clique com o botão direito do mouse em espaço vazio para colocar um bloco no ar.Para fazer isso, você precisará ter o bloco que deseja colocar em sua mão.");
         add("constructionwand.description.core_destruction", "O núcleo de destruição destrói blocos (sem entidades de ladrilhos) do lado de frente para você.O número máximo de blocos depende da camada de varinha.Blocos destruídos desaparecem no vazio, você pode usar o recurso de desfazer se cometer um erro.");
         add("stat.constructionwand.use_wand", "Blocos colocados usando varinha");
+
+add("advancement.constructionwand.void_sack.desc", "Saco do Vazio");
+add("advancement.constructionwand.void_sack.title", "Armazene itens do Destruction Core dentro do Saco do Vazio ou em contêineres vinculados");
+
+add("item.constructionwand.void_sack", "Saco do Vazio");
+add("item.constructionwand.void_sack.active", "§aAtivo §7(pressione §6%1$s§7 para alternar)");
+add("item.constructionwand.void_sack.inactive", "§7Inativo §7(pressione §6%1$s§7 para alternar)");
+add("item.constructionwand.void_sack.linked", "Vinculado a: %d, %d, %d");
+add("item.constructionwand.void_sack.no_link", "Nenhum contêiner vinculado");
+add("item.constructionwand.void_sack.sending", "Enviando para o contêiner");
+add("item.constructionwand.void_sack.storing", "Armazenando internamente");
+add("item.constructionwand.void_sack.slots_used", "Espaços usados: %d / %d");
+add("item.constructionwand.void_sack.linked_msg", "Saco vinculado a %d, %d, %d");
+add("item.constructionwand.void_sack.activated", "Saco do Vazio ativado");
+add("item.constructionwand.void_sack.deactivated", "Saco do Vazio desativado");
+add("gui.constructionwand.void_sack.toggle_tooltip", "Alternar: enviar para o contêiner / armazenar internamente");
+add("gui.constructionwand.void_sack.sending", "Enviando →");
+add("gui.constructionwand.void_sack.storing", "Armazenando");
+add("key.constructionwand.void_sack_toggle", "Alternar Saco do Vazio");
+add("key.category.constructionwand.category", "Construction Wands Revived");
+add("constructionwand.undo.success", "Ação da varinha desfeita");
+add("constructionwand.undo.nothing", "Nada para desfazer");
+add("constructionwand.networking.wand_undo.failed", "Falha ao desfazer a ação da varinha");
+add("key.constructionwand.wand_option", "Opção da varinha");
+add("key.constructionwand.wand_undo", "Desfazer varinha");
         }
     }
 
@@ -917,6 +1065,31 @@ add("advancement.constructionwand.core_destruction.desc", "Получите яд
         add("constructionwand.description.core_angel", "Ангельское ядро размещает блоки на противоположной стороне блока (или ряда блоков), обращённые к Вам. Максимальное расстояние зависит от уровня жезла. Щелчок правой кнопкой мыши по пустому воздуху разместит блок в воздухе. Чтобы это сделать, Вам нужно иметь необходимые блоки в левой руке, чтобы разместить их.");
         add("constructionwand.description.core_destruction", "Ядро разрушения разрушает блоки (не функциональные блоки), обращённые к Вам. Максимально количество блоков зависит от уровня жезла. Разрушенные блоки исчезают в пустоту, можно использовать функцию отмены в случае допущенной ошибки.");
         add("stat.constructionwand.use_wand", "Блоки, размещённые при помощи Жезла");
+       
+add("advancement.constructionwand.void_sack.desc", "Мешок Пустоты");
+add("advancement.constructionwand.void_sack.title", "Сохраняйте предметы из Destruction Core в Мешке Пустоты или связанных контейнерах");
+
+add("item.constructionwand.void_sack", "Мешок Пустоты");
+add("item.constructionwand.void_sack.active", "§aАктивен §7(нажмите §6%1$s§7 для переключения)");
+add("item.constructionwand.void_sack.inactive", "§7Неактивен §7(нажмите §6%1$s§7 для переключения)");
+add("item.constructionwand.void_sack.linked", "Связан с: %d, %d, %d");
+add("item.constructionwand.void_sack.no_link", "Нет связанного контейнера");
+add("item.constructionwand.void_sack.sending", "Отправка в контейнер");
+add("item.constructionwand.void_sack.storing", "Внутреннее хранение");
+add("item.constructionwand.void_sack.slots_used", "Использовано слотов: %d / %d");
+add("item.constructionwand.void_sack.linked_msg", "Мешок связан с %d, %d, %d");
+add("item.constructionwand.void_sack.activated", "Мешок Пустоты активирован");
+add("item.constructionwand.void_sack.deactivated", "Мешок Пустоты деактивирован");
+add("gui.constructionwand.void_sack.toggle_tooltip", "Переключить: отправка в контейнер / внутреннее хранение");
+add("gui.constructionwand.void_sack.sending", "Отправка →");
+add("gui.constructionwand.void_sack.storing", "Хранение");
+add("key.constructionwand.void_sack_toggle", "Переключить Мешок Пустоты");
+add("key.category.constructionwand.category", "Construction Wands Revived");
+add("constructionwand.undo.success", "Действие жезла отменено");
+add("constructionwand.undo.nothing", "Нечего отменять");
+add("constructionwand.networking.wand_undo.failed", "Не удалось отменить действие жезла");
+add("key.constructionwand.wand_option", "Опция жезла");
+add("key.constructionwand.wand_undo", "Отменить действие жезла");
         }
     }
 
@@ -1007,6 +1180,31 @@ add("advancement.constructionwand.core_destruction.desc", "Skaffa en rivningssta
         add("constructionwand.description.core_angel", "Änglakärnan placerar ett block på den motsatta sidan av blocket (eller blockraden) som är riktad mot dig. Det maximala avståndet beror på stavens nivå. Högerklicka i luften för att placera ett block i luften. För att göra detta behöver du hålla blocket du vill placera i din sekundära hand.");
         add("constructionwand.description.core_destruction", "Rivningskärnan förstör block (inte blockentiteter) på sidan som är riktad mot dig. Det maximala antalet block beror på stavens nivå. Förstörda block försvinner helt och hållet, men du kan använda ångrafunktionen om du har gjort ett misstag.");
         add("stat.constructionwand.use_wand", "Block placerade med stavar");
+        add("advancement.constructionwand.void_sack.desc", "Tomhetspåse");
+add("advancement.constructionwand.void_sack.title", "Förvara föremål från Destruction Core i Tomhetspåsen eller länkade behållare");
+
+add("item.constructionwand.void_sack", "Tomhetspåse");
+add("item.constructionwand.void_sack.active", "§aAktiv §7(tryck §6%1$s§7 för att växla)");
+add("item.constructionwand.void_sack.inactive", "§7Inaktiv §7(tryck §6%1$s§7 för att växla)");
+add("item.constructionwand.void_sack.linked", "Länkad till: %d, %d, %d");
+add("item.constructionwand.void_sack.no_link", "Ingen behållare länkad");
+add("item.constructionwand.void_sack.sending", "Skickar till behållare");
+add("item.constructionwand.void_sack.storing", "Intern lagring");
+add("item.constructionwand.void_sack.slots_used", "Använda platser: %d / %d");
+add("item.constructionwand.void_sack.linked_msg", "Påsen länkades till %d, %d, %d");
+add("item.constructionwand.void_sack.activated", "Tomhetspåsen aktiverades");
+add("item.constructionwand.void_sack.deactivated", "Tomhetspåsen avaktiverades");
+add("gui.constructionwand.void_sack.toggle_tooltip", "Växla: skicka till behållare / intern lagring");
+add("gui.constructionwand.void_sack.sending", "Skickar →");
+add("gui.constructionwand.void_sack.storing", "Lagring");
+add("key.constructionwand.void_sack_toggle", "Växla Tomhetspåse");
+add("constructionwand.description.void_sack", "Tomhetspåsen fångar upp föremål du plockar upp och lagrar dem i sitt interna 4×4-inventarie.\n\n§5§nAKTIVERING§0§r\nTryck på %1$s för att aktivera eller avaktivera påsen. När den är avaktiverad hamnar föremål i ditt vanliga inventarie.\n\n§5§nLÄNKA EN BEHÅLLARE§0§r\nHögerklicka på valfri behållare (kista, tunna, shulkerlåda...) medan du håller påsen för att länka den. När den är länkad skickas föremål först till behållaren när påsen är aktiv. Om behållaren är full lagras överskottet i påsens interna lagring.\n\n§5§nLÄGE§0§r\nTryck på %1$s för att växla mellan §aSkickar§0 (föremål → behållare) och §eLagrar§0 (föremål → interna platser). Du kan även använda växlingsknappen i GUI:t.");
+add("key.category.constructionwand.category", "Construction Wands Revived");
+add("constructionwand.undo.success", "Trollstavsåtgärd ångrad");
+add("constructionwand.undo.nothing", "Inget att ångra");
+add("constructionwand.networking.wand_undo.failed", "Det gick inte att ångra trollstavsåtgärden");
+add("key.constructionwand.wand_option", "Trollstavsalternativ");
+add("key.constructionwand.wand_undo", "Ångra trollstav");        
         }
     }
 
@@ -1097,6 +1295,30 @@ add("advancement.constructionwand.core_destruction.desc", "Bir Yıkım Asa Çeki
         add("constructionwand.description.core_angel", "Melek çekirdeği, karşı karşıya olduğunuz bloğun (veya blok sırasının) karşı tarafına bir blok yerleştirir. Maksimum mesafe asa seviyesine bağlıdır. Havada bir blok yerleştirmek için boş alana sağ tıklayın. Bunu yapmak için, yerleştirmek istediğiniz bloğu boştaki elinize almalısınız.");
         add("constructionwand.description.core_destruction", "Yıkım çekirdeği, size bakan taraftaki blokları (tile entities haricinde) yok eder. Maksimum blok sayısı asa seviyesine bağlıdır. Yok edilen bloklar boşluğa kaybolur, hata yaptıysanız geri alma özelliğini kullanabilirsiniz.");
         add("stat.constructionwand.use_wand", "Asa kullanılarak yerleştirilen bloklar");
+        add("advancement.constructionwand.void_sack.desc", "Boşluk Çuvalı");
+        add("advancement.constructionwand.void_sack.title", "Destruction Core öğelerini Boşluk Çuvalında veya bağlı konteynerlerde sakla");
+add("item.constructionwand.void_sack", "Boşluk Çantası");
+add("item.constructionwand.void_sack.active", "§aEtkin §7(geçiş yapmak için §6%1$s§7 tuşuna basın)");
+add("item.constructionwand.void_sack.inactive", "§7Devre Dışı §7(geçiş yapmak için §6%1$s§7 tuşuna basın)");
+add("item.constructionwand.void_sack.linked", "Bağlı: %d, %d, %d");
+add("item.constructionwand.void_sack.no_link", "Bağlı konteyner yok");
+add("item.constructionwand.void_sack.sending", "Konteynere gönderiliyor");
+add("item.constructionwand.void_sack.storing", "Dahili depolama");
+add("item.constructionwand.void_sack.slots_used", "Kullanılan yuva: %d / %d");
+add("item.constructionwand.void_sack.linked_msg", "Çanta %d, %d, %d konumuna bağlandı");
+add("item.constructionwand.void_sack.activated", "Boşluk Çantası etkinleştirildi");
+add("item.constructionwand.void_sack.deactivated", "Boşluk Çantası devre dışı bırakıldı");
+add("gui.constructionwand.void_sack.toggle_tooltip", "Geçiş yap: konteynere gönder / dahili depolama");
+add("gui.constructionwand.void_sack.sending", "Gönderiliyor →");
+add("gui.constructionwand.void_sack.storing", "Depolama");
+add("key.constructionwand.void_sack_toggle", "Boşluk Çantasını Değiştir");
+add("constructionwand.description.void_sack", "Boşluk Çantası topladığınız eşyaları yakalar ve dahili 4×4 envanterinde saklar.\n\n§5§nETKİNLEŞTİRME§0§r\nÇantayı etkinleştirmek veya devre dışı bırakmak için %1$s tuşuna basın. Devre dışıyken eşyalar normal envanterinize gider.\n\n§5§nKONTEYNER BAĞLAMA§0§r\nÇantayı elinizde tutarken herhangi bir konteynere (sandık, varil, shulker kutusu...) sağ tıklayarak bağlayın. Bağlandıktan sonra, çanta etkin durumdayken eşyalar önce konteynere gönderilir. Konteyner doluysa fazla eşyalar çantanın dahili deposuna aktarılır.\n\n§5§nMOD§0§r\n§aGönderme§0 (eşyalar → konteyner) ve §eDepolama§0 (eşyalar → dahili yuvalar) modları arasında geçiş yapmak için %1$s tuşuna basın. Ayrıca GUI içindeki geçiş düğmesini de kullanabilirsiniz.");
+add("key.category.constructionwand.category", "Construction Wands Revived");
+add("constructionwand.undo.success", "Değnek işlemi geri alındı");
+add("constructionwand.undo.nothing", "Geri alınacak bir şey yok");
+add("constructionwand.networking.wand_undo.failed", "Değnek işlemi geri alınamadı");
+add("key.constructionwand.wand_option", "Değnek seçeneği");
+add("key.constructionwand.wand_undo", "Değneği geri al");
         }
     }
 
@@ -1187,6 +1409,31 @@ add("advancement.constructionwand.core_destruction.desc", "获得一个破坏手
         add("constructionwand.description.core_angel", "天使核心可将一个方块放置在你所面对的方块(或一排方块)的对面。最大距离取决于手杖材质。在空地上手持手杖并单击鼠标右键即可在空中放置方块。要做到这一点。你需要将想要被在空中放置的方块放在你的副手栏中。");
         add("constructionwand.description.core_destruction", "毁灭核心会破坏面向你一侧的方块(破坏时被破坏的方块不可存在实体)。最大破坏方块数取决于手杖材质。被使用毁灭核心破坏的方块会消失。如果你只是不小心使用了毁灭核心。可以使用“撤消”功能以撤回被破坏并消失的物品返回原处。");
         add("stat.constructionwand.use_wand", "使用建筑手杖所放置的方块");
+add("advancement.constructionwand.void_sack.desc", "虚空袋");
+add("advancement.constructionwand.void_sack.title", "将 Destruction Core 产生的物品存入虚空袋或已绑定的容器中");
+
+add("item.constructionwand.void_sack", "虚空袋");
+add("item.constructionwand.void_sack.active", "§a已启用 §7(按 §6%1$s§7 切换)");
+add("item.constructionwand.void_sack.inactive", "§7已禁用 §7(按 §6%1$s§7 切换)");
+add("item.constructionwand.void_sack.linked", "已绑定到：%d, %d, %d");
+add("item.constructionwand.void_sack.no_link", "未绑定容器");
+add("item.constructionwand.void_sack.sending", "发送到容器");
+add("item.constructionwand.void_sack.storing", "内部存储");
+add("item.constructionwand.void_sack.slots_used", "已使用槽位：%d / %d");
+add("item.constructionwand.void_sack.linked_msg", "虚空袋已绑定到 %d, %d, %d");
+add("item.constructionwand.void_sack.activated", "虚空袋已启用");
+add("item.constructionwand.void_sack.deactivated", "虚空袋已禁用");
+add("gui.constructionwand.void_sack.toggle_tooltip", "切换：发送到容器 / 内部存储");
+add("gui.constructionwand.void_sack.sending", "发送 →");
+add("gui.constructionwand.void_sack.storing", "存储");
+add("key.constructionwand.void_sack_toggle", "切换虚空袋");
+add("constructionwand.description.void_sack", "虚空袋会拦截你拾取的物品，并将其存储在内部的 4×4 背包空间中。\n\n§5§n启用§0§r\n按下 %1$s 以启用或禁用虚空袋。禁用时，物品会进入你的普通背包。\n\n§5§n绑定容器§0§r\n手持虚空袋右键点击任意容器（箱子、木桶、潜影盒等）即可进行绑定。绑定后，当虚空袋处于启用状态时，物品会优先存入该容器。如果容器已满，多余的物品将存入虚空袋的内部存储空间。\n\n§5§n模式§0§r\n按下 %1$s 可在 §a发送模式§0（物品 → 容器）和 §e存储模式§0（物品 → 内部槽位）之间切换。你也可以在 GUI 中使用切换按钮进行更改。");
+add("key.category.constructionwand.category", "Construction Wands Revived");
+add("constructionwand.undo.success", "法杖操作已撤销");
+add("constructionwand.undo.nothing", "没有可撤销的操作");
+add("constructionwand.networking.wand_undo.failed", "撤销法杖操作失败");   
+add("key.constructionwand.wand_option", "法杖选项");
+add("key.constructionwand.wand_undo", "撤销法杖操作");     
         }
     }
 
@@ -1277,6 +1524,31 @@ add("advancement.constructionwand.core_destruction.desc", "Erhalte einen Kristal
         add("constructionwand.description.core_angel", "Der Kristall der Engel platziert einen Block auf der gegenüberliegenden Seites des Blocks (oder der Blockreihe) den du anschaust. Die maximale Entfernung hängt vom Material des Stabes ab. Ein Rechtsklick ins Leere platziert einen Block mitten in der Luft. Hierfür musst du den Block, den du platzieren willst, in der linken Hand halten.");
         add("constructionwand.description.core_destruction", "Der Kristall der Zerstörung zerstört Blöcke (keine Tile Entities) auf der dir zugewandten Seite. Die maximale Anzahl Blöcke hängt vonm Material des Stabes ab. Zerstörte Blöcke verschwinden im Nichts, du kannst Fehler jedoch rückgängig machen.");
         add("stat.constructionwand.use_wand", "Blöcke mithilfe des Stabs platziert");
+       add("advancement.constructionwand.void_sack.desc", "Leerenbeutel");
+add("advancement.constructionwand.void_sack.title", "Bewahre Gegenstände aus dem Destruction Core im Leerenbeutel oder in verknüpften Behältern auf");
+
+add("item.constructionwand.void_sack", "Leerenbeutel");
+add("item.constructionwand.void_sack.active", "§aAktiv §7(drücke §6%1$s§7 zum Umschalten)");
+add("item.constructionwand.void_sack.inactive", "§7Inaktiv §7(drücke §6%1$s§7 zum Umschalten)");
+add("item.constructionwand.void_sack.linked", "Verknüpft mit: %d, %d, %d");
+add("item.constructionwand.void_sack.no_link", "Kein Behälter verknüpft");
+add("item.constructionwand.void_sack.sending", "An Behälter senden");
+add("item.constructionwand.void_sack.storing", "Interne Lagerung");
+add("item.constructionwand.void_sack.slots_used", "Belegte Plätze: %d / %d");
+add("item.constructionwand.void_sack.linked_msg", "Beutel mit %d, %d, %d verknüpft");
+add("item.constructionwand.void_sack.activated", "Leerenbeutel aktiviert");
+add("item.constructionwand.void_sack.deactivated", "Leerenbeutel deaktiviert");
+add("gui.constructionwand.void_sack.toggle_tooltip", "Umschalten: an Behälter senden / intern lagern");
+add("gui.constructionwand.void_sack.sending", "Senden →");
+add("gui.constructionwand.void_sack.storing", "Lagerung");
+add("key.constructionwand.void_sack_toggle", "Leerenbeutel umschalten");
+add("constructionwand.description.void_sack", "Der Leerenbeutel fängt aufgesammelte Gegenstände ab und speichert sie in seinem internen 4×4-Inventar.\n\n§5§nAKTIVIERUNG§0§r\nDrücke %1$s, um den Beutel zu aktivieren oder zu deaktivieren. Wenn er deaktiviert ist, werden Gegenstände in dein normales Inventar gelegt.\n\n§5§nBEHÄLTER VERKNÜPFEN§0§r\nKlicke mit der rechten Maustaste auf einen beliebigen Behälter (Truhe, Fass, Shulkerkiste usw.), während du den Beutel hältst, um ihn zu verknüpfen. Nach der Verknüpfung werden Gegenstände bei aktiviertem Beutel zuerst in den Behälter gesendet. Ist der Behälter voll, werden überschüssige Gegenstände im internen Speicher des Beutels abgelegt.\n\n§5§nMODUS§0§r\nDrücke %1$s, um zwischen §aSenden§0 (Gegenstände → Behälter) und §eLagern§0 (Gegenstände → interne Plätze) umzuschalten. Alternativ kannst du auch die Umschalttaste in der GUI verwenden.");
+add("key.category.constructionwand.category", "Construction Wands Revived");
+add("constructionwand.undo.success", "Zauberstab-Aktion rückgängig gemacht");
+add("constructionwand.undo.nothing", "Nichts zum Rückgängigmachen");
+add("constructionwand.networking.wand_undo.failed", "Rückgängigmachen der Zauberstab-Aktion fehlgeschlagen");       
+add("key.constructionwand.wand_option", "Zauberstab-Option");
+add("key.constructionwand.wand_undo", "Zauberstab rückgängig machen");       
         }
     }
 

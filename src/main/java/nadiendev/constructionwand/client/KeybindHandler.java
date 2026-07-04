@@ -20,6 +20,7 @@ import nadiendev.constructionwand.basics.option.WandOptions;
 import nadiendev.constructionwand.items.wand.ItemWand;
 import nadiendev.constructionwand.network.PacketQueryUndo;
 import nadiendev.constructionwand.network.PacketWandOption;
+import nadiendev.constructionwand.network.PacketRequestUndo;
 import nadiendev.constructionwand.items.containeritems.ItemVoidSack;
 import nadiendev.constructionwand.network.PacketToggleVoidSackActive;
 
@@ -30,6 +31,12 @@ public class KeybindHandler {
     public static final KeyMapping KEY_VOID_SACK_TOGGLE = new KeyMapping(
             getKey("void_sack_toggle"),
             GLFW.GLFW_KEY_M,
+            CATEGORY
+    );
+
+    public static final KeyMapping KEY_UNDO = new KeyMapping(
+            getKey("wand_undo"),
+            GLFW.GLFW_KEY_K,
             CATEGORY
     );
 
@@ -58,6 +65,14 @@ public class KeybindHandler {
                     PacketToggleVoidSackActive.send(hand);
                     break;
                 }
+            }
+        }
+    }
+
+        // K -> undo directo con la varita (no depende de mantener CTRL)
+        while (KEY_UNDO.consumeClick()) {
+            if (WandUtil.holdingWand(player) != null) {
+                ClientPacketDistributor.sendToServer(new PacketRequestUndo());
             }
         }
     }

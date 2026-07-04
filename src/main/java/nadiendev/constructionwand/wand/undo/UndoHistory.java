@@ -1,6 +1,7 @@
 package nadiendev.constructionwand.wand.undo;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -89,6 +90,41 @@ public class UndoHistory
             updateClient(player, true, playerEntry.shiftActive);
             return true;
         }
+        return false;
+    }
+
+    /**
+     * Undo directo disparado por la tecla K. No requiere que el jugador
+     * esté apuntando a un bloque específico ni que CTRL esté presionado:
+     * simplemente deshace la última entrada de historial mientras el
+     * jugador sostiene la varita.
+     * <p>
+     * Además envía feedback al jugador (system message) indicando si la
+     * acción tuvo éxito, si no había nada para deshacer, o si falló.
+     */
+    public boolean forceUndo(Player player, Level world) {
+        PlayerEntry playerEntry = getEntryFromPlayer(player);
+        LinkedList<HistoryEntry> historyEntries = playerEntry.entries;
+
+        if(historyEntries.isEmpty()) {
+            player.sendSystemMessage(Component.translatable("constructionwand.undo.nothing"));
+            return false;
+        }
+
+        HistoryEntry entry = historyEntries.getLast();
+        if(!entry.world.equals(world)) {
+            player.sendSystemMessage(Component.translatable("constructionwand.undo.nothing"));
+            return false;
+        }
+
+        if(entry.undo(player)) {
+            historyEntries.remove(entry);
+            updateClient(player, playerEntry.undoActive, playerEntry.shiftActive);
+            player.sendSystemMessage(Component.translatable("constructionwand.undo.success"));
+            return true;
+        }
+
+        player.sendSystemMessage(Component.translatable("constructionwand.networking.wand_undo.failed"));
         return false;
     }
 

@@ -31,6 +31,7 @@ public class ClientHandler {
     public static void registerKeymapping(final RegisterKeyMappingsEvent event) {
         event.register(KeybindHandler.KEY_OPT);
         event.register(KeybindHandler.KEY_VOID_SACK_TOGGLE);
+        event.register(KeybindHandler.KEY_UNDO);
     }
 
     @SubscribeEvent

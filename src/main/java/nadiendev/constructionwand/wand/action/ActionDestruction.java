@@ -26,7 +26,14 @@ import java.util.List;
 
 public class ActionDestruction implements IWandAction
 {
-  
+    // ─────────────────────────────────────────────────────────────────────────
+    // VoidSack drop-interception context
+    // ─────────────────────────────────────────────────────────────────────────
+
+    /**
+     * Active context for VoidSackDropHandler.
+     * Set in VoidSackCapturingSnapshot#execute(), cleared in finally.
+     */
     public static final ThreadLocal<VoidSackDropContext> ACTIVE_CONTEXT = new ThreadLocal<>();
 
     /**
@@ -88,7 +95,6 @@ public class ActionDestruction implements IWandAction
             BlockPos currentCandidate = candidates.removeFirst();
 
             // Only break blocks whose face toward the player is unobstructed.
-            // WandUtil.isBlockPermeable is unchanged in 26.1.
             if (!WandUtil.isBlockPermeable(world, currentCandidate.relative(breakFace))) continue;
 
             try {
@@ -98,14 +104,12 @@ public class ActionDestruction implements IWandAction
                 if (options.matchBlocks(targetBlock.getBlock(), candidateBlock.getBlock())
                         && allCandidates.add(currentCandidate))
                 {
-                    // DestroySnapshot.get performs permission/tool checks internally
-                    // using the 26.1 break pipeline (BlockEvent.BreakEvent etc.).
+                    // DestroySnapshot.get 
                     DestroySnapshot snapshot = DestroySnapshot.get(world, player, currentCandidate);
                     if (snapshot == null) continue;
                     destroySnapshots.add(snapshot);
 
-                    // Spread to neighbours based on the break face and active locks.
-                    // statement is retained here for clarity and zero migration risk.
+                 
                     switch (breakFace) {
                         case DOWN:
                         case UP:
@@ -169,7 +173,7 @@ public class ActionDestruction implements IWandAction
 
         // ─────────────────────────────────────────────────────────────────────
         // Void Sack wrapping (server-side only)
-        // ─────────────────────────────────────────────────────────────────────
+        //───────────────────────────────────────────
         if (!world.isClientSide() && player instanceof ServerPlayer serverPlayer) {
             ItemStack voidSack = findSack(serverPlayer);
             if (!voidSack.isEmpty()) {
@@ -184,7 +188,9 @@ public class ActionDestruction implements IWandAction
         return destroySnapshots;
     }
 
-
+    /**
+     * Searches the player's full inventory for the first VoidSack.
+     */
     public static ItemStack findSack(Player player) {
         ItemStack main = player.getMainHandItem();
         if (main.getItem() instanceof ItemVoidSack) return main;
@@ -224,8 +230,11 @@ public class ActionDestruction implements IWandAction
         @Override public boolean    restore(Level w, Player p)           { return delegate.restore(w, p); }
 
         /**
-         * Sets ACTIVE_CONTEXT 
-         * VoidSackDropHandler 
+         * Sets ACTIVE_CONTEXT before delegating to the real execute() so that
+         * VoidSackDropHandler can see the context when BlockDropsEvent fires.
+         *
+         * The try/finally guarantees ACTIVE_CONTEXT is always cleared even if
+         * the delegate throws.
          */
         @Override
         public boolean execute(Level world, Player player, BlockHitResult ray) {
