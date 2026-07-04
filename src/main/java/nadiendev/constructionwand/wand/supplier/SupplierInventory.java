@@ -20,11 +20,10 @@ import nadiendev.constructionwand.basics.pool.IPool;
 import nadiendev.constructionwand.basics.pool.OrderedPool;
 import nadiendev.constructionwand.containers.ContainerManager;
 import nadiendev.constructionwand.containers.ContainerTrace;
+import nadiendev.constructionwand.integrations.curios.CuriosIntegration;
 import nadiendev.constructionwand.wand.undo.PlaceSnapshot;
-import top.theillusivec4.curios.api.CuriosApi;
 
 import org.jetbrains.annotations.Nullable;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -83,20 +82,12 @@ public class SupplierInventory implements IWandSupplier {
         }
     }
 
+    /**
+     * Curios API Optional Dependency.
+     * Six Seven -_-
+     */
     private List<ItemStack> getCuriosInv(Player player) {
-        List<ItemStack> result = new ArrayList<>();
-        try {
-            CuriosApi.getCuriosInventory(player).ifPresent(inv -> {
-                inv.getCurios().forEach((id, handler) -> {
-                    var stacks = handler.getStacks();
-                    for (int i = 0; i < stacks.getSlots(); i++) {
-                        ItemStack stack = stacks.getStackInSlot(i);
-                        if (!stack.isEmpty()) result.add(stack);
-                    }
-                });
-            });
-        } catch (Exception ignored) {}
-        return result;
+        return CuriosIntegration.getCurioStacks(player);
     }
 
     private boolean hasContainerWithItem(BlockItem item) {

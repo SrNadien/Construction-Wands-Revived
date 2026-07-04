@@ -15,7 +15,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import nadiendev.constructionwand.api.IContainerHandler;
 import nadiendev.constructionwand.containers.ContainerTrace;
-import top.theillusivec4.curios.api.CuriosApi;
+import nadiendev.constructionwand.integrations.curios.CuriosIntegration;
 
 public class HandlerWirelessTerminal implements IContainerHandler {
 
@@ -110,24 +110,7 @@ public class HandlerWirelessTerminal implements IContainerHandler {
             }
         }
 
-        try {
-            var curiosInventory = CuriosApi.getCuriosInventory(player).orElse(null);
-            if (curiosInventory == null) return null;
-
-            int globalSlot = 0;
-            for (var entry : curiosInventory.getCurios().entrySet()) {
-                var stacks = entry.getValue().getStacks();
-                for (int i = 0; i < stacks.getSlots(); i++) {
-                    ItemStack slotStack = stacks.getStackInSlot(i);
-                    if (slotStack.getItem() == item.getItem()
-                            && ItemStack.isSameItemSameComponents(slotStack, item)) {
-                        return MenuLocators.forCurioSlot(globalSlot);
-                    }
-                    globalSlot++;
-                }
-            }
-        } catch (Exception ignored) {}
-
-        return null;
+        // Curios
+        return CuriosIntegration.resolveCurioSlot(player, item);
     }
 }
