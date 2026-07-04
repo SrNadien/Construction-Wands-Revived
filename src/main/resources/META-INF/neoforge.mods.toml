@@ -1,0 +1,86 @@
+modLoader = "javafml"
+loaderVersion = "${loader_version}"
+license = "${license}"
+[[mods]]
+modId="${modid}"
+version="${mod_version}"
+displayName="Construction Wands Revived"
+displayURL="https://www.curseforge.com/minecraft/mc-mods/construction-wands-revived"
+logoFile="logo.png"
+authors="${author}"
+description="${description}"
+
+[[dependencies.${modid}]]
+    modId="neoforge"
+    type="required"
+    versionRange="${neoversion}"
+    ordering = "NONE"
+    side="BOTH"
+[[dependencies.${modid}]]
+    modId="minecraft"
+    type="required"
+    versionRange="${mcversion}"
+    ordering = "NONE"
+    side="BOTH"
+
+# jei dependency 
+[[dependencies.${modid}]]
+    modId="jei"
+    type="optional"
+    versionRange="${jei_version}"
+    ordering="AFTER"
+    side = "BOTH"
+
+# guideme dependency 
+[[dependencies.${modid}]]
+    modId="guideme"
+    type="optional"
+    versionRange="${guideme_version}"
+    ordering="AFTER"
+    side = "BOTH"
+
+# ae2 dependency 
+[[dependencies.${modid}]]
+    modId="ae2"
+    type="optional"
+    versionRange="${ae2_version}"
+    ordering="AFTER"
+    side = "BOTH"
+
+# refined storage dependency 
+[[dependencies.${modid}]]
+    modId="refinedstorage"
+    type="optional"
+    versionRange="${refinedstorage_version}"
+    ordering="AFTER"
+    side = "BOTH"
+
+# sophisticated core dependency 
+[[dependencies.${modid}]]
+    modId="sophisticatedcore"
+    type="optional"
+    versionRange="${sophisticatedcore_version}"
+    ordering="AFTER"
+    side = "BOTH"
+
+# sophisticated backpacks dependency 
+[[dependencies.${modid}]]
+    modId="sophisticatedbackpacks"
+    type="optional"
+    versionRange="${sophisticatedbackpacks_version}"
+    ordering="AFTER"
+    side = "BOTH"
+
+[[dependencies.${modid}]]
+modId = "curios"
+type="optional"
+versionRange = "${curios_version}"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.${modid}]]
+modId = "ae2wtlib"
+type="optional"
+versionRange = "${ae2wtlib_version}"
+ordering = "NONE"
+side = "BOTH"

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_core_destruction": {
+      "conditions": {
+        "items": [
+          {
+            "items": "constructionwand:core_destruction"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "constructionwand:void_sack"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_core_destruction"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "constructionwand:void_sack"
+    ]
+  }
+}
