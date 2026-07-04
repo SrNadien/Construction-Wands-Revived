@@ -19,9 +19,7 @@ public final class CuriosIntegration {
     private CuriosIntegration() {
     }
 
-    /**
-     * @return true si el mod Curios API está instalado y cargado.
-     */
+
     public static boolean isLoaded() {
         return LOADED;
     }
