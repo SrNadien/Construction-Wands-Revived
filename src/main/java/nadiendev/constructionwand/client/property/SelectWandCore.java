@@ -5,6 +5,7 @@ import nadiendev.constructionwand.basics.option.WandOptions;
 import nadiendev.constructionwand.items.ModItems;
 import nadiendev.constructionwand.items.core.ItemCoreAngel;
 import nadiendev.constructionwand.items.core.ItemCoreDestruction;
+import nadiendev.constructionwand.items.core.ItemCoreExchange;
 import nadiendev.constructionwand.items.wand.ItemWand;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
@@ -25,6 +26,7 @@ public class SelectWandCore
                     var core = new WandOptions(stack).cores.get();
                     if (core instanceof ItemCoreAngel)       return 1f; // core_angel active
                     if (core instanceof ItemCoreDestruction) return 2f; // core_destruction active
+                    if (core instanceof ItemCoreExchange)    return 3f; // core_exchange active
                     return 0f;                                          // default (no core)
                 });
             }

@@ -12,6 +12,12 @@
       "predicate": {
         "constructionwand:wand_core": 2.0
       }
+    },
+    {
+      "model": "constructionwand:item/netherite_wand_core_exchange",
+      "predicate": {
+        "constructionwand:wand_core": 3.0
+      }
     }
   ],
   "textures": {

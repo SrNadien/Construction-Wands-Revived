@@ -3,7 +3,7 @@ plugins {
     id 'eclipse'
     id 'idea'
     id 'maven-publish'
-    id 'net.neoforged.gradle.userdev' version '7.0.171'
+    id 'net.neoforged.moddev' version '2.0.143'
 }
 
 version = "${mcversion}-${mod_version}-${tag_lanzador}"
@@ -15,40 +15,50 @@ base {
 // Mojang ships Java 21 to end users in 1.20.5+, so your mod should target Java 21.
 java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 
-//minecraft.accessTransformers.file rootProject.file('src/main/resources/META-INF/accesstransformer.cfg')
-//minecraft.accessTransformers.entry public net.minecraft.client.Minecraft textureManager # textureManager
+//neoForge.accessTransformers.file rootProject.file('src/main/resources/META-INF/accesstransformer.cfg')
 
-runs {
-    // applies to all the run configs below
-    configureEach {
-        // Recommended logging data for a userdev environment
-        systemProperty 'forge.logging.markers', 'REGISTRIES'
+neoForge {
+    version = "${neoversion}"
 
-        // Recommended logging level for the console
-        systemProperty 'forge.logging.console.level', 'debug'
+    runs {
+        client {
+            client()
+            // Comma-separated list of namespaces to load gametests from. Empty = all namespaces.
+            systemProperty 'forge.enabledGameTestNamespaces', "${modid}"
+        }
 
-        //Limit ram usage for the dev environment to 4GB
-        jvmArgument '-Xmx2G'
+        server {
+            server()
+            systemProperty 'forge.enabledGameTestNamespaces', "${modid}"
+            programArgument '--nogui'
+        }
 
-        modSource project.sourceSets.main
+        data {
+            data()
+            // example of overriding the workingDirectory set in configureEach above, uncomment if you want to use it
+            // gameDirectory = project.file('run-data')
+
+            // Specify the modid for data generation, where to output the resulting resource, and where to look for existing resources.
+            programArguments.addAll '--mod', "${modid}", '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
+        }
+
+        // applies to all the run configs above
+        configureEach {
+            // Recommended logging data for a userdev environment
+            systemProperty 'forge.logging.markers', 'REGISTRIES'
+
+            // Recommended logging level for the console
+            logLevel = org.slf4j.event.Level.DEBUG
+
+            //Limit ram usage for the dev environment to 4GB
+            jvmArgument '-Xmx2G'
+        }
     }
 
-    client {
-        // Comma-separated list of namespaces to load gametests from. Empty = all namespaces.
-        systemProperty 'forge.enabledGameTestNamespaces', "${modid}"
-    }
-
-    server {
-        systemProperty 'forge.enabledGameTestNamespaces', "${modid}"
-        argument '--nogui'
-    }
-
-    data {
-        // example of overriding the workingDirectory set in configureEach above, uncomment if you want to use it
-        // workingDirectory project.file('run-data')
-
-        // Specify the modid for data generation, where to output the resulting resource, and where to look for existing resources.
-        arguments.addAll '--mod', "${modid}", '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
+    mods {
+        "${modid}" {
+            sourceSet(sourceSets.main)
+        }
     }
 }
 
@@ -92,8 +102,6 @@ repositories {
 }
 
 dependencies {
-    implementation "net.neoforged:neoforge:${neoversion}"
-
     //jei
     compileOnly "mezz.jei:jei-${mcversion}-common-api:${jei_version}"
     compileOnly "mezz.jei:jei-${mcversion}-neoforge-api:${jei_version}"

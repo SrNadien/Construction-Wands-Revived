@@ -5,6 +5,7 @@ import nadiendev.constructionwand.items.ModItems;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -20,14 +21,9 @@ public class ModCreativeTabs {
                     .title(Component.translatable("itemGroup." + ConstructionWand.MODID))
                     .icon(() -> new ItemStack(ModItems.WAND_INFINITY.get()))
                     .displayItems((parameters, output) -> {
-                        output.accept(ModItems.WAND_STONE.get());
-                        output.accept(ModItems.WAND_IRON.get());
-                        output.accept(ModItems.WAND_DIAMOND.get());
-                        output.accept(ModItems.WAND_NETHERITE.get());
-                        output.accept(ModItems.WAND_INFINITY.get());
-                        output.accept(ModItems.CORE_ANGEL.get());
-                        output.accept(ModItems.CORE_DESTRUCTION.get());
-                        output.accept(ModItems.VOID_SACK.get());
+                        for (DeferredHolder<Item, ? extends Item> entry : ModItems.ITEMS.getEntries()) {
+                            output.accept(entry.get());
+                        }
                     })
                     .build());
 

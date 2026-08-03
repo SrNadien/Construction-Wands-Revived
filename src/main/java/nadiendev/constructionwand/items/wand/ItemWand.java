@@ -144,6 +144,11 @@ public abstract class ItemWand extends Item implements ICustomItemModel
                 .texture("layer0", generator.modLoc("item/" + name))
                 .texture("layer1", generator.modLoc("item/overlay_core"));
 
+        // Sub-model for core_exchange overlay
+        generator.withExistingParent(name + "_core_exchange", "item/handheld")
+                .texture("layer0", generator.modLoc("item/" + name))
+                .texture("layer1", generator.modLoc("item/overlay_core"));
+
         // Base model with overrides per core value
         generator.withExistingParent(name, "item/handheld")
                 .texture("layer0", generator.modLoc("item/" + name))
@@ -154,6 +159,10 @@ public abstract class ItemWand extends Item implements ICustomItemModel
                 .override()
                     .predicate(generator.modLoc("wand_core"), 2.0f) // core_destruction
                     .model(generator.getExistingFile(generator.modLoc("item/" + name + "_core_destruction")))
+                .end()
+                .override()
+                    .predicate(generator.modLoc("wand_core"), 3.0f) // core_exchange
+                    .model(generator.getExistingFile(generator.modLoc("item/" + name + "_core_exchange")))
                 .end();
     }
 }

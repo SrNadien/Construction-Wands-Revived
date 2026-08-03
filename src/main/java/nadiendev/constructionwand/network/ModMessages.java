@@ -22,6 +22,7 @@ public final class ModMessages {
         registrar.playToServer(PacketToggleVoidSack.TYPE, PacketToggleVoidSack.CODEC, PacketToggleVoidSack::handle);
         registrar.playToServer(PacketToggleVoidSackActive.TYPE, PacketToggleVoidSackActive.CODEC, PacketToggleVoidSackActive::handle);
         registrar.playToServer(PacketWandUndo.ID, PacketWandUndo.CODEC, PacketWandUndo.Handler::handle);
+        registrar.playToServer(PacketExchangeSelect.ID, PacketExchangeSelect.CODEC, PacketExchangeSelect.Handler::handle);
     }
 
     public static void sendToServer(CustomPacketPayload message) {

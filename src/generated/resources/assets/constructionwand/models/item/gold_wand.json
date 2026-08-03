@@ -2,25 +2,25 @@
   "parent": "minecraft:item/handheld",
   "overrides": [
     {
-      "model": "constructionwand:item/iron_wand_core_angel",
+      "model": "constructionwand:item/gold_wand_core_angel",
       "predicate": {
         "constructionwand:wand_core": 1.0
       }
     },
     {
-      "model": "constructionwand:item/iron_wand_core_destruction",
+      "model": "constructionwand:item/gold_wand_core_destruction",
       "predicate": {
         "constructionwand:wand_core": 2.0
       }
     },
     {
-      "model": "constructionwand:item/iron_wand_core_exchange",
+      "model": "constructionwand:item/gold_wand_core_exchange",
       "predicate": {
         "constructionwand:wand_core": 3.0
       }
     }
   ],
   "textures": {
-    "layer0": "constructionwand:item/iron_wand"
+    "layer0": "constructionwand:item/gold_wand"
   }
 }

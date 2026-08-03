@@ -11,6 +11,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.client.event.InputEvent;
 import nadiendev.constructionwand.ConstructionWand;
 import nadiendev.constructionwand.items.containeritems.ItemVoidSack;
+import nadiendev.constructionwand.network.PacketExchangeSelect;
 import nadiendev.constructionwand.network.PacketToggleVoidSackActive;
 
 public class KeybindHandler {
@@ -24,6 +25,16 @@ public class KeybindHandler {
     public static final KeyMapping KEY_WAND_UNDO = new KeyMapping(
             getKey("wand_undo"),
             GLFW.GLFW_KEY_K,
+            getCategory("constructionwand")
+    );
+
+    /**
+     * Selecciona el bloque apuntado como reemplazo del Exchange core.
+     * Numpad 7 por defecto (evita el conflicto de Shift+Click con el GUI de la vara).
+     */
+    public static final KeyMapping KEY_EXCHANGE_SELECT = new KeyMapping(
+            getKey("exchange_select"),
+            GLFW.GLFW_KEY_KP_7,
             getCategory("constructionwand")
     );
 
@@ -56,6 +67,14 @@ public class KeybindHandler {
             if (nadiendev.constructionwand.basics.WandUtil.holdingWand(player) != null) {
                 nadiendev.constructionwand.network.ModMessages.sendToServer(
                         new nadiendev.constructionwand.network.PacketWandUndo());
+            }
+        }
+
+        // Seleccionar bloque de reemplazo del Exchange core con Numpad 7
+        if (KEY_EXCHANGE_SELECT.consumeClick()) {
+            if (nadiendev.constructionwand.basics.WandUtil.holdingWand(player) != null) {
+                nadiendev.constructionwand.network.ModMessages.sendToServer(
+                        new PacketExchangeSelect());
             }
         }
     }
