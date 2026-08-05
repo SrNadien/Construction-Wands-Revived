@@ -11,7 +11,7 @@ If you are still using version 1.x, use [the old guide](https://github.com/Theta
 
 ## Wands
 
-There are basic wands made from stone, iron, gold, diamond and the Infinity wand. Wands from higher tiers are more powerful
+There are basic wands made from stone, iron, gold, diamond, netherite and the Infinity wand. Wands from higher tiers are more powerful
 and last longer. These properties can be changed in the config.
 
 | Wand     | Durability  | Max. Blocks | Upgradeable | Angel distance | Max. Blocks (Destroy) |
@@ -42,7 +42,7 @@ GUI.
 Wand cores are magical gemstones that allow your wand to have different uses.
 
 Every wand comes with a Construction core by default, then you can make your wand even better by putting
-aditional cores into it. Put your new core together with your wand in a crafting grid to install it. 
+additional cores into it. Put your new core together with your wand in a crafting grid to install it. 
 To switch between cores, hold down OPTKEY and left click empty space with your wand.
 Stone wands can't be upgraded.
 
@@ -105,7 +105,7 @@ Destruction core, it will restore the blocks.
 
 - Having blocks in your offhand will place them instead of the block you're looking at.
 
-- Look at your statisics to see how many blocks you have placed using your wand.
+- Look at your statistics to see how many blocks you have placed using your wand.
 
 - **1.16+ only:** The Infinity Wand won't burn in lava just like netherite gear.
 
@@ -113,8 +113,8 @@ Destruction core, it will restore the blocks.
 
 ## TileEntity Blacklist
 
-Some modded TileEntities can cause issues when placed using a wand. They may turn into invisible and
-unremovable ghost blocks, become unbreakable or cause other unwanted effects.
+Some modded TileEntities can cause issues when placed using a wand. They may become invisible and unremovable ghost blocks, become unbreakable or cause other unwanted effects.
+
 
 That's why I've included a Black/Whitelist system for TileEntities in CW Version 1.7, Chisels&Bits blocks are blacklisted by default.
 There are probably a few other tile entities from other mods out there which may cause issues as well.
