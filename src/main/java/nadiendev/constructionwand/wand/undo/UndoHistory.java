@@ -7,8 +7,10 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import javax.annotation.Nullable;
 import nadiendev.constructionwand.network.ModMessages;
 import nadiendev.constructionwand.ConstructionWand;
 import nadiendev.constructionwand.basics.ConfigServer;
@@ -128,16 +130,33 @@ public class UndoHistory
         return false;
     }
 
+    /**
+     * Bloque seleccionado por el jugador con la tecla de selección usando el
+     * Exchange core. Es el bloque que se usará para reemplazar el/los bloque(s)
+     * objetivo en el próximo click.
+     */
+    @Nullable
+    public BlockItem getExchangeSelection(Player player) {
+        return getEntryFromPlayer(player).exchangeSelection;
+    }
+
+    public void setExchangeSelection(Player player, @Nullable BlockItem item) {
+        getEntryFromPlayer(player).exchangeSelection = item;
+    }
+
     private static class PlayerEntry
     {
         public final LinkedList<HistoryEntry> entries;
         public boolean undoActive;
         public boolean shiftActive;
+        @Nullable
+        public BlockItem exchangeSelection;
 
         public PlayerEntry() {
             entries = new LinkedList<>();
             undoActive = false;
             shiftActive = false;
+            exchangeSelection = null;
         }
     }
 

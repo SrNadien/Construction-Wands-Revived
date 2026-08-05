@@ -15,6 +15,13 @@
           "model": "constructionwand:item/infinity_wand_destruction"
         },
         "when": "destruction"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "constructionwand:item/infinity_wand_exchange"
+        },
+        "when": "exchange"
       }
     ],
     "fallback": {

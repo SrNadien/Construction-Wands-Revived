@@ -32,6 +32,7 @@ public class ClientHandler {
         event.register(KeybindHandler.KEY_OPT);
         event.register(KeybindHandler.KEY_VOID_SACK_TOGGLE);
         event.register(KeybindHandler.KEY_UNDO);
+        event.register(KeybindHandler.KEY_EXCHANGE_SELECT);
     }
 
     @SubscribeEvent

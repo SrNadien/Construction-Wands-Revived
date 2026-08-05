@@ -7,6 +7,7 @@ import nadiendev.constructionwand.containers.handlers.HandlerCapability;
 import nadiendev.constructionwand.containers.handlers.HandlerShulkerbox;
 import nadiendev.constructionwand.containers.handlers.HandlerSophisticatedBackpack;
 import nadiendev.constructionwand.containers.handlers.HandlerWirelessTerminal;
+import nadiendev.constructionwand.containers.handlers.HandlerWirelessTerminalAE2WTLib;
 import nadiendev.constructionwand.containers.handlers.HandlerPortableCell;
 import nadiendev.constructionwand.containers.handlers.HandlerWirelessGrid;
 
@@ -48,6 +49,15 @@ public class ContainerRegistrar {
             }
         } catch (Exception e) {
             ConstructionWand.LOGGER.warn("Could not load Applied Energistics 2 integration: " + e.getMessage());
+        }
+
+        try {
+            if (ModList.get().isLoaded("ae2wtlib")) {
+                ConstructionWand.containerManager.register(new HandlerWirelessTerminalAE2WTLib());
+                ConstructionWand.LOGGER.info("AE2 Wireless Terminals integration added");
+            }
+        } catch (Exception e) {
+            ConstructionWand.LOGGER.warn("Could not load AE2 Wireless Terminals integration: " + e.getMessage());
         }
     }
 

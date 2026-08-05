@@ -22,11 +22,13 @@ public class ModCreativeTabs {
                             .displayItems((parameters, output) -> {
                                 output.accept(ModItems.WAND_STONE.get());
                                 output.accept(ModItems.WAND_IRON.get());
+                                output.accept(ModItems.WAND_GOLD.get());
                                 output.accept(ModItems.WAND_DIAMOND.get());
                                 output.accept(ModItems.WAND_NETHERITE.get());
                                 output.accept(ModItems.WAND_INFINITY.get());
                                 output.accept(ModItems.CORE_ANGEL.get());
                                 output.accept(ModItems.CORE_DESTRUCTION.get());
+                                output.accept(ModItems.CORE_EXCHANGE.get());
                                 output.accept(ModItems.VOID_SACK.get()); 
                             })
                             .build());
