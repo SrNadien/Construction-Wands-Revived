@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": "#c:glass_panes",
+    "O": "minecraft:nether_star",
+    "X": "#c:storage_blocks/netherite"
+  },
+  "pattern": [
+    " #X",
+    "#O#",
+    "X# "
+  ],
+  "result": {
+    "id": "constructionwand:core_exchange"
+  }
+}

@@ -69,6 +69,13 @@ repositories {
             includeGroup("com.refinedmods.refinedstorage")
         }
     }
+    maven {
+        url = uri("https://modmaven.dev/")
+        content {
+            includeGroup "appeng"
+            includeGroup "de.mari_023"
+        }
+    }
 }
 
 dependencies {
@@ -97,6 +104,10 @@ dependencies {
      // Curios API
     compileOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}:api"
     runtimeOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}"
+
+    //Ae2 Wireless Terminals
+    implementation "de.mari_023:ae2wtlib_api:${ae2wtlib_version}"
+    runtimeOnly "de.mari_023:ae2wtlib:${ae2wtlib_version}"
 
 }
 

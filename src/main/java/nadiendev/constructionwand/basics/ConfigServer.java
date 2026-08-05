@@ -39,26 +39,29 @@ public class ConfigServer
 
     public static class WandProperties
     {
-        public static final WandProperties DEFAULT = new WandProperties(null, null, null, null, null);
+        public static final WandProperties DEFAULT = new WandProperties(null, null, null, null, null, null);
 
         private final ModConfigSpec.IntValue durability;
         private final ModConfigSpec.IntValue limit;
         private final ModConfigSpec.IntValue angel;
         private final ModConfigSpec.IntValue destruction;
+        private final ModConfigSpec.IntValue exchange;
         private final ModConfigSpec.BooleanValue upgradeable;
 
         private WandProperties(ModConfigSpec.IntValue durability, ModConfigSpec.IntValue limit,
                                ModConfigSpec.IntValue angel, ModConfigSpec.IntValue destruction,
+                               ModConfigSpec.IntValue exchange,
                                ModConfigSpec.BooleanValue upgradeable) {
             this.durability = durability;
             this.limit = limit;
             this.angel = angel;
             this.destruction = destruction;
+            this.exchange = exchange;
             this.upgradeable = upgradeable;
         }
 
         public WandProperties(ModConfigSpec.Builder builder, DeferredHolder<Item, ? extends Item> wandSupplier, int defDurability, int defLimit,
-                              int defAngel, int defDestruction, boolean defUpgradeable) {
+                              int defAngel, int defDestruction, int defExchange, boolean defUpgradeable) {
             Identifier registryName = wandSupplier.getId();
             builder.push(registryName.getPath());
 
@@ -73,6 +76,8 @@ public class ConfigServer
             angel = builder.defineInRange("angel", defAngel, 0, Integer.MAX_VALUE);
             builder.comment("Wand destruction block limit (0 to disable destruction core)");
             destruction = builder.defineInRange("destruction", defDestruction, 0, Integer.MAX_VALUE);
+            builder.comment("Wand exchange block limit (0 to disable exchange core)");
+            exchange = builder.defineInRange("exchange", defExchange, 0, Integer.MAX_VALUE);
             builder.comment("Allow wand upgrading by putting the wand together with a wand core in a crafting grid.");
             upgradeable = builder.define("upgradeable", defUpgradeable);
             builder.pop();
@@ -96,6 +101,10 @@ public class ConfigServer
             return destruction == null ? 0 : destruction.get();
         }
 
+        public int getExchange() {
+            return exchange == null ? 0 : exchange.get();
+        }
+
         public boolean isUpgradeable() {
             return upgradeable != null && upgradeable.get();
         }
@@ -111,11 +120,12 @@ public class ConfigServer
                 "in the /saves/myworld/serverconfig folder. If you want to change the serverconfig for all",
                 "new worlds, copy the config files in the /defaultconfigs folder.");
 
-        new WandProperties(builder, ModItems.WAND_STONE, ToolMaterial.STONE.durability(), 9, 0, 0, false);
-        new WandProperties(builder, ModItems.WAND_IRON, ToolMaterial.IRON.durability(), 27, 2, 9, true);
-        new WandProperties(builder, ModItems.WAND_DIAMOND, ToolMaterial.DIAMOND.durability(), 128, 8, 25, true);
-        new WandProperties(builder, ModItems.WAND_NETHERITE, ToolMaterial.NETHERITE.durability(), 512, 15, 75, true);
-        new WandProperties(builder, ModItems.WAND_INFINITY, 0, 1024, 16, 81, true);
+        new WandProperties(builder, ModItems.WAND_STONE, ToolMaterial.STONE.durability(), 9, 0, 0, 0, false);
+        new WandProperties(builder, ModItems.WAND_IRON, ToolMaterial.IRON.durability(), 27, 2, 9, 9, true);
+        new WandProperties(builder, ModItems.WAND_GOLD, ToolMaterial.GOLD.durability(), 60, 5, 15, 15, true);
+        new WandProperties(builder, ModItems.WAND_DIAMOND, ToolMaterial.DIAMOND.durability(), 128, 8, 25, 25, true);
+        new WandProperties(builder, ModItems.WAND_NETHERITE, ToolMaterial.NETHERITE.durability(), 512, 15, 75, 75, true);
+        new WandProperties(builder, ModItems.WAND_INFINITY, 0, 1024, 16, 81, 81, true);
 
         builder.push("misc");
         builder.comment("Block limit for Infinity Wand used in creative mode");

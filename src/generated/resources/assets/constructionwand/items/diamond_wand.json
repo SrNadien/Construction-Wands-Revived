@@ -15,6 +15,13 @@
           "model": "constructionwand:item/diamond_wand_destruction"
         },
         "when": "destruction"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "constructionwand:item/diamond_wand_exchange"
+        },
+        "when": "exchange"
       }
     ],
     "fallback": {

@@ -49,13 +49,15 @@ public class AdvancementGenerator extends AdvancementProvider {
             // WANDS
             AdvancementHolder stoneWand   = onHasItem(consumer, ModItems.WAND_STONE,      AdvancementType.TASK,      root);
             AdvancementHolder ironWand    = onHasItem(consumer, ModItems.WAND_IRON,       AdvancementType.TASK,      stoneWand);
-            AdvancementHolder diamondWand = onHasItem(consumer, ModItems.WAND_DIAMOND,    AdvancementType.TASK,      ironWand);
+            AdvancementHolder goldWand    = onHasItem(consumer, ModItems.WAND_GOLD,       AdvancementType.TASK,      ironWand);
+            AdvancementHolder diamondWand = onHasItem(consumer, ModItems.WAND_DIAMOND,    AdvancementType.TASK,      goldWand);
             AdvancementHolder netherWand  = onHasItem(consumer, ModItems.WAND_NETHERITE,  AdvancementType.TASK,      diamondWand);
             AdvancementHolder infWand     = onHasItem(consumer, ModItems.WAND_INFINITY,   AdvancementType.CHALLENGE, netherWand);
 
             // CORES (dependen del stone wand como base)
             AdvancementHolder angelCore      = onHasItem(consumer, ModItems.CORE_ANGEL,       AdvancementType.TASK, stoneWand);
             AdvancementHolder destructionCore = onHasItem(consumer, ModItems.CORE_DESTRUCTION, AdvancementType.TASK, stoneWand);
+            AdvancementHolder exchangeCore   = onHasItem(consumer, ModItems.CORE_EXCHANGE,    AdvancementType.TASK, stoneWand);
 
             // VOID SACk
             AdvancementHolder voidSack        = onHasItem(consumer, ModItems.VOID_SACK,        AdvancementType.TASK, root);

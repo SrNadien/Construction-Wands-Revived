@@ -21,6 +21,7 @@ import nadiendev.constructionwand.items.wand.ItemWand;
 import nadiendev.constructionwand.network.PacketQueryUndo;
 import nadiendev.constructionwand.network.PacketWandOption;
 import nadiendev.constructionwand.network.PacketRequestUndo;
+import nadiendev.constructionwand.network.PacketExchangeSelect;
 import nadiendev.constructionwand.items.containeritems.ItemVoidSack;
 import nadiendev.constructionwand.network.PacketToggleVoidSackActive;
 
@@ -37,6 +38,16 @@ public class KeybindHandler {
     public static final KeyMapping KEY_UNDO = new KeyMapping(
             getKey("wand_undo"),
             GLFW.GLFW_KEY_K,
+            CATEGORY
+    );
+
+    /**
+     * Selecciona el bloque apuntado como reemplazo del Exchange core.
+     * Numpad 7 por defecto (evita el conflicto de Shift+Click con el GUI de la vara).
+     */
+    public static final KeyMapping KEY_EXCHANGE_SELECT = new KeyMapping(
+            getKey("exchange_select"),
+            GLFW.GLFW_KEY_KP_7,
             CATEGORY
     );
 
@@ -72,6 +83,13 @@ public class KeybindHandler {
         while (KEY_UNDO.consumeClick()) {
             if (WandUtil.holdingWand(player) != null) {
                 ClientPacketDistributor.sendToServer(new PacketRequestUndo());
+            }
+        }
+
+        // Numpad 7 -> seleccionar bloque de reemplazo del Exchange core
+        while (KEY_EXCHANGE_SELECT.consumeClick()) {
+            if (WandUtil.holdingWand(player) != null) {
+                ClientPacketDistributor.sendToServer(new PacketExchangeSelect());
             }
         }
     }

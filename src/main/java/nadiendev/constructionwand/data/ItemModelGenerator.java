@@ -90,10 +90,21 @@ public class ItemModelGenerator extends ModelProvider {
                 )
         );
 
+        // Modelo con core "exchange": layer0 = textura del wand + layer1 = overlay_core
+        ItemModel.Unbaked exchangeModel = ItemModelUtils.plainModel(
+                generateLayeredItem(
+                        itemModels,
+                        location.withSuffix("_exchange"),
+                        wandTexture,
+                        overlayMaterial
+                )
+        );
+
         // Select por string
         List<SelectItemModel.SwitchCase<String>> cases = new ArrayList<>();
         cases.add(ItemModelUtils.when("angel", angelModel));
         cases.add(ItemModelUtils.when("destruction", destructionModel));
+        cases.add(ItemModelUtils.when("exchange", exchangeModel));
 
         itemModels.itemModelOutput.accept(
                 wand,

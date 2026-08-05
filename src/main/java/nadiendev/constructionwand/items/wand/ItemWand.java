@@ -21,6 +21,7 @@ import nadiendev.constructionwand.basics.option.IOption;
 import nadiendev.constructionwand.basics.option.WandOptions;
 import nadiendev.constructionwand.items.core.ItemCoreAngel;
 import nadiendev.constructionwand.items.core.ItemCoreDestruction;
+import nadiendev.constructionwand.items.core.ItemCoreExchange;
 import nadiendev.constructionwand.wand.WandJob;
 
 import javax.annotation.Nonnull;
@@ -129,6 +130,7 @@ public abstract class ItemWand extends Item
     private static ChatFormatting getCoreColor(IWandCore core) {
         if (core instanceof ItemCoreAngel)       return ChatFormatting.YELLOW;
         if (core instanceof ItemCoreDestruction) return ChatFormatting.RED;
+        if (core instanceof ItemCoreExchange)    return ChatFormatting.AQUA;
         return ChatFormatting.WHITE;
     }
 

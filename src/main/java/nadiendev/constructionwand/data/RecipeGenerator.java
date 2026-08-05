@@ -40,6 +40,9 @@ public class RecipeGenerator extends RecipeProvider
         wandRecipe(ModItems.WAND_IRON.get(),       Inp.fromTag(registries, Tags.Items.INGOTS_IRON));
         wandRecipeAlt1(ModItems.WAND_IRON.get(),   Inp.fromTag(registries, Tags.Items.INGOTS_IRON));
         wandRecipeAlt2(ModItems.WAND_IRON.get(),   Inp.fromTag(registries, Tags.Items.INGOTS_IRON));
+        wandRecipe(ModItems.WAND_GOLD.get(),       Inp.fromTag(registries, Tags.Items.INGOTS_GOLD));
+        wandRecipeAlt1(ModItems.WAND_GOLD.get(),   Inp.fromTag(registries, Tags.Items.INGOTS_GOLD));
+        wandRecipeAlt2(ModItems.WAND_GOLD.get(),   Inp.fromTag(registries, Tags.Items.INGOTS_GOLD));
         wandRecipe(ModItems.WAND_DIAMOND.get(),    Inp.fromTag(registries, Tags.Items.GEMS_DIAMOND));
         wandRecipeAlt1(ModItems.WAND_DIAMOND.get(), Inp.fromTag(registries, Tags.Items.GEMS_DIAMOND));
         wandRecipeAlt2(ModItems.WAND_DIAMOND.get(), Inp.fromTag(registries, Tags.Items.GEMS_DIAMOND));
@@ -56,6 +59,9 @@ public class RecipeGenerator extends RecipeProvider
         coreRecipe(ModItems.CORE_DESTRUCTION.get(),
                 Inp.fromTag(registries, Tags.Items.STORAGE_BLOCKS_DIAMOND),
                 Inp.fromItem(registries, Items.DIAMOND_PICKAXE));
+        coreRecipe(ModItems.CORE_EXCHANGE.get(),
+                Inp.fromItem(registries, Items.NETHER_STAR),
+                Inp.fromTag(registries, Tags.Items.STORAGE_BLOCKS_NETHERITE));
 
         voidSackRecipe();
 

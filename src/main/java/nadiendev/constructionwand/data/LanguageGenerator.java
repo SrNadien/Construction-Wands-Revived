@@ -22,11 +22,25 @@ public class LanguageGenerator extends LanguageProvider {
 
         addItem(ModItems.WAND_STONE, "Stone Wand");
         addItem(ModItems.WAND_IRON, "Iron Wand");
+        addItem(ModItems.WAND_GOLD, "Gold Wand");
         addItem(ModItems.WAND_DIAMOND, "Diamond Wand");
         addItem(ModItems.WAND_NETHERITE, "Netherite Wand");
         addItem(ModItems.WAND_INFINITY, "Infinity Wand");
         addItem(ModItems.CORE_ANGEL, "Angel Wand Core");
         addItem(ModItems.CORE_DESTRUCTION, "Destruction Wand Core");
+        addItem(ModItems.CORE_EXCHANGE, "Exchange Wand Core");
+        add("advancement.constructionwand.gold_wand.title", "Gold Wand");
+        add("advancement.constructionwand.gold_wand.desc", "Obtain a Gold Wand");
+        add("advancement.constructionwand.core_exchange.title", "Exchange Core");
+        add("advancement.constructionwand.core_exchange.desc", "Obtain an Exchange Wand Core");
+        add("constructionwand.option.cores.constructionwand:core_exchange", "§bExchange Core");
+        add("constructionwand.option.cores.constructionwand:core_exchange.desc", "Replaces blocks on the side facing you with the block in your offhand");
+        add("constructionwand.description.core_exchange", "The exchange core replaces blocks on the side facing you (or a row of blocks) with the block held in your offhand. Maximum number of blocks depends on wand tier. Restrictions work just like with the Construction core.");
+        add("constructionwand.message.exchange_selected", "Selected: %s");
+        add("constructionwand.message.exchange_invalid", "That block can't be selected");
+        add("constructionwand.message.exchange_none_selected", "No block selected — press Numpad 7 looking at a block");
+        add("constructionwand.message.exchange_no_target", "Look at a block first");
+        add("key.constructionwand.exchange_select", "Select Exchange Block");
 
  add("advancement.constructionwand.root.title", "Construction Wands Revived");
 add("advancement.constructionwand.root.desc", "Get your first wand");
@@ -146,11 +160,25 @@ add("advancement.constructionwand.void_sack.title", "Store items from the Destru
 
         addItem(ModItems.WAND_STONE, "Varita de Piedra");
         addItem(ModItems.WAND_IRON, "Varita de Hierro");
+        addItem(ModItems.WAND_GOLD, "Varita de Oro");
         addItem(ModItems.WAND_DIAMOND, "Varita de Diamante");
         addItem(ModItems.WAND_NETHERITE, "Varita de netherita");
         addItem(ModItems.WAND_INFINITY, "Varita del Infinito");
         addItem(ModItems.CORE_ANGEL, "Núcleo de Varita Angelical");
         addItem(ModItems.CORE_DESTRUCTION, "Núcleo de Varita de Destrucción");
+        addItem(ModItems.CORE_EXCHANGE, "Núcleo de Varita de Intercambio");
+        add("advancement.constructionwand.gold_wand.title", "Varita de Oro");
+        add("advancement.constructionwand.gold_wand.desc", "Obtené una Varita de Oro");
+        add("advancement.constructionwand.core_exchange.title", "Núcleo de Intercambio");
+        add("advancement.constructionwand.core_exchange.desc", "Obtené un Núcleo de Varita de Intercambio");
+        add("constructionwand.option.cores.constructionwand:core_exchange", "§bNúcleo de Intercambio");
+        add("constructionwand.option.cores.constructionwand:core_exchange.desc", "Reemplaza bloques en el lado que te mira por el bloque que tenés en la mano secundaria");
+        add("constructionwand.description.core_exchange", "El núcleo de intercambio reemplaza los bloques en el lado que estás mirando (o una fila de bloques) por el bloque que tenés en la mano secundaria. El número máximo de bloques depende del nivel de la varita. Las restricciones funcionan igual que con el núcleo de Construcción.");
+        add("constructionwand.message.exchange_selected", "Seleccionado: %s");
+        add("constructionwand.message.exchange_invalid", "Ese bloque no se puede seleccionar");
+        add("constructionwand.message.exchange_none_selected", "No hay bloque seleccionado — presioná Numpad 7 mirando un bloque");
+        add("constructionwand.message.exchange_no_target", "Primero mirá un bloque");
+        add("key.constructionwand.exchange_select", "Seleccionar bloque de Intercambio");
        
          add("advancement.constructionwand.root.title", "Varitas de Construcción Revividas");
 add("advancement.constructionwand.root.desc", "Obtené tu primera varita");
@@ -260,11 +288,25 @@ add("advancement.constructionwand.core_destruction.desc", "Obtené un Núcleo de
 
         addItem(ModItems.WAND_STONE, "Varita de piedra");
         addItem(ModItems.WAND_IRON, "Varita de hierro");
+        addItem(ModItems.WAND_GOLD, "Varita de Oro");
         addItem(ModItems.WAND_DIAMOND, "Varita de diamante");
         addItem(ModItems.WAND_NETHERITE, "Varita de netherita");
         addItem(ModItems.WAND_INFINITY, "Varita infinita");
         addItem(ModItems.CORE_ANGEL, "Núcleo de varita angelical");
         addItem(ModItems.CORE_DESTRUCTION, "Núcleo de varita de destrucción");
+        addItem(ModItems.CORE_EXCHANGE, "Núcleo de Varita de Intercambio");
+        add("advancement.constructionwand.gold_wand.title", "Varita de Oro");
+        add("advancement.constructionwand.gold_wand.desc", "Obtén una Varita de Oro");
+        add("advancement.constructionwand.core_exchange.title", "Núcleo de Intercambio");
+        add("advancement.constructionwand.core_exchange.desc", "Obtén un Núcleo de Varita de Intercambio");
+        add("constructionwand.option.cores.constructionwand:core_exchange", "§bNúcleo de Intercambio");
+        add("constructionwand.option.cores.constructionwand:core_exchange.desc", "Reemplaza bloques en el lado que te mira por el bloque que tenés en la mano secundaria");
+        add("constructionwand.description.core_exchange", "El núcleo de intercambio reemplaza los bloques en el lado que estás mirando (o una fila de bloques) por el bloque que tenés en la mano secundaria. El número máximo de bloques depende del nivel de la varita. Las restricciones funcionan igual que con el núcleo de Construcción.");
+        add("constructionwand.message.exchange_selected", "Seleccionado: %s");
+        add("constructionwand.message.exchange_invalid", "Ese bloque no se puede seleccionar");
+        add("constructionwand.message.exchange_none_selected", "No hay bloque seleccionado — presioná Numpad 7 mirando un bloque");
+        add("constructionwand.message.exchange_no_target", "Primero mirá un bloque");
+        add("key.constructionwand.exchange_select", "Seleccionar bloque de Intercambio");
 
         add("constructionwand.tooltip.blocks", "%d bloques máx.");
         add("constructionwand.tooltip.shift", "Presiona [MAYÚS]");
@@ -341,11 +383,25 @@ add("advancement.constructionwand.core_destruction.desc", "Obtené un Núcleo de
 
         addItem(ModItems.WAND_STONE, "Varita de piedra");
         addItem(ModItems.WAND_IRON, "Varita de hierro");
+        addItem(ModItems.WAND_GOLD, "Varita de Oro");
         addItem(ModItems.WAND_DIAMOND, "Varita de diamante");
         addItem(ModItems.WAND_NETHERITE, "Varita de netherita");
         addItem(ModItems.WAND_INFINITY, "Varita infinita");
         addItem(ModItems.CORE_ANGEL, "Núcleo de varita angelical");
         addItem(ModItems.CORE_DESTRUCTION, "Núcleo de varita de destrucción");
+        addItem(ModItems.CORE_EXCHANGE, "Núcleo de Varita de Intercambio");
+        add("advancement.constructionwand.gold_wand.title", "Varita de Oro");
+        add("advancement.constructionwand.gold_wand.desc", "Obtén una Varita de Oro");
+        add("advancement.constructionwand.core_exchange.title", "Núcleo de Intercambio");
+        add("advancement.constructionwand.core_exchange.desc", "Obtén un Núcleo de Varita de Intercambio");
+        add("constructionwand.option.cores.constructionwand:core_exchange", "§bNúcleo de Intercambio");
+        add("constructionwand.option.cores.constructionwand:core_exchange.desc", "Reemplaza bloques en el lado que te mira por el bloque que tenés en la mano secundaria");
+        add("constructionwand.description.core_exchange", "El núcleo de intercambio reemplaza los bloques en el lado que estás mirando (o una fila de bloques) por el bloque que tenés en la mano secundaria. El número máximo de bloques depende del nivel de la varita. Las restricciones funcionan igual que con el núcleo de Construcción.");
+        add("constructionwand.message.exchange_selected", "Seleccionado: %s");
+        add("constructionwand.message.exchange_invalid", "Ese bloque no se puede seleccionar");
+        add("constructionwand.message.exchange_none_selected", "No hay bloque seleccionado — presioná Numpad 7 mirando un bloque");
+        add("constructionwand.message.exchange_no_target", "Primero mirá un bloque");
+        add("key.constructionwand.exchange_select", "Seleccionar bloque de Intercambio");
 
         add("advancement.constructionwand.root.title", "Varitas de Construcción Revividas");
 add("advancement.constructionwand.root.desc", "Obtené tu primera varita");
@@ -439,11 +495,25 @@ add("advancement.constructionwand.core_destruction.desc", "Obtené un Núcleo de
 
         addItem(ModItems.WAND_STONE, "Varita de piedra");
         addItem(ModItems.WAND_IRON, "Varita de hierro");
+        addItem(ModItems.WAND_GOLD, "Varita de Oro");
         addItem(ModItems.WAND_DIAMOND, "Varita de diamante");
         addItem(ModItems.WAND_NETHERITE, "Varita de netherita");
         addItem(ModItems.WAND_INFINITY, "Varita infinita");
         addItem(ModItems.CORE_ANGEL, "Núcleo de varita angelical");
         addItem(ModItems.CORE_DESTRUCTION, "Núcleo de varita de destrucción");
+        addItem(ModItems.CORE_EXCHANGE, "Núcleo de Varita de Intercambio");
+        add("advancement.constructionwand.gold_wand.title", "Varita de Oro");
+        add("advancement.constructionwand.gold_wand.desc", "Obtén una Varita de Oro");
+        add("advancement.constructionwand.core_exchange.title", "Núcleo de Intercambio");
+        add("advancement.constructionwand.core_exchange.desc", "Obtén un Núcleo de Varita de Intercambio");
+        add("constructionwand.option.cores.constructionwand:core_exchange", "§bNúcleo de Intercambio");
+        add("constructionwand.option.cores.constructionwand:core_exchange.desc", "Reemplaza bloques en el lado que te mira por el bloque que tenés en la mano secundaria");
+        add("constructionwand.description.core_exchange", "El núcleo de intercambio reemplaza los bloques en el lado que estás mirando (o una fila de bloques) por el bloque que tenés en la mano secundaria. El número máximo de bloques depende del nivel de la varita. Las restricciones funcionan igual que con el núcleo de Construcción.");
+        add("constructionwand.message.exchange_selected", "Seleccionado: %s");
+        add("constructionwand.message.exchange_invalid", "Ese bloque no se puede seleccionar");
+        add("constructionwand.message.exchange_none_selected", "No hay bloque seleccionado — presioná Numpad 7 mirando un bloque");
+        add("constructionwand.message.exchange_no_target", "Primero mirá un bloque");
+        add("key.constructionwand.exchange_select", "Seleccionar bloque de Intercambio");
 
          add("advancement.constructionwand.root.title", "Varitas de Construcción Revividas");
 add("advancement.constructionwand.root.desc", "Obtené tu primera varita");
@@ -552,11 +622,25 @@ add("advancement.constructionwand.core_destruction.desc", "Obtené un Núcleo de
 
         addItem(ModItems.WAND_STONE, "Varita de piedra");
         addItem(ModItems.WAND_IRON, "Varita de hierro");
+        addItem(ModItems.WAND_GOLD, "Varita de Oro");
         addItem(ModItems.WAND_DIAMOND, "Varita de diamante");
         addItem(ModItems.WAND_NETHERITE, "Varita de netherita");
         addItem(ModItems.WAND_INFINITY, "Varita infinita");
         addItem(ModItems.CORE_ANGEL, "Núcleo de varita angelical");
         addItem(ModItems.CORE_DESTRUCTION, "Núcleo de varita de destrucción");
+        addItem(ModItems.CORE_EXCHANGE, "Núcleo de Varita de Intercambio");
+        add("advancement.constructionwand.gold_wand.title", "Varita de Oro");
+        add("advancement.constructionwand.gold_wand.desc", "Obtén una Varita de Oro");
+        add("advancement.constructionwand.core_exchange.title", "Núcleo de Intercambio");
+        add("advancement.constructionwand.core_exchange.desc", "Obtén un Núcleo de Varita de Intercambio");
+        add("constructionwand.option.cores.constructionwand:core_exchange", "§bNúcleo de Intercambio");
+        add("constructionwand.option.cores.constructionwand:core_exchange.desc", "Reemplaza bloques en el lado que te mira por el bloque que tenés en la mano secundaria");
+        add("constructionwand.description.core_exchange", "El núcleo de intercambio reemplaza los bloques en el lado que estás mirando (o una fila de bloques) por el bloque que tenés en la mano secundaria. El número máximo de bloques depende del nivel de la varita. Las restricciones funcionan igual que con el núcleo de Construcción.");
+        add("constructionwand.message.exchange_selected", "Seleccionado: %s");
+        add("constructionwand.message.exchange_invalid", "Ese bloque no se puede seleccionar");
+        add("constructionwand.message.exchange_none_selected", "No hay bloque seleccionado — presioná Numpad 7 mirando un bloque");
+        add("constructionwand.message.exchange_no_target", "Primero mirá un bloque");
+        add("key.constructionwand.exchange_select", "Seleccionar bloque de Intercambio");
 
          add("advancement.constructionwand.root.title", "Varitas de Construcción Revividas");
 add("advancement.constructionwand.root.desc", "Obtené tu primera varita");
@@ -665,11 +749,25 @@ add("advancement.constructionwand.core_destruction.desc", "Obtené un Núcleo de
 
         addItem(ModItems.WAND_STONE, "石の杖");
         addItem(ModItems.WAND_IRON, "鉄の杖");
+        addItem(ModItems.WAND_GOLD, "金の杖");
         addItem(ModItems.WAND_DIAMOND, "ダイヤモンドの杖");
         addItem(ModItems.WAND_NETHERITE, "ネザライトの杖");
         addItem(ModItems.WAND_INFINITY, "無限の杖");
         addItem(ModItems.CORE_ANGEL, "天使の杖のコア");
         addItem(ModItems.CORE_DESTRUCTION, "破壊の杖のコア");
+        addItem(ModItems.CORE_EXCHANGE, "交換の杖のコア");
+        add("advancement.constructionwand.gold_wand.title", "金の杖");
+        add("advancement.constructionwand.gold_wand.desc", "金の杖を入手する");
+        add("advancement.constructionwand.core_exchange.title", "交換のコア");
+        add("advancement.constructionwand.core_exchange.desc", "交換の杖のコアを入手する");
+        add("constructionwand.option.cores.constructionwand:core_exchange", "§b交換のコア");
+        add("constructionwand.option.cores.constructionwand:core_exchange.desc", "正面方向のブロックをオフハンドのブロックに置き換えます。");
+        add("constructionwand.description.core_exchange", "交換のコアは、正面方向のブロック（またはブロックの列）を、オフハンドに持っているブロックと入れ替えます。置き換えられる最大ブロック数は杖の段階に依存します。制限の効果は建築のコアと同様です。");
+        add("constructionwand.message.exchange_selected", "選択済み: %s");
+        add("constructionwand.message.exchange_invalid", "そのブロックは選択できません");
+        add("constructionwand.message.exchange_none_selected", "ブロックが選択されていません — ブロックを見ながらテンキー7を押してください");
+        add("constructionwand.message.exchange_no_target", "まずブロックを見てください");
+        add("key.constructionwand.exchange_select", "交換ブロックを選択");
 
         add("advancement.constructionwand.root.title", "建築の杖リバイバル");
 add("advancement.constructionwand.root.desc", "最初の杖を手に入れよう");
@@ -779,11 +877,25 @@ add("key.constructionwand.wand_undo", "ワンドを元に戻す");
 
         addItem(ModItems.WAND_STONE, "돌 완드");
         addItem(ModItems.WAND_IRON, "철 완드");
+        addItem(ModItems.WAND_GOLD, "황금 지팡이");
         addItem(ModItems.WAND_DIAMOND, "다이아몬드 완드");
         addItem(ModItems.WAND_NETHERITE, "네더라이트 지팡이");
         addItem(ModItems.WAND_INFINITY, "무한의 완드");
         addItem(ModItems.CORE_ANGEL, "천사 완드 코어");
         addItem(ModItems.CORE_DESTRUCTION, "파괴 완드 코어");
+        addItem(ModItems.CORE_EXCHANGE, "교환 완드 코어");
+        add("advancement.constructionwand.gold_wand.title", "황금 지팡이");
+        add("advancement.constructionwand.gold_wand.desc", "황금 지팡이 획득하기");
+        add("advancement.constructionwand.core_exchange.title", "교환 코어");
+        add("advancement.constructionwand.core_exchange.desc", "교환 지팡이 코어 획득하기");
+        add("constructionwand.option.cores.constructionwand:core_exchange", "§b교환 코어");
+        add("constructionwand.option.cores.constructionwand:core_exchange.desc", "당신 쪽의 블록을 보조 손의 블록으로 교체합니다.");
+        add("constructionwand.description.core_exchange", "교환 코어는 당신이 마주보고 있는 블록(또는 블록 행)을 보조 손에 들고 있는 블록으로 교체합니다. 최대 블록 수는 완드의 티어에 따라 다릅니다. 제한 옵션은 건축 코어와 동일하게 작동합니다.");
+        add("constructionwand.message.exchange_selected", "선택됨: %s");
+        add("constructionwand.message.exchange_invalid", "그 블록은 선택할 수 없습니다");
+        add("constructionwand.message.exchange_none_selected", "선택된 블록이 없습니다 — 블록을 보면서 넘버패드 7을 누르세요");
+        add("constructionwand.message.exchange_no_target", "먼저 블록을 보세요");
+        add("key.constructionwand.exchange_select", "교환 블록 선택");
 
         add("advancement.constructionwand.root.title", "건설 지팡이 부활");
 add("advancement.constructionwand.root.desc", "첫 번째 지팡이를 획득하세요");
@@ -893,11 +1005,25 @@ add("key.constructionwand.wand_undo", "지팡이 실행 취소");
 
         addItem(ModItems.WAND_STONE, "Varinha de pedra");
         addItem(ModItems.WAND_IRON, "Varinha de ferro");
+        addItem(ModItems.WAND_GOLD, "Varinha de Ouro");
         addItem(ModItems.WAND_DIAMOND, "Varinha de Diamante");
         addItem(ModItems.WAND_NETHERITE, "Varinha de Netjerita");
         addItem(ModItems.WAND_INFINITY, "Varinha infinita");
         addItem(ModItems.CORE_ANGEL, "Núcleo de Varita Angelical");
         addItem(ModItems.CORE_DESTRUCTION, "Núcleo de Varita de Destruição");
+        addItem(ModItems.CORE_EXCHANGE, "Núcleo de Varita de Troca");
+        add("advancement.constructionwand.gold_wand.title", "Varinha de Ouro");
+        add("advancement.constructionwand.gold_wand.desc", "Obtenha uma Varinha de Ouro");
+        add("advancement.constructionwand.core_exchange.title", "Núcleo de Troca");
+        add("advancement.constructionwand.core_exchange.desc", "Obtenha um Núcleo de Troca");
+        add("constructionwand.option.cores.constructionwand:core_exchange", "§bNúcleo de Troca");
+        add("constructionwand.option.cores.constructionwand:core_exchange.desc", "Substitui os blocos do lado de frente para você pelo bloco na sua mão secundária");
+        add("constructionwand.description.core_exchange", "O núcleo de troca substitui os blocos do lado de frente para você (ou uma fileira de blocos) pelo bloco que você está segurando na mão secundária. O número máximo de blocos depende da camada de varinha. As restrições funcionam da mesma forma que com o núcleo de construção.");
+        add("constructionwand.message.exchange_selected", "Selecionado: %s");
+        add("constructionwand.message.exchange_invalid", "Esse bloco não pode ser selecionado");
+        add("constructionwand.message.exchange_none_selected", "Nenhum bloco selecionado — pressione Numpad 7 olhando para um bloco");
+        add("constructionwand.message.exchange_no_target", "Olhe para um bloco primeiro");
+        add("key.constructionwand.exchange_select", "Selecionar Bloco de Troca");
 
         add("constructionwand.tooltip.blocks", "Max. %d blocos");
         add("constructionwand.tooltip.shift", "Pressione Shift]");
@@ -991,11 +1117,25 @@ add("key.constructionwand.wand_undo", "Desfazer varinha");
 
         addItem(ModItems.WAND_STONE, "Каменный жезл");
         addItem(ModItems.WAND_IRON, "Железный жезл");
+        addItem(ModItems.WAND_GOLD, "Золотая палочка");
         addItem(ModItems.WAND_DIAMOND, "Алмазный жезл");
         addItem(ModItems.WAND_NETHERITE, "Незеритовый жезл");
         addItem(ModItems.WAND_INFINITY, "Бесконечный жезл");
         addItem(ModItems.CORE_ANGEL, "Ангельское ядро для жезла");
         addItem(ModItems.CORE_DESTRUCTION, "Ядро разрушения для жезла");
+        addItem(ModItems.CORE_EXCHANGE, "Обменное ядро для жезла");
+        add("advancement.constructionwand.gold_wand.title", "Золотая палочка");
+        add("advancement.constructionwand.gold_wand.desc", "Получите золотую палочку");
+        add("advancement.constructionwand.core_exchange.title", "Ядро обмена");
+        add("advancement.constructionwand.core_exchange.desc", "Получите ядро обмена палочки");
+        add("constructionwand.option.cores.constructionwand:core_exchange", "§bОбменное ядро");
+        add("constructionwand.option.cores.constructionwand:core_exchange.desc", "Заменяет блоки на стороне, обращённой к Вам, на блок из левой руки.");
+        add("constructionwand.description.core_exchange", "Обменное ядро заменяет блоки на стороне, обращённой к Вам (или ряд блоков), на блок, который Вы держите в левой руке. Максимальное количество блоков зависит от уровня жезла. Ограничения работают так же, как и с ядром строительства.");
+        add("constructionwand.message.exchange_selected", "Выбрано: %s");
+        add("constructionwand.message.exchange_invalid", "Этот блок нельзя выбрать");
+        add("constructionwand.message.exchange_none_selected", "Блок не выбран — нажмите Numpad 7, глядя на блок");
+        add("constructionwand.message.exchange_no_target", "Сначала посмотрите на блок");
+        add("key.constructionwand.exchange_select", "Выбрать блок для обмена");
 
           add("advancement.constructionwand.root.title", "Строительные Жезлы Возрождены");
 add("advancement.constructionwand.root.desc", "Получите свой первый жезл");
@@ -1106,11 +1246,25 @@ add("key.constructionwand.wand_undo", "Отменить действие жез�
 
         addItem(ModItems.WAND_STONE, "Stenstav");
         addItem(ModItems.WAND_IRON, "Järnstav");
+        addItem(ModItems.WAND_GOLD, "Guldstav");
         addItem(ModItems.WAND_DIAMOND, "Diamantstav");
         addItem(ModItems.WAND_NETHERITE, "Netheritstav");
         addItem(ModItems.WAND_INFINITY, "Oändlighetsstav");
         addItem(ModItems.CORE_ANGEL, "Änglastavskärna");
         addItem(ModItems.CORE_DESTRUCTION, "Rivningsstavskärna");
+        addItem(ModItems.CORE_EXCHANGE, "Utbytesstavskärna");
+        add("advancement.constructionwand.gold_wand.title", "Guldstav");
+        add("advancement.constructionwand.gold_wand.desc", "Skaffa en Guldstav");
+        add("advancement.constructionwand.core_exchange.title", "Utbyteskärna");
+        add("advancement.constructionwand.core_exchange.desc", "Skaffa en Utbyteskärna");
+        add("constructionwand.option.cores.constructionwand:core_exchange", "§bUtbyteskärna");
+        add("constructionwand.option.cores.constructionwand:core_exchange.desc", "Ersätter block på sidan som är riktad mot dig med blocket i din sekundära hand");
+        add("constructionwand.description.core_exchange", "Utbyteskärnan ersätter block på sidan som är riktad mot dig (eller en rad block) med blocket du håller i din sekundära hand. Det maximala antalet block beror på stavens nivå. Begränsningar fungerar precis som med byggkärnan.");
+        add("constructionwand.message.exchange_selected", "Vald: %s");
+        add("constructionwand.message.exchange_invalid", "Det blocket kan inte väljas");
+        add("constructionwand.message.exchange_none_selected", "Inget block valt — tryck Numpad 7 medan du tittar på ett block");
+        add("constructionwand.message.exchange_no_target", "Titta på ett block först");
+        add("key.constructionwand.exchange_select", "Välj utbytesblock");
 
            add("advancement.constructionwand.root.title", "Byggstavar Återupplivade");
 add("advancement.constructionwand.root.desc", "Skaffa din första stav");
@@ -1221,11 +1375,25 @@ add("key.constructionwand.wand_undo", "Ångra trollstav");
 
         addItem(ModItems.WAND_STONE, "Taş Asa");
         addItem(ModItems.WAND_IRON, "Demir Asa");
+        addItem(ModItems.WAND_GOLD, "Altın Asa");
         addItem(ModItems.WAND_DIAMOND, "Elmas Asa");
         addItem(ModItems.WAND_NETHERITE, "Netherite Asa");
         addItem(ModItems.WAND_INFINITY, "Sonsuzluk Asası");
         addItem(ModItems.CORE_ANGEL, "Melek Asa Çekirdeği");
         addItem(ModItems.CORE_DESTRUCTION, "Yıkım Asa Çekirdeği");
+        addItem(ModItems.CORE_EXCHANGE, "Değişim Asa Çekirdeği");
+        add("advancement.constructionwand.gold_wand.title", "Altın Asa");
+        add("advancement.constructionwand.gold_wand.desc", "Bir Altın Asa edin");
+        add("advancement.constructionwand.core_exchange.title", "Değişim Çekirdeği");
+        add("advancement.constructionwand.core_exchange.desc", "Bir Değişim Asa Çekirdeği edin");
+        add("constructionwand.option.cores.constructionwand:core_exchange", "§bDeğişim Çekirdeği");
+        add("constructionwand.option.cores.constructionwand:core_exchange.desc", "Size bakan taraftaki blokları, boştaki elinizdeki blokla değiştirir");
+        add("constructionwand.description.core_exchange", "Değişim çekirdeği, karşı karşıya olduğunuz bloğu (veya blok sırasını) boştaki elinizde tuttuğunuz blokla değiştirir. Maksimum blok sayısı asa seviyesine bağlıdır. Kısıtlamalar inşa çekirdeğiyle aynı şekilde çalışır.");
+        add("constructionwand.message.exchange_selected", "Seçildi: %s");
+        add("constructionwand.message.exchange_invalid", "O blok seçilemez");
+        add("constructionwand.message.exchange_none_selected", "Seçili blok yok — bir bloğa bakarken Numpad 7'ye basın");
+        add("constructionwand.message.exchange_no_target", "Önce bir bloğa bakın");
+        add("key.constructionwand.exchange_select", "Değişim Bloğu Seç");
   
 add("advancement.constructionwand.root.title", "Yeniden Canlandırılmış İnşaat Asaları");
 add("advancement.constructionwand.root.desc", "İlk asanı edin");
@@ -1335,11 +1503,25 @@ add("key.constructionwand.wand_undo", "Değneği geri al");
 
         addItem(ModItems.WAND_STONE, "石制手杖");
         addItem(ModItems.WAND_IRON, "铁制手杖");
+        addItem(ModItems.WAND_GOLD, "金杖");
         addItem(ModItems.WAND_DIAMOND, "钻石手杖");
         addItem(ModItems.WAND_NETHERITE, "下界合金建筑杖");
         addItem(ModItems.WAND_INFINITY, "无尽手杖");
         addItem(ModItems.CORE_ANGEL, "天使手杖核心");
         addItem(ModItems.CORE_DESTRUCTION, "破坏手杖核心");
+        addItem(ModItems.CORE_EXCHANGE, "交换手杖核心");
+        add("advancement.constructionwand.gold_wand.title", "金杖");
+        add("advancement.constructionwand.gold_wand.desc", "获得一根金杖");
+        add("advancement.constructionwand.core_exchange.title", "置换核心");
+        add("advancement.constructionwand.core_exchange.desc", "获得一个置换法杖核心");
+        add("constructionwand.option.cores.constructionwand:core_exchange", "§b交换核心");
+        add("constructionwand.option.cores.constructionwand:core_exchange.desc", "将面向你一侧的方块替换为副手中的方块");
+        add("constructionwand.description.core_exchange", "交换核心会将你所面对的方块（或一排方块）替换为你副手中持有的方块。最大替换方块数取决于手杖材质。限制选项的效果与建筑核心相同。");
+        add("constructionwand.message.exchange_selected", "已选择：%s");
+        add("constructionwand.message.exchange_invalid", "该方块无法被选择");
+        add("constructionwand.message.exchange_none_selected", "未选择方块 — 看着一个方块并按小键盘7");
+        add("constructionwand.message.exchange_no_target", "请先看向一个方块");
+        add("key.constructionwand.exchange_select", "选择交换方块");
 
 add("advancement.constructionwand.root.title", "建筑手杖复兴版");
 add("advancement.constructionwand.root.desc", "获得你的第一根手杖");
@@ -1450,11 +1632,25 @@ add("key.constructionwand.wand_undo", "撤销法杖操作");
 
         addItem(ModItems.WAND_STONE, "Steinerner Stab");
         addItem(ModItems.WAND_IRON, "Eiserner Stab");
+        addItem(ModItems.WAND_GOLD, "Goldstab");
         addItem(ModItems.WAND_DIAMOND, "Diamantener Stab");
         addItem(ModItems.WAND_NETHERITE, "Netherit Stab");
         addItem(ModItems.WAND_INFINITY, "Stab der Unendlichkeit");
         addItem(ModItems.CORE_ANGEL, "Kristall der Engel");
         addItem(ModItems.CORE_DESTRUCTION, "Kristall der Zerstörung");
+        addItem(ModItems.CORE_EXCHANGE, "Kristall des Austauschs");
+        add("advancement.constructionwand.gold_wand.title", "Goldstab");
+        add("advancement.constructionwand.gold_wand.desc", "Erhalte einen Goldstab");
+        add("advancement.constructionwand.core_exchange.title", "Austauschkern");
+        add("advancement.constructionwand.core_exchange.desc", "Erhalte einen Austausch-Stabkern");
+        add("constructionwand.option.cores.constructionwand:core_exchange", "§bKristall des Austauschs");
+        add("constructionwand.option.cores.constructionwand:core_exchange.desc", "Ersetzt Blöcke auf der dir zugewandten Seite durch den Block in deiner linken Hand");
+        add("constructionwand.description.core_exchange", "Der Kristall des Austauschs ersetzt Blöcke auf der dir zugewandten Seite (oder eine Reihe von Blöcken) durch den Block, den du in deiner linken Hand hältst. Die maximale Anzahl Blöcke hängt vom Material des Stabes ab. Beschränkungen funktionieren genauso wie beim Kristall der Konstruktion.");
+        add("constructionwand.message.exchange_selected", "Ausgewählt: %s");
+        add("constructionwand.message.exchange_invalid", "Dieser Block kann nicht ausgewählt werden");
+        add("constructionwand.message.exchange_none_selected", "Kein Block ausgewählt — drücke Numpad 7, während du einen Block anschaust");
+        add("constructionwand.message.exchange_no_target", "Schau zuerst auf einen Block");
+        add("key.constructionwand.exchange_select", "Austauschblock auswählen");
 
 add("advancement.constructionwand.root.title", "Baustäbe Wiederbelebt");
 add("advancement.constructionwand.root.desc", "Erhalte deinen ersten Stab");
