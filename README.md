@@ -6,7 +6,7 @@ block you are facing, conjure blocks in mid air or destroy lots of blocks very f
 
 ![](https://raw.githubusercontent.com/SrNadien/Construction-Wands-Revived/Neo/1.21.1/images/wands.png)
 
-**Note:** These are the instructions for Construction Wands version 2.0+
+**Note:** These are the instructions for Construction Wands version 4.0+
 ## Wands
 
 There are basic wands made from stone, iron, gold, diamond, netherite and the Infinity wand. Wands from higher tiers are more powerful
