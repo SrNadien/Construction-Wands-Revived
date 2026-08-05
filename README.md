@@ -6,8 +6,7 @@ block you are facing, conjure blocks in mid air or destroy lots of blocks very f
 
 ![](https://raw.githubusercontent.com/SrNadien/Construction-Wands-Revived/Neo/1.21.1/images/wands.png)
 
-**Note:** These are the instructions for Construction Wands version 2.0+, which introduced some new features.
-If you are still using version 1.x, use [the old guide](https://github.com/SrNadien/ConstructionWand/tree/1.16.2-1.7) instead.
+**Note:** These are the instructions for Construction Wands version 4.0+
 
 ## Wands
 
