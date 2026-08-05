@@ -11,7 +11,7 @@ If you are still using version 1.x, use [the old guide](https://github.com/Theta
 
 ## Wands
 
-There are basic wands made from stone, iron, goldm diamond and the Infinity wand. Wands from higher tiers are more powerful
+There are basic wands made from stone, iron, gold, diamond and the Infinity wand. Wands from higher tiers are more powerful
 and last longer. These properties can be changed in the config.
 
 | Wand     | Durability  | Max. Blocks | Upgradeable | Angel distance | Max. Blocks (Destroy) |
