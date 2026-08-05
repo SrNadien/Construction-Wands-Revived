@@ -4,7 +4,7 @@ With a Construction Wand you can place multiple blocks (up to 1024) at once, ext
 facing. If that's not enough: you can upgrade your wand with additional cores, allowing you to place a block behind the
 block you are facing, conjure blocks in mid air or destroy lots of blocks very fast.
 
-![](https://raw.githubusercontent.com/SrNadien/Construction-Wands-Revived/1.21.1/images/wands.png)
+![](https://raw.githubusercontent.com/SrNadien/Construction-Wands-Revived/Neo/1.21.1/images/wands.png)
 
 **Note:** These are the instructions for Construction Wands version 2.0+, which introduced some new features.
 If you are still using version 1.x, use [the old guide](https://github.com/Theta-Dev/ConstructionWand/tree/1.16.2-1.7) instead.
@@ -23,12 +23,12 @@ and last longer. These properties can be changed in the config.
 | Infinity | Unbreakable | 1024        | Yes         | 8              | 81                    |
 
 ## Crafting
-![](https://raw.githubusercontent.com/SrNadien/Construction-Wands-Revived/1.21.1/images/crafting1.png)
-![](https://raw.githubusercontent.com/Theta-Dev/ConstructionWand/1.21.1/images/crafting2.png)
-![](https://raw.githubusercontent.com/Theta-Dev/ConstructionWand/1.21.1/images/crafting3.png)
-![](https://raw.githubusercontent.com/Theta-Dev/ConstructionWand/1.21.1/images/crafting4.png)
-![](https://raw.githubusercontent.com/Theta-Dev/ConstructionWand/1.21.1/images/crafting5.png)
-![](https://raw.githubusercontent.com/Theta-Dev/ConstructionWand/1.21.1/images/crafting6.png)
+![](https://raw.githubusercontent.com/SrNadien/Construction-Wands-Revived/Neo/1.21.1/images/crafting1.png)
+![](https://raw.githubusercontent.com/Theta-Dev/ConstructionWand/Neo/1.21.1/images/crafting2.png)
+![](https://raw.githubusercontent.com/Theta-Dev/ConstructionWand/Neo/1.21.1/images/crafting3.png)
+![](https://raw.githubusercontent.com/Theta-Dev/ConstructionWand/Neo/1.21.1/images/crafting4.png)
+![](https://raw.githubusercontent.com/Theta-Dev/ConstructionWand/Neo/1.21.1/images/crafting5.png)
+![](https://raw.githubusercontent.com/Theta-Dev/ConstructionWand/Neo/1.21.1/images/crafting6.png)
 
 ## Keybindings
 
@@ -68,7 +68,7 @@ and you can use the undo feature if you've made a mistake.
 ## Options
 SNEAK+OPTKEY+Right clicking empty space opens the option screen of your wand.
 
-![](https://raw.githubusercontent.com/SrNadien/Construction-Wands-Revived/1.21.1/images/options.png)
+![](https://raw.githubusercontent.com/SrNadien/Construction-Wands-Revived/Neo/1.21.1/images/options.png)
 
 **Restriction:** If restriction is enabled, the wand will only place blocks in one row or column
 (choose between North/South, East/West on a horizontal plane, and on a vertical plane Horizontal and Vertical).
@@ -78,7 +78,7 @@ has no effect if the angel core is enabled.
 **Direction:** If set to "Player" the wand places blocks in the same direction as if they were placed by yourself.
 Target mode places the blocks in the same direction as their supporting block. See the picture below:
 
-![](https://raw.githubusercontent.com/SrNadien/Construction-Wands-Revived/1.21.1/images/placedir.png)
+![](https://raw.githubusercontent.com/SrNadien/Construction-Wands-Revived/Neo/1.21.1/images/placedir.png)
 
 **Replacement:** Enables/disables the replacement of replaceable blocks (Fluids, snow, tallgrass).
 
