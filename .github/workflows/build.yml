@@ -4,7 +4,8 @@ on:
   push:
     branches:
       - "Neo/1.21.1"
-
+    paths:
+      - "src/**/*.java"
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -49,7 +50,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           tag_name: v${{ steps.gradle_props.outputs.release_version }}
-          name: ConstructionWnadsRevived ${{ steps.gradle_props.outputs.release_version }}
+          name: ConstructionWandsRevived ${{ steps.gradle_props.outputs.release_version }}
           generate_release_notes: true
           files: |
             build/libs/*.jar
