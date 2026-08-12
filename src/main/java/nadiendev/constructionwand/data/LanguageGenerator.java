@@ -283,6 +283,40 @@ add("advancement.constructionwand.core_destruction.desc", "Obtené un Núcleo de
         }
         @Override
         protected void addTranslations() {
+        add("advancement.constructionwand.root.title", "Varitas de Construcción Revividas");
+        add("advancement.constructionwand.root.desc", "Consigue tu primera varita");
+        add("advancement.constructionwand.stone_wand.title", "Varita de Piedra");
+        add("advancement.constructionwand.stone_wand.desc", "Obtén una Varita de Piedra");
+        add("advancement.constructionwand.iron_wand.title", "Varita de Hierro");
+        add("advancement.constructionwand.iron_wand.desc", "Obtén una Varita de Hierro");
+        add("advancement.constructionwand.diamond_wand.title", "Varita de Diamante");
+        add("advancement.constructionwand.diamond_wand.desc", "Obtén una Varita de Diamante");
+        add("advancement.constructionwand.netherite_wand.title", "Varita de Netherita");
+        add("advancement.constructionwand.netherite_wand.desc", "Obtén una Varita de Netherita");
+        add("advancement.constructionwand.infinity_wand.title", "Varita del Infinito");
+        add("advancement.constructionwand.infinity_wand.desc", "Obtén la Varita del Infinito");
+        add("advancement.constructionwand.core_angel.title", "Núcleo Angelical");
+        add("advancement.constructionwand.core_angel.desc", "Obtén un Núcleo de Varita Angelical");
+        add("advancement.constructionwand.core_destruction.title", "Núcleo de Destrucción");
+        add("advancement.constructionwand.core_destruction.desc", "Obtén un Núcleo de Varita de Destrucción");
+
+        add("item.constructionwand.void_sack", "Bolsa del Vacío");
+        add("item.constructionwand.void_sack.active", "§aActiva §7(presiona §6%1$s§7 para cambiar)");
+        add("item.constructionwand.void_sack.inactive", "§7Inactiva §7(presiona §6%1$s§7 para cambiar)");
+        add("item.constructionwand.void_sack.linked", "Vinculada a: %d, %d, %d");
+        add("item.constructionwand.void_sack.no_link", "Sin contenedor vinculado");
+        add("item.constructionwand.void_sack.sending", "Enviando al contenedor");
+        add("item.constructionwand.void_sack.storing", "Guardando internamente");
+        add("item.constructionwand.void_sack.slots_used", "Espacios usados: %d / %d");
+        add("item.constructionwand.void_sack.linked_msg", "Bolsa vinculada a %d, %d, %d");
+        add("item.constructionwand.void_sack.activated", "Bolsa del Vacío activada");
+        add("item.constructionwand.void_sack.deactivated", "Bolsa del Vacío desactivada");
+        add("gui.constructionwand.void_sack.toggle_tooltip", "Cambiar: enviar al contenedor / guardar internamente");
+        add("gui.constructionwand.void_sack.sending", "Enviando →");
+        add("gui.constructionwand.void_sack.storing", "Guardando");
+        add("key.constructionwand.void_sack_toggle", "Alternar Bolsa del Vacío");
+        add("constructionwand.description.void_sack", "La Bolsa del Vacío intercepta los ítems que recoges y los guarda en su inventario interno de 4×4.\n\n§5§nACTIVACIÓN§0§r\nPresiona %1$s para activar o desactivar la bolsa. Mientras está inactiva, los ítems van a tu inventario normal.\n\n§5§nVINCULAR UN CONTENEDOR§0§r\nHaz clic derecho sobre cualquier contenedor (cofre, barril, shulker...) con la bolsa en la mano para vincularlo. Una vez vinculada, los ítems van primero a ese contenedor mientras la bolsa está activa. Si el contenedor está lleno, el exceso va al almacenamiento interno de la bolsa.\n\n§5§nMODO§0§r\nPresiona %1$s para alternar entre §aEnviando§0 (ítems → contenedor) y §eGuardando§0 (ítems → espacios internos). También puedes usar el botón de cambio dentro de la GUI de la bolsa.");
+
         add("itemGroup.constructionwand", "Varitas de Construcción Revividas");
         add("itemGroup.constructionwand.construction_wand_tab", "Varitas de Construcción Revividas");
 
@@ -378,6 +412,23 @@ add("advancement.constructionwand.core_destruction.desc", "Obtené un Núcleo de
         }
         @Override
         protected void addTranslations() {
+        add("item.constructionwand.void_sack", "Bolsa del Vacío");
+        add("item.constructionwand.void_sack.active", "§aActiva §7(presiona §6%1$s§7 para cambiar)");
+        add("item.constructionwand.void_sack.inactive", "§7Inactiva §7(presiona §6%1$s§7 para cambiar)");
+        add("item.constructionwand.void_sack.linked", "Vinculada a: %d, %d, %d");
+        add("item.constructionwand.void_sack.no_link", "Sin contenedor vinculado");
+        add("item.constructionwand.void_sack.sending", "Enviando al contenedor");
+        add("item.constructionwand.void_sack.storing", "Guardando internamente");
+        add("item.constructionwand.void_sack.slots_used", "Espacios usados: %d / %d");
+        add("item.constructionwand.void_sack.linked_msg", "Bolsa vinculada a %d, %d, %d");
+        add("item.constructionwand.void_sack.activated", "Bolsa del Vacío activada");
+        add("item.constructionwand.void_sack.deactivated", "Bolsa del Vacío desactivada");
+        add("gui.constructionwand.void_sack.toggle_tooltip", "Cambiar: enviar al contenedor / guardar internamente");
+        add("gui.constructionwand.void_sack.sending", "Enviando →");
+        add("gui.constructionwand.void_sack.storing", "Guardando");
+        add("key.constructionwand.void_sack_toggle", "Alternar Bolsa del Vacío");
+        add("constructionwand.description.void_sack", "La Bolsa del Vacío intercepta los ítems que recoges y los guarda en su inventario interno de 4×4.\n\n§5§nACTIVACIÓN§0§r\nPresiona %1$s para activar o desactivar la bolsa. Mientras está inactiva, los ítems van a tu inventario normal.\n\n§5§nVINCULAR UN CONTENEDOR§0§r\nHaz clic derecho sobre cualquier contenedor (cofre, barril, shulker...) con la bolsa en la mano para vincularlo. Una vez vinculada, los ítems van primero a ese contenedor mientras la bolsa está activa. Si el contenedor está lleno, el exceso va al almacenamiento interno de la bolsa.\n\n§5§nMODO§0§r\nPresiona %1$s para alternar entre §aEnviando§0 (ítems → contenedor) y §eGuardando§0 (ítems → espacios internos). También puedes usar el botón de cambio dentro de la GUI de la bolsa.");
+
         add("itemGroup.constructionwand", "Varitas de Construcción Revividas");
         add("itemGroup.constructionwand.construction_wand_tab", "Varitas de Construcción Revividas");
 
@@ -490,6 +541,8 @@ add("advancement.constructionwand.core_destruction.desc", "Obtené un Núcleo de
         }
         @Override
         protected void addTranslations() {
+        add("constructionwand.description.void_sack", "La Bolsa del Vacío intercepta los objetos que recoges y los guarda en su inventario interno de 4×4.\n\n§5§nACTIVACIÓN§0§r\nPulsa %1$s para activar o desactivar la bolsa. Mientras está inactiva, los objetos van a tu inventario normal.\n\n§5§nVINCULAR UN CONTENEDOR§0§r\nHaz clic derecho sobre cualquier contenedor (cofre, barril, shulker...) con la bolsa en la mano para vincularlo. Una vez vinculada, los objetos van primero a ese contenedor mientras la bolsa está activa. Si el contenedor está lleno, el exceso va al almacenamiento interno de la bolsa.\n\n§5§nMODO§0§r\nPulsa %1$s para alternar entre §aEnviando§0 (objetos → contenedor) y §eGuardando§0 (objetos → huecos internos). También puedes usar el botón de cambio dentro de la GUI de la bolsa.");
+
         add("itemGroup.constructionwand", "Varitas de Construcción Revividas");
         add("itemGroup.constructionwand.construction_wand_tab", "Varitas de Construcción Revividas");
 
@@ -617,6 +670,8 @@ add("advancement.constructionwand.core_destruction.desc", "Obtené un Núcleo de
         }
         @Override
         protected void addTranslations() {
+        add("constructionwand.description.void_sack", "La Bolsa del Vacío intercepta los ítems que recoges y los guarda en su inventario interno de 4×4.\n\n§5§nACTIVACIÓN§0§r\nPresiona %1$s para activar o desactivar la bolsa. Mientras está inactiva, los ítems van a tu inventario normal.\n\n§5§nVINCULAR UN CONTENEDOR§0§r\nHaz clic derecho sobre cualquier contenedor (cofre, barril, shulker...) con la bolsa en la mano para vincularlo. Una vez vinculada, los ítems van primero a ese contenedor mientras la bolsa está activa. Si el contenedor está lleno, el exceso va al almacenamiento interno de la bolsa.\n\n§5§nMODO§0§r\nPresiona %1$s para alternar entre §aEnviando§0 (ítems → contenedor) y §eGuardando§0 (ítems → espacios internos). También puedes usar el botón de cambio dentro de la GUI de la bolsa.");
+
         add("itemGroup.constructionwand", "Varitas de Construcción Revividas");
         add("itemGroup.constructionwand.construction_wand_tab", "Varitas de Construcción Revividas");
 
@@ -744,6 +799,8 @@ add("advancement.constructionwand.core_destruction.desc", "Obtené un Núcleo de
         }
         @Override
         protected void addTranslations() {
+add("constructionwand.description.void_sack", "ボイドサックは拾ったアイテムを回収し、内部の4×4インベントリに保管します。\n\n§5§n有効化§0§r\n%1$s を押すとサックの有効/無効を切り替えられます。無効の間は、アイテムは通常どおりインベントリに入ります。\n\n§5§nコンテナのリンク§0§r\nサックを持った状態で任意のコンテナ（チェスト、樽、シュルカーボックスなど）を右クリックするとリンクできます。リンク後、サックが有効ならアイテムはまずそのコンテナへ送られます。コンテナが満杯の場合、あふれた分はサック内部に保管されます。\n\n§5§nモード切り替え§0§r\n%1$s を押すと §a送信§0（アイテム → コンテナ）と §e保存§0（アイテム → 内部スロット）を切り替えられます。サックのGUI内にある切り替えボタンでも変更できます。");
+
         add("itemGroup.constructionwand", "建築の杖リバイバル");
         add("itemGroup.constructionwand.construction_wand_tab", "建築の杖リバイバル");
 
@@ -872,6 +929,8 @@ add("key.constructionwand.wand_undo", "ワンドを元に戻す");
         }
         @Override
         protected void addTranslations() {
+add("constructionwand.description.void_sack", "공허 자루는 획득한 아이템을 가로채 내부 4×4 인벤토리에 보관합니다.\n\n§5§n활성화§0§r\n%1$s 키를 눌러 자루를 활성화하거나 비활성화할 수 있습니다. 비활성화된 동안에는 아이템이 평소대로 인벤토리에 들어갑니다.\n\n§5§n컨테이너 연결§0§r\n자루를 든 채로 아무 컨테이너(상자, 통, 셜커 상자 등)를 우클릭하면 연결됩니다. 연결한 뒤 자루가 활성화되어 있으면 아이템이 먼저 해당 컨테이너로 전송됩니다. 컨테이너가 가득 차면 남은 아이템은 자루의 내부 저장 공간에 보관됩니다.\n\n§5§n모드 전환§0§r\n%1$s 키를 눌러 §a전송§0(아이템 → 컨테이너)과 §e저장§0(아이템 → 내부 슬롯)을 전환할 수 있습니다. 자루 GUI의 전환 버튼으로도 변경할 수 있습니다.");
+
         add("itemGroup.constructionwand", "건축 완드 리바이벌");
         add("itemGroup.constructionwand.construction_wand_tab", "건축 완드 리바이벌");
 
@@ -1000,6 +1059,24 @@ add("key.constructionwand.wand_undo", "지팡이 실행 취소");
         }
         @Override
         protected void addTranslations() {
+add("advancement.constructionwand.root.title", "Varinhas de Construção Revividas");
+add("advancement.constructionwand.root.desc", "Obtenha sua primeira varinha");
+add("advancement.constructionwand.stone_wand.title", "Varinha de Pedra");
+add("advancement.constructionwand.stone_wand.desc", "Obtenha uma Varinha de Pedra");
+add("advancement.constructionwand.iron_wand.title", "Varinha de Ferro");
+add("advancement.constructionwand.iron_wand.desc", "Obtenha uma Varinha de Ferro");
+add("advancement.constructionwand.diamond_wand.title", "Varinha de Diamante");
+add("advancement.constructionwand.diamond_wand.desc", "Obtenha uma Varinha de Diamante");
+add("advancement.constructionwand.netherite_wand.title", "Varinha de Netherita");
+add("advancement.constructionwand.netherite_wand.desc", "Obtenha uma Varinha de Netherita");
+add("advancement.constructionwand.infinity_wand.title", "Varinha do Infinito");
+add("advancement.constructionwand.infinity_wand.desc", "Obtenha a Varinha do Infinito");
+add("advancement.constructionwand.core_angel.title", "Núcleo Angelical");
+add("advancement.constructionwand.core_angel.desc", "Obtenha um Núcleo de Varinha Angelical");
+add("advancement.constructionwand.core_destruction.title", "Núcleo de Destruição");
+add("advancement.constructionwand.core_destruction.desc", "Obtenha um Núcleo de Varinha de Destruição");
+add("constructionwand.description.void_sack", "O Saco do Vazio intercepta os itens que você coleta e os armazena em seu inventário interno de 4×4.\n\n§5§nATIVAÇÃO§0§r\nPressione %1$s para ativar ou desativar o saco. Enquanto estiver inativo, os itens vão para o seu inventário normal.\n\n§5§nVINCULAR UM CONTÊINER§0§r\nClique com o botão direito em qualquer contêiner (baú, barril, shulker...) segurando o saco para vinculá-lo. Depois de vinculado, os itens vão primeiro para esse contêiner enquanto o saco estiver ativo. Se o contêiner estiver cheio, o excedente vai para o armazenamento interno do saco.\n\n§5§nMODO§0§r\nPressione %1$s para alternar entre §aEnviando§0 (itens → contêiner) e §eArmazenando§0 (itens → espaços internos). Você também pode usar o botão de alternância dentro da GUI do saco.");
+
         add("itemGroup.constructionwand", "Varinhas de Construção Revividas");
         add("itemGroup.constructionwand.construction_wand_tab", "Varinhas de Construção Revividas");
 
@@ -1112,6 +1189,8 @@ add("key.constructionwand.wand_undo", "Desfazer varinha");
         }
         @Override
         protected void addTranslations() {
+add("constructionwand.description.void_sack", "Мешок Пустоты перехватывает подобранные предметы и хранит их во внутреннем инвентаре 4×4.\n\n§5§nАКТИВАЦИЯ§0§r\nНажмите %1$s, чтобы включить или выключить мешок. Пока он выключен, предметы попадают в обычный инвентарь.\n\n§5§nПРИВЯЗКА КОНТЕЙНЕРА§0§r\nЩёлкните правой кнопкой по любому контейнеру (сундук, бочка, шалкеровый ящик...), держа мешок в руке, чтобы привязать его. После привязки предметы сначала отправляются в этот контейнер, пока мешок активен. Если контейнер заполнен, излишки попадают во внутреннее хранилище мешка.\n\n§5§nРЕЖИМ§0§r\nНажмите %1$s, чтобы переключаться между §aОтправкой§0 (предметы → контейнер) и §eХранением§0 (предметы → внутренние слоты). Также можно нажать кнопку переключения в интерфейсе мешка.");
+
         add("itemGroup.constructionwand", "Волшебные жезлы для строительства - Возрождение");
         add("itemGroup.constructionwand.construction_wand_tab", "Волшебные жезлы для строительства - Возрождение");
 

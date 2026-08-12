@@ -31,4 +31,9 @@ description="${mod_description}"
     ordering="AFTER"
     side="CLIENT"
 
-
+[[dependencies.${modid}]]
+modId = "ae2wtlib"
+type="optional"
+versionRange = "${ae2wtlib_version}"
+ordering = "NONE"
+side = "BOTH"

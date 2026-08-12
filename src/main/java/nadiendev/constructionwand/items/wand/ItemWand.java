@@ -111,7 +111,7 @@ public abstract class ItemWand extends Item
                 lines.accept(Component.translatable(langTooltip + "cores").withStyle(ChatFormatting.GRAY));
                 for(IWandCore core : options.cores.getUpgrades()) {
                     ChatFormatting coreColor = getCoreColor(core);
-                    lines.accept(Component.translatable(options.cores.getKeyTranslation() + "." + core.getClass().getSimpleName())
+                    lines.accept(Component.translatable(options.cores.getKeyTranslation() + "." + core.getRegistryName().toString())
                             .withStyle(coreColor));
                 }
             }

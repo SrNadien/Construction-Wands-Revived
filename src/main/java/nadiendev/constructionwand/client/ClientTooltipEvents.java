@@ -2,7 +2,6 @@ package nadiendev.constructionwand.client;
 
 import nadiendev.constructionwand.ConstructionWand;
 import nadiendev.constructionwand.api.IWandCore;
-import nadiendev.constructionwand.items.wand.ItemWand;
 import nadiendev.constructionwand.items.core.ItemCore;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
@@ -26,9 +25,8 @@ public class ClientTooltipEvents {
 
         Consumer<Component> tooltip = component -> event.getToolTip().add(component);
 
-        if (item instanceof ItemWand) {
-            ItemWand.appendWandTooltip(stack, tooltip, event.getFlags());
-        } else if (item instanceof ItemCore && item instanceof IWandCore core) {
+        // ItemWand adds its own tooltip in appendHoverText, adding it here too would duplicate it
+        if (item instanceof ItemCore && item instanceof IWandCore core) {
             ItemCore.appendCoreTooltip(core, tooltip);
         }
     }

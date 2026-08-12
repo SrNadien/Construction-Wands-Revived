@@ -105,9 +105,9 @@ dependencies {
     compileOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}:api"
     runtimeOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}"
 
-    //Ae2 Wireless Terminals
-    implementation "de.mari_023:ae2wtlib_api:${ae2wtlib_version}"
-    runtimeOnly "de.mari_023:ae2wtlib:${ae2wtlib_version}"
+    //Ae2 Wireless Terminals 
+     implementation "de.mari_023:ae2wtlib_api:${ae2wtlib_version}"
+      runtimeOnly "de.mari_023:ae2wtlib:${ae2wtlib_version}"
 
 }
 
@@ -138,6 +138,7 @@ tasks.withType(ProcessResources).configureEach {
             jei_version : jei_version,
             sophisticatedbackpacks_version: sophisticatedbackpacks_version,
             sophisticatedcore_version: sophisticatedcore_version,
+            ae2wtlib_version: ae2wtlib_version,
     ]
     inputs.properties replaceProperties
 
