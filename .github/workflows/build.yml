@@ -6,6 +6,7 @@ on:
       - "Neo/1.21.1"
     paths:
       - "src/**/*.java"
+      - "gradle.properties"
 jobs:
   build:
     runs-on: ubuntu-latest
