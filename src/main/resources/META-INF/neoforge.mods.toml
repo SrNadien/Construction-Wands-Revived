@@ -6,34 +6,27 @@ modId="${modid}"
 version="${mod_version}"
 displayName="${mod_names}"
 displayURL=""
-logoFile="logo.png"
+bannerFile="logo.png"
 authors="${author}"
 description="${mod_description}"
 
 [[dependencies.${modid}]]
     modId="neoforge"
     type="required"
-    versionRange="${neo_version}"
+    versionRange="${neoforgeVersionRange}"
     ordering = "NONE"
     side="BOTH"
 [[dependencies.${modid}]]
     modId="minecraft"
     type="required"
-    versionRange="${mcversion}"
+    versionRange="${minecraft_range_version}"
     ordering = "NONE"
     side="BOTH"
 
-#jei dependency 
+#jei dependency
 [[dependencies.${modid}]]
     modId="jei"
     type="optional"
-    versionRange="${jei_version}"
+    versionRange="[${jei_version},)"
     ordering="AFTER"
     side="CLIENT"
-
-[[dependencies.${modid}]]
-modId = "ae2wtlib"
-type="optional"
-versionRange = "${ae2wtlib_version}"
-ordering = "NONE"
-side = "BOTH"

@@ -84,7 +84,7 @@ public class ClientEvents
         ItemStack wand = event.getItemStack();
         if(!(wand.getItem() instanceof ItemWand)) return;
 
-        Minecraft.getInstance().setScreen(new ScreenWand(wand));
+        Minecraft.getInstance().gui.setScreen(new ScreenWand(wand));
         event.setCanceled(true);
     }
 

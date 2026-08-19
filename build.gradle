@@ -3,7 +3,7 @@ plugins {
     id 'eclipse'
     id 'idea'
     id 'maven-publish'
-    id 'net.neoforged.gradle.userdev' version '7.1.21'
+    id 'net.neoforged.gradle.userdev' version '7.1.38'
 }
 
 version = "${mcversion}-${mod_version}-${tag_lanzador}"
@@ -12,7 +12,7 @@ base {
     archivesName = "${mod_named}"
 }
 
-// NeoForge 26.1 usa Java 25
+// NeoForge 26.2 usa Java 25
 java.toolchain.languageVersion = JavaLanguageVersion.of(25)
 
 //minecraft.accessTransformers.file rootProject.file('src/main/resources/META-INF/accesstransformer.cfg')
@@ -35,7 +35,7 @@ runs {
 
     server {
         systemProperty 'neoforge.enabledGameTestNamespaces', "${modid}"
-        argument '--nogui'                          
+        argument '--nogui'
     }
 
     clientData {
@@ -53,9 +53,10 @@ repositories {
     maven {
         url = "https://maven.blamejared.com"
     }
-    maven {
-        url = "https://maven.theillusivec4.top/"
-    }
+    // Repo de Curios: integracion desactivada en 26.2 (el mod esta roto en esta version).
+    // maven {
+    //     url = "https://maven.theillusivec4.top/"
+    // }
     maven {
         name = "Curse Maven"
         url = "https://cursemaven.com"
@@ -63,19 +64,20 @@ repositories {
             includeGroup "curse.maven"
         }
     }
-     maven {
-        url = 'https://maven.creeperhost.net'
-        content {
-            includeGroup("com.refinedmods.refinedstorage")
-        }
-    }
-    maven {
-        url = uri("https://modmaven.dev/")
-        content {
-            includeGroup "appeng"
-            includeGroup "de.mari_023"
-        }
-    }
+
+    // Repos de Refined Storage / AE2 / AE2WTLib: sin build para 26.2.
+    // Descomentar junto con las dependencias de abajo cuando publiquen.
+    // maven {
+    //     url = 'https://maven.creeperhost.net'
+    //     content { includeGroup "com.refinedmods.refinedstorage" }
+    // }
+    // maven {
+    //     url = uri("https://modmaven.dev/")
+    //     content {
+    //         includeGroup "appeng"
+    //         includeGroup "de.mari_023"
+    //     }
+    // }
 }
 
 dependencies {
@@ -90,25 +92,31 @@ dependencies {
     //sophisticated core
     implementation "curse.maven:sophisticated-core-618298:${sophisticatedcore_version}"
 
+    // Curios API: DESACTIVADO en 26.2, el mod esta roto en esta version de NeoForge.
+    // CuriosCompat.java y CuriosHelper.java estan aparcados en src/disabled-integrations/
+    // y los usos en SupplierInventory.java quedan comentados.
+    // compileOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}:api"
+    // runtimeOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}"
+
+    // ---------------------------------------------------------------------
+    // Integraciones sin build para Minecraft 26.2.
+    // El codigo esta aparcado en src/disabled-integrations/ (fuera del sourceSet).
+    // Para reactivar: descomentar aqui, en gradle.properties, los repos de
+    // arriba, y mover las clases de vuelta a src/main/java.
+    // ---------------------------------------------------------------------
     // Applied Energistics 2
-    implementation "curse.maven:applied-energistics-2-223794:${ae2_version_id}"
-    implementation "curse.maven:guideme-1173950:${guideme_version_id}"
+    // implementation "curse.maven:applied-energistics-2-223794:${ae2_version_id}"
+    // implementation "curse.maven:guideme-1173950:${guideme_version_id}"
 
-    //refined Storage
-    // implementation "com.refinedmods.refinedstorage:refinedstorage-neoforge:${refinedstorage_version}"
-    implementation "curse.maven:refined-storage-243076:${refinedstorage_version_id}"
+    // Refined Storage
+    // implementation "curse.maven:refined-storage-243076:${refinedstorage_version_id}"
 
-    //refined storage curios integration
-    implementation "curse.maven:refined-storage-curios-integration-1230729:${refinedstorage_curiosintegration_version_id}"
+    // Refined Storage Curios Integration
+    // implementation "curse.maven:refined-storage-curios-integration-1230729:${refinedstorage_curiosintegration_version_id}"
 
-     // Curios API
-    compileOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}:api"
-    runtimeOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}"
-
-    //Ae2 Wireless Terminals 
-     implementation "de.mari_023:ae2wtlib_api:${ae2wtlib_version}"
-      runtimeOnly "de.mari_023:ae2wtlib:${ae2wtlib_version}"
-
+    // AE2 Wireless Terminals
+    // implementation "de.mari_023:ae2wtlib_api:${ae2wtlib_version}"
+    // runtimeOnly "de.mari_023:ae2wtlib:${ae2wtlib_version}"
 }
 
 jar {
@@ -138,7 +146,9 @@ tasks.withType(ProcessResources).configureEach {
             jei_version : jei_version,
             sophisticatedbackpacks_version: sophisticatedbackpacks_version,
             sophisticatedcore_version: sophisticatedcore_version,
-            ae2wtlib_version: ae2wtlib_version,
+            minecraft_range_version: minecraft_range_version,
+            neoforgeVersionRange: neoforgeVersionRange,
+            loader_version_range: loader_version_range,
     ]
     inputs.properties replaceProperties
 

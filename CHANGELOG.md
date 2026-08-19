@@ -1,5 +1,108 @@
 # Changelog
 
+## 4.1.0 — Minecraft 26.2 / NeoForge
+
+Port to Minecraft 26.2. See the [NeoForge 26.2 primer](https://docs.neoforged.net/primer/docs/26.2/).
+
+### Ported
+
+- **Block preview rendering rewritten for the new feature/submit-node system.** 26.2 deleted
+  `MultiBufferSource` and `ShapeRenderer` outright, so the wand preview no longer grabs a
+  `VertexConsumer` and draws into it. It now submits a `ShapeOutline` node per block through
+  `SubmitNodeCollector#submitShapeOutline`, matching how vanilla draws the block highlight.
+  `CustomBlockOutlineRenderer#render` also changed signature (no more buffer source, no more
+  translucent-pass flag), so all the per-frame work — reading the held wand, asking the server for
+  the preview — moved into the `ExtractBlockOutlineRenderStateEvent` handler, which is where 26.2
+  wants it: the renderer now only receives data already copied out of the level.
+- **Advancement classes moved packages.** `Criterion` and `InventoryChangeTrigger` are now in
+  `net.minecraft.advancements.triggers`, and `ItemPredicate` in `net.minecraft.advancements.predicates`.
+- **`Minecraft#setScreen` is gone.** Screens are opened through `Minecraft#gui.setScreen` now
+  (the whole screen/HUD split of 26.2).
+- Recipe JSONs regenerated with the 26.2 data generators.
+
+### Removed (temporarily)
+
+These integrations do not ship in this version:
+
+| Integration | Mod | Reason |
+|---|---|---|
+| Wireless Terminal, Portable Cell | Applied Energistics 2 | no 26.2 build |
+| Wireless terminals (all variants) | AE2 Wireless Terminal Library | no 26.2 build |
+| Wireless Grid | Refined Storage | no 26.2 build |
+| — | Refined Storage Curios Integration | no 26.2 build |
+| Pulling blocks from Curios slots | Curios | 26.2 build exists but is broken on this NeoForge |
+
+The code is not deleted: it sits in `src/disabled-integrations/`, outside the source set, together
+with a README explaining how to switch each one back on. Shulker boxes, bundles, capability
+inventories and Sophisticated Backpacks are unaffected.
+
+### Build
+
+- Minecraft `26.2`, NeoForge `26.2.0.53-beta` (declared range: `[26.2.0.40-beta,26.3.0)`).
+  The compile target is `.53-beta` and not `.40-beta` only because Sophisticated Core/Backpacks
+  for 26.2 refuse to load below it.
+- JEI `30.24.0.173`, Sophisticated Core `1.4.101`, Sophisticated Backpacks `3.25.90`.
+- NeoGradle `7.1.38`.
+- Parchment mappings disabled: there is no 26.2 export yet (latest is 1.21.11 / 26.1). The lines are
+  commented in `gradle.properties`, ready to re-enable.
+- `neoforge.mods.toml` now declares real version ranges instead of bare versions, which previously
+  meant no constraint at all, and uses `bannerFile` instead of the deprecated `logoFile`
+  (26.2 split it into `bannerFile` for wide banners and `iconFile` for square icons).
+
+---
+
+## 4.1.0 — Minecraft 26.2 / NeoForge (Español)
+
+Port a Minecraft 26.2. Ver el [primer de NeoForge 26.2](https://docs.neoforged.net/primer/docs/26.2/).
+
+### Portado
+
+- **El render del preview de bloques reescrito al nuevo sistema de submit nodes.** 26.2 eliminó
+  `MultiBufferSource` y `ShapeRenderer`, así que el preview de la varita ya no pide un
+  `VertexConsumer` para dibujar en él. Ahora envía un nodo `ShapeOutline` por bloque mediante
+  `SubmitNodeCollector#submitShapeOutline`, igual que hace el juego con el contorno del bloque
+  apuntado. `CustomBlockOutlineRenderer#render` también cambió de firma (sin buffer source y sin
+  el flag de pasada translúcida), así que todo el trabajo por frame — leer la varita en mano y
+  pedir el preview al servidor — se movió al handler de `ExtractBlockOutlineRenderStateEvent`,
+  que es donde 26.2 lo quiere: el renderer solo recibe datos ya copiados fuera del nivel.
+- **Las clases de logros cambiaron de paquete.** `Criterion` e `InventoryChangeTrigger` están ahora
+  en `net.minecraft.advancements.triggers`, e `ItemPredicate` en `net.minecraft.advancements.predicates`.
+- **`Minecraft#setScreen` ya no existe.** Las pantallas se abren con `Minecraft#gui.setScreen`
+  (la separación pantalla/HUD de 26.2).
+- JSONs de recetas regenerados con los data generators de 26.2.
+
+### Quitado (temporalmente)
+
+Estas integraciones no van en esta versión:
+
+| Integración | Mod | Motivo |
+|---|---|---|
+| Terminal inalámbrica, celda portátil | Applied Energistics 2 | sin build para 26.2 |
+| Terminales inalámbricas (todas) | AE2 Wireless Terminal Library | sin build para 26.2 |
+| Wireless Grid | Refined Storage | sin build para 26.2 |
+| — | Refined Storage Curios Integration | sin build para 26.2 |
+| Sacar bloques de los slots de Curios | Curios | hay build 26.2 pero está roto en este NeoForge |
+
+El código no se borró: está en `src/disabled-integrations/`, fuera del source set, con un README que
+explica cómo reactivar cada uno. Shulker boxes, bundles, inventarios por capability y Sophisticated
+Backpacks no cambian.
+
+### Build
+
+- Minecraft `26.2`, NeoForge `26.2.0.53-beta` (rango declarado: `[26.2.0.40-beta,26.3.0)`).
+  Se compila contra `.53-beta` y no `.40-beta` solo porque Sophisticated Core/Backpacks para 26.2
+  se niegan a cargar por debajo.
+- JEI `30.24.0.173`, Sophisticated Core `1.4.101`, Sophisticated Backpacks `3.25.90`.
+- NeoGradle `7.1.38`.
+- Parchment desactivado: todavía no hay export para 26.2 (el último es 1.21.11 / 26.1). Las líneas
+  quedan comentadas en `gradle.properties`, listas para reactivar.
+- `neoforge.mods.toml` declara ahora rangos de versión reales en vez de versiones sueltas, que en la
+  práctica no restringían nada, y usa `bannerFile` en vez del deprecado `logoFile`
+  (26.2 lo partió en `bannerFile` para banners apaisados e `iconFile` para iconos cuadrados).
+
+---
+
+
 ## 4.0.3 — Minecraft 26.1 / NeoForge
 
 ### Additions
