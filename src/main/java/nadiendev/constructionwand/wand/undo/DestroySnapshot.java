@@ -1,15 +1,10 @@
 package nadiendev.constructionwand.wand.undo;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.component.DataComponents;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.enchantment.Enchantments;
-import net.minecraft.world.item.enchantment.ItemEnchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluids;
@@ -21,6 +16,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import nadiendev.constructionwand.items.containeritems.ItemVoidSack;
 
 import javax.annotation.Nullable;
+import java.util.List;
 
 public class DestroySnapshot implements ISnapshot
 {
@@ -56,38 +52,18 @@ public class DestroySnapshot implements ISnapshot
 
     @Override
     public boolean execute(Level world, Player player, BlockHitResult rayTraceResult) {
-        if (!(world instanceof ServerLevel serverLevel)) {
+        if(!(world instanceof ServerLevel serverLevel)) {
             return WandUtil.removeBlock(world, player, block, pos);
         }
 
-        if (!WandUtil.isBlockRemovable(world, player, pos)) return false;
+        if(!WandUtil.isBlockRemovable(world, player, pos)) return false;
 
-        // En 26.1, ItemEnchantments se movió a net.minecraft.world.item.enchantment.ItemEnchantments
-        // (ya no está en net.minecraft.world.item.component).
-        // ItemEnchantments.EMPTY sigue existiendo; ItemEnchantments.Mutable también.
-        var silkTouchHolder = serverLevel.registryAccess()
-                .lookupOrThrow(Registries.ENCHANTMENT)
-                .getOrThrow(Enchantments.SILK_TOUCH);
+        ServerPlayer serverPlayer = player instanceof ServerPlayer sp ? sp : null;
 
-        // Construir ItemEnchantments con Silk Touch nivel 1
-        ItemEnchantments.Mutable mutableEnchantments =
-                new ItemEnchantments.Mutable(ItemEnchantments.EMPTY);
-        mutableEnchantments.set(silkTouchHolder, 1);
-
-        // Crear la herramienta con el componente de enchantments
-        ItemStack silkTool = new ItemStack(Items.NETHERITE_PICKAXE);
-        silkTool.set(DataComponents.ENCHANTMENTS, mutableEnchantments.toImmutable());
-
-        // Nota: silkTool está creado pero destroyBlock usa la herramienta del jugador internamente.
-        // Para forzar silk touch en el drop, se puede swapear temporalmente la herramienta
-        // o usar el overload que acepta una herramienta custom si existe en 26.1.
-        // En vanilla 26.1 destroyBlock no acepta una herramienta override, así que el bloque
-        // se romperá con la herramienta del jugador. Si se necesita silk touch garantizado,
-        // habría que reemplazar temporalmente el item en mano del jugador.
-        if (player instanceof ServerPlayer serverPlayer) {
+        // Con la Void Sack activa el bloque suelta sus drops normalmente y la bolsa los
+        // intercepta al recogerlos, asi que aqui no hay que tocar nada.
+        if(hasActiveVoidSack(player)) {
             return serverLevel.destroyBlock(pos, true, serverPlayer, 512);
-        } else {
-            return serverLevel.destroyBlock(pos, true, null, 512);
         }
 
         // Sin Void Sack: los drops van directos al inventario del jugador y, cuando el
