@@ -12,11 +12,16 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.item.enchantment.ItemEnchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 import nadiendev.constructionwand.basics.WandUtil;
+import nadiendev.constructionwand.items.containeritems.ItemVoidSack;
+import nadiendev.constructionwand.wand.action.ActionDestruction;
 
 import javax.annotation.Nullable;
+import java.util.List;
 
 public class DestroySnapshot implements ISnapshot
 {
@@ -86,9 +91,33 @@ public class DestroySnapshot implements ISnapshot
         // drops en el mundo y el sack los intercepta al recogerlos.
         if(hasActiveVoidSack(player)) {
             return serverLevel.destroyBlock(pos, true, serverPlayer, 512);
-        } else {
-            return serverLevel.destroyBlock(pos, true, null, 512);
         }
+
+        // Sin Void Sack los drops van directo al inventario en vez de quedar tirados en el
+        // piso. Se calculan antes de romper el bloque, con la herramienta del jugador, para
+        // que los items sean exactamente los mismos que soltaria normalmente.
+        BlockState destroyed = serverLevel.getBlockState(pos);
+        BlockEntity blockEntity = destroyed.hasBlockEntity() ? serverLevel.getBlockEntity(pos) : null;
+        List<ItemStack> drops = Block.getDrops(destroyed, serverLevel, pos, blockEntity, player,
+                player.getMainHandItem());
+
+        if(!serverLevel.destroyBlock(pos, false, serverPlayer, 512)) return false;
+
+        // Inventory#add consume lo que entra; lo que no entra se descarta.
+        for(ItemStack drop : drops) {
+            player.getInventory().add(drop);
+        }
+
+        return true;
+    }
+
+    /**
+     * True si el jugador lleva una Bolsa del Vacio activa, que es la que intercepta los drops
+     * en VoidSackDropHandler.
+     */
+    private static boolean hasActiveVoidSack(Player player) {
+        ItemStack sack = ActionDestruction.findSack(player);
+        return !sack.isEmpty() && ItemVoidSack.isActive(sack);
     }
 
     @Override
