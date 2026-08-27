@@ -80,7 +80,11 @@ public class DestroySnapshot implements ISnapshot
         // En vanilla 26.1 destroyBlock no acepta una herramienta override, así que el bloque
         // se romperá con la herramienta del jugador. Si se necesita silk touch garantizado,
         // habría que reemplazar temporalmente el item en mano del jugador.
-        if (player instanceof ServerPlayer serverPlayer) {
+        ServerPlayer serverPlayer = player instanceof ServerPlayer sp ? sp : null;
+
+        // Con Void Sack activo se mantiene el comportamiento normal: el bloque suelta sus
+        // drops en el mundo y el sack los intercepta al recogerlos.
+        if(hasActiveVoidSack(player)) {
             return serverLevel.destroyBlock(pos, true, serverPlayer, 512);
         } else {
             return serverLevel.destroyBlock(pos, true, null, 512);

@@ -119,54 +119,21 @@ public class ActionExchange implements IWandAction
                     switch(targetFace) {
                         case DOWN:
                         case UP:
-                            if(options.testLock(WandOptions.LOCK.NORTHSOUTH)) {
-                                candidates.add(currentCandidate.relative(Direction.NORTH));
-                                candidates.add(currentCandidate.relative(Direction.SOUTH));
-                            }
-                            if(options.testLock(WandOptions.LOCK.EASTWEST)) {
-                                candidates.add(currentCandidate.relative(Direction.EAST));
-                                candidates.add(currentCandidate.relative(Direction.WEST));
-                            }
-                            if(options.testLock(WandOptions.LOCK.NORTHSOUTH) && options.testLock(WandOptions.LOCK.EASTWEST)) {
-                                candidates.add(currentCandidate.relative(Direction.NORTH).relative(Direction.EAST));
-                                candidates.add(currentCandidate.relative(Direction.NORTH).relative(Direction.WEST));
-                                candidates.add(currentCandidate.relative(Direction.SOUTH).relative(Direction.EAST));
-                                candidates.add(currentCandidate.relative(Direction.SOUTH).relative(Direction.WEST));
-                            }
+                            addNeighbours(world, candidates, currentCandidate, targetFace,
+                                    options.testLock(WandOptions.LOCK.NORTHSOUTH), Direction.NORTH, Direction.SOUTH,
+                                    options.testLock(WandOptions.LOCK.EASTWEST), Direction.EAST, Direction.WEST);
                             break;
                         case NORTH:
                         case SOUTH:
-                            if(options.testLock(WandOptions.LOCK.HORIZONTAL)) {
-                                candidates.add(currentCandidate.relative(Direction.EAST));
-                                candidates.add(currentCandidate.relative(Direction.WEST));
-                            }
-                            if(options.testLock(WandOptions.LOCK.VERTICAL)) {
-                                candidates.add(currentCandidate.relative(Direction.UP));
-                                candidates.add(currentCandidate.relative(Direction.DOWN));
-                            }
-                            if(options.testLock(WandOptions.LOCK.HORIZONTAL) && options.testLock(WandOptions.LOCK.VERTICAL)) {
-                                candidates.add(currentCandidate.relative(Direction.UP).relative(Direction.EAST));
-                                candidates.add(currentCandidate.relative(Direction.UP).relative(Direction.WEST));
-                                candidates.add(currentCandidate.relative(Direction.DOWN).relative(Direction.EAST));
-                                candidates.add(currentCandidate.relative(Direction.DOWN).relative(Direction.WEST));
-                            }
+                            addNeighbours(world, candidates, currentCandidate, targetFace,
+                                    options.testLock(WandOptions.LOCK.HORIZONTAL), Direction.EAST, Direction.WEST,
+                                    options.testLock(WandOptions.LOCK.VERTICAL), Direction.UP, Direction.DOWN);
                             break;
                         case EAST:
                         case WEST:
-                            if(options.testLock(WandOptions.LOCK.HORIZONTAL)) {
-                                candidates.add(currentCandidate.relative(Direction.NORTH));
-                                candidates.add(currentCandidate.relative(Direction.SOUTH));
-                            }
-                            if(options.testLock(WandOptions.LOCK.VERTICAL)) {
-                                candidates.add(currentCandidate.relative(Direction.UP));
-                                candidates.add(currentCandidate.relative(Direction.DOWN));
-                            }
-                            if(options.testLock(WandOptions.LOCK.HORIZONTAL) && options.testLock(WandOptions.LOCK.VERTICAL)) {
-                                candidates.add(currentCandidate.relative(Direction.UP).relative(Direction.NORTH));
-                                candidates.add(currentCandidate.relative(Direction.UP).relative(Direction.SOUTH));
-                                candidates.add(currentCandidate.relative(Direction.DOWN).relative(Direction.NORTH));
-                                candidates.add(currentCandidate.relative(Direction.DOWN).relative(Direction.SOUTH));
-                            }
+                            addNeighbours(world, candidates, currentCandidate, targetFace,
+                                    options.testLock(WandOptions.LOCK.HORIZONTAL), Direction.NORTH, Direction.SOUTH,
+                                    options.testLock(WandOptions.LOCK.VERTICAL), Direction.UP, Direction.DOWN);
                             break;
                     }
                 }
@@ -175,6 +142,38 @@ public class ActionExchange implements IWandAction
         }
 
         return exchangeSnapshots;
+    }
+
+    /**
+     * Encola los vecinos del bloque procesado sobre los dos ejes habilitados por el lock.
+     * Los ortogonales se propagan siempre; las diagonales solo cuando ambos ortogonales que las
+     * componen estan descubiertos, para que el intercambio se corte debajo de un bloque tapado
+     * en vez de rodearlo.
+     */
+    private void addNeighbours(Level world, LinkedList<BlockPos> candidates, BlockPos pos, Direction targetFace,
+                               boolean axisA, Direction a1, Direction a2,
+                               boolean axisB, Direction b1, Direction b2) {
+        if(axisA) {
+            candidates.add(pos.relative(a1));
+            candidates.add(pos.relative(a2));
+        }
+        if(axisB) {
+            candidates.add(pos.relative(b1));
+            candidates.add(pos.relative(b2));
+        }
+        if(axisA && axisB) {
+            for(Direction a : new Direction[] {a1, a2}) {
+                BlockPos orthoA = pos.relative(a);
+                if(!WandUtil.isBlockPermeable(world, orthoA.relative(targetFace))) continue;
+
+                for(Direction b : new Direction[] {b1, b2}) {
+                    BlockPos orthoB = pos.relative(b);
+                    if(!WandUtil.isBlockPermeable(world, orthoB.relative(targetFace))) continue;
+
+                    candidates.add(orthoA.relative(b));
+                }
+            }
+        }
     }
 
     @Nonnull
