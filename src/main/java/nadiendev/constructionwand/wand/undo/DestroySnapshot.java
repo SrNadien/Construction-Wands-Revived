@@ -15,6 +15,10 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 import nadiendev.constructionwand.basics.WandUtil;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import nadiendev.constructionwand.items.containeritems.ItemVoidSack;
 
 import javax.annotation.Nullable;
 
@@ -85,6 +89,31 @@ public class DestroySnapshot implements ISnapshot
         } else {
             return serverLevel.destroyBlock(pos, true, null, 512);
         }
+
+        // Sin Void Sack: los drops van directos al inventario del jugador y, cuando el
+        // inventario esta lleno, el resto simplemente se descarta.
+        BlockState broken = world.getBlockState(pos);
+        BlockEntity blockEntity = world.getBlockEntity(pos);
+        List<ItemStack> drops = Block.getDrops(broken, serverLevel, pos, blockEntity, player, ItemStack.EMPTY);
+
+        if(!serverLevel.destroyBlock(pos, false, serverPlayer, 512)) return false;
+
+        for(ItemStack drop : drops) {
+            if(drop.isEmpty()) continue;
+            // add() mete lo que quepa; lo que sobra se pierde (inventario lleno).
+            player.getInventory().add(drop);
+        }
+
+        return true;
+    }
+
+    /** True si el jugador lleva un Void Sack activo en alguna mano. */
+    private static boolean hasActiveVoidSack(Player player) {
+        for(InteractionHand hand : InteractionHand.values()) {
+            ItemStack stack = player.getItemInHand(hand);
+            if(stack.getItem() instanceof ItemVoidSack && ItemVoidSack.isActive(stack)) return true;
+        }
+        return false;
     }
 
     @Override

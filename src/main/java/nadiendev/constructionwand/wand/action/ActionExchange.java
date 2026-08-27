@@ -116,58 +116,41 @@ public class ActionExchange implements IWandAction
                     if(snapshot == null) continue;
                     exchangeSnapshots.add(snapshot);
 
-                    switch(targetFace) {
-                        case DOWN:
-                        case UP:
-                            if(options.testLock(WandOptions.LOCK.NORTHSOUTH)) {
-                                candidates.add(currentCandidate.relative(Direction.NORTH));
-                                candidates.add(currentCandidate.relative(Direction.SOUTH));
+                    // Ejes de propagacion segun la cara apuntada, con sus locks
+                    Direction[] axisA, axisB;
+                    boolean lockA, lockB;
+                    if(targetFace == Direction.UP || targetFace == Direction.DOWN) {
+                        axisA = new Direction[]{Direction.NORTH, Direction.SOUTH};
+                        axisB = new Direction[]{Direction.EAST, Direction.WEST};
+                        lockA = options.testLock(WandOptions.LOCK.NORTHSOUTH);
+                        lockB = options.testLock(WandOptions.LOCK.EASTWEST);
+                    }
+                    else {
+                        axisA = (targetFace == Direction.NORTH || targetFace == Direction.SOUTH)
+                                ? new Direction[]{Direction.EAST, Direction.WEST}
+                                : new Direction[]{Direction.NORTH, Direction.SOUTH};
+                        axisB = new Direction[]{Direction.UP, Direction.DOWN};
+                        lockA = options.testLock(WandOptions.LOCK.HORIZONTAL);
+                        lockB = options.testLock(WandOptions.LOCK.VERTICAL);
+                    }
+
+                    if(lockA) for(Direction a : axisA) candidates.add(currentCandidate.relative(a));
+                    if(lockB) for(Direction b : axisB) candidates.add(currentCandidate.relative(b));
+
+                    // Las diagonales solo se propagan si ambos vecinos ortogonales estan
+                    // descubiertos. Asi, cuando justo delante hay un bloque encimado, el
+                    // intercambio se corta debajo de ese bloque en vez de rodearlo y
+                    // seguir reemplazando al otro lado.
+                    if(lockA && lockB) {
+                        for(Direction a : axisA) {
+                            BlockPos sideA = currentCandidate.relative(a);
+                            if(!WandUtil.isBlockPermeable(world, sideA.relative(targetFace))) continue;
+                            for(Direction b : axisB) {
+                                BlockPos sideB = currentCandidate.relative(b);
+                                if(!WandUtil.isBlockPermeable(world, sideB.relative(targetFace))) continue;
+                                candidates.add(sideA.relative(b));
                             }
-                            if(options.testLock(WandOptions.LOCK.EASTWEST)) {
-                                candidates.add(currentCandidate.relative(Direction.EAST));
-                                candidates.add(currentCandidate.relative(Direction.WEST));
-                            }
-                            if(options.testLock(WandOptions.LOCK.NORTHSOUTH) && options.testLock(WandOptions.LOCK.EASTWEST)) {
-                                candidates.add(currentCandidate.relative(Direction.NORTH).relative(Direction.EAST));
-                                candidates.add(currentCandidate.relative(Direction.NORTH).relative(Direction.WEST));
-                                candidates.add(currentCandidate.relative(Direction.SOUTH).relative(Direction.EAST));
-                                candidates.add(currentCandidate.relative(Direction.SOUTH).relative(Direction.WEST));
-                            }
-                            break;
-                        case NORTH:
-                        case SOUTH:
-                            if(options.testLock(WandOptions.LOCK.HORIZONTAL)) {
-                                candidates.add(currentCandidate.relative(Direction.EAST));
-                                candidates.add(currentCandidate.relative(Direction.WEST));
-                            }
-                            if(options.testLock(WandOptions.LOCK.VERTICAL)) {
-                                candidates.add(currentCandidate.relative(Direction.UP));
-                                candidates.add(currentCandidate.relative(Direction.DOWN));
-                            }
-                            if(options.testLock(WandOptions.LOCK.HORIZONTAL) && options.testLock(WandOptions.LOCK.VERTICAL)) {
-                                candidates.add(currentCandidate.relative(Direction.UP).relative(Direction.EAST));
-                                candidates.add(currentCandidate.relative(Direction.UP).relative(Direction.WEST));
-                                candidates.add(currentCandidate.relative(Direction.DOWN).relative(Direction.EAST));
-                                candidates.add(currentCandidate.relative(Direction.DOWN).relative(Direction.WEST));
-                            }
-                            break;
-                        case EAST:
-                        case WEST:
-                            if(options.testLock(WandOptions.LOCK.HORIZONTAL)) {
-                                candidates.add(currentCandidate.relative(Direction.NORTH));
-                                candidates.add(currentCandidate.relative(Direction.SOUTH));
-                            }
-                            if(options.testLock(WandOptions.LOCK.VERTICAL)) {
-                                candidates.add(currentCandidate.relative(Direction.UP));
-                                candidates.add(currentCandidate.relative(Direction.DOWN));
-                            }
-                            if(options.testLock(WandOptions.LOCK.HORIZONTAL) && options.testLock(WandOptions.LOCK.VERTICAL)) {
-                                candidates.add(currentCandidate.relative(Direction.UP).relative(Direction.NORTH));
-                                candidates.add(currentCandidate.relative(Direction.UP).relative(Direction.SOUTH));
-                                candidates.add(currentCandidate.relative(Direction.DOWN).relative(Direction.NORTH));
-                                candidates.add(currentCandidate.relative(Direction.DOWN).relative(Direction.SOUTH));
-                            }
-                            break;
+                        }
                     }
                 }
             } catch(Exception e) {

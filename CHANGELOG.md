@@ -1,5 +1,25 @@
 # Changelog
 
+## 4.0.2 — Minecraft 26.2 / NeoForge
+
+### Changes
+
+- **Exchange core: replacement now stops under a covered block instead of going around it.**
+  When the exchange flood-fill reached a block with something sitting on top of it, that block was
+  correctly skipped — but the fill kept spreading through the diagonal neighbours, wrapped around
+  the obstruction and carried on replacing on the far side. Diagonals now only propagate when both
+  orthogonal neighbours are themselves uncovered, so the exchange cuts off right below the covered
+  block and stops there. Straight propagation already behaved this way; this only closes the
+  diagonal bypass.
+
+- **Destruction core: broken blocks go straight to your inventory when you have no Void Sack.**
+  Previously the drops were spawned in the world and you had to walk over them. Now, if you are not
+  holding an active Void Sack, the drops are inserted directly into your inventory, and once the
+  inventory is full the remainder is discarded instead of littering the ground. Nothing changes when
+  a Void Sack **is** active: the block still drops normally and the sack intercepts the pickup, so
+  linked containers and internal storage work exactly as before. Which items a block drops is
+  unchanged.
+
 ## 4.1.0 — Minecraft 26.2 / NeoForge
 
 Port to Minecraft 26.2. See the [NeoForge 26.2 primer](https://docs.neoforged.net/primer/docs/26.2/).
@@ -49,9 +69,19 @@ inventories and Sophisticated Backpacks are unaffected.
   meant no constraint at all, and uses `bannerFile` instead of the deprecated `logoFile`
   (26.2 split it into `bannerFile` for wide banners and `iconFile` for square icons).
 
+### Changes
+
+- **Exchange core: replacement now stops under a covered block instead of going around it.**
+  When the exchange flood-fill reached a block with something sitting on top of it, that block was
+  correctly skipped — but the fill kept spreading through the diagonal neighbours, wrapped around
+  the obstruction and carried on replacing on the far side. Diagonals now only propagate when both
+  orthogonal neighbours are themselves uncovered, so the exchange cuts off right below the covered
+  block and stops there. Straight propagation already behaved this way; this only closes the
+  diagonal bypass.
+
 ---
 
-## 4.1.0 — Minecraft 26.2 / NeoForge (Español)
+## 4.0.2 — Minecraft 26.2 / NeoForge (Español)
 
 Port a Minecraft 26.2. Ver el [primer de NeoForge 26.2](https://docs.neoforged.net/primer/docs/26.2/).
 
@@ -100,8 +130,17 @@ Backpacks no cambian.
   práctica no restringían nada, y usa `bannerFile` en vez del deprecado `logoFile`
   (26.2 lo partió en `bannerFile` para banners apaisados e `iconFile` para iconos cuadrados).
 
----
+### Cambios
 
+- **Núcleo de intercambio: el reemplazo ahora se corta debajo de un bloque tapado en vez de rodearlo.**
+  Cuando el relleno del intercambio llegaba a un bloque que tenía algo encima, ese bloque se saltaba
+  correctamente, pero el relleno seguía extendiéndose por los vecinos diagonales, rodeaba el
+  obstáculo y continuaba reemplazando al otro lado. Ahora las diagonales solo se propagan si los dos
+  vecinos ortogonales están a su vez descubiertos, así que el intercambio se corta justo debajo del
+  bloque tapado y se detiene ahí. La propagación recta ya funcionaba así; esto solo cierra el atajo
+  por diagonal.
+
+---
 
 ## 4.0.3 — Minecraft 26.1 / NeoForge
 
