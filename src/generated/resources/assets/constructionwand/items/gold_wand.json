@@ -5,28 +5,28 @@
       {
         "model": {
           "type": "minecraft:model",
-          "model": "constructionwand:item/infinity_wand_angel"
+          "model": "constructionwand:item/gold_wand_angel"
         },
         "when": "angel"
       },
       {
         "model": {
           "type": "minecraft:model",
-          "model": "constructionwand:item/infinity_wand_destruction"
+          "model": "constructionwand:item/gold_wand_destruction"
         },
         "when": "destruction"
       },
       {
         "model": {
           "type": "minecraft:model",
-          "model": "constructionwand:item/infinity_wand_exchange"
+          "model": "constructionwand:item/gold_wand_exchange"
         },
         "when": "exchange"
       }
     ],
     "fallback": {
       "type": "minecraft:model",
-      "model": "constructionwand:item/infinity_wand"
+      "model": "constructionwand:item/gold_wand"
     },
     "property": "constructionwand:wand_core"
   }

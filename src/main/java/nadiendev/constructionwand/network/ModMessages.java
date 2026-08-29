@@ -3,6 +3,7 @@ package nadiendev.constructionwand.network;
 import nadiendev.constructionwand.ConstructionWand;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.server.level.ServerPlayer;
+
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 
@@ -21,6 +22,8 @@ public final class ModMessages {
         registrar.playToClient(PacketPreviewResult.ID, PacketPreviewResult.CODEC, PacketPreviewResult.Handler::handle);
         registrar.playToServer(PacketToggleVoidSack.TYPE, PacketToggleVoidSack.CODEC, PacketToggleVoidSack::handle);
         registrar.playToServer(PacketToggleVoidSackActive.TYPE, PacketToggleVoidSackActive.CODEC, PacketToggleVoidSackActive::handle);
+        registrar.playToServer(PacketWandUndo.ID, PacketWandUndo.CODEC, PacketWandUndo.Handler::handle);
+        registrar.playToServer(PacketExchangeSelect.ID, PacketExchangeSelect.CODEC, PacketExchangeSelect.Handler::handle);
     }
 
     public static void sendToPlayer(CustomPacketPayload message, ServerPlayer player) {

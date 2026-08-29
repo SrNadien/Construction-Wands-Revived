@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_item": {
+    "has_ender_chest": {
       "conditions": {
         "items": [
           {
-            "items": "#c:feathers"
+            "items": "#c:chests/ender"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "constructionwand:core_angel"
+        "recipe": "constructionwand:void_sack"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_item"
+      "has_ender_chest"
     ]
   ],
   "rewards": {
     "recipes": [
-      "constructionwand:core_angel"
+      "constructionwand:void_sack"
     ]
   }
 }
