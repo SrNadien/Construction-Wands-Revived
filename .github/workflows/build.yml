@@ -3,7 +3,7 @@ name: Build and Release
 on:
   push:
     branches:
-      - "Neo/1.21.1"
+      - "Neo/1.21.11"
     paths:
       - "src/**/*.java"
       - "gradle.properties"
