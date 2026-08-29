@@ -4,9 +4,9 @@ on:
   push:
     branches:
       - "Neo/1.21.11"
-    # paths:
-    #   - "src/**/*.java"
-    #   - "gradle.properties"
+    paths:
+      - "src/**/*.java"
+      - "gradle.properties"
 jobs:
   build:
     runs-on: ubuntu-latest
