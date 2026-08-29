@@ -22,11 +22,13 @@ public class LanguageGenerator extends LanguageProvider {
 
         addItem(ModItems.WAND_STONE, "Stone Wand");
         addItem(ModItems.WAND_IRON, "Iron Wand");
+        addItem(ModItems.WAND_GOLD, "Gold Wand");
         addItem(ModItems.WAND_DIAMOND, "Diamond Wand");
         addItem(ModItems.WAND_NETHERITE, "Netherite Wand");
         addItem(ModItems.WAND_INFINITY, "Infinity Wand");
         addItem(ModItems.CORE_ANGEL, "Angel Wand Core");
         addItem(ModItems.CORE_DESTRUCTION, "Destruction Wand Core");
+        addItem(ModItems.CORE_EXCHANGE, "Exchange Wand Core");
 
  add("advancement.constructionwand.root.title", "Construction Wands Revived");
 add("advancement.constructionwand.root.desc", "Get your first wand");
@@ -118,8 +120,20 @@ add("advancement.constructionwand.core_destruction.desc", "Obtain a Destruction 
         add("gui.constructionwand.void_sack.storing", "Storing");
         add("key.constructionwand.void_sack_toggle", "Toggle Void Sack");
         add("constructionwand.description.void_sack", "The Void Sack intercepts items you pick up and stores them in its 4×4 internal inventory.\n\n§5§nACTIVATION§0§r\nPress %1$s to activate or deactivate the sack. While inactive, items go to your normal inventory as usual.\n\n§5§nLINKING A CONTAINER§0§r\nRight-click any container (chest, barrel, shulker...) while holding the sack to link it. Once linked, items go to that container first when the sack is active. If the container is full, the overflow goes to the sack's internal storage.\n\n§5§nTOGGLE MODE§0§r\nPress %1$s to switch between §aSending§0 (items → container) and §eStoring§0 (items → internal slots). You can also click the toggle button inside the sack GUI.");
-
-        add("stat.constructionwand.use_wand", "Blocks placed using Wand");
+     add("stat.constructionwand.use_wand", "Blocks placed using Wand");
+     add("key.constructionwand.wand_undo", "Undo Wand Action");
+    add("constructionwand.undo.success",  "Wand action undone");
+    add("constructionwand.undo.nothing",  "Nothing to undo");
+    add("constructionwand.networking.wand_undo.failed",  "Failed to undo wand action");
+    add("key.categories.constructionwand", "Construction Wands Revived");
+    add("constructionwand.message.exchange_selected", "Selected: %s");
+add("constructionwand.message.exchange_invalid", "That block can't be selected");
+add("constructionwand.message.exchange_none_selected", "No block selected — press Numpad 7 looking at a block");
+add("constructionwand.message.exchange_no_target", "Look at a block first");
+add("key.constructionwand.exchange_select", "Select Exchange Block");
+add("constructionwand.option.cores.constructionwand:core_exchange", "§bExchange Core");
+add("constructionwand.option.cores.constructionwand:core_exchange.desc", "Replaces blocks on the side facing you with the block in your offhand");
+add("constructionwand.description.core_exchange", "The exchange core replaces blocks on the side facing you (or a row of blocks) with the block held in your offhand. Maximum number of blocks depends on wand tier. Restrictions work just like with the Construction core.");
     }
 
     private void addCoreInfo(String core, String name, String desc) {
@@ -138,11 +152,13 @@ add("advancement.constructionwand.core_destruction.desc", "Obtain a Destruction 
 
         addItem(ModItems.WAND_STONE, "Varita de Piedra");
         addItem(ModItems.WAND_IRON, "Varita de Hierro");
+        addItem(ModItems.WAND_GOLD, "Varita de Oro");
         addItem(ModItems.WAND_DIAMOND, "Varita de Diamante");
         addItem(ModItems.WAND_NETHERITE, "Varita de netherita");
         addItem(ModItems.WAND_INFINITY, "Varita del Infinito");
         addItem(ModItems.CORE_ANGEL, "Núcleo de Varita Angelical");
         addItem(ModItems.CORE_DESTRUCTION, "Núcleo de Varita de Destrucción");
+        addItem(ModItems.CORE_EXCHANGE, "Núcleo de Varita de Intercambio");
        
          add("advancement.constructionwand.root.title", "Varitas de Construcción Revividas");
 add("advancement.constructionwand.root.desc", "Obtené tu primera varita");
@@ -231,6 +247,21 @@ add("advancement.constructionwand.core_destruction.desc", "Obtené un Núcleo de
         add("constructionwand.description.void_sack", "La Bolsa del Vacío intercepta los ítems que recogés y los guarda en su inventario interno de 4×4.\n\n§5§nACTIVACIÓN§0§r\nPresioná %1$s para activar o desactivar la bolsa. Mientras está inactiva, los ítems van a tu inventario normal.\n\n§5§nVINCULAR UN CONTAINER§0§r\nHacé clic derecho sobre cualquier container (cofre, barril, shulker...) con la bolsa en mano para vincularlo. Una vez vinculada, los ítems van primero al container cuando la bolsa está activa. Si el container está lleno, el exceso va al almacenamiento interno de la bolsa.\n\n§5§nMODO§0§r\nPresioná %1$s para alternar entre §aEnviando§0 (ítems → container) y §eGuardando§0 (ítems → espacios internos). También podés usar el botón de cambio dentro de la GUI.");
 
         add("stat.constructionwand.use_wand", "Bloques colocados usando la Varita");
+        add("advancement.constructionwand.void_sack.desc", "Bolsa del Vacío");
+        add("advancement.constructionwand.void_sack.title", "Guarda items del Destruction Core dentro de la Bolsa del Vacío o en contenedores vinculados");
+        add("key.constructionwand.wand_undo", "Deshacer acción de varita");
+       add("constructionwand.undo.success",  "Acción de varita deshecha");
+       add("constructionwand.undo.nothing",  "Nada para deshacer");
+       add("constructionwand.networking.wand_undo.failed",  "No se pudo deshacer la acción de la varita");
+       add("key.categories.constructionwand", "Varitas de Construcción Revividas");
+       add("constructionwand.message.exchange_selected", "Seleccionado: %s");
+add("constructionwand.message.exchange_invalid", "Ese bloque no se puede seleccionar");
+add("constructionwand.message.exchange_none_selected", "No hay bloque seleccionado — presioná Numpad 7 mirando un bloque");
+add("constructionwand.message.exchange_no_target", "Primero mirá un bloque");
+add("key.constructionwand.exchange_select", "Seleccionar bloque de Intercambio");
+add("constructionwand.option.cores.constructionwand:core_exchange", "§bNúcleo de Intercambio");
+add("constructionwand.option.cores.constructionwand:core_exchange.desc", "Reemplaza bloques en el lado que te mira por el bloque que tenés en la mano secundaria");
+add("constructionwand.description.core_exchange", "El núcleo de intercambio reemplaza los bloques en el lado que estás mirando (o una fila de bloques) por el bloque que tenés en la mano secundaria. El número máximo de bloques depende del nivel de la varita. Las restricciones funcionan igual que con el núcleo de Construcción.");
         }
     }
 
@@ -240,28 +271,47 @@ add("advancement.constructionwand.core_destruction.desc", "Obtené un Núcleo de
         }
         @Override
         protected void addTranslations() {
-        add("itemGroup.constructionwand", "Varitas de Construcción Revividas");
+           add("itemGroup.constructionwand", "Varitas de Construcción Revividas");
         add("itemGroup.constructionwand.construction_wand_tab", "Varitas de Construcción Revividas");
 
-        addItem(ModItems.WAND_STONE, "Varita de piedra");
-        addItem(ModItems.WAND_IRON, "Varita de hierro");
-        addItem(ModItems.WAND_DIAMOND, "Varita de diamante");
+        addItem(ModItems.WAND_STONE, "Varita de Piedra");
+        addItem(ModItems.WAND_IRON, "Varita de Hierro");
+        addItem(ModItems.WAND_GOLD, "Varita de Oro");
+        addItem(ModItems.WAND_DIAMOND, "Varita de Diamante");
         addItem(ModItems.WAND_NETHERITE, "Varita de netherita");
-        addItem(ModItems.WAND_INFINITY, "Varita infinita");
-        addItem(ModItems.CORE_ANGEL, "Núcleo de varita angelical");
-        addItem(ModItems.CORE_DESTRUCTION, "Núcleo de varita de destrucción");
+        addItem(ModItems.WAND_INFINITY, "Varita del Infinito");
+        addItem(ModItems.CORE_ANGEL, "Núcleo de Varita Angelical");
+        addItem(ModItems.CORE_DESTRUCTION, "Núcleo de Varita de Destrucción");
+        addItem(ModItems.CORE_EXCHANGE, "Núcleo de Varita de Intercambio");
+       
+         add("advancement.constructionwand.root.title", "Varitas de Construcción Revividas");
+add("advancement.constructionwand.root.desc", "Obtené tu primera varita");
+add("advancement.constructionwand.stone_wand.title", "Varita de Piedra");
+add("advancement.constructionwand.stone_wand.desc", "Obtené una Varita de Piedra");
+add("advancement.constructionwand.iron_wand.title", "Varita de Hierro");
+add("advancement.constructionwand.iron_wand.desc", "Obtené una Varita de Hierro");
+add("advancement.constructionwand.diamond_wand.title", "Varita de Diamante");
+add("advancement.constructionwand.diamond_wand.desc", "Obtené una Varita de Diamante");
+add("advancement.constructionwand.netherite_wand.title", "Varita de Netherita");
+add("advancement.constructionwand.netherite_wand.desc", "Obtené una Varita de Netherita");
+add("advancement.constructionwand.infinity_wand.title", "Varita del Infinito");
+add("advancement.constructionwand.infinity_wand.desc", "Obtené la Varita del Infinito");
+add("advancement.constructionwand.core_angel.title", "Núcleo Angelical");
+add("advancement.constructionwand.core_angel.desc", "Obtené un Núcleo de Varita Angelical");
+add("advancement.constructionwand.core_destruction.title", "Núcleo de Destrucción");
+add("advancement.constructionwand.core_destruction.desc", "Obtené un Núcleo de Varita de Destrucción");
 
-        add("constructionwand.tooltip.blocks", "%d bloques máx.");
+        add("constructionwand.tooltip.blocks", "Máx. %d bloques");
         add("constructionwand.tooltip.shift", "Presiona [MAYÚS]");
         add("constructionwand.tooltip.cores", "Núcleos de varita:");
-        add("constructionwand.tooltip.core_tip", "Combina el núcleo con tu varita en una cuadrícula de fabricación");
+        add("constructionwand.tooltip.core_tip", "Combina el núcleo con tu varita en una rejilla de crafteo");
         add("constructionwand.option.cores", "");
-        add("constructionwand.option.cores.constructionwand:default", "Núcleo de construcción");
-        add("constructionwand.option.cores.constructionwand:default.desc", "Extiende tu construcción hacia el lado que estás mirando");
-        add("constructionwand.option.cores.constructionwand:core_angel", "§6Núcleo angelical");
+        add("constructionwand.option.cores.constructionwand:default", "Núcleo de Construcción");
+        add("constructionwand.option.cores.constructionwand:default.desc", "Extiende tu construcción hacia el lado que te mira");
+        add("constructionwand.option.cores.constructionwand:core_angel", "§6Núcleo Angelical");
         add("constructionwand.option.cores.constructionwand:core_angel.desc", "Coloca bloques detrás, incluso en el aire");
-        add("constructionwand.option.cores.constructionwand:core_destruction", "§cNúcleo de destrucción");
-        add("constructionwand.option.cores.constructionwand:core_destruction.desc", "Destruye bloques en el lado que estás mirando");
+        add("constructionwand.option.cores.constructionwand:core_destruction", "§cNúcleo de Destrucción");
+        add("constructionwand.option.cores.constructionwand:core_destruction.desc", "Destruye bloques en el lado que te mira");
         add("constructionwand.option.lock", "Restricción: ");
         add("constructionwand.option.lock.horizontal", "§aIzquierda/Derecha");
         add("constructionwand.option.lock.horizontal.desc", "Construye una columna horizontal frente al bloque original");
@@ -272,7 +322,7 @@ add("advancement.constructionwand.core_destruction.desc", "Obtené un Núcleo de
         add("constructionwand.option.lock.eastwest", "§6Este/Oeste");
         add("constructionwand.option.lock.eastwest.desc", "Construye una fila en dirección E/O sobre el bloque original");
         add("constructionwand.option.lock.nolock", "§cNinguna");
-        add("constructionwand.option.lock.nolock.desc", "Extiende desde cualquier lado del bloque original");
+        add("constructionwand.option.lock.nolock.desc", "Extender desde cualquier lado del bloque original");
         add("constructionwand.option.direction", "Dirección: ");
         add("constructionwand.option.direction.target", "§6Objetivo");
         add("constructionwand.option.direction.target.desc", "Coloca bloques con la misma orientación que el bloque objetivo");
@@ -292,18 +342,49 @@ add("advancement.constructionwand.core_destruction.desc", "Obtené un Núcleo de
         add("constructionwand.option.match.any.desc", "Extiende cualquier bloque");
         add("constructionwand.option.random", "Aleatorio: ");
         add("constructionwand.option.random.yes", "§aSí");
-        add("constructionwand.option.random.yes.desc", "Coloca bloques al azar presentes en tu barra de acceso rápido");
+        add("constructionwand.option.random.yes.desc", "Coloca bloques al azar presentes en tu barra rápida");
         add("constructionwand.option.random.no", "§cNo");
         add("constructionwand.option.random.no.desc", "No aleatorizar los bloques colocados");
-        add("constructionwand.description.wand", "La %1$s puede colocar hasta %2$d bloques al lado de una construcción que estés mirando y dura %3$s.\n\nMantén presionado %5$s y gira la rueda para cambiar la restricción de colocación (Horizontal, Vertical, Norte/Sur, Este/Oeste, Sin restricción).\n\nAbre la pantalla de opciones con %6$s§9 + Clic derecho§0.\n\n§5§nDESHACER§0§r\nManteniendo presionado §9Agacharse + §0%4$s mientras miras un bloque mostrará los últimos bloques que colocaste resaltados con un borde verde. §9Agacharse + §0%4$s§9 + Clic derecho§0 sobre cualquiera de ellos deshará la operación, devolviéndote todos los objetos. Si usaste el núcleo de destrucción, restaurará los bloques.\n\n§5§nCONTENEDORES§0§r\nLas cajas de shulker, sacos y muchos contenedores de otros mods pueden proveer bloques de construcción para la varita.\n\n§5§nPRIORIDAD DE MANO SECUNDARIA§0§r\nTener bloques en la mano secundaria hará que se coloquen ellos en vez del bloque al que estás mirando.");
-        add("constructionwand.description.durability.limited", "para %d bloques");
+        add("constructionwand.description.wand", "La %1$s puede colocar hasta %2$d bloques al lado de una construcción que te mire y dura %3$s.\n\nMantén presionado %5$s y rota la rueda para cambiar la restricción de colocación (Horizontal, Vertical, Norte/Sur, Este/Oeste, Sin restricción).\n\nAbre la pantalla de opciones con %6$s§9+Clic derecho§0.\n\n§5§nDESHACER§0§r\nManteniendo presionado §9Agacharse+§0%4$s mientras mirás un bloque mostrará los últimos bloques que colocaste con un borde verde alrededor. §9Agacharse+§0%4$s§9+Clic derecho§0 sobre cualquiera de ellos deshará la operación, devolviéndote todos los objetos. Si usaste el núcleo de Destrucción, restaurará los bloques.\n\n§5§nCONTENEDORES§0§r\nShulker boxes, bundles y muchos contenedores de otros mods pueden proveer bloques de construcción para la varita.\n\n§5§nPRIORIDAD MAIN/SECUNDARIA§0§r\nTener bloques en la mano secundaria hará que se coloquen ellos en vez del bloque en el que estás mirando.");
+        add("constructionwand.description.durability.limited", "por %d bloques");
         add("constructionwand.description.durability.unlimited", "para siempre");
         add("constructionwand.description.key.sneak", "Agacharse");
-        add("constructionwand.description.key.sneak_opt", "Agacharse + %s");
-        add("constructionwand.description.core", "§5§nINSTALACIÓN§0§r\nColoca tu nuevo núcleo junto con tu varita en una cuadrícula de fabricación para instalarlo. Para cambiar entre núcleos, mantén presionado %s y haz clic izquierdo en un espacio vacío con tu varita o usa la pantalla de opciones.");
-        add("constructionwand.description.core_angel", "El núcleo angelical coloca un bloque en el lado opuesto del bloque (o fila de bloques) que estás mirando. La distancia máxima depende del nivel de la varita. Haz clic derecho en un espacio vacío para colocar un bloque en el aire. Para hacer eso, necesitarás tener el bloque que deseas colocar en tu mano secundaria.");
-        add("constructionwand.description.core_destruction", "El núcleo de destrucción destruye bloques (no entidades de bloque) en el lado que estás mirando. El número máximo de bloques depende del nivel de la varita. Los bloques destruidos desaparecen en el vacío, puedes usar la función de deshacer si cometiste un error.");
-        add("stat.constructionwand.use_wand", "Bloques colocados usando la varita");
+        add("constructionwand.description.key.sneak_opt", "Agacharse+%s");
+        add("constructionwand.description.core", "§5§nINSTALACIÓN§0§r\nPon tu nuevo núcleo junto con tu varita en una rejilla de crafteo para instalarlo. Para cambiar entre núcleos, mantén presionado %s y haz clic izquierdo en el aire con tu varita o usa la pantalla de opciones.");
+        add("constructionwand.description.core_angel", "El núcleo angelical coloca un bloque en el lado opuesto del bloque (o fila de bloques) al que estás mirando. La distancia máxima depende del nivel de la varita. Clic derecho en el aire para colocar un bloque en el aire. Para eso, necesitarás tener el bloque que quieras colocar en la mano secundaria.");
+        add("constructionwand.description.core_destruction", "El núcleo de destrucción destruye bloques (no entidades de bloque) en el lado que estás mirando. El número máximo de bloques depende del nivel de la varita. Los bloques destruidos desaparecen en el vacío; podés usar la función deshacer si te equivocás.");
+        add("item.constructionwand.void_sack", "Bolsa del Vacío");
+        add("item.constructionwand.void_sack.active", "§aActiva §7(presioná §6%1$s§7 para cambiar)");
+        add("item.constructionwand.void_sack.inactive", "§7Inactiva §7(presioná §6%1$s§7 para cambiar)");
+        add("item.constructionwand.void_sack.linked", "Vinculada a: %d, %d, %d");
+        add("item.constructionwand.void_sack.no_link", "Sin container vinculado");
+        add("item.constructionwand.void_sack.sending", "Enviando al container");
+        add("item.constructionwand.void_sack.storing", "Guardando internamente");
+        add("item.constructionwand.void_sack.slots_used", "Espacios usados: %d / %d");
+        add("item.constructionwand.void_sack.linked_msg", "Bolsa vinculada a %d, %d, %d");
+        add("item.constructionwand.void_sack.activated", "Bolsa del Vacío activada");
+        add("item.constructionwand.void_sack.deactivated", "Bolsa del Vacío desactivada");
+        add("gui.constructionwand.void_sack.toggle_tooltip", "Cambiar: enviar al container / guardar internamente");
+        add("gui.constructionwand.void_sack.sending", "Enviando →");
+        add("gui.constructionwand.void_sack.storing", "Guardando");
+        add("key.constructionwand.void_sack_toggle", "Alternar Bolsa del Vacío");
+        add("constructionwand.description.void_sack", "La Bolsa del Vacío intercepta los ítems que recogés y los guarda en su inventario interno de 4×4.\n\n§5§nACTIVACIÓN§0§r\nPresioná %1$s para activar o desactivar la bolsa. Mientras está inactiva, los ítems van a tu inventario normal.\n\n§5§nVINCULAR UN CONTAINER§0§r\nHacé clic derecho sobre cualquier container (cofre, barril, shulker...) con la bolsa en mano para vincularlo. Una vez vinculada, los ítems van primero al container cuando la bolsa está activa. Si el container está lleno, el exceso va al almacenamiento interno de la bolsa.\n\n§5§nMODO§0§r\nPresioná %1$s para alternar entre §aEnviando§0 (ítems → container) y §eGuardando§0 (ítems → espacios internos). También podés usar el botón de cambio dentro de la GUI.");
+        add("stat.constructionwand.use_wand", "Bloques colocados usando la Varita");
+        add("advancement.constructionwand.void_sack.desc", "Bolsa del Vacío");
+        add("advancement.constructionwand.void_sack.title", "Guarda items del Destruction Core dentro de la Bolsa del Vacío o en contenedores vinculados");
+        add("key.constructionwand.wand_undo", "Deshacer acción de varita");
+       add("constructionwand.undo.success",  "Acción de varita deshecha");
+       add("constructionwand.undo.nothing",  "Nada para deshacer");
+       add("constructionwand.networking.wand_undo.failed",  "No se pudo deshacer la acción de la varita");
+       add("key.categories.constructionwand", "Varitas de Construcción Revividas");
+       add("constructionwand.message.exchange_selected", "Seleccionado: %s");
+add("constructionwand.message.exchange_invalid", "Ese bloque no se puede seleccionar");
+add("constructionwand.message.exchange_none_selected", "No hay bloque seleccionado — presioná Numpad 7 mirando un bloque");
+add("constructionwand.message.exchange_no_target", "Primero mirá un bloque");
+add("key.constructionwand.exchange_select", "Seleccionar bloque de Intercambio");
+add("constructionwand.option.cores.constructionwand:core_exchange", "§bNúcleo de Intercambio");
+add("constructionwand.option.cores.constructionwand:core_exchange.desc", "Reemplaza bloques en el lado que te mira por el bloque que tenés en la mano secundaria");
+add("constructionwand.description.core_exchange", "El núcleo de intercambio reemplaza los bloques en el lado que estás mirando (o una fila de bloques) por el bloque que tenés en la mano secundaria. El número máximo de bloques depende del nivel de la varita. Las restricciones funcionan igual que con el núcleo de Construcción.");
         }
     }
 
@@ -313,18 +394,20 @@ add("advancement.constructionwand.core_destruction.desc", "Obtené un Núcleo de
         }
         @Override
         protected void addTranslations() {
-        add("itemGroup.constructionwand", "Varitas de Construcción Revividas");
+          add("itemGroup.constructionwand", "Varitas de Construcción Revividas");
         add("itemGroup.constructionwand.construction_wand_tab", "Varitas de Construcción Revividas");
 
-        addItem(ModItems.WAND_STONE, "Varita de piedra");
-        addItem(ModItems.WAND_IRON, "Varita de hierro");
-        addItem(ModItems.WAND_DIAMOND, "Varita de diamante");
+        addItem(ModItems.WAND_STONE, "Varita de Piedra");
+        addItem(ModItems.WAND_IRON, "Varita de Hierro");
+        addItem(ModItems.WAND_GOLD, "Varita de Oro");
+        addItem(ModItems.WAND_DIAMOND, "Varita de Diamante");
         addItem(ModItems.WAND_NETHERITE, "Varita de netherita");
-        addItem(ModItems.WAND_INFINITY, "Varita infinita");
-        addItem(ModItems.CORE_ANGEL, "Núcleo de varita angelical");
-        addItem(ModItems.CORE_DESTRUCTION, "Núcleo de varita de destrucción");
-
-        add("advancement.constructionwand.root.title", "Varitas de Construcción Revividas");
+        addItem(ModItems.WAND_INFINITY, "Varita del Infinito");
+        addItem(ModItems.CORE_ANGEL, "Núcleo de Varita Angelical");
+        addItem(ModItems.CORE_DESTRUCTION, "Núcleo de Varita de Destrucción");
+        addItem(ModItems.CORE_EXCHANGE, "Núcleo de Varita de Intercambio");
+       
+         add("advancement.constructionwand.root.title", "Varitas de Construcción Revividas");
 add("advancement.constructionwand.root.desc", "Obtené tu primera varita");
 add("advancement.constructionwand.stone_wand.title", "Varita de Piedra");
 add("advancement.constructionwand.stone_wand.desc", "Obtené una Varita de Piedra");
@@ -341,17 +424,17 @@ add("advancement.constructionwand.core_angel.desc", "Obtené un Núcleo de Varit
 add("advancement.constructionwand.core_destruction.title", "Núcleo de Destrucción");
 add("advancement.constructionwand.core_destruction.desc", "Obtené un Núcleo de Varita de Destrucción");
 
-        add("constructionwand.tooltip.blocks", "%d bloques máx.");
+        add("constructionwand.tooltip.blocks", "Máx. %d bloques");
         add("constructionwand.tooltip.shift", "Presiona [MAYÚS]");
         add("constructionwand.tooltip.cores", "Núcleos de varita:");
-        add("constructionwand.tooltip.core_tip", "Combina el núcleo con tu varita en una cuadrícula de fabricación");
+        add("constructionwand.tooltip.core_tip", "Combina el núcleo con tu varita en una rejilla de crafteo");
         add("constructionwand.option.cores", "");
-        add("constructionwand.option.cores.constructionwand:default", "Núcleo de construcción");
-        add("constructionwand.option.cores.constructionwand:default.desc", "Extiende tu construcción hacia el lado que estás mirando");
-        add("constructionwand.option.cores.constructionwand:core_angel", "§6Núcleo angelical");
+        add("constructionwand.option.cores.constructionwand:default", "Núcleo de Construcción");
+        add("constructionwand.option.cores.constructionwand:default.desc", "Extiende tu construcción hacia el lado que te mira");
+        add("constructionwand.option.cores.constructionwand:core_angel", "§6Núcleo Angelical");
         add("constructionwand.option.cores.constructionwand:core_angel.desc", "Coloca bloques detrás, incluso en el aire");
-        add("constructionwand.option.cores.constructionwand:core_destruction", "§cNúcleo de destrucción");
-        add("constructionwand.option.cores.constructionwand:core_destruction.desc", "Destruye bloques en el lado que estás mirando");
+        add("constructionwand.option.cores.constructionwand:core_destruction", "§cNúcleo de Destrucción");
+        add("constructionwand.option.cores.constructionwand:core_destruction.desc", "Destruye bloques en el lado que te mira");
         add("constructionwand.option.lock", "Restricción: ");
         add("constructionwand.option.lock.horizontal", "§aIzquierda/Derecha");
         add("constructionwand.option.lock.horizontal.desc", "Construye una columna horizontal frente al bloque original");
@@ -362,7 +445,7 @@ add("advancement.constructionwand.core_destruction.desc", "Obtené un Núcleo de
         add("constructionwand.option.lock.eastwest", "§6Este/Oeste");
         add("constructionwand.option.lock.eastwest.desc", "Construye una fila en dirección E/O sobre el bloque original");
         add("constructionwand.option.lock.nolock", "§cNinguna");
-        add("constructionwand.option.lock.nolock.desc", "Extiende desde cualquier lado del bloque original");
+        add("constructionwand.option.lock.nolock.desc", "Extender desde cualquier lado del bloque original");
         add("constructionwand.option.direction", "Dirección: ");
         add("constructionwand.option.direction.target", "§6Objetivo");
         add("constructionwand.option.direction.target.desc", "Coloca bloques con la misma orientación que el bloque objetivo");
@@ -382,18 +465,49 @@ add("advancement.constructionwand.core_destruction.desc", "Obtené un Núcleo de
         add("constructionwand.option.match.any.desc", "Extiende cualquier bloque");
         add("constructionwand.option.random", "Aleatorio: ");
         add("constructionwand.option.random.yes", "§aSí");
-        add("constructionwand.option.random.yes.desc", "Coloca bloques al azar presentes en tu barra de acceso rápido");
+        add("constructionwand.option.random.yes.desc", "Coloca bloques al azar presentes en tu barra rápida");
         add("constructionwand.option.random.no", "§cNo");
         add("constructionwand.option.random.no.desc", "No aleatorizar los bloques colocados");
-        add("constructionwand.description.wand", "La %1$s puede colocar hasta %2$d bloques al lado de una construcción que estés mirando y dura %3$s.\n\nMantén presionado %5$s y gira la rueda para cambiar la restricción de colocación (Horizontal, Vertical, Norte/Sur, Este/Oeste, Sin restricción).\n\nAbre la pantalla de opciones con %6$s§9 + Clic derecho§0.\n\n§5§nDESHACER§0§r\nManteniendo presionado §9Agacharse + §0%4$s mientras miras un bloque mostrará los últimos bloques que colocaste resaltados con un borde verde. §9Agacharse + §0%4$s§9 + Clic derecho§0 sobre cualquiera de ellos deshará la operación, devolviéndote todos los objetos. Si usaste el núcleo de destrucción, restaurará los bloques.\n\n§5§nCONTENEDORES§0§r\nLas cajas de shulker, sacos y muchos contenedores de otros mods pueden proveer bloques de construcción para la varita.\n\n§5§nPRIORIDAD DE MANO SECUNDARIA§0§r\nTener bloques en la mano secundaria hará que se coloquen ellos en vez del bloque al que estás mirando.");
-        add("constructionwand.description.durability.limited", "para %d bloques");
+        add("constructionwand.description.wand", "La %1$s puede colocar hasta %2$d bloques al lado de una construcción que te mire y dura %3$s.\n\nMantén presionado %5$s y rota la rueda para cambiar la restricción de colocación (Horizontal, Vertical, Norte/Sur, Este/Oeste, Sin restricción).\n\nAbre la pantalla de opciones con %6$s§9+Clic derecho§0.\n\n§5§nDESHACER§0§r\nManteniendo presionado §9Agacharse+§0%4$s mientras mirás un bloque mostrará los últimos bloques que colocaste con un borde verde alrededor. §9Agacharse+§0%4$s§9+Clic derecho§0 sobre cualquiera de ellos deshará la operación, devolviéndote todos los objetos. Si usaste el núcleo de Destrucción, restaurará los bloques.\n\n§5§nCONTENEDORES§0§r\nShulker boxes, bundles y muchos contenedores de otros mods pueden proveer bloques de construcción para la varita.\n\n§5§nPRIORIDAD MAIN/SECUNDARIA§0§r\nTener bloques en la mano secundaria hará que se coloquen ellos en vez del bloque en el que estás mirando.");
+        add("constructionwand.description.durability.limited", "por %d bloques");
         add("constructionwand.description.durability.unlimited", "para siempre");
         add("constructionwand.description.key.sneak", "Agacharse");
-        add("constructionwand.description.key.sneak_opt", "Agacharse + %s");
-        add("constructionwand.description.core", "§5§nINSTALACIÓN§0§r\nColoca tu nuevo núcleo junto con tu varita en una cuadrícula de fabricación para instalarlo. Para cambiar entre núcleos, mantén presionado %s y haz clic izquierdo en un espacio vacío con tu varita o usa la pantalla de opciones.");
-        add("constructionwand.description.core_angel", "El núcleo angelical coloca un bloque en el lado opuesto del bloque (o fila de bloques) que estás mirando. La distancia máxima depende del nivel de la varita. Haz clic derecho en un espacio vacío para colocar un bloque en el aire. Para hacer eso, necesitarás tener el bloque que deseas colocar en tu mano secundaria.");
-        add("constructionwand.description.core_destruction", "El núcleo de destrucción destruye bloques (no entidades de bloque) en el lado que estás mirando. El número máximo de bloques depende del nivel de la varita. Los bloques destruidos desaparecen en el vacío, puedes usar la función de deshacer si cometiste un error.");
-        add("stat.constructionwand.use_wand", "Bloques colocados usando la varita");
+        add("constructionwand.description.key.sneak_opt", "Agacharse+%s");
+        add("constructionwand.description.core", "§5§nINSTALACIÓN§0§r\nPon tu nuevo núcleo junto con tu varita en una rejilla de crafteo para instalarlo. Para cambiar entre núcleos, mantén presionado %s y haz clic izquierdo en el aire con tu varita o usa la pantalla de opciones.");
+        add("constructionwand.description.core_angel", "El núcleo angelical coloca un bloque en el lado opuesto del bloque (o fila de bloques) al que estás mirando. La distancia máxima depende del nivel de la varita. Clic derecho en el aire para colocar un bloque en el aire. Para eso, necesitarás tener el bloque que quieras colocar en la mano secundaria.");
+        add("constructionwand.description.core_destruction", "El núcleo de destrucción destruye bloques (no entidades de bloque) en el lado que estás mirando. El número máximo de bloques depende del nivel de la varita. Los bloques destruidos desaparecen en el vacío; podés usar la función deshacer si te equivocás.");
+        add("item.constructionwand.void_sack", "Bolsa del Vacío");
+        add("item.constructionwand.void_sack.active", "§aActiva §7(presioná §6%1$s§7 para cambiar)");
+        add("item.constructionwand.void_sack.inactive", "§7Inactiva §7(presioná §6%1$s§7 para cambiar)");
+        add("item.constructionwand.void_sack.linked", "Vinculada a: %d, %d, %d");
+        add("item.constructionwand.void_sack.no_link", "Sin container vinculado");
+        add("item.constructionwand.void_sack.sending", "Enviando al container");
+        add("item.constructionwand.void_sack.storing", "Guardando internamente");
+        add("item.constructionwand.void_sack.slots_used", "Espacios usados: %d / %d");
+        add("item.constructionwand.void_sack.linked_msg", "Bolsa vinculada a %d, %d, %d");
+        add("item.constructionwand.void_sack.activated", "Bolsa del Vacío activada");
+        add("item.constructionwand.void_sack.deactivated", "Bolsa del Vacío desactivada");
+        add("gui.constructionwand.void_sack.toggle_tooltip", "Cambiar: enviar al container / guardar internamente");
+        add("gui.constructionwand.void_sack.sending", "Enviando →");
+        add("gui.constructionwand.void_sack.storing", "Guardando");
+        add("key.constructionwand.void_sack_toggle", "Alternar Bolsa del Vacío");
+        add("constructionwand.description.void_sack", "La Bolsa del Vacío intercepta los ítems que recogés y los guarda en su inventario interno de 4×4.\n\n§5§nACTIVACIÓN§0§r\nPresioná %1$s para activar o desactivar la bolsa. Mientras está inactiva, los ítems van a tu inventario normal.\n\n§5§nVINCULAR UN CONTAINER§0§r\nHacé clic derecho sobre cualquier container (cofre, barril, shulker...) con la bolsa en mano para vincularlo. Una vez vinculada, los ítems van primero al container cuando la bolsa está activa. Si el container está lleno, el exceso va al almacenamiento interno de la bolsa.\n\n§5§nMODO§0§r\nPresioná %1$s para alternar entre §aEnviando§0 (ítems → container) y §eGuardando§0 (ítems → espacios internos). También podés usar el botón de cambio dentro de la GUI.");
+        add("stat.constructionwand.use_wand", "Bloques colocados usando la Varita");
+        add("advancement.constructionwand.void_sack.desc", "Bolsa del Vacío");
+        add("advancement.constructionwand.void_sack.title", "Guarda items del Destruction Core dentro de la Bolsa del Vacío o en contenedores vinculados");
+        add("key.constructionwand.wand_undo", "Deshacer acción de varita");
+       add("constructionwand.undo.success",  "Acción de varita deshecha");
+       add("constructionwand.undo.nothing",  "Nada para deshacer");
+       add("constructionwand.networking.wand_undo.failed",  "No se pudo deshacer la acción de la varita");
+       add("key.categories.constructionwand", "Varitas de Construcción Revividas");
+       add("constructionwand.message.exchange_selected", "Seleccionado: %s");
+add("constructionwand.message.exchange_invalid", "Ese bloque no se puede seleccionar");
+add("constructionwand.message.exchange_none_selected", "No hay bloque seleccionado — presioná Numpad 7 mirando un bloque");
+add("constructionwand.message.exchange_no_target", "Primero mirá un bloque");
+add("key.constructionwand.exchange_select", "Seleccionar bloque de Intercambio");
+add("constructionwand.option.cores.constructionwand:core_exchange", "§bNúcleo de Intercambio");
+add("constructionwand.option.cores.constructionwand:core_exchange.desc", "Reemplaza bloques en el lado que te mira por el bloque que tenés en la mano secundaria");
+add("constructionwand.description.core_exchange", "El núcleo de intercambio reemplaza los bloques en el lado que estás mirando (o una fila de bloques) por el bloque que tenés en la mano secundaria. El número máximo de bloques depende del nivel de la varita. Las restricciones funcionan igual que con el núcleo de Construcción.");
         }
     }
 
@@ -403,17 +517,19 @@ add("advancement.constructionwand.core_destruction.desc", "Obtené un Núcleo de
         }
         @Override
         protected void addTranslations() {
-        add("itemGroup.constructionwand", "Varitas de Construcción Revividas");
+          add("itemGroup.constructionwand", "Varitas de Construcción Revividas");
         add("itemGroup.constructionwand.construction_wand_tab", "Varitas de Construcción Revividas");
 
-        addItem(ModItems.WAND_STONE, "Varita de piedra");
-        addItem(ModItems.WAND_IRON, "Varita de hierro");
-        addItem(ModItems.WAND_DIAMOND, "Varita de diamante");
+        addItem(ModItems.WAND_STONE, "Varita de Piedra");
+        addItem(ModItems.WAND_IRON, "Varita de Hierro");
+        addItem(ModItems.WAND_GOLD, "Varita de Oro");
+        addItem(ModItems.WAND_DIAMOND, "Varita de Diamante");
         addItem(ModItems.WAND_NETHERITE, "Varita de netherita");
-        addItem(ModItems.WAND_INFINITY, "Varita infinita");
-        addItem(ModItems.CORE_ANGEL, "Núcleo de varita angelical");
-        addItem(ModItems.CORE_DESTRUCTION, "Núcleo de varita de destrucción");
-
+        addItem(ModItems.WAND_INFINITY, "Varita del Infinito");
+        addItem(ModItems.CORE_ANGEL, "Núcleo de Varita Angelical");
+        addItem(ModItems.CORE_DESTRUCTION, "Núcleo de Varita de Destrucción");
+        addItem(ModItems.CORE_EXCHANGE, "Núcleo de Varita de Intercambio");
+       
          add("advancement.constructionwand.root.title", "Varitas de Construcción Revividas");
 add("advancement.constructionwand.root.desc", "Obtené tu primera varita");
 add("advancement.constructionwand.stone_wand.title", "Varita de Piedra");
@@ -431,17 +547,17 @@ add("advancement.constructionwand.core_angel.desc", "Obtené un Núcleo de Varit
 add("advancement.constructionwand.core_destruction.title", "Núcleo de Destrucción");
 add("advancement.constructionwand.core_destruction.desc", "Obtené un Núcleo de Varita de Destrucción");
 
-        add("constructionwand.tooltip.blocks", "%d bloques máx.");
+        add("constructionwand.tooltip.blocks", "Máx. %d bloques");
         add("constructionwand.tooltip.shift", "Presiona [MAYÚS]");
         add("constructionwand.tooltip.cores", "Núcleos de varita:");
-        add("constructionwand.tooltip.core_tip", "Combina el núcleo con tu varita en una cuadrícula de fabricación");
+        add("constructionwand.tooltip.core_tip", "Combina el núcleo con tu varita en una rejilla de crafteo");
         add("constructionwand.option.cores", "");
-        add("constructionwand.option.cores.constructionwand:default", "Núcleo de construcción");
-        add("constructionwand.option.cores.constructionwand:default.desc", "Extiende tu construcción hacia el lado que estás mirando");
-        add("constructionwand.option.cores.constructionwand:core_angel", "§6Núcleo angelical");
+        add("constructionwand.option.cores.constructionwand:default", "Núcleo de Construcción");
+        add("constructionwand.option.cores.constructionwand:default.desc", "Extiende tu construcción hacia el lado que te mira");
+        add("constructionwand.option.cores.constructionwand:core_angel", "§6Núcleo Angelical");
         add("constructionwand.option.cores.constructionwand:core_angel.desc", "Coloca bloques detrás, incluso en el aire");
-        add("constructionwand.option.cores.constructionwand:core_destruction", "§cNúcleo de destrucción");
-        add("constructionwand.option.cores.constructionwand:core_destruction.desc", "Destruye bloques en el lado que estás mirando");
+        add("constructionwand.option.cores.constructionwand:core_destruction", "§cNúcleo de Destrucción");
+        add("constructionwand.option.cores.constructionwand:core_destruction.desc", "Destruye bloques en el lado que te mira");
         add("constructionwand.option.lock", "Restricción: ");
         add("constructionwand.option.lock.horizontal", "§aIzquierda/Derecha");
         add("constructionwand.option.lock.horizontal.desc", "Construye una columna horizontal frente al bloque original");
@@ -452,7 +568,7 @@ add("advancement.constructionwand.core_destruction.desc", "Obtené un Núcleo de
         add("constructionwand.option.lock.eastwest", "§6Este/Oeste");
         add("constructionwand.option.lock.eastwest.desc", "Construye una fila en dirección E/O sobre el bloque original");
         add("constructionwand.option.lock.nolock", "§cNinguna");
-        add("constructionwand.option.lock.nolock.desc", "Extiende desde cualquier lado del bloque original");
+        add("constructionwand.option.lock.nolock.desc", "Extender desde cualquier lado del bloque original");
         add("constructionwand.option.direction", "Dirección: ");
         add("constructionwand.option.direction.target", "§6Objetivo");
         add("constructionwand.option.direction.target.desc", "Coloca bloques con la misma orientación que el bloque objetivo");
@@ -472,18 +588,49 @@ add("advancement.constructionwand.core_destruction.desc", "Obtené un Núcleo de
         add("constructionwand.option.match.any.desc", "Extiende cualquier bloque");
         add("constructionwand.option.random", "Aleatorio: ");
         add("constructionwand.option.random.yes", "§aSí");
-        add("constructionwand.option.random.yes.desc", "Coloca bloques al azar presentes en tu barra de acceso rápido");
+        add("constructionwand.option.random.yes.desc", "Coloca bloques al azar presentes en tu barra rápida");
         add("constructionwand.option.random.no", "§cNo");
         add("constructionwand.option.random.no.desc", "No aleatorizar los bloques colocados");
-        add("constructionwand.description.wand", "La %1$s puede colocar hasta %2$d bloques al lado de una construcción que estés mirando y dura %3$s.\n\nMantén presionado %5$s y gira la rueda para cambiar la restricción de colocación (Horizontal, Vertical, Norte/Sur, Este/Oeste, Sin restricción).\n\nAbre la pantalla de opciones con %6$s§9 + Clic derecho§0.\n\n§5§nDESHACER§0§r\nManteniendo presionado §9Agacharse + §0%4$s mientras miras un bloque mostrará los últimos bloques que colocaste resaltados con un borde verde. §9Agacharse + §0%4$s§9 + Clic derecho§0 sobre cualquiera de ellos deshará la operación, devolviéndote todos los objetos. Si usaste el núcleo de destrucción, restaurará los bloques.\n\n§5§nCONTENEDORES§0§r\nLas cajas de shulker, sacos y muchos contenedores de otros mods pueden proveer bloques de construcción para la varita.\n\n§5§nPRIORIDAD DE MANO SECUNDARIA§0§r\nTener bloques en la mano secundaria hará que se coloquen ellos en vez del bloque al que estás mirando.");
-        add("constructionwand.description.durability.limited", "para %d bloques");
+        add("constructionwand.description.wand", "La %1$s puede colocar hasta %2$d bloques al lado de una construcción que te mire y dura %3$s.\n\nMantén presionado %5$s y rota la rueda para cambiar la restricción de colocación (Horizontal, Vertical, Norte/Sur, Este/Oeste, Sin restricción).\n\nAbre la pantalla de opciones con %6$s§9+Clic derecho§0.\n\n§5§nDESHACER§0§r\nManteniendo presionado §9Agacharse+§0%4$s mientras mirás un bloque mostrará los últimos bloques que colocaste con un borde verde alrededor. §9Agacharse+§0%4$s§9+Clic derecho§0 sobre cualquiera de ellos deshará la operación, devolviéndote todos los objetos. Si usaste el núcleo de Destrucción, restaurará los bloques.\n\n§5§nCONTENEDORES§0§r\nShulker boxes, bundles y muchos contenedores de otros mods pueden proveer bloques de construcción para la varita.\n\n§5§nPRIORIDAD MAIN/SECUNDARIA§0§r\nTener bloques en la mano secundaria hará que se coloquen ellos en vez del bloque en el que estás mirando.");
+        add("constructionwand.description.durability.limited", "por %d bloques");
         add("constructionwand.description.durability.unlimited", "para siempre");
         add("constructionwand.description.key.sneak", "Agacharse");
-        add("constructionwand.description.key.sneak_opt", "Agacharse + %s");
-        add("constructionwand.description.core", "§5§nINSTALACIÓN§0§r\nColoca tu nuevo núcleo junto con tu varita en una cuadrícula de fabricación para instalarlo. Para cambiar entre núcleos, mantén presionado %s y haz clic izquierdo en un espacio vacío con tu varita o usa la pantalla de opciones.");
-        add("constructionwand.description.core_angel", "El núcleo angelical coloca un bloque en el lado opuesto del bloque (o fila de bloques) que estás mirando. La distancia máxima depende del nivel de la varita. Haz clic derecho en un espacio vacío para colocar un bloque en el aire. Para hacer eso, necesitarás tener el bloque que deseas colocar en tu mano secundaria.");
-        add("constructionwand.description.core_destruction", "El núcleo de destrucción destruye bloques (no entidades de bloque) en el lado que estás mirando. El número máximo de bloques depende del nivel de la varita. Los bloques destruidos desaparecen en el vacío, puedes usar la función de deshacer si cometiste un error.");
-        add("stat.constructionwand.use_wand", "Bloques colocados usando la varita");
+        add("constructionwand.description.key.sneak_opt", "Agacharse+%s");
+        add("constructionwand.description.core", "§5§nINSTALACIÓN§0§r\nPon tu nuevo núcleo junto con tu varita en una rejilla de crafteo para instalarlo. Para cambiar entre núcleos, mantén presionado %s y haz clic izquierdo en el aire con tu varita o usa la pantalla de opciones.");
+        add("constructionwand.description.core_angel", "El núcleo angelical coloca un bloque en el lado opuesto del bloque (o fila de bloques) al que estás mirando. La distancia máxima depende del nivel de la varita. Clic derecho en el aire para colocar un bloque en el aire. Para eso, necesitarás tener el bloque que quieras colocar en la mano secundaria.");
+        add("constructionwand.description.core_destruction", "El núcleo de destrucción destruye bloques (no entidades de bloque) en el lado que estás mirando. El número máximo de bloques depende del nivel de la varita. Los bloques destruidos desaparecen en el vacío; podés usar la función deshacer si te equivocás.");
+        add("item.constructionwand.void_sack", "Bolsa del Vacío");
+        add("item.constructionwand.void_sack.active", "§aActiva §7(presioná §6%1$s§7 para cambiar)");
+        add("item.constructionwand.void_sack.inactive", "§7Inactiva §7(presioná §6%1$s§7 para cambiar)");
+        add("item.constructionwand.void_sack.linked", "Vinculada a: %d, %d, %d");
+        add("item.constructionwand.void_sack.no_link", "Sin container vinculado");
+        add("item.constructionwand.void_sack.sending", "Enviando al container");
+        add("item.constructionwand.void_sack.storing", "Guardando internamente");
+        add("item.constructionwand.void_sack.slots_used", "Espacios usados: %d / %d");
+        add("item.constructionwand.void_sack.linked_msg", "Bolsa vinculada a %d, %d, %d");
+        add("item.constructionwand.void_sack.activated", "Bolsa del Vacío activada");
+        add("item.constructionwand.void_sack.deactivated", "Bolsa del Vacío desactivada");
+        add("gui.constructionwand.void_sack.toggle_tooltip", "Cambiar: enviar al container / guardar internamente");
+        add("gui.constructionwand.void_sack.sending", "Enviando →");
+        add("gui.constructionwand.void_sack.storing", "Guardando");
+        add("key.constructionwand.void_sack_toggle", "Alternar Bolsa del Vacío");
+        add("constructionwand.description.void_sack", "La Bolsa del Vacío intercepta los ítems que recogés y los guarda en su inventario interno de 4×4.\n\n§5§nACTIVACIÓN§0§r\nPresioná %1$s para activar o desactivar la bolsa. Mientras está inactiva, los ítems van a tu inventario normal.\n\n§5§nVINCULAR UN CONTAINER§0§r\nHacé clic derecho sobre cualquier container (cofre, barril, shulker...) con la bolsa en mano para vincularlo. Una vez vinculada, los ítems van primero al container cuando la bolsa está activa. Si el container está lleno, el exceso va al almacenamiento interno de la bolsa.\n\n§5§nMODO§0§r\nPresioná %1$s para alternar entre §aEnviando§0 (ítems → container) y §eGuardando§0 (ítems → espacios internos). También podés usar el botón de cambio dentro de la GUI.");
+        add("stat.constructionwand.use_wand", "Bloques colocados usando la Varita");
+        add("advancement.constructionwand.void_sack.desc", "Bolsa del Vacío");
+        add("advancement.constructionwand.void_sack.title", "Guarda items del Destruction Core dentro de la Bolsa del Vacío o en contenedores vinculados");
+        add("key.constructionwand.wand_undo", "Deshacer acción de varita");
+       add("constructionwand.undo.success",  "Acción de varita deshecha");
+       add("constructionwand.undo.nothing",  "Nada para deshacer");
+       add("constructionwand.networking.wand_undo.failed",  "No se pudo deshacer la acción de la varita");
+       add("key.categories.constructionwand", "Varitas de Construcción Revividas");
+       add("constructionwand.message.exchange_selected", "Seleccionado: %s");
+add("constructionwand.message.exchange_invalid", "Ese bloque no se puede seleccionar");
+add("constructionwand.message.exchange_none_selected", "No hay bloque seleccionado — presioná Numpad 7 mirando un bloque");
+add("constructionwand.message.exchange_no_target", "Primero mirá un bloque");
+add("key.constructionwand.exchange_select", "Seleccionar bloque de Intercambio");
+add("constructionwand.option.cores.constructionwand:core_exchange", "§bNúcleo de Intercambio");
+add("constructionwand.option.cores.constructionwand:core_exchange.desc", "Reemplaza bloques en el lado que te mira por el bloque que tenés en la mano secundaria");
+add("constructionwand.description.core_exchange", "El núcleo de intercambio reemplaza los bloques en el lado que estás mirando (o una fila de bloques) por el bloque que tenés en la mano secundaria. El número máximo de bloques depende del nivel de la varita. Las restricciones funcionan igual que con el núcleo de Construcción.");
         }
     }
 
@@ -493,17 +640,19 @@ add("advancement.constructionwand.core_destruction.desc", "Obtené un Núcleo de
         }
         @Override
         protected void addTranslations() {
-        add("itemGroup.constructionwand", "Varitas de Construcción Revividas");
+           add("itemGroup.constructionwand", "Varitas de Construcción Revividas");
         add("itemGroup.constructionwand.construction_wand_tab", "Varitas de Construcción Revividas");
 
-        addItem(ModItems.WAND_STONE, "Varita de piedra");
-        addItem(ModItems.WAND_IRON, "Varita de hierro");
-        addItem(ModItems.WAND_DIAMOND, "Varita de diamante");
+        addItem(ModItems.WAND_STONE, "Varita de Piedra");
+        addItem(ModItems.WAND_IRON, "Varita de Hierro");
+        addItem(ModItems.WAND_GOLD, "Varita de Oro");
+        addItem(ModItems.WAND_DIAMOND, "Varita de Diamante");
         addItem(ModItems.WAND_NETHERITE, "Varita de netherita");
-        addItem(ModItems.WAND_INFINITY, "Varita infinita");
-        addItem(ModItems.CORE_ANGEL, "Núcleo de varita angelical");
-        addItem(ModItems.CORE_DESTRUCTION, "Núcleo de varita de destrucción");
-
+        addItem(ModItems.WAND_INFINITY, "Varita del Infinito");
+        addItem(ModItems.CORE_ANGEL, "Núcleo de Varita Angelical");
+        addItem(ModItems.CORE_DESTRUCTION, "Núcleo de Varita de Destrucción");
+        addItem(ModItems.CORE_EXCHANGE, "Núcleo de Varita de Intercambio");
+       
          add("advancement.constructionwand.root.title", "Varitas de Construcción Revividas");
 add("advancement.constructionwand.root.desc", "Obtené tu primera varita");
 add("advancement.constructionwand.stone_wand.title", "Varita de Piedra");
@@ -521,17 +670,17 @@ add("advancement.constructionwand.core_angel.desc", "Obtené un Núcleo de Varit
 add("advancement.constructionwand.core_destruction.title", "Núcleo de Destrucción");
 add("advancement.constructionwand.core_destruction.desc", "Obtené un Núcleo de Varita de Destrucción");
 
-        add("constructionwand.tooltip.blocks", "%d bloques máx.");
+        add("constructionwand.tooltip.blocks", "Máx. %d bloques");
         add("constructionwand.tooltip.shift", "Presiona [MAYÚS]");
         add("constructionwand.tooltip.cores", "Núcleos de varita:");
-        add("constructionwand.tooltip.core_tip", "Combina el núcleo con tu varita en una cuadrícula de fabricación");
+        add("constructionwand.tooltip.core_tip", "Combina el núcleo con tu varita en una rejilla de crafteo");
         add("constructionwand.option.cores", "");
-        add("constructionwand.option.cores.constructionwand:default", "Núcleo de construcción");
-        add("constructionwand.option.cores.constructionwand:default.desc", "Extiende tu construcción hacia el lado que estás mirando");
-        add("constructionwand.option.cores.constructionwand:core_angel", "§6Núcleo angelical");
+        add("constructionwand.option.cores.constructionwand:default", "Núcleo de Construcción");
+        add("constructionwand.option.cores.constructionwand:default.desc", "Extiende tu construcción hacia el lado que te mira");
+        add("constructionwand.option.cores.constructionwand:core_angel", "§6Núcleo Angelical");
         add("constructionwand.option.cores.constructionwand:core_angel.desc", "Coloca bloques detrás, incluso en el aire");
-        add("constructionwand.option.cores.constructionwand:core_destruction", "§cNúcleo de destrucción");
-        add("constructionwand.option.cores.constructionwand:core_destruction.desc", "Destruye bloques en el lado que estás mirando");
+        add("constructionwand.option.cores.constructionwand:core_destruction", "§cNúcleo de Destrucción");
+        add("constructionwand.option.cores.constructionwand:core_destruction.desc", "Destruye bloques en el lado que te mira");
         add("constructionwand.option.lock", "Restricción: ");
         add("constructionwand.option.lock.horizontal", "§aIzquierda/Derecha");
         add("constructionwand.option.lock.horizontal.desc", "Construye una columna horizontal frente al bloque original");
@@ -542,7 +691,7 @@ add("advancement.constructionwand.core_destruction.desc", "Obtené un Núcleo de
         add("constructionwand.option.lock.eastwest", "§6Este/Oeste");
         add("constructionwand.option.lock.eastwest.desc", "Construye una fila en dirección E/O sobre el bloque original");
         add("constructionwand.option.lock.nolock", "§cNinguna");
-        add("constructionwand.option.lock.nolock.desc", "Extiende desde cualquier lado del bloque original");
+        add("constructionwand.option.lock.nolock.desc", "Extender desde cualquier lado del bloque original");
         add("constructionwand.option.direction", "Dirección: ");
         add("constructionwand.option.direction.target", "§6Objetivo");
         add("constructionwand.option.direction.target.desc", "Coloca bloques con la misma orientación que el bloque objetivo");
@@ -562,18 +711,49 @@ add("advancement.constructionwand.core_destruction.desc", "Obtené un Núcleo de
         add("constructionwand.option.match.any.desc", "Extiende cualquier bloque");
         add("constructionwand.option.random", "Aleatorio: ");
         add("constructionwand.option.random.yes", "§aSí");
-        add("constructionwand.option.random.yes.desc", "Coloca bloques al azar presentes en tu barra de acceso rápido");
+        add("constructionwand.option.random.yes.desc", "Coloca bloques al azar presentes en tu barra rápida");
         add("constructionwand.option.random.no", "§cNo");
         add("constructionwand.option.random.no.desc", "No aleatorizar los bloques colocados");
-        add("constructionwand.description.wand", "La %1$s puede colocar hasta %2$d bloques al lado de una construcción que estés mirando y dura %3$s.\n\nMantén presionado %5$s y gira la rueda para cambiar la restricción de colocación (Horizontal, Vertical, Norte/Sur, Este/Oeste, Sin restricción).\n\nAbre la pantalla de opciones con %6$s§9 + Clic derecho§0.\n\n§5§nDESHACER§0§r\nManteniendo presionado §9Agacharse + §0%4$s mientras miras un bloque mostrará los últimos bloques que colocaste resaltados con un borde verde. §9Agacharse + §0%4$s§9 + Clic derecho§0 sobre cualquiera de ellos deshará la operación, devolviéndote todos los objetos. Si usaste el núcleo de destrucción, restaurará los bloques.\n\n§5§nCONTENEDORES§0§r\nLas cajas de shulker, sacos y muchos contenedores de otros mods pueden proveer bloques de construcción para la varita.\n\n§5§nPRIORIDAD DE MANO SECUNDARIA§0§r\nTener bloques en la mano secundaria hará que se coloquen ellos en vez del bloque al que estás mirando.");
-        add("constructionwand.description.durability.limited", "para %d bloques");
+        add("constructionwand.description.wand", "La %1$s puede colocar hasta %2$d bloques al lado de una construcción que te mire y dura %3$s.\n\nMantén presionado %5$s y rota la rueda para cambiar la restricción de colocación (Horizontal, Vertical, Norte/Sur, Este/Oeste, Sin restricción).\n\nAbre la pantalla de opciones con %6$s§9+Clic derecho§0.\n\n§5§nDESHACER§0§r\nManteniendo presionado §9Agacharse+§0%4$s mientras mirás un bloque mostrará los últimos bloques que colocaste con un borde verde alrededor. §9Agacharse+§0%4$s§9+Clic derecho§0 sobre cualquiera de ellos deshará la operación, devolviéndote todos los objetos. Si usaste el núcleo de Destrucción, restaurará los bloques.\n\n§5§nCONTENEDORES§0§r\nShulker boxes, bundles y muchos contenedores de otros mods pueden proveer bloques de construcción para la varita.\n\n§5§nPRIORIDAD MAIN/SECUNDARIA§0§r\nTener bloques en la mano secundaria hará que se coloquen ellos en vez del bloque en el que estás mirando.");
+        add("constructionwand.description.durability.limited", "por %d bloques");
         add("constructionwand.description.durability.unlimited", "para siempre");
         add("constructionwand.description.key.sneak", "Agacharse");
-        add("constructionwand.description.key.sneak_opt", "Agacharse + %s");
-        add("constructionwand.description.core", "§5§nINSTALACIÓN§0§r\nColoca tu nuevo núcleo junto con tu varita en una cuadrícula de fabricación para instalarlo. Para cambiar entre núcleos, mantén presionado %s y haz clic izquierdo en un espacio vacío con tu varita o usa la pantalla de opciones.");
-        add("constructionwand.description.core_angel", "El núcleo angelical coloca un bloque en el lado opuesto del bloque (o fila de bloques) que estás mirando. La distancia máxima depende del nivel de la varita. Haz clic derecho en un espacio vacío para colocar un bloque en el aire. Para hacer eso, necesitarás tener el bloque que deseas colocar en tu mano secundaria.");
-        add("constructionwand.description.core_destruction", "El núcleo de destrucción destruye bloques (no entidades de bloque) en el lado que estás mirando. El número máximo de bloques depende del nivel de la varita. Los bloques destruidos desaparecen en el vacío, puedes usar la función de deshacer si cometiste un error.");
-        add("stat.constructionwand.use_wand", "Bloques colocados usando la varita");
+        add("constructionwand.description.key.sneak_opt", "Agacharse+%s");
+        add("constructionwand.description.core", "§5§nINSTALACIÓN§0§r\nPon tu nuevo núcleo junto con tu varita en una rejilla de crafteo para instalarlo. Para cambiar entre núcleos, mantén presionado %s y haz clic izquierdo en el aire con tu varita o usa la pantalla de opciones.");
+        add("constructionwand.description.core_angel", "El núcleo angelical coloca un bloque en el lado opuesto del bloque (o fila de bloques) al que estás mirando. La distancia máxima depende del nivel de la varita. Clic derecho en el aire para colocar un bloque en el aire. Para eso, necesitarás tener el bloque que quieras colocar en la mano secundaria.");
+        add("constructionwand.description.core_destruction", "El núcleo de destrucción destruye bloques (no entidades de bloque) en el lado que estás mirando. El número máximo de bloques depende del nivel de la varita. Los bloques destruidos desaparecen en el vacío; podés usar la función deshacer si te equivocás.");
+        add("item.constructionwand.void_sack", "Bolsa del Vacío");
+        add("item.constructionwand.void_sack.active", "§aActiva §7(presioná §6%1$s§7 para cambiar)");
+        add("item.constructionwand.void_sack.inactive", "§7Inactiva §7(presioná §6%1$s§7 para cambiar)");
+        add("item.constructionwand.void_sack.linked", "Vinculada a: %d, %d, %d");
+        add("item.constructionwand.void_sack.no_link", "Sin container vinculado");
+        add("item.constructionwand.void_sack.sending", "Enviando al container");
+        add("item.constructionwand.void_sack.storing", "Guardando internamente");
+        add("item.constructionwand.void_sack.slots_used", "Espacios usados: %d / %d");
+        add("item.constructionwand.void_sack.linked_msg", "Bolsa vinculada a %d, %d, %d");
+        add("item.constructionwand.void_sack.activated", "Bolsa del Vacío activada");
+        add("item.constructionwand.void_sack.deactivated", "Bolsa del Vacío desactivada");
+        add("gui.constructionwand.void_sack.toggle_tooltip", "Cambiar: enviar al container / guardar internamente");
+        add("gui.constructionwand.void_sack.sending", "Enviando →");
+        add("gui.constructionwand.void_sack.storing", "Guardando");
+        add("key.constructionwand.void_sack_toggle", "Alternar Bolsa del Vacío");
+        add("constructionwand.description.void_sack", "La Bolsa del Vacío intercepta los ítems que recogés y los guarda en su inventario interno de 4×4.\n\n§5§nACTIVACIÓN§0§r\nPresioná %1$s para activar o desactivar la bolsa. Mientras está inactiva, los ítems van a tu inventario normal.\n\n§5§nVINCULAR UN CONTAINER§0§r\nHacé clic derecho sobre cualquier container (cofre, barril, shulker...) con la bolsa en mano para vincularlo. Una vez vinculada, los ítems van primero al container cuando la bolsa está activa. Si el container está lleno, el exceso va al almacenamiento interno de la bolsa.\n\n§5§nMODO§0§r\nPresioná %1$s para alternar entre §aEnviando§0 (ítems → container) y §eGuardando§0 (ítems → espacios internos). También podés usar el botón de cambio dentro de la GUI.");
+        add("stat.constructionwand.use_wand", "Bloques colocados usando la Varita");
+        add("advancement.constructionwand.void_sack.desc", "Bolsa del Vacío");
+        add("advancement.constructionwand.void_sack.title", "Guarda items del Destruction Core dentro de la Bolsa del Vacío o en contenedores vinculados");
+        add("key.constructionwand.wand_undo", "Deshacer acción de varita");
+       add("constructionwand.undo.success",  "Acción de varita deshecha");
+       add("constructionwand.undo.nothing",  "Nada para deshacer");
+       add("constructionwand.networking.wand_undo.failed",  "No se pudo deshacer la acción de la varita");
+       add("key.categories.constructionwand", "Varitas de Construcción Revividas");
+       add("constructionwand.message.exchange_selected", "Seleccionado: %s");
+add("constructionwand.message.exchange_invalid", "Ese bloque no se puede seleccionar");
+add("constructionwand.message.exchange_none_selected", "No hay bloque seleccionado — presioná Numpad 7 mirando un bloque");
+add("constructionwand.message.exchange_no_target", "Primero mirá un bloque");
+add("key.constructionwand.exchange_select", "Seleccionar bloque de Intercambio");
+add("constructionwand.option.cores.constructionwand:core_exchange", "§bNúcleo de Intercambio");
+add("constructionwand.option.cores.constructionwand:core_exchange.desc", "Reemplaza bloques en el lado que te mira por el bloque que tenés en la mano secundaria");
+add("constructionwand.description.core_exchange", "El núcleo de intercambio reemplaza los bloques en el lado que estás mirando (o una fila de bloques) por el bloque que tenés en la mano secundaria. El número máximo de bloques depende del nivel de la varita. Las restricciones funcionan igual que con el núcleo de Construcción.");
         }
     }
 
@@ -588,11 +768,13 @@ add("advancement.constructionwand.core_destruction.desc", "Obtené un Núcleo de
 
         addItem(ModItems.WAND_STONE, "石の杖");
         addItem(ModItems.WAND_IRON, "鉄の杖");
+        addItem(ModItems.WAND_GOLD, "金の杖");
         addItem(ModItems.WAND_DIAMOND, "ダイヤモンドの杖");
         addItem(ModItems.WAND_NETHERITE, "ネザライトの杖");
         addItem(ModItems.WAND_INFINITY, "無限の杖");
         addItem(ModItems.CORE_ANGEL, "天使の杖のコア");
         addItem(ModItems.CORE_DESTRUCTION, "破壊の杖のコア");
+        addItem(ModItems.CORE_EXCHANGE, "交換の杖のコア");
 
         add("advancement.constructionwand.root.title", "建築の杖リバイバル");
 add("advancement.constructionwand.root.desc", "最初の杖を手に入れよう");
@@ -664,6 +846,39 @@ add("advancement.constructionwand.core_destruction.desc", "破壊の杖のコア
         add("constructionwand.description.core_angel", "天使のコアはブロックの反対側にブロックを設置します。最大距離は杖の段階に依存します。オフハンドにブロックを持った状態で、何もない空間に使用すると空中にそのブロックを設置できます。");
         add("constructionwand.description.core_destruction", "破壊のコアは正面のブロック(タイルエンティティは不可)を破壊できます。破壊できる最大ブロック数は杖の段階に依存します。破壊されたブロックは消滅しますが、間違えたときは取り消すことができます。");
         add("stat.constructionwand.use_wand", "杖を用いてブロックを設置");
+        add("advancement.constructionwand.void_sack.desc", "ボイドサック");
+add("advancement.constructionwand.void_sack.title", "Destruction Coreのアイテムをボイドサックまたはリンクされたコンテナに保存する");
+
+add("item.constructionwand.void_sack", "ボイドサック");
+add("item.constructionwand.void_sack.active", "§a有効 §7(§6%1$s§7で切り替え)");
+add("item.constructionwand.void_sack.inactive", "§7無効 §7(§6%1$s§7で切り替え)");
+add("item.constructionwand.void_sack.linked", "リンク先: %d, %d, %d");
+add("item.constructionwand.void_sack.no_link", "リンクされたコンテナなし");
+add("item.constructionwand.void_sack.sending", "コンテナへ送信中");
+add("item.constructionwand.void_sack.storing", "内部保存中");
+add("item.constructionwand.void_sack.slots_used", "使用スロット: %d / %d");
+add("item.constructionwand.void_sack.linked_msg", "サックを %d, %d, %d にリンクしました");
+add("item.constructionwand.void_sack.activated", "ボイドサックを有効化しました");
+add("item.constructionwand.void_sack.deactivated", "ボイドサックを無効化しました");
+add("gui.constructionwand.void_sack.toggle_tooltip", "切り替え: コンテナへ送信 / 内部保存");
+add("gui.constructionwand.void_sack.sending", "送信中 →");
+add("gui.constructionwand.void_sack.storing", "保存中");
+add("key.constructionwand.void_sack_toggle", "ボイドサック切り替え");
+add("key.constructionwand.wand_undo", "杖の操作を取り消す");
+add("constructionwand.undo.success",  "杖の操作を取り消しました");
+add("constructionwand.undo.nothing",  "取り消す操作はありません");
+add("constructionwand.networking.wand_undo.failed",  "杖の操作を取り消せませんでした");
+add("constructionwand.description.wand_undo", "§5§n取り消し§0§r\nスニークしながら杖を使用すると、最後に設置したブロックが緑の境界線で表示されます。スニークしながら杖を使用して右クリックすると、処理を取り消すことができ、すべてのブロックはインベントリに戻ります。破壊の杖を使用していた場合もブロックはもとに戻ります。");
+add("constructionwand.description.wand_undo_key", "§5§n取り消し§0§r\nスニークしながら杖を使用すると、最後に設置したブロックが緑の境界線で表示されます。スニークしながら杖を使用して右クリックすると、処理を取り消すことができ、すべてのブロックはインベントリに戻ります。破壊の杖を使用していた場合もブロックはもとに戻ります。");
+add("key.categories.constructionwand", "建築の杖リバイバル");  
+add("constructionwand.option.cores.constructionwand:core_exchange", "§b交換のコア");
+add("constructionwand.option.cores.constructionwand:core_exchange.desc", "正面方向のブロックをオフハンドのブロックに置き換えます。");
+add("constructionwand.description.core_exchange", "交換のコアは、正面方向のブロック（またはブロックの列）を、オフハンドに持っているブロックと入れ替えます。置き換えられる最大ブロック数は杖の段階に依存します。制限の効果は建築のコアと同様です。");     
+add("constructionwand.message.exchange_selected", "選択済み: %s");
+add("constructionwand.message.exchange_invalid", "そのブロックは選択できません");
+add("constructionwand.message.exchange_none_selected", "ブロックが選択されていません — ブロックを見ながらテンキー7を押してください");
+add("constructionwand.message.exchange_no_target", "まずブロックを見てください");
+add("key.constructionwand.exchange_select", "交換ブロックを選択");        
         }
     }
 
@@ -678,11 +893,13 @@ add("advancement.constructionwand.core_destruction.desc", "破壊の杖のコア
 
         addItem(ModItems.WAND_STONE, "돌 완드");
         addItem(ModItems.WAND_IRON, "철 완드");
+        addItem(ModItems.WAND_GOLD, "금 완드");
         addItem(ModItems.WAND_DIAMOND, "다이아몬드 완드");
         addItem(ModItems.WAND_NETHERITE, "네더라이트 지팡이");
         addItem(ModItems.WAND_INFINITY, "무한의 완드");
         addItem(ModItems.CORE_ANGEL, "천사 완드 코어");
         addItem(ModItems.CORE_DESTRUCTION, "파괴 완드 코어");
+        addItem(ModItems.CORE_EXCHANGE, "교환 완드 코어");
 
         add("advancement.constructionwand.root.title", "건설 지팡이 부활");
 add("advancement.constructionwand.root.desc", "첫 번째 지팡이를 획득하세요");
@@ -754,6 +971,39 @@ add("advancement.constructionwand.core_destruction.desc", "파괴 지팡이 코�
         add("constructionwand.description.core_angel", "엔젤 코어는 마주보고 있는 블록(또는 블록 행)의 반대쪽에 블록을 배치합니다. 최대 거리는 완드의 티어에 따라 다릅니다. 빈 공간을 우클릭하면 공중에 블록을 배치할 수 있습니다. 그렇게 하려면 보조 손에 배치하려는 블록이 있어야 합니다.");
         add("constructionwand.description.core_destruction", "파괴 코어는 당신 쪽의 (타일 엔티티가 없는)블록을 파괴합니다. 최대 블록 수는 완드의 티어에 따라 다릅니다. 파괴된 블록은 공허로 사라지며 실수를 했다면 실행 취소 기능을 사용할 수 있습니다.");
         add("stat.constructionwand.use_wand", "완드로 배치한 블록 수");
+        add("advancement.constructionwand.void_sack.desc", "공허 자루");
+add("advancement.constructionwand.void_sack.title", "Destruction Core의 아이템을 공허 자루 또는 연결된 컨테이너에 저장하세요");
+
+add("item.constructionwand.void_sack", "공허 자루");
+add("item.constructionwand.void_sack.active", "§a활성화됨 §7(§6%1$s§7 키로 전환)");
+add("item.constructionwand.void_sack.inactive", "§7비활성화됨 §7(§6%1$s§7 키로 전환)");
+add("item.constructionwand.void_sack.linked", "연결됨: %d, %d, %d");
+add("item.constructionwand.void_sack.no_link", "연결된 컨테이너 없음");
+add("item.constructionwand.void_sack.sending", "컨테이너로 전송 중");
+add("item.constructionwand.void_sack.storing", "내부 저장 중");
+add("item.constructionwand.void_sack.slots_used", "사용된 슬롯: %d / %d");
+add("item.constructionwand.void_sack.linked_msg", "자루가 %d, %d, %d 에 연결됨");
+add("item.constructionwand.void_sack.activated", "공허 자루 활성화됨");
+add("item.constructionwand.void_sack.deactivated", "공허 자루 비활성화됨");
+add("gui.constructionwand.void_sack.toggle_tooltip", "전환: 컨테이너로 전송 / 내부 저장");
+add("gui.constructionwand.void_sack.sending", "전송 중 →");
+add("gui.constructionwand.void_sack.storing", "저장 중");
+add("key.constructionwand.void_sack_toggle", "공허 자루 전환");
+add("key.constructionwand.wand_undo", "완드 작업 실행 취소");
+add("constructionwand.undo.success",  "완드 작업 실행 취소됨");
+add("constructionwand.undo.nothing",  "실행 취소할 작업이 없습니다");
+add("constructionwand.networking.wand_undo.failed",  "완드 작업을 실행 취소할 수 없습니다");
+add("constructionwand.description.wand_undo", "§5§n실행 취소§0§r\n웅크린 상태에서 완드를 사용하면 마지막으로 배치한 블록이 녹색 테두리로 표시됩니다. 웅크린 상태에서 완드를 사용하여 우클릭하면 작업을 실행 취소할 수 있으며, 모든 블록이 인벤토리로 돌아갑니다. 파괴 코어를 사용했다면 블록도 원래대로 돌아갑니다.");
+add("constructionwand.description.wand_undo_key", "§5§n실행 취소§0§r\n웅크린 상태에서 완드를 사용하면 마지막으로 배치한 블록이 녹색 테두리로 표시됩니다. 웅크린 상태에서 완드를 사용하여 우클릭하면 작업을 실행 취소할 수 있으며, 모든 블록이 인벤토리로 돌아갑니다. 파괴 코어를 사용했다면 블록도 원래대로 돌아갑니다.");
+add("key.categories.constructionwand", "건축 완드 리바이벌");    
+add("constructionwand.option.cores.constructionwand:core_exchange", "§b교환 코어");
+add("constructionwand.option.cores.constructionwand:core_exchange.desc", "당신 쪽의 블록을 보조 손의 블록으로 교체합니다.");
+add("constructionwand.description.core_exchange", "교환 코어는 당신이 마주보고 있는 블록(또는 블록 행)을 보조 손에 들고 있는 블록으로 교체합니다. 최대 블록 수는 완드의 티어에 따라 다릅니다. 제한 옵션은 건축 코어와 동일하게 작동합니다.");   
+add("constructionwand.message.exchange_selected", "선택됨: %s");
+add("constructionwand.message.exchange_invalid", "그 블록은 선택할 수 없습니다");
+add("constructionwand.message.exchange_none_selected", "선택된 블록이 없습니다 — 블록을 보면서 넘버패드 7을 누르세요");
+add("constructionwand.message.exchange_no_target", "먼저 블록을 보세요");
+add("key.constructionwand.exchange_select", "교환 블록 선택");       
         }
     }
 
@@ -768,11 +1018,13 @@ add("advancement.constructionwand.core_destruction.desc", "파괴 지팡이 코�
 
         addItem(ModItems.WAND_STONE, "Varinha de pedra");
         addItem(ModItems.WAND_IRON, "Varinha de ferro");
+        addItem(ModItems.WAND_GOLD, "Varinha de Ouro");
         addItem(ModItems.WAND_DIAMOND, "Varinha de Diamante");
         addItem(ModItems.WAND_NETHERITE, "Varinha de Netjerita");
         addItem(ModItems.WAND_INFINITY, "Varinha infinita");
         addItem(ModItems.CORE_ANGEL, "Núcleo de Varita Angelical");
         addItem(ModItems.CORE_DESTRUCTION, "Núcleo de Varita de Destruição");
+        addItem(ModItems.CORE_EXCHANGE, "Núcleo de Varita de Troca");
 
         add("constructionwand.tooltip.blocks", "Max. %d blocos");
         add("constructionwand.tooltip.shift", "Pressione Shift]");
@@ -827,6 +1079,40 @@ add("advancement.constructionwand.core_destruction.desc", "파괴 지팡이 코�
         add("constructionwand.description.core_angel", "O núcleo do anjo coloca um bloco no lado oposto do bloco (ou fileira de blocos) que você está enfrentando.A distância máxima depende da camada de varinha.Clique com o botão direito do mouse em espaço vazio para colocar um bloco no ar.Para fazer isso, você precisará ter o bloco que deseja colocar em sua mão.");
         add("constructionwand.description.core_destruction", "O núcleo de destruição destrói blocos (sem entidades de ladrilhos) do lado de frente para você.O número máximo de blocos depende da camada de varinha.Blocos destruídos desaparecem no vazio, você pode usar o recurso de desfazer se cometer um erro.");
         add("stat.constructionwand.use_wand", "Blocos colocados usando varinha");
+
+add("advancement.constructionwand.void_sack.desc", "Saco do Vazio");
+add("advancement.constructionwand.void_sack.title", "Armazene itens do Destruction Core dentro do Saco do Vazio ou em contêineres vinculados");
+
+add("item.constructionwand.void_sack", "Saco do Vazio");
+add("item.constructionwand.void_sack.active", "§aAtivo §7(pressione §6%1$s§7 para alternar)");
+add("item.constructionwand.void_sack.inactive", "§7Inativo §7(pressione §6%1$s§7 para alternar)");
+add("item.constructionwand.void_sack.linked", "Vinculado a: %d, %d, %d");
+add("item.constructionwand.void_sack.no_link", "Nenhum contêiner vinculado");
+add("item.constructionwand.void_sack.sending", "Enviando para o contêiner");
+add("item.constructionwand.void_sack.storing", "Armazenando internamente");
+add("item.constructionwand.void_sack.slots_used", "Espaços usados: %d / %d");
+add("item.constructionwand.void_sack.linked_msg", "Saco vinculado a %d, %d, %d");
+add("item.constructionwand.void_sack.activated", "Saco do Vazio ativado");
+add("item.constructionwand.void_sack.deactivated", "Saco do Vazio desativado");
+add("gui.constructionwand.void_sack.toggle_tooltip", "Alternar: enviar para o contêiner / armazenar internamente");
+add("gui.constructionwand.void_sack.sending", "Enviando →");
+add("gui.constructionwand.void_sack.storing", "Armazenando");
+add("key.constructionwand.void_sack_toggle", "Alternar Saco do Vazio");
+add("key.constructionwand.wand_undo", "Desfazer ação da varinha");
+add("constructionwand.undo.success",  "Ação da varinha desfeita");
+add("constructionwand.undo.nothing",  "Nenhuma ação para desfazer");
+add("constructionwand.networking.wand_undo.failed",  "Falha ao desfazer ação da varinha");
+add("constructionwand.description.wand_undo", "§5§nDESFAZER§0§r\nMantendo pressionada §9Esgueirar-se+§0%4$s Enquanto olha para um bloco, mostrará os últimos blocos que você colocou com uma borda verde ao redor deles. §9Esgueirar-se+§0%4$s§9+Certa clicando§0 Qualquer um deles desfazerá a operação, oferecendo todos os itens de volta.Se você usou o núcleo de destruição, ele restaurará os blocos.");
+add("constructionwand.description.wand_undo_key", "§5§nDESFAZER§0§r\nMantendo pressionada §9Esgueirar-se+§0%4$s Enquanto olha para um bloco, mostrará os últimos blocos que você colocou com uma borda verde ao redor deles. §9Esgueirar-se+§0%4$s§9+Certa clicando§0 Qualquer um deles desfazerá a operação, oferecendo todos os itens de volta.Se você usou o núcleo de destruição, ele restaurará os blocos.");
+add("key.categories.constructionwand", "Varinhas de Construção Revividas"); 
+add("constructionwand.option.cores.constructionwand:core_exchange", "§bNúcleo de Troca");
+add("constructionwand.option.cores.constructionwand:core_exchange.desc", "Substitui os blocos do lado de frente para você pelo bloco na sua mão secundária");
+add("constructionwand.description.core_exchange", "O núcleo de troca substitui os blocos do lado de frente para você (ou uma fileira de blocos) pelo bloco que você está segurando na mão secundária. O número máximo de blocos depende da camada de varinha. As restrições funcionam da mesma forma que com o núcleo de construção.");      
+add("constructionwand.message.exchange_selected", "Selecionado: %s");
+add("constructionwand.message.exchange_invalid", "Esse bloco não pode ser selecionado");
+add("constructionwand.message.exchange_none_selected", "Nenhum bloco selecionado — pressione Numpad 7 olhando para um bloco");
+add("constructionwand.message.exchange_no_target", "Olhe para um bloco primeiro");
+add("key.constructionwand.exchange_select", "Selecionar Bloco de Troca");       
         }
     }
 
@@ -841,11 +1127,13 @@ add("advancement.constructionwand.core_destruction.desc", "파괴 지팡이 코�
 
         addItem(ModItems.WAND_STONE, "Каменный жезл");
         addItem(ModItems.WAND_IRON, "Железный жезл");
+        addItem(ModItems.WAND_GOLD, "Золотой жезл");
         addItem(ModItems.WAND_DIAMOND, "Алмазный жезл");
         addItem(ModItems.WAND_NETHERITE, "Незеритовый жезл");
         addItem(ModItems.WAND_INFINITY, "Бесконечный жезл");
         addItem(ModItems.CORE_ANGEL, "Ангельское ядро для жезла");
         addItem(ModItems.CORE_DESTRUCTION, "Ядро разрушения для жезла");
+        addItem(ModItems.CORE_EXCHANGE, "Обменное ядро для жезла");
 
           add("advancement.constructionwand.root.title", "Строительные Жезлы Возрождены");
 add("advancement.constructionwand.root.desc", "Получите свой первый жезл");
@@ -917,6 +1205,40 @@ add("advancement.constructionwand.core_destruction.desc", "Получите яд
         add("constructionwand.description.core_angel", "Ангельское ядро размещает блоки на противоположной стороне блока (или ряда блоков), обращённые к Вам. Максимальное расстояние зависит от уровня жезла. Щелчок правой кнопкой мыши по пустому воздуху разместит блок в воздухе. Чтобы это сделать, Вам нужно иметь необходимые блоки в левой руке, чтобы разместить их.");
         add("constructionwand.description.core_destruction", "Ядро разрушения разрушает блоки (не функциональные блоки), обращённые к Вам. Максимально количество блоков зависит от уровня жезла. Разрушенные блоки исчезают в пустоту, можно использовать функцию отмены в случае допущенной ошибки.");
         add("stat.constructionwand.use_wand", "Блоки, размещённые при помощи Жезла");
+       
+add("advancement.constructionwand.void_sack.desc", "Мешок Пустоты");
+add("advancement.constructionwand.void_sack.title", "Сохраняйте предметы из Destruction Core в Мешке Пустоты или связанных контейнерах");
+
+add("item.constructionwand.void_sack", "Мешок Пустоты");
+add("item.constructionwand.void_sack.active", "§aАктивен §7(нажмите §6%1$s§7 для переключения)");
+add("item.constructionwand.void_sack.inactive", "§7Неактивен §7(нажмите §6%1$s§7 для переключения)");
+add("item.constructionwand.void_sack.linked", "Связан с: %d, %d, %d");
+add("item.constructionwand.void_sack.no_link", "Нет связанного контейнера");
+add("item.constructionwand.void_sack.sending", "Отправка в контейнер");
+add("item.constructionwand.void_sack.storing", "Внутреннее хранение");
+add("item.constructionwand.void_sack.slots_used", "Использовано слотов: %d / %d");
+add("item.constructionwand.void_sack.linked_msg", "Мешок связан с %d, %d, %d");
+add("item.constructionwand.void_sack.activated", "Мешок Пустоты активирован");
+add("item.constructionwand.void_sack.deactivated", "Мешок Пустоты деактивирован");
+add("gui.constructionwand.void_sack.toggle_tooltip", "Переключить: отправка в контейнер / внутреннее хранение");
+add("gui.constructionwand.void_sack.sending", "Отправка →");
+add("gui.constructionwand.void_sack.storing", "Хранение");
+add("key.constructionwand.void_sack_toggle", "Переключить Мешок Пустоты");
+add("key.constructionwand.wand_undo", "Отменить действие жезла");
+add("constructionwand.undo.success",  "Действие жезла отменено");
+add("constructionwand.undo.nothing",  "Нет действий для отмены");
+add("constructionwand.networking.wand_undo.failed",  "Не удалось отменить действие жезла");
+add("constructionwand.description.wand_undo", "§5§nОТМЕНА§0§r\nУдерживая §9Приседание+§0%4$s пока смотрите на блоки, установленные Вами, они будут выделены зелёным контуром. §9Приседание+§0%4$s§9+щелчок правой кнопкой мыши§0 на любой из них отменит операцию, вернув Вам все предметы обратно. Если использовать Ядро разрушения, то он вернёт блоки.");
+add("constructionwand.description.wand_undo_key", "§5§nОТМЕНА§0§r\nУдерживая §9Приседание+§0%4$s пока смотрите на блоки, установленные Вами, они будут выделены зелёным контуром. §9Приседание+§0%4$s§9+щелчок правой кнопкой мыши§0 на любой из них отменит операцию, вернув Вам все предметы обратно. Если использовать Ядро разрушения, то он вернёт блоки.");
+add("key.categories.constructionwand", "Волшебные жезлы для строительства - Возрождение");        
+add("constructionwand.option.cores.constructionwand:core_exchange", "§bОбменное ядро");
+add("constructionwand.option.cores.constructionwand:core_exchange.desc", "Заменяет блоки на стороне, обращённой к Вам, на блок из левой руки.");
+add("constructionwand.description.core_exchange", "Обменное ядро заменяет блоки на стороне, обращённой к Вам (или ряд блоков), на блок, который Вы держите в левой руке. Максимальное количество блоков зависит от уровня жезла. Ограничения работают так же, как и с ядром строительства.");       
+add("constructionwand.message.exchange_selected", "Выбрано: %s");
+add("constructionwand.message.exchange_invalid", "Этот блок нельзя выбрать");
+add("constructionwand.message.exchange_none_selected", "Блок не выбран — нажмите Numpad 7, глядя на блок");
+add("constructionwand.message.exchange_no_target", "Сначала посмотрите на блок");
+add("key.constructionwand.exchange_select", "Выбрать блок для обмена");        
         }
     }
 
@@ -931,11 +1253,13 @@ add("advancement.constructionwand.core_destruction.desc", "Получите яд
 
         addItem(ModItems.WAND_STONE, "Stenstav");
         addItem(ModItems.WAND_IRON, "Järnstav");
+        addItem(ModItems.WAND_GOLD, "Guldstav");
         addItem(ModItems.WAND_DIAMOND, "Diamantstav");
         addItem(ModItems.WAND_NETHERITE, "Netheritstav");
         addItem(ModItems.WAND_INFINITY, "Oändlighetsstav");
         addItem(ModItems.CORE_ANGEL, "Änglastavskärna");
         addItem(ModItems.CORE_DESTRUCTION, "Rivningsstavskärna");
+        addItem(ModItems.CORE_EXCHANGE, "Utbytesstavskärna");
 
            add("advancement.constructionwand.root.title", "Byggstavar Återupplivade");
 add("advancement.constructionwand.root.desc", "Skaffa din första stav");
@@ -1007,6 +1331,40 @@ add("advancement.constructionwand.core_destruction.desc", "Skaffa en rivningssta
         add("constructionwand.description.core_angel", "Änglakärnan placerar ett block på den motsatta sidan av blocket (eller blockraden) som är riktad mot dig. Det maximala avståndet beror på stavens nivå. Högerklicka i luften för att placera ett block i luften. För att göra detta behöver du hålla blocket du vill placera i din sekundära hand.");
         add("constructionwand.description.core_destruction", "Rivningskärnan förstör block (inte blockentiteter) på sidan som är riktad mot dig. Det maximala antalet block beror på stavens nivå. Förstörda block försvinner helt och hållet, men du kan använda ångrafunktionen om du har gjort ett misstag.");
         add("stat.constructionwand.use_wand", "Block placerade med stavar");
+        add("advancement.constructionwand.void_sack.desc", "Tomhetspåse");
+add("advancement.constructionwand.void_sack.title", "Förvara föremål från Destruction Core i Tomhetspåsen eller länkade behållare");
+
+add("item.constructionwand.void_sack", "Tomhetspåse");
+add("item.constructionwand.void_sack.active", "§aAktiv §7(tryck §6%1$s§7 för att växla)");
+add("item.constructionwand.void_sack.inactive", "§7Inaktiv §7(tryck §6%1$s§7 för att växla)");
+add("item.constructionwand.void_sack.linked", "Länkad till: %d, %d, %d");
+add("item.constructionwand.void_sack.no_link", "Ingen behållare länkad");
+add("item.constructionwand.void_sack.sending", "Skickar till behållare");
+add("item.constructionwand.void_sack.storing", "Intern lagring");
+add("item.constructionwand.void_sack.slots_used", "Använda platser: %d / %d");
+add("item.constructionwand.void_sack.linked_msg", "Påsen länkades till %d, %d, %d");
+add("item.constructionwand.void_sack.activated", "Tomhetspåsen aktiverades");
+add("item.constructionwand.void_sack.deactivated", "Tomhetspåsen avaktiverades");
+add("gui.constructionwand.void_sack.toggle_tooltip", "Växla: skicka till behållare / intern lagring");
+add("gui.constructionwand.void_sack.sending", "Skickar →");
+add("gui.constructionwand.void_sack.storing", "Lagring");
+add("key.constructionwand.void_sack_toggle", "Växla Tomhetspåse");
+add("constructionwand.description.void_sack", "Tomhetspåsen fångar upp föremål du plockar upp och lagrar dem i sitt interna 4×4-inventarie.\n\n§5§nAKTIVERING§0§r\nTryck på %1$s för att aktivera eller avaktivera påsen. När den är avaktiverad hamnar föremål i ditt vanliga inventarie.\n\n§5§nLÄNKA EN BEHÅLLARE§0§r\nHögerklicka på valfri behållare (kista, tunna, shulkerlåda...) medan du håller påsen för att länka den. När den är länkad skickas föremål först till behållaren när påsen är aktiv. Om behållaren är full lagras överskottet i påsens interna lagring.\n\n§5§nLÄGE§0§r\nTryck på %1$s för att växla mellan §aSkickar§0 (föremål → behållare) och §eLagrar§0 (föremål → interna platser). Du kan även använda växlingsknappen i GUI:t.");
+add("key.constructionwand.wand_undo", "Ångra stavens åtgärd");
+add("constructionwand.undo.success",  "Stavens åtgärd ångrades");
+add("constructionwand.undo.nothing",  "Inga åtgärder att ångra");
+add("constructionwand.networking.wand_undo.failed",  "Misslyckades med att ångra stavens åtgärd");
+add("constructionwand.description.wand_undo", "§5§nÅNGRA§0§r\nNär du håller ned §9Smyga+§0%4$s medan du tittar på ett block kommer du se de senaste blocken du placerade omgivna av en grön ram. §9Smyg+§0%4$s§9+högerklicka§0 på något av dem för att ångra handlingen och få tillbaka alla föremål. Om du har använt rivningskärnan kommer blocken att återställas.");
+add("constructionwand.description.wand_undo_key", "§5§nÅNGRA§0§r\nNär du håller ned §9Smyga+§0%4$s medan du tittar på ett block kommer du se de senaste blocken du placerade omgivna av en grön ram. §9Smyg+§0%4$s§9+högerklicka§0 på något av dem för att ångra handlingen och få tillbaka alla föremål. Om du har använt rivningskärnan kommer blocken att återställas.");
+add("key.categories.constructionwand", "Byggstavar Återupplivade");
+add("constructionwand.option.cores.constructionwand:core_exchange", "§bUtbyteskärna");
+add("constructionwand.option.cores.constructionwand:core_exchange.desc", "Ersätter block på sidan som är riktad mot dig med blocket i din sekundära hand");
+add("constructionwand.description.core_exchange", "Utbyteskärnan ersätter block på sidan som är riktad mot dig (eller en rad block) med blocket du håller i din sekundära hand. Det maximala antalet block beror på stavens nivå. Begränsningar fungerar precis som med byggkärnan.");
+add("constructionwand.message.exchange_selected", "Vald: %s");
+add("constructionwand.message.exchange_invalid", "Det blocket kan inte väljas");
+add("constructionwand.message.exchange_none_selected", "Inget block valt — tryck Numpad 7 medan du tittar på ett block");
+add("constructionwand.message.exchange_no_target", "Titta på ett block först");
+add("key.constructionwand.exchange_select", "Välj utbytesblock");       
         }
     }
 
@@ -1021,11 +1379,13 @@ add("advancement.constructionwand.core_destruction.desc", "Skaffa en rivningssta
 
         addItem(ModItems.WAND_STONE, "Taş Asa");
         addItem(ModItems.WAND_IRON, "Demir Asa");
+        addItem(ModItems.WAND_GOLD, "Altın Asa");
         addItem(ModItems.WAND_DIAMOND, "Elmas Asa");
         addItem(ModItems.WAND_NETHERITE, "Netherite Asa");
         addItem(ModItems.WAND_INFINITY, "Sonsuzluk Asası");
         addItem(ModItems.CORE_ANGEL, "Melek Asa Çekirdeği");
         addItem(ModItems.CORE_DESTRUCTION, "Yıkım Asa Çekirdeği");
+        addItem(ModItems.CORE_EXCHANGE, "Değişim Asa Çekirdeği");
   
 add("advancement.constructionwand.root.title", "Yeniden Canlandırılmış İnşaat Asaları");
 add("advancement.constructionwand.root.desc", "İlk asanı edin");
@@ -1097,6 +1457,39 @@ add("advancement.constructionwand.core_destruction.desc", "Bir Yıkım Asa Çeki
         add("constructionwand.description.core_angel", "Melek çekirdeği, karşı karşıya olduğunuz bloğun (veya blok sırasının) karşı tarafına bir blok yerleştirir. Maksimum mesafe asa seviyesine bağlıdır. Havada bir blok yerleştirmek için boş alana sağ tıklayın. Bunu yapmak için, yerleştirmek istediğiniz bloğu boştaki elinize almalısınız.");
         add("constructionwand.description.core_destruction", "Yıkım çekirdeği, size bakan taraftaki blokları (tile entities haricinde) yok eder. Maksimum blok sayısı asa seviyesine bağlıdır. Yok edilen bloklar boşluğa kaybolur, hata yaptıysanız geri alma özelliğini kullanabilirsiniz.");
         add("stat.constructionwand.use_wand", "Asa kullanılarak yerleştirilen bloklar");
+        add("advancement.constructionwand.void_sack.desc", "Boşluk Çuvalı");
+        add("advancement.constructionwand.void_sack.title", "Destruction Core öğelerini Boşluk Çuvalında veya bağlı konteynerlerde sakla");
+add("item.constructionwand.void_sack", "Boşluk Çantası");
+add("item.constructionwand.void_sack.active", "§aEtkin §7(geçiş yapmak için §6%1$s§7 tuşuna basın)");
+add("item.constructionwand.void_sack.inactive", "§7Devre Dışı §7(geçiş yapmak için §6%1$s§7 tuşuna basın)");
+add("item.constructionwand.void_sack.linked", "Bağlı: %d, %d, %d");
+add("item.constructionwand.void_sack.no_link", "Bağlı konteyner yok");
+add("item.constructionwand.void_sack.sending", "Konteynere gönderiliyor");
+add("item.constructionwand.void_sack.storing", "Dahili depolama");
+add("item.constructionwand.void_sack.slots_used", "Kullanılan yuva: %d / %d");
+add("item.constructionwand.void_sack.linked_msg", "Çanta %d, %d, %d konumuna bağlandı");
+add("item.constructionwand.void_sack.activated", "Boşluk Çantası etkinleştirildi");
+add("item.constructionwand.void_sack.deactivated", "Boşluk Çantası devre dışı bırakıldı");
+add("gui.constructionwand.void_sack.toggle_tooltip", "Geçiş yap: konteynere gönder / dahili depolama");
+add("gui.constructionwand.void_sack.sending", "Gönderiliyor →");
+add("gui.constructionwand.void_sack.storing", "Depolama");
+add("key.constructionwand.void_sack_toggle", "Boşluk Çantasını Değiştir");
+add("constructionwand.description.void_sack", "Boşluk Çantası topladığınız eşyaları yakalar ve dahili 4×4 envanterinde saklar.\n\n§5§nETKİNLEŞTİRME§0§r\nÇantayı etkinleştirmek veya devre dışı bırakmak için %1$s tuşuna basın. Devre dışıyken eşyalar normal envanterinize gider.\n\n§5§nKONTEYNER BAĞLAMA§0§r\nÇantayı elinizde tutarken herhangi bir konteynere (sandık, varil, shulker kutusu...) sağ tıklayarak bağlayın. Bağlandıktan sonra, çanta etkin durumdayken eşyalar önce konteynere gönderilir. Konteyner doluysa fazla eşyalar çantanın dahili deposuna aktarılır.\n\n§5§nMOD§0§r\n§aGönderme§0 (eşyalar → konteyner) ve §eDepolama§0 (eşyalar → dahili yuvalar) modları arasında geçiş yapmak için %1$s tuşuna basın. Ayrıca GUI içindeki geçiş düğmesini de kullanabilirsiniz.");
+add("key.constructionwand.wand_undo", "Asa eylemini geri al");
+add("constructionwand.undo.success",  "Asa eylemi geri alındı");
+add("constructionwand.undo.nothing",  "Geri alınacak eylem yok");
+add("constructionwand.networking.wand_undo.failed",  "Asa eylemi geri alınamadı");
+add("constructionwand.description.wand_undo", "§5§nGERİ AL§0§r\nBir bloğa bakarken §9Eğil+§0%4$s tuşunu basılı tuttuğunuzda, yerleştirdiğiniz son bloklar, çevresinde yeşil bir çerçeveyle gösterilecektir. §9Eğil+§0%4$s§9+Bunlardan herhangi birine sağ tıklama§0 işlemi geri alacak ve tüm öğeleri size geri verecektir. Yıkım çekirdeğini kullandıysanız blokları geri koyacaktır.");
+add("constructionwand.description.wand_undo_key", "§5§nGERİ AL§0§r\nBir bloğa bakarken §9Eğil+§0%4$s tuşunu basılı tuttuğunuzda, yerleştirdiğiniz son bloklar, çevresinde yeşil bir çerçeveyle gösterilecektir. §9Eğil+§0%4$s§9+Bunlardan herhangi birine sağ tıklama§0 işlemi geri alacak ve tüm öğeleri size geri verecektir. Yıkım çekirdeğini kullandıysanız blokları geri koyacaktır.");
+add("key.categories.constructionwand", "Yeniden Canlandırılmış İnşaat Asaları"); 
+add("constructionwand.option.cores.constructionwand:core_exchange", "§bDeğişim Çekirdeği");
+add("constructionwand.option.cores.constructionwand:core_exchange.desc", "Size bakan taraftaki blokları, boştaki elinizdeki blokla değiştirir");
+add("constructionwand.description.core_exchange", "Değişim çekirdeği, karşı karşıya olduğunuz bloğu (veya blok sırasını) boştaki elinizde tuttuğunuz blokla değiştirir. Maksimum blok sayısı asa seviyesine bağlıdır. Kısıtlamalar inşa çekirdeğiyle aynı şekilde çalışır.");     
+add("constructionwand.message.exchange_selected", "Seçildi: %s");
+add("constructionwand.message.exchange_invalid", "O blok seçilemez");
+add("constructionwand.message.exchange_none_selected", "Seçili blok yok — bir bloğa bakarken Numpad 7'ye basın");
+add("constructionwand.message.exchange_no_target", "Önce bir bloğa bakın");
+add("key.constructionwand.exchange_select", "Değişim Bloğu Seç");        
         }
     }
 
@@ -1111,11 +1504,13 @@ add("advancement.constructionwand.core_destruction.desc", "Bir Yıkım Asa Çeki
 
         addItem(ModItems.WAND_STONE, "石制手杖");
         addItem(ModItems.WAND_IRON, "铁制手杖");
+        addItem(ModItems.WAND_GOLD, "金制手杖");
         addItem(ModItems.WAND_DIAMOND, "钻石手杖");
         addItem(ModItems.WAND_NETHERITE, "下界合金建筑杖");
         addItem(ModItems.WAND_INFINITY, "无尽手杖");
         addItem(ModItems.CORE_ANGEL, "天使手杖核心");
         addItem(ModItems.CORE_DESTRUCTION, "破坏手杖核心");
+        addItem(ModItems.CORE_EXCHANGE, "交换手杖核心");
 
 add("advancement.constructionwand.root.title", "建筑手杖复兴版");
 add("advancement.constructionwand.root.desc", "获得你的第一根手杖");
@@ -1187,6 +1582,37 @@ add("advancement.constructionwand.core_destruction.desc", "获得一个破坏手
         add("constructionwand.description.core_angel", "天使核心可将一个方块放置在你所面对的方块(或一排方块)的对面。最大距离取决于手杖材质。在空地上手持手杖并单击鼠标右键即可在空中放置方块。要做到这一点。你需要将想要被在空中放置的方块放在你的副手栏中。");
         add("constructionwand.description.core_destruction", "毁灭核心会破坏面向你一侧的方块(破坏时被破坏的方块不可存在实体)。最大破坏方块数取决于手杖材质。被使用毁灭核心破坏的方块会消失。如果你只是不小心使用了毁灭核心。可以使用“撤消”功能以撤回被破坏并消失的物品返回原处。");
         add("stat.constructionwand.use_wand", "使用建筑手杖所放置的方块");
+add("advancement.constructionwand.void_sack.desc", "虚空袋");
+add("advancement.constructionwand.void_sack.title", "将 Destruction Core 产生的物品存入虚空袋或已绑定的容器中");
+
+add("item.constructionwand.void_sack", "虚空袋");
+add("item.constructionwand.void_sack.active", "§a已启用 §7(按 §6%1$s§7 切换)");
+add("item.constructionwand.void_sack.inactive", "§7已禁用 §7(按 §6%1$s§7 切换)");
+add("item.constructionwand.void_sack.linked", "已绑定到：%d, %d, %d");
+add("item.constructionwand.void_sack.no_link", "未绑定容器");
+add("item.constructionwand.void_sack.sending", "发送到容器");
+add("item.constructionwand.void_sack.storing", "内部存储");
+add("item.constructionwand.void_sack.slots_used", "已使用槽位：%d / %d");
+add("item.constructionwand.void_sack.linked_msg", "虚空袋已绑定到 %d, %d, %d");
+add("item.constructionwand.void_sack.activated", "虚空袋已启用");
+add("item.constructionwand.void_sack.deactivated", "虚空袋已禁用");
+add("gui.constructionwand.void_sack.toggle_tooltip", "切换：发送到容器 / 内部存储");
+add("gui.constructionwand.void_sack.sending", "发送 →");
+add("gui.constructionwand.void_sack.storing", "存储");
+add("key.constructionwand.void_sack_toggle", "切换虚空袋");
+add("key.constructionwand.wand_undo", "撤销手杖操作");
+add("constructionwand.undo.success",  "手杖操作已撤销");
+add("constructionwand.undo.nothing",  "没有可撤销的操作");
+add("constructionwand.networking.wand_undo.failed",  "无法撤销手�  杖操作");
+add("constructionwand.description.void_sack", "虚空袋会拦截你拾取的物品，并将其存储在内部的 4×4 背包空间中。\n\n§5§n启用§0§r\n按下 %1$s 以启用或禁用虚空袋。禁用时，物品会进入你的普通背包。\n\n§5§n绑定容器§0§r\n手持虚空袋右键点击任意容器（箱子、木桶、潜影盒等）即可进行绑定。绑定后，当虚空袋处于启用状态时，物品会优先存入该容器。如果容器已满，多余的物品将存入虚空袋的内部存储空间。\n\n§5§n模式§0§r\n按下 %1$s 可在 §a发送模式§0（物品 → 容器）和 §e存储模式§0（物品 → 内部槽位）之间切换。你也可以在 GUI 中使用切换按钮进行更改。");     
+add("constructionwand.option.cores.constructionwand:core_exchange", "§b交换核心");
+add("constructionwand.option.cores.constructionwand:core_exchange.desc", "将面向你一侧的方块替换为副手中的方块");
+add("constructionwand.description.core_exchange", "交换核心会将你所面对的方块（或一排方块）替换为你副手中持有的方块。最大替换方块数取决于手杖材质。限制选项的效果与建筑核心相同。");
+add("constructionwand.message.exchange_selected", "已选择：%s");
+add("constructionwand.message.exchange_invalid", "该方块无法被选择");
+add("constructionwand.message.exchange_none_selected", "未选择方块 — 看着一个方块并按小键盘7");
+add("constructionwand.message.exchange_no_target", "请先看向一个方块");
+add("key.constructionwand.exchange_select", "选择交换方块");        
         }
     }
 
@@ -1201,11 +1627,13 @@ add("advancement.constructionwand.core_destruction.desc", "获得一个破坏手
 
         addItem(ModItems.WAND_STONE, "Steinerner Stab");
         addItem(ModItems.WAND_IRON, "Eiserner Stab");
+        addItem(ModItems.WAND_GOLD, "Goldener Stab");
         addItem(ModItems.WAND_DIAMOND, "Diamantener Stab");
         addItem(ModItems.WAND_NETHERITE, "Netherit Stab");
         addItem(ModItems.WAND_INFINITY, "Stab der Unendlichkeit");
         addItem(ModItems.CORE_ANGEL, "Kristall der Engel");
         addItem(ModItems.CORE_DESTRUCTION, "Kristall der Zerstörung");
+        addItem(ModItems.CORE_EXCHANGE, "Kristall des Austauschs");
 
 add("advancement.constructionwand.root.title", "Baustäbe Wiederbelebt");
 add("advancement.constructionwand.root.desc", "Erhalte deinen ersten Stab");
@@ -1277,6 +1705,37 @@ add("advancement.constructionwand.core_destruction.desc", "Erhalte einen Kristal
         add("constructionwand.description.core_angel", "Der Kristall der Engel platziert einen Block auf der gegenüberliegenden Seites des Blocks (oder der Blockreihe) den du anschaust. Die maximale Entfernung hängt vom Material des Stabes ab. Ein Rechtsklick ins Leere platziert einen Block mitten in der Luft. Hierfür musst du den Block, den du platzieren willst, in der linken Hand halten.");
         add("constructionwand.description.core_destruction", "Der Kristall der Zerstörung zerstört Blöcke (keine Tile Entities) auf der dir zugewandten Seite. Die maximale Anzahl Blöcke hängt vonm Material des Stabes ab. Zerstörte Blöcke verschwinden im Nichts, du kannst Fehler jedoch rückgängig machen.");
         add("stat.constructionwand.use_wand", "Blöcke mithilfe des Stabs platziert");
+       add("advancement.constructionwand.void_sack.desc", "Leerenbeutel");
+add("advancement.constructionwand.void_sack.title", "Bewahre Gegenstände aus dem Destruction Core im Leerenbeutel oder in verknüpften Behältern auf");
+
+add("item.constructionwand.void_sack", "Leerenbeutel");
+add("item.constructionwand.void_sack.active", "§aAktiv §7(drücke §6%1$s§7 zum Umschalten)");
+add("item.constructionwand.void_sack.inactive", "§7Inaktiv §7(drücke §6%1$s§7 zum Umschalten)");
+add("item.constructionwand.void_sack.linked", "Verknüpft mit: %d, %d, %d");
+add("item.constructionwand.void_sack.no_link", "Kein Behälter verknüpft");
+add("item.constructionwand.void_sack.sending", "An Behälter senden");
+add("item.constructionwand.void_sack.storing", "Interne Lagerung");
+add("item.constructionwand.void_sack.slots_used", "Belegte Plätze: %d / %d");
+add("item.constructionwand.void_sack.linked_msg", "Beutel mit %d, %d, %d verknüpft");
+add("item.constructionwand.void_sack.activated", "Leerenbeutel aktiviert");
+add("item.constructionwand.void_sack.deactivated", "Leerenbeutel deaktiviert");
+add("gui.constructionwand.void_sack.toggle_tooltip", "Umschalten: an Behälter senden / intern lagern");
+add("gui.constructionwand.void_sack.sending", "Senden →");
+add("gui.constructionwand.void_sack.storing", "Lagerung");
+add("key.constructionwand.void_sack_toggle", "Leerenbeutel umschalten");
+add("key.constructionwand.wand_undo", "Stabaktion rückgängig machen");
+add("constructionwand.undo.success",  "Stabaktion rückgängig gemacht");
+add("constructionwand.undo.nothing",  "Keine Aktion zum Rückgängigmachen");
+add("constructionwand.networking.wand_undo.failed",  "Stabaktion konnte nicht rückgängig gemacht werden");
+add("constructionwand.description.void_sack", "Der Leerenbeutel fängt aufgesammelte Gegenstände ab und speichert sie in seinem internen 4×4-Inventar.\n\n§5§nAKTIVIERUNG§0§r\nDrücke %1$s, um den Beutel zu aktivieren oder zu deaktivieren. Wenn er deaktiviert ist, werden Gegenstände in dein normales Inventar gelegt.\n\n§5§nBEHÄLTER VERKNÜPFEN§0§r\nKlicke mit der rechten Maustaste auf einen beliebigen Behälter (Truhe, Fass, Shulkerkiste usw.), während du den Beutel hältst, um ihn zu verknüpfen. Nach der Verknüpfung werden Gegenstände bei aktiviertem Beutel zuerst in den Behälter gesendet. Ist der Behälter voll, werden überschüssige Gegenstände im internen Speicher des Beutels abgelegt.\n\n§5§nMODUS§0§r\nDrücke %1$s, um zwischen §aSenden§0 (Gegenstände → Behälter) und §eLagern§0 (Gegenstände → interne Plätze) umzuschalten. Alternativ kannst du auch die Umschalttaste in der GUI verwenden.");    
+add("constructionwand.option.cores.constructionwand:core_exchange", "§bKristall des Austauschs");
+add("constructionwand.option.cores.constructionwand:core_exchange.desc", "Ersetzt Blöcke auf der dir zugewandten Seite durch den Block in deiner linken Hand");
+add("constructionwand.description.core_exchange", "Der Kristall des Austauschs ersetzt Blöcke auf der dir zugewandten Seite (oder eine Reihe von Blöcken) durch den Block, den du in deiner linken Hand hältst. Die maximale Anzahl Blöcke hängt vom Material des Stabes ab. Beschränkungen funktionieren genauso wie beim Kristall der Konstruktion.");       
+add("constructionwand.message.exchange_selected", "Ausgewählt: %s");
+add("constructionwand.message.exchange_invalid", "Dieser Block kann nicht ausgewählt werden");
+add("constructionwand.message.exchange_none_selected", "Kein Block ausgewählt — drücke Numpad 7, während du einen Block anschaust");
+add("constructionwand.message.exchange_no_target", "Schau zuerst auf einen Block");
+add("key.constructionwand.exchange_select", "Austauschblock auswählen");       
         }
     }
 

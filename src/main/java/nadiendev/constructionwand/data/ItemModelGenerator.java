@@ -79,10 +79,21 @@ public class ItemModelGenerator extends ModelProvider {
                 )
         );
 
+        // Modelo con core "exchange"
+        ItemModel.Unbaked exchangeModel = ItemModelUtils.plainModel(
+                generateLayeredItem(
+                        itemModels,
+                        location.withSuffix("_exchange"),
+                        location,
+                        Identifier.fromNamespaceAndPath(ConstructionWand.MODID, "item/overlay_core")
+                )
+        );
+
         // Select por string
         List<SelectItemModel.SwitchCase<String>> cases = new ArrayList<>();
         cases.add(ItemModelUtils.when("angel", angelModel));
         cases.add(ItemModelUtils.when("destruction", destructionModel));
+        cases.add(ItemModelUtils.when("exchange", exchangeModel));
 
         itemModels.itemModelOutput.accept(
                 wand,

@@ -68,10 +68,72 @@ public class SupplierInventory implements IWandSupplier
 
     protected void addBlockItem(BlockItem item) {
         int count = WandUtil.countItem(player, item);
-        if(count > 0) {
+
+        // Si hay algún container handler que reconoce este item, usamos MAX_VALUE
+        // para no limitar por el stock real de la red (que se decrementaría incorrectamente
+        // en getPlaceSnapshot). El verdadero consumo ocurre en takeItemStack().
+        // Esto también corrige el bug en modo creativo con terminales wireless:
+        // countItemInContainers devuelve el stock real de la red, pero getPlaceSnapshot
+        // lo va decrementando y se queda "sin stock" aunque la red tenga miles.
+        if (hasContainerWithItem(item)) {
+            count = Integer.MAX_VALUE;
+        } else {
+            count += countItemInContainers(item);
+        }
+
+        if (count > 0) {
             itemCounts.put(item, count);
             itemPool.add(item);
         }
+    }
+
+    /**
+     * Curios API Optional Dependency.
+     * Six Seven -_-
+     */
+    // Sin integración de Curios en 1.21.11 (no hay dependencia disponible para esta
+    // versión de Minecraft); se devuelve vacío para que solo cuenten hotbar e inventario.
+    private List<ItemStack> getCuriosInv(Player player) {
+        return List.of();
+    }
+
+    private boolean hasContainerWithItem(BlockItem item) {
+        if (!(player instanceof ServerPlayer sp)) return false;
+
+        ContainerManager containerManager = ConstructionWand.containerManager;
+        ContainerTrace trace = new ContainerTrace(sp);
+        ItemStack itemStack = new ItemStack(item);
+
+        for (ItemStack inv : WandUtil.getHotbarWithOffhand(player)) {
+            if (containerManager.countItems(player, trace, itemStack, inv) > 0) return true;
+        }
+        for (ItemStack inv : WandUtil.getMainInv(player)) {
+            if (containerManager.countItems(player, trace, itemStack, inv) > 0) return true;
+        }
+        for (ItemStack inv : getCuriosInv(player)) {
+            if (containerManager.countItems(player, trace, itemStack, inv) > 0) return true;
+        }
+        return false;
+    }
+
+    private int countItemInContainers(BlockItem item) {
+        if (!(player instanceof ServerPlayer sp)) return 0;
+
+        ContainerManager containerManager = ConstructionWand.containerManager;
+        ContainerTrace trace = new ContainerTrace(sp);
+        ItemStack itemStack = new ItemStack(item);
+        int total = 0;
+
+        for (ItemStack inv : WandUtil.getHotbarWithOffhand(player)) {
+            total += containerManager.countItems(player, trace, itemStack, inv);
+        }
+        for (ItemStack inv : WandUtil.getMainInv(player)) {
+            total += containerManager.countItems(player, trace, itemStack, inv);
+        }
+        for (ItemStack inv : getCuriosInv(player)) {
+            total += containerManager.countItems(player, trace, itemStack, inv);
+        }
+        return total;
     }
 
     @Override
