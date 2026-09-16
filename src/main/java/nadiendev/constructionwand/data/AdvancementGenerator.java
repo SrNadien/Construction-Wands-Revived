@@ -44,9 +44,11 @@ public class AdvancementGenerator extends AdvancementProvider {
                     .addCriterion("stone_wand", hasItemsTrigger(ModItems.WAND_STONE.get()))
                     .save(consumer, rootID("root"));
 
+            AdvancementHolder woodWand     = onHasItem(consumer, ModItems.WAND_WOOD,        AdvancementType.TASK,      root);
             AdvancementHolder stoneWand    = onHasItem(consumer, ModItems.WAND_STONE,       AdvancementType.TASK,      root);
             AdvancementHolder ironWand     = onHasItem(consumer, ModItems.WAND_IRON,        AdvancementType.TASK,      stoneWand);
-            AdvancementHolder diamondWand  = onHasItem(consumer, ModItems.WAND_DIAMOND,     AdvancementType.TASK,      ironWand);
+            AdvancementHolder goldWand     = onHasItem(consumer, ModItems.WAND_GOLD,        AdvancementType.TASK,      ironWand);
+            AdvancementHolder diamondWand  = onHasItem(consumer, ModItems.WAND_DIAMOND,     AdvancementType.TASK,      goldWand);
             AdvancementHolder netherWand   = onHasItem(consumer, ModItems.WAND_NETHERITE,   AdvancementType.TASK,      diamondWand);
             AdvancementHolder infWand      = onHasItem(consumer, ModItems.WAND_INFINITY,    AdvancementType.CHALLENGE, netherWand);
 

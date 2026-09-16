@@ -54,10 +54,13 @@
   "item.constructionwand.core_angel": "Núcleo de Varita Angelical",
   "item.constructionwand.core_destruction": "Núcleo de Varita de Destruição",
   "item.constructionwand.diamond_wand": "Varinha de Diamante",
+  "item.constructionwand.gold_wand": "Varinha de ouro",
   "item.constructionwand.infinity_wand": "Varinha infinita",
   "item.constructionwand.iron_wand": "Varinha de ferro",
   "item.constructionwand.netherite_wand": "Varinha de Netjerita",
   "item.constructionwand.stone_wand": "Varinha de pedra",
+  "item.constructionwand.wood_wand": "Varinha de madeira",
   "itemGroup.constructionwand": "Varinhas de Construção Revividas",
+  "itemGroup.constructionwand.construction_wand_tab": "Varinhas de Construção Revividas",
   "stat.constructionwand.use_wand": "Blocos colocados usando varinha"
 }

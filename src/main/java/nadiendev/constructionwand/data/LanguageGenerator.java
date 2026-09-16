@@ -20,7 +20,9 @@ public class LanguageGenerator extends LanguageProvider {
         add("itemGroup.constructionwand", "Construction Wands Revived");
         add("itemGroup.constructionwand.construction_wand_tab", "Construction Wands Revived");
 
+        addItem(ModItems.WAND_WOOD, "Wooden Wand");
         addItem(ModItems.WAND_STONE, "Stone Wand");
+        addItem(ModItems.WAND_GOLD, "Golden Wand");
         addItem(ModItems.WAND_IRON, "Iron Wand");
         addItem(ModItems.WAND_DIAMOND, "Diamond Wand");
         addItem(ModItems.WAND_NETHERITE, "Netherite Wand");
@@ -30,9 +32,13 @@ public class LanguageGenerator extends LanguageProvider {
 
  add("advancement.constructionwand.root.title", "Construction Wands Revived");
 add("advancement.constructionwand.root.desc", "Get your first wand");
+add("advancement.constructionwand.wood_wand.title", "Wooden Wand");
 add("advancement.constructionwand.stone_wand.title", "Stone Wand");
+add("advancement.constructionwand.wood_wand.desc", "Obtain a Wooden Wand");
 add("advancement.constructionwand.stone_wand.desc", "Obtain a Stone Wand");
+add("advancement.constructionwand.gold_wand.title", "Golden Wand");
 add("advancement.constructionwand.iron_wand.title", "Iron Wand");
+add("advancement.constructionwand.gold_wand.desc", "Obtain an Golden Wand");
 add("advancement.constructionwand.iron_wand.desc", "Obtain an Iron Wand");
 add("advancement.constructionwand.diamond_wand.title", "Diamond Wand");
 add("advancement.constructionwand.diamond_wand.desc", "Obtain a Diamond Wand");
@@ -136,7 +142,9 @@ add("advancement.constructionwand.core_destruction.desc", "Obtain a Destruction 
         add("itemGroup.constructionwand", "Varitas de Construcción Revividas");
         add("itemGroup.constructionwand.construction_wand_tab", "Varitas de Construcción Revividas");
 
+        addItem(ModItems.WAND_WOOD, "Varita de Madera");
         addItem(ModItems.WAND_STONE, "Varita de Piedra");
+        addItem(ModItems.WAND_GOLD, "Varita de Oro");
         addItem(ModItems.WAND_IRON, "Varita de Hierro");
         addItem(ModItems.WAND_DIAMOND, "Varita de Diamante");
         addItem(ModItems.WAND_NETHERITE, "Varita de netherita");
@@ -146,9 +154,13 @@ add("advancement.constructionwand.core_destruction.desc", "Obtain a Destruction 
        
          add("advancement.constructionwand.root.title", "Varitas de Construcción Revividas");
 add("advancement.constructionwand.root.desc", "Obtené tu primera varita");
+add("advancement.constructionwand.wood_wand.title", "Varita de Madera");
 add("advancement.constructionwand.stone_wand.title", "Varita de Piedra");
+add("advancement.constructionwand.wood_wand.desc", "Obtené una Varita de Madera");
 add("advancement.constructionwand.stone_wand.desc", "Obtené una Varita de Piedra");
+add("advancement.constructionwand.gold_wand.title", "Varita de Oro");
 add("advancement.constructionwand.iron_wand.title", "Varita de Hierro");
+add("advancement.constructionwand.gold_wand.desc", "Obtené una Varita de Oro");
 add("advancement.constructionwand.iron_wand.desc", "Obtené una Varita de Hierro");
 add("advancement.constructionwand.diamond_wand.title", "Varita de Diamante");
 add("advancement.constructionwand.diamond_wand.desc", "Obtené una Varita de Diamante");
@@ -243,7 +255,9 @@ add("advancement.constructionwand.core_destruction.desc", "Obtené un Núcleo de
         add("itemGroup.constructionwand", "Varitas de Construcción Revividas");
         add("itemGroup.constructionwand.construction_wand_tab", "Varitas de Construcción Revividas");
 
+        addItem(ModItems.WAND_WOOD, "Varita de madera");
         addItem(ModItems.WAND_STONE, "Varita de piedra");
+        addItem(ModItems.WAND_GOLD, "Varita de oro");
         addItem(ModItems.WAND_IRON, "Varita de hierro");
         addItem(ModItems.WAND_DIAMOND, "Varita de diamante");
         addItem(ModItems.WAND_NETHERITE, "Varita de netherita");
@@ -316,7 +330,9 @@ add("advancement.constructionwand.core_destruction.desc", "Obtené un Núcleo de
         add("itemGroup.constructionwand", "Varitas de Construcción Revividas");
         add("itemGroup.constructionwand.construction_wand_tab", "Varitas de Construcción Revividas");
 
+        addItem(ModItems.WAND_WOOD, "Varita de madera");
         addItem(ModItems.WAND_STONE, "Varita de piedra");
+        addItem(ModItems.WAND_GOLD, "Varita de oro");
         addItem(ModItems.WAND_IRON, "Varita de hierro");
         addItem(ModItems.WAND_DIAMOND, "Varita de diamante");
         addItem(ModItems.WAND_NETHERITE, "Varita de netherita");
@@ -326,9 +342,13 @@ add("advancement.constructionwand.core_destruction.desc", "Obtené un Núcleo de
 
         add("advancement.constructionwand.root.title", "Varitas de Construcción Revividas");
 add("advancement.constructionwand.root.desc", "Obtené tu primera varita");
+add("advancement.constructionwand.wood_wand.title", "Varita de Madera");
 add("advancement.constructionwand.stone_wand.title", "Varita de Piedra");
+add("advancement.constructionwand.wood_wand.desc", "Obtené una Varita de Madera");
 add("advancement.constructionwand.stone_wand.desc", "Obtené una Varita de Piedra");
+add("advancement.constructionwand.gold_wand.title", "Varita de Oro");
 add("advancement.constructionwand.iron_wand.title", "Varita de Hierro");
+add("advancement.constructionwand.gold_wand.desc", "Obtené una Varita de Oro");
 add("advancement.constructionwand.iron_wand.desc", "Obtené una Varita de Hierro");
 add("advancement.constructionwand.diamond_wand.title", "Varita de Diamante");
 add("advancement.constructionwand.diamond_wand.desc", "Obtené una Varita de Diamante");
@@ -406,7 +426,9 @@ add("advancement.constructionwand.core_destruction.desc", "Obtené un Núcleo de
         add("itemGroup.constructionwand", "Varitas de Construcción Revividas");
         add("itemGroup.constructionwand.construction_wand_tab", "Varitas de Construcción Revividas");
 
+        addItem(ModItems.WAND_WOOD, "Varita de madera");
         addItem(ModItems.WAND_STONE, "Varita de piedra");
+        addItem(ModItems.WAND_GOLD, "Varita de oro");
         addItem(ModItems.WAND_IRON, "Varita de hierro");
         addItem(ModItems.WAND_DIAMOND, "Varita de diamante");
         addItem(ModItems.WAND_NETHERITE, "Varita de netherita");
@@ -416,9 +438,13 @@ add("advancement.constructionwand.core_destruction.desc", "Obtené un Núcleo de
 
          add("advancement.constructionwand.root.title", "Varitas de Construcción Revividas");
 add("advancement.constructionwand.root.desc", "Obtené tu primera varita");
+add("advancement.constructionwand.wood_wand.title", "Varita de Madera");
 add("advancement.constructionwand.stone_wand.title", "Varita de Piedra");
+add("advancement.constructionwand.wood_wand.desc", "Obtené una Varita de Madera");
 add("advancement.constructionwand.stone_wand.desc", "Obtené una Varita de Piedra");
+add("advancement.constructionwand.gold_wand.title", "Varita de Oro");
 add("advancement.constructionwand.iron_wand.title", "Varita de Hierro");
+add("advancement.constructionwand.gold_wand.desc", "Obtené una Varita de Oro");
 add("advancement.constructionwand.iron_wand.desc", "Obtené una Varita de Hierro");
 add("advancement.constructionwand.diamond_wand.title", "Varita de Diamante");
 add("advancement.constructionwand.diamond_wand.desc", "Obtené una Varita de Diamante");
@@ -496,7 +522,9 @@ add("advancement.constructionwand.core_destruction.desc", "Obtené un Núcleo de
         add("itemGroup.constructionwand", "Varitas de Construcción Revividas");
         add("itemGroup.constructionwand.construction_wand_tab", "Varitas de Construcción Revividas");
 
+        addItem(ModItems.WAND_WOOD, "Varita de madera");
         addItem(ModItems.WAND_STONE, "Varita de piedra");
+        addItem(ModItems.WAND_GOLD, "Varita de oro");
         addItem(ModItems.WAND_IRON, "Varita de hierro");
         addItem(ModItems.WAND_DIAMOND, "Varita de diamante");
         addItem(ModItems.WAND_NETHERITE, "Varita de netherita");
@@ -506,9 +534,13 @@ add("advancement.constructionwand.core_destruction.desc", "Obtené un Núcleo de
 
          add("advancement.constructionwand.root.title", "Varitas de Construcción Revividas");
 add("advancement.constructionwand.root.desc", "Obtené tu primera varita");
+add("advancement.constructionwand.wood_wand.title", "Varita de Madera");
 add("advancement.constructionwand.stone_wand.title", "Varita de Piedra");
+add("advancement.constructionwand.wood_wand.desc", "Obtené una Varita de Madera");
 add("advancement.constructionwand.stone_wand.desc", "Obtené una Varita de Piedra");
+add("advancement.constructionwand.gold_wand.title", "Varita de Oro");
 add("advancement.constructionwand.iron_wand.title", "Varita de Hierro");
+add("advancement.constructionwand.gold_wand.desc", "Obtené una Varita de Oro");
 add("advancement.constructionwand.iron_wand.desc", "Obtené una Varita de Hierro");
 add("advancement.constructionwand.diamond_wand.title", "Varita de Diamante");
 add("advancement.constructionwand.diamond_wand.desc", "Obtené una Varita de Diamante");
@@ -586,7 +618,9 @@ add("advancement.constructionwand.core_destruction.desc", "Obtené un Núcleo de
         add("itemGroup.constructionwand", "建築の杖リバイバル");
         add("itemGroup.constructionwand.construction_wand_tab", "建築の杖リバイバル");
 
+        addItem(ModItems.WAND_WOOD, "木の杖");
         addItem(ModItems.WAND_STONE, "石の杖");
+        addItem(ModItems.WAND_GOLD, "金の杖");
         addItem(ModItems.WAND_IRON, "鉄の杖");
         addItem(ModItems.WAND_DIAMOND, "ダイヤモンドの杖");
         addItem(ModItems.WAND_NETHERITE, "ネザライトの杖");
@@ -596,9 +630,13 @@ add("advancement.constructionwand.core_destruction.desc", "Obtené un Núcleo de
 
         add("advancement.constructionwand.root.title", "建築の杖リバイバル");
 add("advancement.constructionwand.root.desc", "最初の杖を手に入れよう");
+add("advancement.constructionwand.wood_wand.title", "木の杖");
 add("advancement.constructionwand.stone_wand.title", "石の杖");
+add("advancement.constructionwand.wood_wand.desc", "木の杖を入手する");
 add("advancement.constructionwand.stone_wand.desc", "石の杖を入手する");
+add("advancement.constructionwand.gold_wand.title", "金の杖");
 add("advancement.constructionwand.iron_wand.title", "鉄の杖");
+add("advancement.constructionwand.gold_wand.desc", "金の杖を入手する");
 add("advancement.constructionwand.iron_wand.desc", "鉄の杖を入手する");
 add("advancement.constructionwand.diamond_wand.title", "ダイヤモンドの杖");
 add("advancement.constructionwand.diamond_wand.desc", "ダイヤモンドの杖を入手する");
@@ -676,7 +714,9 @@ add("advancement.constructionwand.core_destruction.desc", "破壊の杖のコア
         add("itemGroup.constructionwand", "건축 완드 리바이벌");
         add("itemGroup.constructionwand.construction_wand_tab", "건축 완드 리바이벌");
 
+        addItem(ModItems.WAND_WOOD, "나무 완드");
         addItem(ModItems.WAND_STONE, "돌 완드");
+        addItem(ModItems.WAND_GOLD, "금 완드");
         addItem(ModItems.WAND_IRON, "철 완드");
         addItem(ModItems.WAND_DIAMOND, "다이아몬드 완드");
         addItem(ModItems.WAND_NETHERITE, "네더라이트 지팡이");
@@ -686,9 +726,13 @@ add("advancement.constructionwand.core_destruction.desc", "破壊の杖のコア
 
         add("advancement.constructionwand.root.title", "건설 지팡이 부활");
 add("advancement.constructionwand.root.desc", "첫 번째 지팡이를 획득하세요");
+add("advancement.constructionwand.wood_wand.title", "나무 지팡이");
 add("advancement.constructionwand.stone_wand.title", "돌 지팡이");
+add("advancement.constructionwand.wood_wand.desc", "나무 지팡이를 획득하세요");
 add("advancement.constructionwand.stone_wand.desc", "돌 지팡이를 획득하세요");
+add("advancement.constructionwand.gold_wand.title", "금 지팡이");
 add("advancement.constructionwand.iron_wand.title", "철 지팡이");
+add("advancement.constructionwand.gold_wand.desc", "금 지팡이를 획득하세요");
 add("advancement.constructionwand.iron_wand.desc", "철 지팡이를 획득하세요");
 add("advancement.constructionwand.diamond_wand.title", "다이아몬드 지팡이");
 add("advancement.constructionwand.diamond_wand.desc", "다이아몬드 지팡이를 획득하세요");
@@ -766,7 +810,9 @@ add("advancement.constructionwand.core_destruction.desc", "파괴 지팡이 코�
         add("itemGroup.constructionwand", "Varinhas de Construção Revividas");
         add("itemGroup.constructionwand.construction_wand_tab", "Varinhas de Construção Revividas");
 
+        addItem(ModItems.WAND_WOOD, "Varinha de madeira");
         addItem(ModItems.WAND_STONE, "Varinha de pedra");
+        addItem(ModItems.WAND_GOLD, "Varinha de ouro");
         addItem(ModItems.WAND_IRON, "Varinha de ferro");
         addItem(ModItems.WAND_DIAMOND, "Varinha de Diamante");
         addItem(ModItems.WAND_NETHERITE, "Varinha de Netjerita");
@@ -839,7 +885,9 @@ add("advancement.constructionwand.core_destruction.desc", "파괴 지팡이 코�
         add("itemGroup.constructionwand", "Волшебные жезлы для строительства - Возрождение");
         add("itemGroup.constructionwand.construction_wand_tab", "Волшебные жезлы для строительства - Возрождение");
 
+        addItem(ModItems.WAND_WOOD, "Деревянный жезл");
         addItem(ModItems.WAND_STONE, "Каменный жезл");
+        addItem(ModItems.WAND_GOLD, "Золотой жезл");
         addItem(ModItems.WAND_IRON, "Железный жезл");
         addItem(ModItems.WAND_DIAMOND, "Алмазный жезл");
         addItem(ModItems.WAND_NETHERITE, "Незеритовый жезл");
@@ -849,9 +897,13 @@ add("advancement.constructionwand.core_destruction.desc", "파괴 지팡이 코�
 
           add("advancement.constructionwand.root.title", "Строительные Жезлы Возрождены");
 add("advancement.constructionwand.root.desc", "Получите свой первый жезл");
+add("advancement.constructionwand.wood_wand.title", "Деревянный жезл");
 add("advancement.constructionwand.stone_wand.title", "Каменный жезл");
+add("advancement.constructionwand.wood_wand.desc", "Получите деревянный жезл");
 add("advancement.constructionwand.stone_wand.desc", "Получите каменный жезл");
+add("advancement.constructionwand.gold_wand.title", "Золотой жезл");
 add("advancement.constructionwand.iron_wand.title", "Железный жезл");
+add("advancement.constructionwand.gold_wand.desc", "Получите золотой жезл");
 add("advancement.constructionwand.iron_wand.desc", "Получите железный жезл");
 add("advancement.constructionwand.diamond_wand.title", "Алмазный жезл");
 add("advancement.constructionwand.diamond_wand.desc", "Получите алмазный жезл");
@@ -929,7 +981,9 @@ add("advancement.constructionwand.core_destruction.desc", "Получите яд
         add("itemGroup.constructionwand", "Byggstavar Återupplivade");
         add("itemGroup.constructionwand.construction_wand_tab", "Byggstavar Återupplivade");
 
+        addItem(ModItems.WAND_WOOD, "Trästav");
         addItem(ModItems.WAND_STONE, "Stenstav");
+        addItem(ModItems.WAND_GOLD, "Guldstav");
         addItem(ModItems.WAND_IRON, "Järnstav");
         addItem(ModItems.WAND_DIAMOND, "Diamantstav");
         addItem(ModItems.WAND_NETHERITE, "Netheritstav");
@@ -939,9 +993,13 @@ add("advancement.constructionwand.core_destruction.desc", "Получите яд
 
            add("advancement.constructionwand.root.title", "Byggstavar Återupplivade");
 add("advancement.constructionwand.root.desc", "Skaffa din första stav");
+add("advancement.constructionwand.wood_wand.title", "Trästav");
 add("advancement.constructionwand.stone_wand.title", "Stenstav");
+add("advancement.constructionwand.wood_wand.desc", "Skaffa en trästav");
 add("advancement.constructionwand.stone_wand.desc", "Skaffa en stenstav");
+add("advancement.constructionwand.gold_wand.title", "Guldstav");
 add("advancement.constructionwand.iron_wand.title", "Järnstav");
+add("advancement.constructionwand.gold_wand.desc", "Skaffa en guldstav");
 add("advancement.constructionwand.iron_wand.desc", "Skaffa en järnstav");
 add("advancement.constructionwand.diamond_wand.title", "Diamantstav");
 add("advancement.constructionwand.diamond_wand.desc", "Skaffa en diamantstav");
@@ -1019,7 +1077,9 @@ add("advancement.constructionwand.core_destruction.desc", "Skaffa en rivningssta
         add("itemGroup.constructionwand", "Yeniden Canlandırılmış İnşaat Asaları");
         add("itemGroup.constructionwand.construction_wand_tab", "Yeniden Canlandırılmış İnşaat Asaları");
 
+        addItem(ModItems.WAND_WOOD, "Ahşap Asa");
         addItem(ModItems.WAND_STONE, "Taş Asa");
+        addItem(ModItems.WAND_GOLD, "Altın Asa");
         addItem(ModItems.WAND_IRON, "Demir Asa");
         addItem(ModItems.WAND_DIAMOND, "Elmas Asa");
         addItem(ModItems.WAND_NETHERITE, "Netherite Asa");
@@ -1029,9 +1089,13 @@ add("advancement.constructionwand.core_destruction.desc", "Skaffa en rivningssta
   
 add("advancement.constructionwand.root.title", "Yeniden Canlandırılmış İnşaat Asaları");
 add("advancement.constructionwand.root.desc", "İlk asanı edin");
+add("advancement.constructionwand.wood_wand.title", "Ahşap Asa");
 add("advancement.constructionwand.stone_wand.title", "Taş Asa");
+add("advancement.constructionwand.wood_wand.desc", "Bir Ahşap Asa edin");
 add("advancement.constructionwand.stone_wand.desc", "Bir Taş Asa edin");
+add("advancement.constructionwand.gold_wand.title", "Altın Asa");
 add("advancement.constructionwand.iron_wand.title", "Demir Asa");
+add("advancement.constructionwand.gold_wand.desc", "Bir Altın Asa edin");
 add("advancement.constructionwand.iron_wand.desc", "Bir Demir Asa edin");
 add("advancement.constructionwand.diamond_wand.title", "Elmas Asa");
 add("advancement.constructionwand.diamond_wand.desc", "Bir Elmas Asa edin");
@@ -1109,7 +1173,9 @@ add("advancement.constructionwand.core_destruction.desc", "Bir Yıkım Asa Çeki
         add("itemGroup.constructionwand", "建筑手杖复兴版");
         add("itemGroup.constructionwand.construction_wand_tab", "建筑手杖复兴版");
 
+        addItem(ModItems.WAND_WOOD, "木制手杖");
         addItem(ModItems.WAND_STONE, "石制手杖");
+        addItem(ModItems.WAND_GOLD, "金制手杖");
         addItem(ModItems.WAND_IRON, "铁制手杖");
         addItem(ModItems.WAND_DIAMOND, "钻石手杖");
         addItem(ModItems.WAND_NETHERITE, "下界合金建筑杖");
@@ -1119,9 +1185,13 @@ add("advancement.constructionwand.core_destruction.desc", "Bir Yıkım Asa Çeki
 
 add("advancement.constructionwand.root.title", "建筑手杖复兴版");
 add("advancement.constructionwand.root.desc", "获得你的第一根手杖");
+add("advancement.constructionwand.wood_wand.title", "木制手杖");
 add("advancement.constructionwand.stone_wand.title", "石制手杖");
+add("advancement.constructionwand.wood_wand.desc", "获得一根木制手杖");
 add("advancement.constructionwand.stone_wand.desc", "获得一根石制手杖");
+add("advancement.constructionwand.gold_wand.title", "金制手杖");
 add("advancement.constructionwand.iron_wand.title", "铁制手杖");
+add("advancement.constructionwand.gold_wand.desc", "获得一根金制手杖");
 add("advancement.constructionwand.iron_wand.desc", "获得一根铁制手杖");
 add("advancement.constructionwand.diamond_wand.title", "钻石手杖");
 add("advancement.constructionwand.diamond_wand.desc", "获得一根钻石手杖");
@@ -1199,7 +1269,9 @@ add("advancement.constructionwand.core_destruction.desc", "获得一个破坏手
         add("itemGroup.constructionwand", "Baustäbe Wiederbelebt");
         add("itemGroup.constructionwand.construction_wand_tab", "Baustäbe Wiederbelebt");
 
+        addItem(ModItems.WAND_WOOD, "Hölzerner Stab");
         addItem(ModItems.WAND_STONE, "Steinerner Stab");
+        addItem(ModItems.WAND_GOLD, "Goldener Stab");
         addItem(ModItems.WAND_IRON, "Eiserner Stab");
         addItem(ModItems.WAND_DIAMOND, "Diamantener Stab");
         addItem(ModItems.WAND_NETHERITE, "Netherit Stab");
@@ -1209,9 +1281,13 @@ add("advancement.constructionwand.core_destruction.desc", "获得一个破坏手
 
 add("advancement.constructionwand.root.title", "Baustäbe Wiederbelebt");
 add("advancement.constructionwand.root.desc", "Erhalte deinen ersten Stab");
+add("advancement.constructionwand.wood_wand.title", "Hölzerner Stab");
 add("advancement.constructionwand.stone_wand.title", "Steinerner Stab");
+add("advancement.constructionwand.wood_wand.desc", "Erhalte einen hölzernen Stab");
 add("advancement.constructionwand.stone_wand.desc", "Erhalte einen steinernen Stab");
+add("advancement.constructionwand.gold_wand.title", "Goldener Stab");
 add("advancement.constructionwand.iron_wand.title", "Eiserner Stab");
+add("advancement.constructionwand.gold_wand.desc", "Erhalte einen goldenen Stab");
 add("advancement.constructionwand.iron_wand.desc", "Erhalte einen eisernen Stab");
 add("advancement.constructionwand.diamond_wand.title", "Diamantener Stab");
 add("advancement.constructionwand.diamond_wand.desc", "Erhalte einen diamantenen Stab");

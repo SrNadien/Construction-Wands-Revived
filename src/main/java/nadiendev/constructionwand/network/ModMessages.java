@@ -15,6 +15,7 @@ public final class ModMessages {
         final PayloadRegistrar registrar = event.registrar(ConstructionWand.MODID);
 
         registrar.playToClient(PacketUndoBlocks.ID, PacketUndoBlocks.CODEC, PacketUndoBlocks.Handler::handle);
+        registrar.playToClient(PacketRefreshModelData.ID, PacketRefreshModelData.CODEC, PacketRefreshModelData.Handler::handle);
         registrar.playToServer(PacketQueryUndo.ID, PacketQueryUndo.CODEC, PacketQueryUndo.Handler::handle);
         registrar.playToServer(PacketWandOption.ID, PacketWandOption.CODEC, PacketWandOption.Handler::handle);
         registrar.playToServer(PacketRequestPreview.ID, PacketRequestPreview.CODEC, PacketRequestPreview.Handler::handle);

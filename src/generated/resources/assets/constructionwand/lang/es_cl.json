@@ -54,10 +54,13 @@
   "item.constructionwand.core_angel": "Núcleo de varita angelical",
   "item.constructionwand.core_destruction": "Núcleo de varita de destrucción",
   "item.constructionwand.diamond_wand": "Varita de diamante",
+  "item.constructionwand.gold_wand": "Varita de oro",
   "item.constructionwand.infinity_wand": "Varita infinita",
   "item.constructionwand.iron_wand": "Varita de hierro",
   "item.constructionwand.netherite_wand": "Varita de netherita",
   "item.constructionwand.stone_wand": "Varita de piedra",
+  "item.constructionwand.wood_wand": "Varita de madera",
   "itemGroup.constructionwand": "Varitas de Construcción Revividas",
+  "itemGroup.constructionwand.construction_wand_tab": "Varitas de Construcción Revividas",
   "stat.constructionwand.use_wand": "Bloques colocados usando la varita"
 }

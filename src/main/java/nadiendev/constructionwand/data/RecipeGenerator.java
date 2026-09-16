@@ -32,8 +32,10 @@ public class RecipeGenerator extends RecipeProvider
 
     @Override
     protected void buildRecipes() {
+        wandRecipe(ModItems.WAND_WOOD.get(), Inp.fromItems(registries, "wood_planks", Items.CHERRY_PLANKS, Items.BIRCH_PLANKS));
         wandRecipe(ModItems.WAND_STONE.get(), Inp.fromTag(registries, ItemTags.STONE_TOOL_MATERIALS));
         wandRecipe(ModItems.WAND_IRON.get(), Inp.fromTag(registries, Tags.Items.INGOTS_IRON));
+        wandRecipe(ModItems.WAND_GOLD.get(), Inp.fromTag(registries, Tags.Items.INGOTS_GOLD));
         wandRecipe(ModItems.WAND_DIAMOND.get(), Inp.fromTag(registries, Tags.Items.GEMS_DIAMOND));
         wandRecipe(ModItems.WAND_NETHERITE.get(), Inp.fromTag(registries, Tags.Items.INGOTS_NETHERITE));
         wandRecipe(ModItems.WAND_INFINITY.get(), Inp.fromTag(registries, Tags.Items.NETHER_STARS));
