@@ -121,6 +121,7 @@ public class ConfigServer
         // NOTE: WAND_GOLD previously had no entry here at all, which made ConfigServer.getWandProperties()
         // fall back to WandProperties.DEFAULT (upgradeable = false). That silently prevented Gold Wand from
         // ever accepting ANY core (Angel/Destruction included), not just Exchange. Added below.
+        new WandProperties(builder, ModItems.WAND_WOOD, Tiers.WOOD.getUses(), 5, 0, 0, 0, false);
         new WandProperties(builder, ModItems.WAND_STONE, Tiers.STONE.getUses(), 9, 0, 0, 0, false);
         new WandProperties(builder, ModItems.WAND_IRON, Tiers.IRON.getUses(), 27, 2, 9, 9, true);
         new WandProperties(builder, ModItems.WAND_GOLD, Tiers.GOLD.getUses(), 60, 5, 15, 15, true);

@@ -23,6 +23,10 @@ public class Inp
         return new Inp(BuiltInRegistries.ITEM.getKey(in.asItem()).getPath(), Ingredient.of(in), ItemPredicate.Builder.item().of(in).build());
     }
 
+    public static Inp fromItems(String name, ItemLike... in) {
+        return new Inp(name, Ingredient.of(in), ItemPredicate.Builder.item().of(in).build());
+    }
+
     public static Inp fromTag(TagKey<Item> in) {
         return new Inp(in.location().getPath(), Ingredient.of(in), ItemPredicate.Builder.item().of(in).build());
     }

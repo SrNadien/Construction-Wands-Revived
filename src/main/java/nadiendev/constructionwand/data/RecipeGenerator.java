@@ -28,6 +28,7 @@ public class RecipeGenerator extends RecipeProvider {
 
     @Override
     protected void buildRecipes(RecipeOutput output, HolderLookup.Provider provider) {
+        wandRecipe(output, ModItems.WAND_WOOD.get(), Inp.fromItems("wood_planks", Items.CHERRY_PLANKS, Items.BIRCH_PLANKS));
         wandRecipe(output, ModItems.WAND_STONE.get(), Inp.fromTag(ItemTags.STONE_TOOL_MATERIALS));
         wandRecipe(output, ModItems.WAND_IRON.get(), Inp.fromTag(Tags.Items.INGOTS_IRON));
         // WAND_GOLD had no recipe at all before this change; the item existed but couldn't be crafted.

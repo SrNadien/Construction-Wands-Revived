@@ -4,6 +4,9 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.TickTask;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
@@ -15,6 +18,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
@@ -118,7 +123,7 @@ public class WandUtil
         return isWhitelist == inList;
     }
 
-    public static boolean placeBlock(Level world, Player player, BlockState block, BlockPos pos, @Nullable BlockItem item) {
+    public static boolean placeBlock(Level world, Player player, BlockState block, BlockPos pos, @Nullable ItemStack item) {
         if(!world.setBlockAndUpdate(pos, block)) {
             ConstructionWand.LOGGER.info("Block could not be placed");
             return false;
@@ -133,15 +138,47 @@ public class WandUtil
         }
 
         ItemStack stack;
-        if(item == null) stack = new ItemStack(block.getBlock().asItem());
+        if(item == null || item.isEmpty()) stack = new ItemStack(block.getBlock().asItem());
         else {
-            stack = new ItemStack(item);
-            player.awardStat(Stats.ITEM_USED.get(item));
+            stack = item.copyWithCount(1);
+            player.awardStat(Stats.ITEM_USED.get(item.getItem()));
+        }
+        BlockItem.updateCustomBlockEntityTag(world, player, pos, stack);
+        block.getBlock().setPlacedBy(world, pos, block, player, stack);
+        BlockEntity blockEntity = world.getBlockEntity(pos);
+        if(blockEntity != null) {
+            blockEntity.setChanged();
+            world.sendBlockUpdated(pos, block, block, Block.UPDATE_ALL);
         }
 
-        block.getBlock().setPlacedBy(world, pos, block, player, stack);
-
         return true;
+    }
+
+    /**
+     * Reenvia el bloque un tick despues de colocarlo.
+     *
+     * El cliente recibe en el mismo tick el cambio de bloque y, justo detras, los datos del
+     * block entity. El cambio de bloque le marca la seccion para remallar, y esa tarea corre
+     * en un hilo aparte: si alcanza a tomar la instantanea antes de que lleguen los datos del
+     * block entity, el bloque se dibuja sin ellos y asi se queda hasta que algo vuelva a
+     * ensuciar la seccion. Por eso un cajon enmarcado salia con marco unas veces si y otras no.
+     *
+     * Colocando a mano no pasa porque el cliente ejecuta setPlacedBy por su cuenta al predecir
+     * la colocacion, y ahi el mod pide el refresco del model data. La varita coloca solo en el
+     * servidor, asi que el remallado hay que provocarlo nosotros, ya con los datos puestos.
+     */
+    private static void scheduleClientRefresh(Level world, BlockPos pos) {
+        if(!(world instanceof ServerLevel serverLevel)) return;
+
+        MinecraftServer server = serverLevel.getServer();
+        if(server == null) return;
+
+        BlockPos immutable = pos.immutable();
+        server.tell(new TickTask(server.getTickCount() + 1, () -> {
+            if(!serverLevel.isLoaded(immutable)) return;
+            BlockState current = serverLevel.getBlockState(immutable);
+            serverLevel.sendBlockUpdated(immutable, current, current, Block.UPDATE_ALL);
+        }));
     }
 
     public static boolean removeBlock(Level world, Player player, @Nullable BlockState block, BlockPos pos) {
@@ -163,7 +200,7 @@ public class WandUtil
         return true;
     }
 
-    public static int countItem(Player player, Item item) {
+    public static int countItem(Player player, ItemStack template) {
         if(player.isCreative()) return Integer.MAX_VALUE;
 
         int total = 0;
@@ -175,10 +212,10 @@ public class WandUtil
         for(ItemStack stack : inventory) {
             if(stack == null || stack.isEmpty()) continue;
 
-            if(WandUtil.stackEquals(stack, item)) {
+            if(WandUtil.stackEquals(stack, template)) {
                 total += stack.getCount();
             } else if(trace != null) {
-                int amount = containerManager.countItems(player, trace, new ItemStack(item), stack);
+                int amount = containerManager.countItems(player, trace, template, stack);
                 if(amount == Integer.MAX_VALUE) return Integer.MAX_VALUE;
                 total += amount;
             }
@@ -205,7 +242,7 @@ public class WandUtil
         return replace && world.getBlockState(pos).canBeReplaced(
                 new WandItemUseContext(world, player,
                         new BlockHitResult(new Vec3(0, 0, 0), Direction.DOWN, pos, false),
-                        pos, (BlockItem) Items.STONE));
+                        pos, new ItemStack(Items.STONE)));
     }
 
     public static boolean isBlockRemovable(Level world, Player player, BlockPos pos) {

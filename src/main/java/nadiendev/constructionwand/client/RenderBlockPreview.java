@@ -25,7 +25,7 @@ public class RenderBlockPreview
     private WandJob wandJob;
     public Set<BlockPos> undoBlocks;
 
-    @SubscribeEvent
+    @SubscribeEvent(receiveCanceled = true)
     public void renderBlockHighlight(RenderHighlightEvent.Block event) {
         if(event.getTarget().getType() != HitResult.Type.BLOCK) return;
 

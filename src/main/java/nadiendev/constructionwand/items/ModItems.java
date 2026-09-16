@@ -16,6 +16,7 @@ public class ModItems
 {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(ConstructionWand.MODID);
 
+    public static final DeferredItem<Item> WAND_WOOD      = ITEMS.register("wood_wand",      () -> new ItemWandBasic(new Item.Properties().stacksTo(1), Tiers.WOOD));
     public static final DeferredItem<Item> WAND_STONE     = ITEMS.register("stone_wand",     () -> new ItemWandBasic(new Item.Properties().stacksTo(1), Tiers.STONE));
     public static final DeferredItem<Item> WAND_IRON      = ITEMS.register("iron_wand",      () -> new ItemWandBasic(new Item.Properties().stacksTo(1), Tiers.IRON));
     public static final DeferredItem<Item> WAND_GOLD      = ITEMS.register("gold_wand",      () -> new ItemWandBasic(new Item.Properties().stacksTo(1), Tiers.GOLD));
@@ -32,7 +33,7 @@ public class ModItems
 
     @SuppressWarnings("unchecked")
     public static final DeferredItem<Item>[] WANDS = new DeferredItem[]{
-            WAND_STONE, WAND_IRON, WAND_GOLD, WAND_DIAMOND, WAND_NETHERITE, WAND_INFINITY};
+            WAND_WOOD, WAND_STONE, WAND_IRON, WAND_GOLD, WAND_DIAMOND, WAND_NETHERITE, WAND_INFINITY};
 
     @SuppressWarnings("unchecked")
     public static final DeferredItem<Item>[] CORES = new DeferredItem[]{

@@ -21,26 +21,26 @@ public class PlaceSnapshot implements ISnapshot
 {
     private BlockState block;
     private final BlockPos pos;
-    private final BlockItem item;
+    private final ItemStack itemStack;
     private final BlockState supportingBlock;
     private final boolean targetMode;
 
-    public PlaceSnapshot(BlockState block, BlockPos pos, BlockItem item, BlockState supportingBlock, boolean targetMode) {
+    public PlaceSnapshot(BlockState block, BlockPos pos, ItemStack itemStack, BlockState supportingBlock, boolean targetMode) {
         this.block = block;
         this.pos = pos;
-        this.item = item;
+        this.itemStack = itemStack.copyWithCount(1);
         this.supportingBlock = supportingBlock;
         this.targetMode = targetMode;
     }
 
     public static PlaceSnapshot get(Level world, Player player, BlockHitResult rayTraceResult,
-                                    BlockPos pos, BlockItem item,
+                                    BlockPos pos, ItemStack itemStack,
                                     @Nullable BlockState supportingBlock, @Nullable WandOptions options) {
         boolean targetMode = options != null && supportingBlock != null && options.direction.get() == WandOptions.DIRECTION.TARGET;
-        BlockState blockState = getPlaceBlockstate(world, player, rayTraceResult, pos, item, supportingBlock, targetMode);
+        BlockState blockState = getPlaceBlockstate(world, player, rayTraceResult, pos, itemStack, supportingBlock, targetMode);
         if(blockState == null) return null;
 
-        return new PlaceSnapshot(blockState, pos, item, supportingBlock, targetMode);
+        return new PlaceSnapshot(blockState, pos, itemStack, supportingBlock, targetMode);
     }
 
     @Override
@@ -55,7 +55,7 @@ public class PlaceSnapshot implements ISnapshot
 
     @Override
     public ItemStack getRequiredItems() {
-        return new ItemStack(item);
+        return itemStack.copy();
     }
 
     @Override
@@ -63,9 +63,9 @@ public class PlaceSnapshot implements ISnapshot
         // Recalculate PlaceBlockState, because other blocks might be placed nearby
         // Not doing this may cause game crashes (StackOverflowException) when placing lots of blocks
         // with changing orientation like panes, iron bars or redstone.
-        block = getPlaceBlockstate(world, player, rayTraceResult, pos, item, supportingBlock, targetMode);
+        block = getPlaceBlockstate(world, player, rayTraceResult, pos, itemStack, supportingBlock, targetMode);
         if(block == null) return false;
-        return WandUtil.placeBlock(world, player, block, pos, item);
+        return WandUtil.placeBlock(world, player, block, pos, itemStack);
     }
 
     @Override
@@ -90,10 +90,12 @@ public class PlaceSnapshot implements ISnapshot
     @SuppressWarnings({"rawtypes", "unchecked"})
     @Nullable
     private static BlockState getPlaceBlockstate(Level world, Player player, BlockHitResult rayTraceResult,
-                                                 BlockPos pos, BlockItem item,
+                                                 BlockPos pos, ItemStack itemStack,
                                                  @Nullable BlockState supportingBlock, boolean targetMode) {
+        if(!(itemStack.getItem() instanceof BlockItem item)) return null;
+
         // Is block at pos replaceable?
-        BlockPlaceContext ctx = new WandItemUseContext(world, player, rayTraceResult, pos, item);
+        BlockPlaceContext ctx = new WandItemUseContext(world, player, rayTraceResult, pos, itemStack);
         if(!ctx.canPlace()) return null;
 
         // Can block be placed?

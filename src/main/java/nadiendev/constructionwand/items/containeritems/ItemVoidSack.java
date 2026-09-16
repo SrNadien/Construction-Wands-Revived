@@ -29,6 +29,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.items.IItemHandler;
 import org.jetbrains.annotations.Nullable;
+import nadiendev.constructionwand.ConstructionWand;
 
 import java.util.List;
 
@@ -280,10 +281,10 @@ public class ItemVoidSack extends Item
                                 List<Component> tooltip, TooltipFlag flag) {
         super.appendHoverText(stack, context, tooltip, flag);
 
-        boolean active = isActive(stack);
-        tooltip.add(Component.translatable(
+        boolean active = isActive(stack);        tooltip.add(Component.translatable(
                 active ? "item.constructionwand.void_sack.active"
-                       : "item.constructionwand.void_sack.inactive")
+                       : "item.constructionwand.void_sack.inactive",
+                Component.keybind("key." + ConstructionWand.MODID + ".void_sack_toggle"))
                 .withStyle(active ? ChatFormatting.GREEN : ChatFormatting.DARK_GRAY));
 
         BlockPos linked = getLinkedPos(stack);

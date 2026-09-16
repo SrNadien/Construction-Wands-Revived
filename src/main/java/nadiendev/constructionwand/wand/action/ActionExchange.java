@@ -127,7 +127,7 @@ public class ActionExchange implements IWandAction
                     if(snapshot == null) continue;
                     exchangeSnapshots.add(snapshot);
 
-                    // Ejes de propagacion segun la cara apuntada, con sus locks
+
                     Direction[] axisA, axisB;
                     boolean lockA, lockB;
                     if(targetFace == Direction.UP || targetFace == Direction.DOWN) {
@@ -148,10 +148,6 @@ public class ActionExchange implements IWandAction
                     if(lockA) for(Direction a : axisA) candidates.add(currentCandidate.relative(a));
                     if(lockB) for(Direction b : axisB) candidates.add(currentCandidate.relative(b));
 
-                    // Las diagonales solo se propagan si ambos vecinos ortogonales estan
-                    // descubiertos. Asi, cuando justo delante hay un bloque encimado, el
-                    // intercambio se corta debajo de ese bloque en vez de rodearlo y
-                    // seguir reemplazando al otro lado.
                     if(lockA && lockB) {
                         for(Direction a : axisA) {
                             BlockPos sideA = currentCandidate.relative(a);

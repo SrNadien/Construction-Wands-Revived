@@ -72,14 +72,10 @@ public class DestroySnapshot implements ISnapshot
 
         ServerPlayer serverPlayer = player instanceof ServerPlayer sp ? sp : null;
 
-        // Con Void Sack activo se mantiene el comportamiento normal: el bloque suelta sus
-        // drops en el mundo y el sack los intercepta al recogerlos.
         if(hasActiveVoidSack(player)) {
             return serverLevel.destroyBlock(pos, true, serverPlayer, 512);
         }
 
-        // Sin Void Sack: los drops van directos al inventario del jugador y, cuando el
-        // inventario esta lleno, el resto simplemente se descarta.
         BlockState broken = world.getBlockState(pos);
         BlockEntity blockEntity = world.getBlockEntity(pos);
         List<ItemStack> drops = Block.getDrops(broken, serverLevel, pos, blockEntity, player, ItemStack.EMPTY);
@@ -88,14 +84,12 @@ public class DestroySnapshot implements ISnapshot
 
         for(ItemStack drop : drops) {
             if(drop.isEmpty()) continue;
-            // add() mete lo que quepa; lo que sobra se pierde (inventario lleno).
             player.getInventory().add(drop);
         }
 
         return true;
     }
 
-    /** True si el jugador lleva un Void Sack activo en alguna mano. */
     private static boolean hasActiveVoidSack(Player player) {
         for(InteractionHand hand : InteractionHand.values()) {
             ItemStack stack = player.getItemInHand(hand);

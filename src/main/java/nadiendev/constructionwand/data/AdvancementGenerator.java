@@ -46,8 +46,10 @@ public class AdvancementGenerator extends AdvancementProvider {
                     ))
                     .save(consumer, rootID("root"));
 
+            onHasItem(consumer, ModItems.WAND_WOOD,     AdvancementType.TASK, root);
             onHasItem(consumer, ModItems.WAND_STONE,    AdvancementType.TASK, root);
             onHasItem(consumer, ModItems.WAND_IRON,     AdvancementType.TASK, root);
+            onHasItem(consumer, ModItems.WAND_GOLD,     AdvancementType.TASK, root);
             onHasItem(consumer, ModItems.WAND_DIAMOND,  AdvancementType.TASK, root);
             onHasItem(consumer, ModItems.WAND_NETHERITE,AdvancementType.TASK, root);
             onHasItem(consumer, ModItems.WAND_INFINITY, AdvancementType.GOAL, root);
