@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "C": "constructionwand:core_destruction",
+    "D": "minecraft:emerald",
+    "E": "minecraft:diamond",
+    "O": "minecraft:netherite_ingot"
+  },
+  "pattern": [
+    "EDE",
+    "OCO",
+    "EDE"
+  ],
+  "result": {
+    "id": "constructionwand:void_sack"
+  }
+}

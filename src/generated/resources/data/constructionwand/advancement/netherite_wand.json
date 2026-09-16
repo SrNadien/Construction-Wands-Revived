@@ -1,0 +1,32 @@
+{
+  "parent": "constructionwand:diamond_wand",
+  "criteria": {
+    "netherite_wand": {
+      "conditions": {
+        "items": [
+          {
+            "items": "constructionwand:netherite_wand"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.constructionwand.netherite_wand.desc"
+    },
+    "icon": {
+      "id": "constructionwand:netherite_wand"
+    },
+    "title": {
+      "translate": "advancement.constructionwand.netherite_wand.title"
+    }
+  },
+  "requirements": [
+    [
+      "netherite_wand"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

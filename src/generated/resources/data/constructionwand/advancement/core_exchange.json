@@ -1,0 +1,32 @@
+{
+  "parent": "constructionwand:stone_wand",
+  "criteria": {
+    "core_exchange": {
+      "conditions": {
+        "items": [
+          {
+            "items": "constructionwand:core_exchange"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.constructionwand.core_exchange.desc"
+    },
+    "icon": {
+      "id": "constructionwand:core_exchange"
+    },
+    "title": {
+      "translate": "advancement.constructionwand.core_exchange.title"
+    }
+  },
+  "requirements": [
+    [
+      "core_exchange"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

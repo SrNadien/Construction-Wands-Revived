@@ -1,0 +1,219 @@
+plugins {
+    id 'java-library'
+    id 'eclipse'
+    id 'idea'
+    id 'maven-publish'
+    // ModDevGradle en vez de NeoGradle: NeoGradle 7.1.38 no puede construir 26.3 porque
+    // su paso neoFormRecompile no logra recompilar la fuente vanilla decompilada
+    // (net/minecraft/core/HolderSet.java). MDG usa NeoForm Runtime, que se apoya en los
+    // artefactos ya compilados que publica NeoForge y no repite ese paso localmente.
+    id 'net.neoforged.moddev' version '2.0.147'
+}
+
+version = "${mcversion}-${mod_version}-${tag_lanzador}"
+group = "${author}.${modid}"
+base {
+    archivesName = "${mod_named}"
+}
+
+// NeoForge 26.3 usa Java 25
+java.toolchain.languageVersion = JavaLanguageVersion.of(25)
+
+neoForge {
+    version = project.neo_version
+
+    // accessTransformers.from 'src/main/resources/META-INF/accesstransformer.cfg'
+
+    mods {
+        "${modid}" {
+            sourceSet sourceSets.main
+        }
+    }
+
+    runs {
+        configureEach {
+            systemProperty 'forge.logging.markers', 'REGISTRIES'
+            systemProperty 'forge.logging.console.level', 'debug'
+            jvmArgument '-Xmx1G'
+        }
+
+        client {
+            client()
+            systemProperty 'neoforge.enabledGameTestNamespaces', "${modid}"
+            jvmArgument '-Xmx2G'
+        }
+
+        server {
+            server()
+            systemProperty 'neoforge.enabledGameTestNamespaces', "${modid}"
+            programArgument '--nogui'
+        }
+
+        clientData {
+            clientData()
+            programArguments.addAll '--mod', "${modid}", '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
+        }
+    }
+}
+
+sourceSets.main.resources {
+    srcDir 'src/generated/resources'
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    maven {
+        url = "https://maven.blamejared.com"
+    }
+    // Repo de Curios: integracion desactivada (el mod esta roto en esta version).
+    // maven {
+    //     url = "https://maven.theillusivec4.top/"
+    // }
+    maven {
+        name = "Curse Maven"
+        url = "https://cursemaven.com"
+        content {
+            includeGroup "curse.maven"
+        }
+    }
+
+    // Reliable Recipe Viewer. Se usa el maven de Modrinth y no https://maven.cassian.cc
+    // porque este ultimo todavia no ha publicado la 8.10.5, que es la primera con 26.3.
+    maven {
+        name = "Modrinth"
+        url = "https://api.modrinth.com/maven"
+        content {
+            includeGroup "maven.modrinth"
+        }
+    }
+
+    // Repos de Refined Storage / AE2 / AE2WTLib: sin build para 26.3.
+    // Descomentar junto con las dependencias de abajo cuando publiquen.
+    // maven {
+    //     url = 'https://maven.creeperhost.net'
+    //     content { includeGroup "com.refinedmods.refinedstorage" }
+    // }
+    // maven {
+    //     url = uri("https://modmaven.dev/")
+    //     content {
+    //         includeGroup "appeng"
+    //         includeGroup "de.mari_023"
+    //     }
+    // }
+}
+
+dependencies {
+    // NeoForge lo aporta el bloque neoForge { version = ... } de arriba; con MDG no se
+    // declara como dependencia normal.
+
+    //jei
+    // JEI no tiene build para 26.3 todavia -- integracion aparcada en src/disabled-integrations/
+    // (no borrada: volver a descomentar estas lineas y mover integrations/jei de vuelta
+    // a src/main/java cuando JEI publique para 26.3).
+    // implementation "mezz.jei:jei-${mcversion}-neoforge:${jei_version}"
+
+    //rrv (Reliable Recipe Viewer) -- reemplazo de JEI mientras tanto
+    implementation "maven.modrinth:rrv:${rrv_version}"
+
+    // Sophisticated Backpacks / Core: las builds publicadas declaran soportar hasta 26.2
+    // ("requires minecraft 26.2 or above, and below 26.3"), asi que en los runs de
+    // desarrollo FML se niega a arrancar si estan en el classpath de runtime. Van como
+    // compileOnly: la integracion sigue compilando y el jar publicado no cambia (nunca se
+    // empaquetaron, y ContainerRegistrar ya la protege con ModList.isLoaded). Volver a
+    // implementation cuando publiquen build para 26.3.
+    //sophisticated backpacks
+    // compileOnly "curse.maven:sophisticated-backpacks-422301:${sophisticatedbackpacks_version}"
+
+    //sophisticated core
+    // compileOnly "curse.maven:sophisticated-core-618298:${sophisticatedcore_version}"
+
+    // Curios API: DESACTIVADO, el mod esta roto en esta version de NeoForge.
+    // CuriosCompat.java y CuriosHelper.java estan aparcados en src/disabled-integrations/
+    // y los usos en SupplierInventory.java quedan comentados.
+    // compileOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}:api"
+    // runtimeOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}"
+
+    // ---------------------------------------------------------------------
+    // Integraciones sin build para Minecraft 26.3.
+    // El codigo esta aparcado en src/disabled-integrations/ (fuera del sourceSet).
+    // Para reactivar: descomentar aqui, en gradle.properties, los repos de
+    // arriba, y mover las clases de vuelta a src/main/java.
+    // ---------------------------------------------------------------------
+    // Applied Energistics 2
+    // implementation "curse.maven:applied-energistics-2-223794:${ae2_version_id}"
+    // implementation "curse.maven:guideme-1173950:${guideme_version_id}"
+
+    // Refined Storage
+    // implementation "curse.maven:refined-storage-243076:${refinedstorage_version_id}"
+
+    // Refined Storage Curios Integration
+    // implementation "curse.maven:refined-storage-curios-integration-1230729:${refinedstorage_curiosintegration_version_id}"
+
+    // AE2 Wireless Terminals
+    // implementation "de.mari_023:ae2wtlib_api:${ae2wtlib_version}"
+    // runtimeOnly "de.mari_023:ae2wtlib:${ae2wtlib_version}"
+}
+
+jar {
+    manifest {
+        attributes([
+                "Specification-Title"     : project.base.archivesName.get(),
+                "Specification-Vendor"    : "${author}",
+                "Specification-Version"   : "1",
+                "Implementation-Title"    : project.base.archivesName.get(),
+                "Implementation-Version"  : "${version}",
+                "Implementation-Vendor"   : "${author}",
+                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+        ])
+    }
+}
+
+tasks.withType(ProcessResources).configureEach {
+    var replaceProperties = [
+            mod_version: mod_version,
+            mcversion : mcversion,
+            neo_version : neo_version,
+            modid      : modid,
+            mod_names : mod_names,
+            author : author,
+            mod_description : mod_description,
+            licence : licence,
+            // jei_version : jei_version,                                  // sin build 26.3
+            // sophisticatedbackpacks_version: sophisticatedbackpacks_version, // sin build 26.3
+            // sophisticatedcore_version: sophisticatedcore_version,           // sin build 26.3
+            minecraft_range_version: minecraft_range_version,
+            neoforgeVersionRange: neoforgeVersionRange,
+            loader_version_range: loader_version_range,
+    ]
+    inputs.properties replaceProperties
+
+    filesMatching(['META-INF/neoforge.mods.toml']) {
+        expand replaceProperties
+    }
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifact jar
+        }
+    }
+    repositories {
+        maven {
+            url "file:///${project.projectDir}/mcmodsrepo"
+        }
+    }
+}
+
+idea {
+    module {
+        downloadSources = true
+        downloadJavadoc = true
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.getRelease().set(25)
+}

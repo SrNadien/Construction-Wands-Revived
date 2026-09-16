@@ -1,0 +1,41 @@
+modLoader = "javafml"
+license = "${licence}"
+
+[[mods]]
+modId="${modid}"
+version="${mod_version}"
+displayName="${mod_names}"
+displayURL=""
+bannerFile="logo.png"
+iconFile="icon.png"
+authors="${author}"
+description="${mod_description}"
+
+[[dependencies.${modid}]]
+    modId="neoforge"
+    type="required"
+    versionRange="${neoforgeVersionRange}"
+    ordering = "NONE"
+    side="BOTH"
+[[dependencies.${modid}]]
+    modId="minecraft"
+    type="required"
+    versionRange="${minecraft_range_version}"
+    ordering = "NONE"
+    side="BOTH"
+
+#jei dependency -- sin build de JEI para 26.3, integracion aparcada
+#[[dependencies.${modid}]]
+#    modId="jei"
+#    type="optional"
+#    versionRange="[JEI_VERSION,)"   # volver a poner la variable jei_version al reactivar
+#    ordering="AFTER"
+#    side="CLIENT"
+
+#rrv dependency -- Reliable Recipe Viewer, reemplaza a JEI mientras JEI no tenga build para 26.3
+[[dependencies.${modid}]]
+    modId="rrv"
+    type="optional"
+    versionRange="[0,)"
+    ordering="AFTER"
+    side="CLIENT"

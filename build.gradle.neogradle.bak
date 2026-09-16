@@ -1,0 +1,184 @@
+plugins {
+    id 'java-library'
+    id 'eclipse'
+    id 'idea'
+    id 'maven-publish'
+    id 'net.neoforged.gradle.userdev' version '7.1.38'
+}
+
+version = "${mcversion}-${mod_version}-${tag_lanzador}"
+group = "${author}.${modid}"
+base {
+    archivesName = "${mod_named}"
+}
+
+// NeoForge 26.2 usa Java 25
+java.toolchain.languageVersion = JavaLanguageVersion.of(25)
+
+//minecraft.accessTransformers.file rootProject.file('src/main/resources/META-INF/accesstransformer.cfg')
+//minecraft.accessTransformers.entry public net.minecraft.client.Minecraft textureManager # textureManager
+
+runs {
+    configureEach {
+        systemProperty 'forge.logging.markers', 'REGISTRIES'
+        systemProperty 'forge.logging.console.level', 'debug'
+
+        jvmArgument '-Xmx1G'
+
+        modSource project.sourceSets.main
+    }
+
+    client {
+        systemProperty 'neoforge.enabledGameTestNamespaces', "${modid}"
+         jvmArgument '-Xmx2G'
+    }
+
+    server {
+        systemProperty 'neoforge.enabledGameTestNamespaces', "${modid}"
+        argument '--nogui'
+    }
+
+    clientData {
+        arguments.addAll '--mod', "${modid}", '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
+    }
+}
+
+sourceSets.main.resources {
+    srcDir 'src/generated/resources'
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    maven {
+        url = "https://maven.blamejared.com"
+    }
+    // Repo de Curios: integracion desactivada en 26.2 (el mod esta roto en esta version).
+    // maven {
+    //     url = "https://maven.theillusivec4.top/"
+    // }
+    maven {
+        name = "Curse Maven"
+        url = "https://cursemaven.com"
+        content {
+            includeGroup "curse.maven"
+        }
+    }
+
+    // Repos de Refined Storage / AE2 / AE2WTLib: sin build para 26.2.
+    // Descomentar junto con las dependencias de abajo cuando publiquen.
+    // maven {
+    //     url = 'https://maven.creeperhost.net'
+    //     content { includeGroup "com.refinedmods.refinedstorage" }
+    // }
+    // maven {
+    //     url = uri("https://modmaven.dev/")
+    //     content {
+    //         includeGroup "appeng"
+    //         includeGroup "de.mari_023"
+    //     }
+    // }
+}
+
+dependencies {
+    implementation "net.neoforged:neoforge:${neo_version}"
+
+    //jei
+    // JEI no tiene build para 26.3 todavia -- integracion aparcada en src/disabled-integrations/
+    // implementation "mezz.jei:jei-${mcversion}-neoforge:${jei_version}"
+
+    //sophisticated backpacks
+    implementation "curse.maven:sophisticated-backpacks-422301:${sophisticatedbackpacks_version}"
+
+    //sophisticated core
+    implementation "curse.maven:sophisticated-core-618298:${sophisticatedcore_version}"
+
+    // Curios API: DESACTIVADO en 26.2, el mod esta roto en esta version de NeoForge.
+    // CuriosCompat.java y CuriosHelper.java estan aparcados en src/disabled-integrations/
+    // y los usos en SupplierInventory.java quedan comentados.
+    // compileOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}:api"
+    // runtimeOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}"
+
+    // ---------------------------------------------------------------------
+    // Integraciones sin build para Minecraft 26.2.
+    // El codigo esta aparcado en src/disabled-integrations/ (fuera del sourceSet).
+    // Para reactivar: descomentar aqui, en gradle.properties, los repos de
+    // arriba, y mover las clases de vuelta a src/main/java.
+    // ---------------------------------------------------------------------
+    // Applied Energistics 2
+    // implementation "curse.maven:applied-energistics-2-223794:${ae2_version_id}"
+    // implementation "curse.maven:guideme-1173950:${guideme_version_id}"
+
+    // Refined Storage
+    // implementation "curse.maven:refined-storage-243076:${refinedstorage_version_id}"
+
+    // Refined Storage Curios Integration
+    // implementation "curse.maven:refined-storage-curios-integration-1230729:${refinedstorage_curiosintegration_version_id}"
+
+    // AE2 Wireless Terminals
+    // implementation "de.mari_023:ae2wtlib_api:${ae2wtlib_version}"
+    // runtimeOnly "de.mari_023:ae2wtlib:${ae2wtlib_version}"
+}
+
+jar {
+    manifest {
+        attributes([
+                "Specification-Title"     : project.base.archivesName.get(),   // FIX: archivesBaseName eliminado en Gradle moderno
+                "Specification-Vendor"    : "${author}",
+                "Specification-Version"   : "1",
+                "Implementation-Title"    : project.base.archivesName.get(),   // FIX: idem
+                "Implementation-Version"  : "${version}",
+                "Implementation-Vendor"   : "${author}",
+                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+        ])
+    }
+}
+
+tasks.withType(ProcessResources).configureEach {
+    var replaceProperties = [
+            mod_version: mod_version,
+            mcversion : mcversion,
+            neo_version : neo_version,
+            modid      : modid,
+            mod_names : mod_names,
+            author : author,
+            mod_description : mod_description,
+            licence : licence,
+            jei_version : jei_version,
+            sophisticatedbackpacks_version: sophisticatedbackpacks_version,
+            sophisticatedcore_version: sophisticatedcore_version,
+            minecraft_range_version: minecraft_range_version,
+            neoforgeVersionRange: neoforgeVersionRange,
+            loader_version_range: loader_version_range,
+    ]
+    inputs.properties replaceProperties
+
+    filesMatching(['META-INF/neoforge.mods.toml']) {
+        expand replaceProperties
+    }
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifact jar
+        }
+    }
+    repositories {
+        maven {
+            url "file:///${project.projectDir}/mcmodsrepo"
+        }
+    }
+}
+
+idea {
+    module {
+        downloadSources = true
+        downloadJavadoc = true
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.getRelease().set(25)
+}

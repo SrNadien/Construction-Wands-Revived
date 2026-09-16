@@ -1,0 +1,32 @@
+{
+  "parent": "constructionwand:root",
+  "criteria": {
+    "void_sack": {
+      "conditions": {
+        "items": [
+          {
+            "items": "constructionwand:void_sack"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.constructionwand.void_sack.desc"
+    },
+    "icon": {
+      "id": "constructionwand:void_sack"
+    },
+    "title": {
+      "translate": "advancement.constructionwand.void_sack.title"
+    }
+  },
+  "requirements": [
+    [
+      "void_sack"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

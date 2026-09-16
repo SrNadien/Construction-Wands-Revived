@@ -1,0 +1,32 @@
+{
+  "parent": "constructionwand:iron_wand",
+  "criteria": {
+    "gold_wand": {
+      "conditions": {
+        "items": [
+          {
+            "items": "constructionwand:gold_wand"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.constructionwand.gold_wand.desc"
+    },
+    "icon": {
+      "id": "constructionwand:gold_wand"
+    },
+    "title": {
+      "translate": "advancement.constructionwand.gold_wand.title"
+    }
+  },
+  "requirements": [
+    [
+      "gold_wand"
+    ]
+  ],
+  "sends_telemetry_event": true
+}
