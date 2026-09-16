@@ -24,7 +24,7 @@ public class SupplierRandom extends SupplierInventory
         itemPool = new RandomPool<>(player.getRandom());
 
         for(ItemStack stack : WandUtil.getHotbarWithOffhand(player)) {
-            if(stack.getItem() instanceof BlockItem blockItem) addBlockItem(blockItem);
+            if(stack.getItem() instanceof BlockItem) addStack(stack);
         }
     }
 }

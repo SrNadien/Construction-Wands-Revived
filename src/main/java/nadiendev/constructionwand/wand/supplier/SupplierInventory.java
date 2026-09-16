@@ -14,6 +14,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import nadiendev.constructionwand.ConstructionWand;
 import nadiendev.constructionwand.api.IWandSupplier;
 import nadiendev.constructionwand.basics.ReplacementRegistry;
+import nadiendev.constructionwand.basics.StackEntry;
 import nadiendev.constructionwand.basics.WandUtil;
 import nadiendev.constructionwand.basics.option.WandOptions;
 import nadiendev.constructionwand.basics.pool.IPool;
@@ -33,8 +34,8 @@ public class SupplierInventory implements IWandSupplier {
     protected final Player player;
     protected final WandOptions options;
 
-    protected HashMap<BlockItem, Integer> itemCounts;
-    protected IPool<BlockItem> itemPool;
+    protected HashMap<StackEntry, Integer> itemCounts;
+    protected IPool<StackEntry> itemPool;
 
     public SupplierInventory(Player player, WandOptions options) {
         this.player = player;
@@ -48,8 +49,8 @@ public class SupplierInventory implements IWandSupplier {
         itemPool = new OrderedPool<>();
 
         // Block in offhand -> override
-        if (!offhandStack.isEmpty() && offhandStack.getItem() instanceof BlockItem blockItem) {
-            addBlockItem(blockItem);
+        if (!offhandStack.isEmpty() && offhandStack.getItem() instanceof BlockItem) {
+            addStack(offhandStack);
         }
         // Otherwise use target block
         else if (target != null && target != Items.AIR) {
@@ -64,11 +65,37 @@ public class SupplierInventory implements IWandSupplier {
         }
     }
 
+    /**
+     * Da de alta todas las variantes de un item que el jugador lleve encima. Un mismo
+     * BlockItem puede existir con componentes distintos (cajones enmarcados con distinto
+     * material, shulkers con contenido, bloques configurados por mods) y cada variante
+     * entra por separado para que se coloque con sus datos intactos.
+     */
     protected void addBlockItem(BlockItem item) {
-        int count = WandUtil.countItem(player, item);
+        boolean found = false;
+
+        for (ItemStack stack : WandUtil.getFullInv(player)) {
+            if (stack == null || stack.isEmpty()) continue;
+            if (stack.getItem() != item) continue;
+            found = true;
+            addStack(stack);
+        }
+
+        // Si no lo lleva encima todavia puede estar disponible via contenedores, o el
+        // jugador estar en creativo: en ese caso se usa la variante limpia.
+        if (!found) addStack(new ItemStack(item));
+    }
+
+    protected void addStack(ItemStack stack) {
+        if (!(stack.getItem() instanceof BlockItem)) return;
+
+        StackEntry entry = new StackEntry(stack);
+        if (itemCounts.containsKey(entry)) return;
+
+        int count = WandUtil.countItem(player, entry.copyStack());
         if (count > 0) {
-            itemCounts.put(item, count);
-            itemPool.add(item);
+            itemCounts.put(entry, count);
+            itemPool.add(entry);
         }
     }
 
@@ -101,19 +128,19 @@ public class SupplierInventory implements IWandSupplier {
 
         while (true) {
             // Draw item from pool (returns null if none are left)
-            BlockItem item = itemPool.draw();
-            if (item == null) return null;
+            StackEntry entry = itemPool.draw();
+            if (entry == null) return null;
 
-            int count = itemCounts.get(item);
+            int count = itemCounts.get(entry);
             if (count == 0) continue;
 
-            PlaceSnapshot placeSnapshot = PlaceSnapshot.get(world, player, rayTraceResult, pos, item, supportingBlock, options);
+            PlaceSnapshot placeSnapshot = PlaceSnapshot.get(world, player, rayTraceResult, pos, entry.copyStack(), supportingBlock, options);
             if (placeSnapshot != null) {
                 int ncount = count - 1;
-                itemCounts.put(item, ncount);
+                itemCounts.put(entry, ncount);
 
                 // Remove item from pool if there are no items left
-                if (ncount == 0) itemPool.remove(item);
+                if (ncount == 0) itemPool.remove(entry);
 
                 return placeSnapshot;
             }
@@ -123,7 +150,6 @@ public class SupplierInventory implements IWandSupplier {
     @Override
     public int takeItemStack(ItemStack stack) {
         int count = stack.getCount();
-        Item item = stack.getItem();
 
         if (player.getInventory().getNonEquipmentItems().isEmpty()) return count;
         if (player.isCreative()) return 0;
@@ -134,18 +160,18 @@ public class SupplierInventory implements IWandSupplier {
         // List<ItemStack> curios  = getCuriosInv();  // Curios desactivado en 26.2
 
         // Take items from main inv, loose items first
-        count = takeItemsInvList(count, item, mainInv, false);
-        count = takeItemsInvList(count, item, mainInv, true);
+        count = takeItemsInvList(count, stack, mainInv, false);
+        count = takeItemsInvList(count, stack, mainInv, true);
 
         // Take items from hotbar, containers first
-        count = takeItemsInvList(count, item, hotbar, true);
-        count = takeItemsInvList(count, item, hotbar, false);
+        count = takeItemsInvList(count, stack, hotbar, true);
+        count = takeItemsInvList(count, stack, hotbar, false);
 
-        count = takeItemsInvList(count, item, armor, true);
-        count = takeItemsInvList(count, item, armor, false);
+        count = takeItemsInvList(count, stack, armor, true);
+        count = takeItemsInvList(count, stack, armor, false);
 
         // Take items from Curios slots (containers only; los curio slots) -- desactivado en 26.2
-        // count = takeItemsInvList(count, item, curios, true);
+        // count = takeItemsInvList(count, stack, curios, true);
 
         return count;
     }
@@ -154,7 +180,11 @@ public class SupplierInventory implements IWandSupplier {
     // Helpers privados
     // -------------------------------------------------------------------------
 
-    private int takeItemsInvList(int count, Item item, List<ItemStack> inv, boolean container) {
+    /**
+     * Consume contra la plantilla completa (item + componentes) para no gastar por error
+     * una variante distinta de la que se coloco.
+     */
+    private int takeItemsInvList(int count, ItemStack template, List<ItemStack> inv, boolean container) {
         if (count == 0) return 0;
         if (!(player instanceof ServerPlayer serverPlayer)) return count;
 
@@ -166,10 +196,10 @@ public class SupplierInventory implements IWandSupplier {
             if (count == 0) break;
 
             if (container) {
-                count = containerManager.useItems(serverPlayer, trace, new ItemStack(item), stack, count);
+                count = containerManager.useItems(serverPlayer, trace, template.copyWithCount(1), stack, count);
             }
 
-            if (!container && WandUtil.stackEquals(stack, item)) {
+            if (!container && WandUtil.stackEquals(stack, template)) {
                 int toTake = Math.min(count, stack.getCount());
                 stack.shrink(toTake);
                 count -= toTake;

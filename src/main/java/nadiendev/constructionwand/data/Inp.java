@@ -16,6 +16,11 @@ public record Inp(String name, Ingredient ingredient, ItemPredicate predicate) {
                 ItemPredicate.Builder.item().of(registries.lookupOrThrow(Registries.ITEM), in).build());
     }
 
+    public static Inp fromItems(HolderLookup.Provider registries, String name, ItemLike... in) {
+        return new Inp(name, Ingredient.of(in),
+                ItemPredicate.Builder.item().of(registries.lookupOrThrow(Registries.ITEM), in).build());
+    }
+
     public static Inp fromTag(HolderLookup.Provider registries, TagKey<Item> in) {
         return new Inp(in.location().getPath(), Ingredient.of(tagSet(registries, in)),
                 ItemPredicate.Builder.item().of(registries.lookupOrThrow(Registries.ITEM), in).build());

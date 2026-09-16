@@ -21,6 +21,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import nadiendev.constructionwand.ConstructionWand;
 import nadiendev.constructionwand.component.ModDataComponents;
 import nadiendev.constructionwand.component.VoidSackData;
 import org.jetbrains.annotations.Nullable;
@@ -247,7 +248,8 @@ public class ItemVoidSack extends Item
         boolean active = isActive(stack);
         tooltip.accept(Component.translatable(
                 active ? "item.constructionwand.void_sack.active"
-                       : "item.constructionwand.void_sack.inactive")
+                       : "item.constructionwand.void_sack.inactive",
+                Component.keybind("key." + ConstructionWand.MODID + ".void_sack_toggle"))
                 .withStyle(active ? ChatFormatting.GREEN : ChatFormatting.DARK_GRAY));
 
         BlockPos linked = getLinkedPos(stack);

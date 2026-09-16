@@ -7,6 +7,7 @@ version="${mod_version}"
 displayName="${mod_names}"
 displayURL=""
 bannerFile="logo.png"
+iconFile="icon.png"
 authors="${author}"
 description="${mod_description}"
 

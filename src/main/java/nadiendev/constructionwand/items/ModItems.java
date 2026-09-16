@@ -17,6 +17,8 @@ public class ModItems {
     public static final DeferredRegister.Items ITEMS =
             DeferredRegister.createItems(ConstructionWand.MODID);
 
+    public static final DeferredItem<Item> WAND_WOOD =
+            ITEMS.registerItem("wood_wand", props -> new ItemWandBasic(props, ToolMaterial.WOOD));
     public static final DeferredItem<Item> WAND_STONE =
             ITEMS.registerItem("stone_wand", props -> new ItemWandBasic(props, ToolMaterial.STONE));
     public static final DeferredItem<Item> WAND_IRON =
@@ -42,7 +44,7 @@ public class ModItems {
 
     @SuppressWarnings("unchecked")
     public static final DeferredItem<Item>[] WANDS =
-            new DeferredItem[]{WAND_STONE, WAND_IRON, WAND_GOLD, WAND_DIAMOND, WAND_NETHERITE, WAND_INFINITY};
+            new DeferredItem[]{WAND_WOOD, WAND_STONE, WAND_IRON, WAND_GOLD, WAND_DIAMOND, WAND_NETHERITE, WAND_INFINITY};
     @SuppressWarnings("unchecked")
     public static final DeferredItem<Item>[] CORES =
             new DeferredItem[]{CORE_ANGEL, CORE_DESTRUCTION, CORE_EXCHANGE};
