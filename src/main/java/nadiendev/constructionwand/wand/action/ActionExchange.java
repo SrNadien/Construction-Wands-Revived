@@ -116,25 +116,41 @@ public class ActionExchange implements IWandAction
                     if(snapshot == null) continue;
                     exchangeSnapshots.add(snapshot);
 
-                    switch(targetFace) {
-                        case DOWN:
-                        case UP:
-                            addNeighbours(world, candidates, currentCandidate, targetFace,
-                                    options.testLock(WandOptions.LOCK.NORTHSOUTH), Direction.NORTH, Direction.SOUTH,
-                                    options.testLock(WandOptions.LOCK.EASTWEST), Direction.EAST, Direction.WEST);
-                            break;
-                        case NORTH:
-                        case SOUTH:
-                            addNeighbours(world, candidates, currentCandidate, targetFace,
-                                    options.testLock(WandOptions.LOCK.HORIZONTAL), Direction.EAST, Direction.WEST,
-                                    options.testLock(WandOptions.LOCK.VERTICAL), Direction.UP, Direction.DOWN);
-                            break;
-                        case EAST:
-                        case WEST:
-                            addNeighbours(world, candidates, currentCandidate, targetFace,
-                                    options.testLock(WandOptions.LOCK.HORIZONTAL), Direction.NORTH, Direction.SOUTH,
-                                    options.testLock(WandOptions.LOCK.VERTICAL), Direction.UP, Direction.DOWN);
-                            break;
+                    // Ejes de propagacion segun la cara apuntada, con sus locks
+                    Direction[] axisA, axisB;
+                    boolean lockA, lockB;
+                    if(targetFace == Direction.UP || targetFace == Direction.DOWN) {
+                        axisA = new Direction[]{Direction.NORTH, Direction.SOUTH};
+                        axisB = new Direction[]{Direction.EAST, Direction.WEST};
+                        lockA = options.testLock(WandOptions.LOCK.NORTHSOUTH);
+                        lockB = options.testLock(WandOptions.LOCK.EASTWEST);
+                    }
+                    else {
+                        axisA = (targetFace == Direction.NORTH || targetFace == Direction.SOUTH)
+                                ? new Direction[]{Direction.EAST, Direction.WEST}
+                                : new Direction[]{Direction.NORTH, Direction.SOUTH};
+                        axisB = new Direction[]{Direction.UP, Direction.DOWN};
+                        lockA = options.testLock(WandOptions.LOCK.HORIZONTAL);
+                        lockB = options.testLock(WandOptions.LOCK.VERTICAL);
+                    }
+
+                    if(lockA) for(Direction a : axisA) candidates.add(currentCandidate.relative(a));
+                    if(lockB) for(Direction b : axisB) candidates.add(currentCandidate.relative(b));
+
+                    // Las diagonales solo se propagan si ambos vecinos ortogonales estan
+                    // descubiertos. Asi, cuando justo delante hay un bloque encimado, el
+                    // intercambio se corta debajo de ese bloque en vez de rodearlo y
+                    // seguir reemplazando al otro lado.
+                    if(lockA && lockB) {
+                        for(Direction a : axisA) {
+                            BlockPos sideA = currentCandidate.relative(a);
+                            if(!WandUtil.isBlockPermeable(world, sideA.relative(targetFace))) continue;
+                            for(Direction b : axisB) {
+                                BlockPos sideB = currentCandidate.relative(b);
+                                if(!WandUtil.isBlockPermeable(world, sideB.relative(targetFace))) continue;
+                                candidates.add(sideA.relative(b));
+                            }
+                        }
                     }
                 }
             } catch(Exception e) {
@@ -142,38 +158,6 @@ public class ActionExchange implements IWandAction
         }
 
         return exchangeSnapshots;
-    }
-
-    /**
-     * Encola los vecinos del bloque procesado sobre los dos ejes habilitados por el lock.
-     * Los ortogonales se propagan siempre; las diagonales solo cuando ambos ortogonales que las
-     * componen estan descubiertos, para que el intercambio se corte debajo de un bloque tapado
-     * en vez de rodearlo.
-     */
-    private void addNeighbours(Level world, LinkedList<BlockPos> candidates, BlockPos pos, Direction targetFace,
-                               boolean axisA, Direction a1, Direction a2,
-                               boolean axisB, Direction b1, Direction b2) {
-        if(axisA) {
-            candidates.add(pos.relative(a1));
-            candidates.add(pos.relative(a2));
-        }
-        if(axisB) {
-            candidates.add(pos.relative(b1));
-            candidates.add(pos.relative(b2));
-        }
-        if(axisA && axisB) {
-            for(Direction a : new Direction[] {a1, a2}) {
-                BlockPos orthoA = pos.relative(a);
-                if(!WandUtil.isBlockPermeable(world, orthoA.relative(targetFace))) continue;
-
-                for(Direction b : new Direction[] {b1, b2}) {
-                    BlockPos orthoB = pos.relative(b);
-                    if(!WandUtil.isBlockPermeable(world, orthoB.relative(targetFace))) continue;
-
-                    candidates.add(orthoA.relative(b));
-                }
-            }
-        }
     }
 
     @Nonnull

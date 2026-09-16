@@ -1,11 +1,11 @@
 {
-  "parent": "constructionwand:wood_wand",
+  "parent": "constructionwand:root",
   "criteria": {
-    "stone_wand": {
+    "wood_wand": {
       "conditions": {
         "items": [
           {
-            "items": "constructionwand:stone_wand"
+            "items": "constructionwand:wood_wand"
           }
         ]
       },
@@ -14,18 +14,18 @@
   },
   "display": {
     "description": {
-      "translate": "advancement.constructionwand.stone_wand.desc"
+      "translate": "advancement.constructionwand.wood_wand.desc"
     },
     "icon": {
-      "id": "constructionwand:stone_wand"
+      "id": "constructionwand:wood_wand"
     },
     "title": {
-      "translate": "advancement.constructionwand.stone_wand.title"
+      "translate": "advancement.constructionwand.wood_wand.title"
     }
   },
   "requirements": [
     [
-      "stone_wand"
+      "wood_wand"
     ]
   ],
   "sends_telemetry_event": true

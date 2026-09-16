@@ -47,7 +47,8 @@ public class AdvancementGenerator extends AdvancementProvider {
                     .save(consumer, rootID("root"));
 
             // WANDS
-            AdvancementHolder stoneWand   = onHasItem(consumer, ModItems.WAND_STONE,      AdvancementType.TASK,      root);
+            AdvancementHolder woodWand    = onHasItem(consumer, ModItems.WAND_WOOD,       AdvancementType.TASK,      root);
+            AdvancementHolder stoneWand   = onHasItem(consumer, ModItems.WAND_STONE,      AdvancementType.TASK,      woodWand);
             AdvancementHolder ironWand    = onHasItem(consumer, ModItems.WAND_IRON,       AdvancementType.TASK,      stoneWand);
             AdvancementHolder goldWand    = onHasItem(consumer, ModItems.WAND_GOLD,       AdvancementType.TASK,      ironWand);
             AdvancementHolder diamondWand = onHasItem(consumer, ModItems.WAND_DIAMOND,    AdvancementType.TASK,      goldWand);
