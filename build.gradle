@@ -12,7 +12,11 @@ base {
     archivesName = "${mod_named}"
 }
 
+// Mojang ships Java 21 to end users in 1.20.5+, so your mod should target Java 21.
 java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+
+//minecraft.accessTransformers.file rootProject.file('src/main/resources/META-INF/accesstransformer.cfg')
+//minecraft.accessTransformers.entry public net.minecraft.client.Minecraft textureManager # textureManager
 
 runs {
     configureEach {
@@ -31,27 +35,18 @@ runs {
         argument '--nogui'
     }
 
-    clientData {
+      clientData {
         arguments.addAll '--mod', "${modid}", '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
     }
 }
 
-// Agregar src/generated/resources como fuente de recursos
-sourceSets {
-    main {
-        resources {
-            srcDir 'src/generated/resources'
-        }
-        java {
-            exclude 'nadiendev/constructionwand/containers/handlers/HandlerPortableCell.java'
-            exclude 'nadiendev/constructionwand/containers/handlers/HandlerWirelessTerminal.java'
-            exclude 'nadiendev/constructionwand/containers/handlers/HandlerWirelessTerminalAE2WTLib.java'
-            exclude 'nadiendev/constructionwand/containers/handlers/HandlerWirelessGrid.java'
-            exclude 'src/generated/resources/.cache/*'
-            exclude 'src/generated/resources/.cache'
-        }
-    }
+sourceSets.main.java {
+    exclude 'nadiendev/constructionwand/containers/handlers/HandlerPortableCell.java'
+    exclude 'nadiendev/constructionwand/containers/handlers/HandlerWirelessTerminal.java'
+    exclude 'nadiendev/constructionwand/containers/handlers/HandlerWirelessTerminalAE2WTLib.java'
+    exclude 'nadiendev/constructionwand/containers/handlers/HandlerWirelessGrid.java'
 }
+
 
 repositories {
     mavenCentral()
@@ -73,9 +68,9 @@ repositories {
         url = "https://maven.theillusivec4.top/"
     }
     maven {
-        name = "TerraformersMC"
-        url = "https://maven.terraformersmc.com/"
-    }
+		name = "TerraformersMC"
+		url = "https://maven.terraformersmc.com/"
+	}
     maven { url "https://maven.shedaniel.me" }
     maven {
         name = "Curse Maven"
@@ -101,6 +96,7 @@ dependencies {
     compileOnly "mezz.jei:jei-${mcversion}-neoforge-api:${jei_version}"
     runtimeOnly "mezz.jei:jei-${mcversion}-neoforge:${jei_version}"
 
+    
     // sophisticated backpacks
     compileOnly "curse.maven:sophisticatedbackpacks-422301:${sophisticatedbackpacks_version}"
 
@@ -110,6 +106,16 @@ dependencies {
     // Curios API
     compileOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}:api"
     runtimeOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}"
+
+ 
+
+
+//    compileOnly ([
+//            group: "vazkii.botania",
+//            name: "Botania",
+//            version: "${project.botania}",
+//            classifier: "api"
+//    ])
 }
 
 jar {
@@ -117,7 +123,7 @@ jar {
         attributes([
                 "Specification-Title": archivesBaseName,
                 "Specification-Vendor": "${author}",
-                "Specification-Version": "1",
+                "Specification-Version": "1", // We are version 1 of ourselves
                 "Implementation-Title": archivesBaseName,
                 "Implementation-Version": "${version}",
                 "Implementation-Vendor" :"${author}",
@@ -129,6 +135,7 @@ jar {
 tasks.withType(ProcessResources).configureEach {
     var replaceProperties = [
             mcversion              : mcversion,
+            url                    : url,
             mod_version            : mod_version,
             modid                  : modid,
             author                 : author,
@@ -138,7 +145,6 @@ tasks.withType(ProcessResources).configureEach {
             license                 : license,
             neoversion             : neoversion,
             loader_version        : loader_version,
-            url                    : url,
             jei_version            : jei_version,
             sophisticatedbackpacks_version : sophisticatedbackpacks_version,
             sophisticatedcore_version : sophisticatedcore_version,
@@ -164,6 +170,7 @@ publishing {
     }
 }
 
+// IDEA no longer automatically downloads sources/javadoc jars for dependencies, so we need to explicitly enable the behavior.
 idea {
     module {
         downloadSources = true
@@ -172,6 +179,6 @@ idea {
 }
 
 tasks.withType(JavaCompile).configureEach {
-    options.encoding = 'UTF-8'
+    options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
     options.getRelease().set(21)
 }

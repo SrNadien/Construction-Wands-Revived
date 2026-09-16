@@ -15,6 +15,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
@@ -118,7 +120,7 @@ public class WandUtil
         return isWhitelist == inList;
     }
 
-    public static boolean placeBlock(Level world, Player player, BlockState block, BlockPos pos, @Nullable BlockItem item) {
+    public static boolean placeBlock(Level world, Player player, BlockState block, BlockPos pos, @Nullable ItemStack item) {
         if(!world.setBlockAndUpdate(pos, block)) {
             ConstructionWand.LOGGER.info("Block could not be placed");
             return false;
@@ -133,13 +135,28 @@ public class WandUtil
         }
 
         ItemStack stack;
-        if(item == null) stack = new ItemStack(block.getBlock().asItem());
+        if(item == null || item.isEmpty()) stack = new ItemStack(block.getBlock().asItem());
         else {
-            stack = new ItemStack(item);
-            player.awardStat(Stats.ITEM_USED.get(item));
+            stack = item.copyWithCount(1);
+            player.awardStat(Stats.ITEM_USED.get(item.getItem()));
         }
 
+        // Mismo orden que BlockItem#place: primero se restaura el BlockEntity guardado en el
+        // stack y despues se avisa al bloque. Sin el primer paso se pierde todo lo que el mod
+        // guarde en el item (el marco de un cajon de Functional Storage, por ejemplo); sin el
+        // stack real en el segundo, los mods que se configuran en setPlacedBy quedan por defecto.
+        BlockItem.updateCustomBlockEntityTag(world, player, pos, stack);
         block.getBlock().setPlacedBy(world, pos, block, player, stack);
+
+        // setBlockAndUpdate ya mando el bloque al cliente ANTES de que se escribieran los
+        // datos del block entity, asi que el cliente lo dibuja sin ellos (un cajon enmarcado
+        // sale sin su marco) y no se entera hasta que algo lo obliga a redibujar, como poner
+        // un bloque al lado. Esto reenvia el bloque una vez ya esta completo.
+        BlockEntity blockEntity = world.getBlockEntity(pos);
+        if(blockEntity != null) {
+            blockEntity.setChanged();
+            world.sendBlockUpdated(pos, block, block, Block.UPDATE_ALL);
+        }
 
         return true;
     }
@@ -164,7 +181,12 @@ public class WandUtil
         return true;
     }
 
-    public static int countItem(Player player, Item item) {
+    /**
+     * Cuenta cuantas unidades tiene el jugador de una variante concreta: se compara contra
+     * el stack plantilla completo (item + componentes), no contra un stack reconstruido,
+     * para que los bloques de mods que guardan datos en el item se encuentren igual.
+     */
+    public static int countItem(Player player, ItemStack template) {
         if(player.isCreative()) return Integer.MAX_VALUE;
 
         int total = 0;
@@ -176,10 +198,10 @@ public class WandUtil
         for(ItemStack stack : inventory) {
             if(stack == null || stack.isEmpty()) continue;
 
-            if(WandUtil.stackEquals(stack, item)) {
+            if(WandUtil.stackEquals(stack, template)) {
                 total += stack.getCount();
             } else if(trace != null) {
-                int amount = containerManager.countItems(player, trace, new ItemStack(item), stack);
+                int amount = containerManager.countItems(player, trace, template, stack);
                 if(amount == Integer.MAX_VALUE) return Integer.MAX_VALUE;
                 total += amount;
             }
@@ -206,7 +228,7 @@ public class WandUtil
         return replace && world.getBlockState(pos).canBeReplaced(
                 new WandItemUseContext(world, player,
                         new BlockHitResult(new Vec3(0, 0, 0), Direction.DOWN, pos, false),
-                        pos, (BlockItem) Items.STONE));
+                        pos, new ItemStack(Items.STONE)));
     }
 
     public static boolean isBlockRemovable(Level world, Player player, BlockPos pos) {

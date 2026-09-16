@@ -1,10 +1,11 @@
 # Construction Wand
 
+
 With a Construction Wand you can place multiple blocks (up to 1024) at once, extending your build on the side you're
 facing. If that's not enough: you can upgrade your wand with additional cores, allowing you to place a block behind the
 block you are facing, conjure blocks in mid air or destroy lots of blocks very fast.
 
-![](https://raw.githubusercontent.com/Theta-Dev/ConstructionWand/1.19/images/wands.png)
+![](images/wands.png)
 
 **Note:** These are the instructions for ConstructionWand version 2.0+, which introduced some new features.
 If you are still using version 1.x, refer to [those](https://github.com/Theta-Dev/ConstructionWand/tree/1.16.2-1.7)
@@ -12,24 +13,30 @@ instructions.
 
 ## Wands
 
-There are basic wands made from stone, iron and diamond and the Infinity wand. Wands from higher tiers are more powerful
-and last longer. These properties can be changed in the config.
+There are basic wands made from wood, stone, iron, gold, diamond and netherite, plus the Infinity wand. Wands from higher
+tiers are more powerful and last longer. These properties can be changed in the config.
 
-| Wand     | Durability  | Max. Blocks | Upgradeable | Angel distance | Max. Blocks (Destroy) |
-|----------|-------------|-------------|-------------|----------------|-----------------------|
-| Stone    | 131         | 9           | No          | -              | -                     |
-| Iron     | 250         | 27          | Yes         | 1              | 9                     |
-| Diamond  | 1561        | 128         | Yes         | 4              | 25                    |
-| Netherite| 2031        | 512         | Yes         | 15              | 75                    |
-| Infinity | Unbreakable | 1024        | Yes         | 8              | 81                    |
+![](images/wand_stats.png)
+
+| Wand      | Durability  | Max. Blocks | Upgradeable | Angel distance | Max. Blocks (Destroy) | Max. Blocks (Exchange) |
+|-----------|-------------|-------------|-------------|----------------|-----------------------|------------------------|
+| Wood      | 59          | 5           | No          | -              | -                     | -                      |
+| Stone     | 131         | 9           | No          | -              | -                     | -                      |
+| Iron      | 250         | 27          | Yes         | 2              | 9                     | 9                      |
+| Gold      | 32          | 60          | Yes         | 5              | 15                    | 15                     |
+| Diamond   | 1561        | 128         | Yes         | 8              | 25                    | 25                     |
+| Netherite | 2031        | 512         | Yes         | 15             | 75                    | 75                     |
+| Infinity  | Unbreakable | 1024        | Yes         | 16             | 81                    | 81                     |
 
 ## Crafting
-![](https://raw.githubusercontent.com/Theta-Dev/ConstructionWand/1.19/images/crafting1.png)
-![](https://raw.githubusercontent.com/Theta-Dev/ConstructionWand/1.19/images/crafting2.png)
-![](https://raw.githubusercontent.com/Theta-Dev/ConstructionWand/1.19/images/crafting3.png)
-![](https://raw.githubusercontent.com/Theta-Dev/ConstructionWand/1.19/images/crafting4.png)
-![](https://raw.githubusercontent.com/Theta-Dev/ConstructionWand/1.19/images/crafting5.png)
-![](https://raw.githubusercontent.com/Theta-Dev/ConstructionWand/1.19/images/crafting6.png)
+![](images/crafting_wood.png)
+![](images/crafting_gold.png)
+![](images/crafting1.png)
+![](images/crafting2.png)
+![](images/crafting3.png)
+![](images/crafting4.png)
+![](images/crafting5.png)
+![](images/crafting6.png)
 
 ## Keybindings
 
@@ -70,7 +77,7 @@ you can use the undo feature if you've made a mistake.
 ## Options
 SNEAK+OPTKEY+Right clicking empty space opens the option screen of your wand.
 
-![](https://raw.githubusercontent.com/Theta-Dev/ConstructionWand/1.19/images/options.png)
+![](images/options.png)
 
 **Restriction:** If restriction is enabled the wand will only place blocks in one row or column
 (choose between North/South, East/West on a horizontal plane and Horizontal, Vertical on a vertical plane).
@@ -80,7 +87,7 @@ has no effect if the angel core is enabled.
 **Direction:** If set to "Player" the wand places blocks in the same direction as if they were placed by yourself.
 Target mode places the blocks in the same direction as their supporting block. See the picture below:
 
-![](https://raw.githubusercontent.com/Theta-Dev/ConstructionWand/1.19/images/placedir.png)
+![](images/placedir.png)
 
 **Replacement:** Enables/disables the replacement of replaceable blocks (Fluids, snow, tallgrass).
 

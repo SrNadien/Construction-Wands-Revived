@@ -109,8 +109,10 @@ public class ConfigServer
                 "in the /saves/myworld/serverconfig folder. If you want to change the serverconfig for all",
                 "new worlds, copy the config files in the /defaultconfigs folder.");
 
+        new WandProperties(builder, ModItems.WAND_WOOD, 59, 5, 0, 0, false);
         new WandProperties(builder, ModItems.WAND_STONE, 131, 9, 0, 0, false);
         new WandProperties(builder, ModItems.WAND_IRON, 250, 27, 2, 9, true);
+        new WandProperties(builder, ModItems.WAND_GOLD, 32, 60, 5, 15, true);
         new WandProperties(builder, ModItems.WAND_DIAMOND, 1561, 128, 8, 25, true);
         new WandProperties(builder, ModItems.WAND_NETHERITE, 2031, 512, 15, 75, true);
         new WandProperties(builder, ModItems.WAND_INFINITY, 0, 1024, 16, 81, true);

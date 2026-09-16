@@ -1,0 +1,1 @@
+{"type":"minecraft:crafting_shaped","category":"misc","pattern":[" #X","#O#","X# "],"key":{"X":"minecraft:diamond_pickaxe","#":"#c:glass_panes","O":"#c:storage_blocks/diamond"},"result":{"id":"constructionwand:core_destruction","count":1}}

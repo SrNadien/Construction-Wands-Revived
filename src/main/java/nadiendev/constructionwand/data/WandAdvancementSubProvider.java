@@ -41,8 +41,10 @@ public class WandAdvancementSubProvider implements AdvancementSubProvider
                 .save(consumer, ConstructionWand.loc("root"));
 
         
+        onHasItem(consumer, itemGetter, ModItems.WAND_WOOD,        AdvancementType.TASK, root);
         onHasItem(consumer, itemGetter, ModItems.WAND_STONE,       AdvancementType.TASK, root);
         onHasItem(consumer, itemGetter, ModItems.WAND_IRON,        AdvancementType.TASK, root);
+        onHasItem(consumer, itemGetter, ModItems.WAND_GOLD,        AdvancementType.TASK, root);
         onHasItem(consumer, itemGetter, ModItems.WAND_DIAMOND,     AdvancementType.TASK, root);
         onHasItem(consumer, itemGetter, ModItems.WAND_NETHERITE,   AdvancementType.TASK, root);
         onHasItem(consumer, itemGetter, ModItems.WAND_INFINITY,    AdvancementType.GOAL, root);

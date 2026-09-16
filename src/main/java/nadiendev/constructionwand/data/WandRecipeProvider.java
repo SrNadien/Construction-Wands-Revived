@@ -32,8 +32,10 @@ public class WandRecipeProvider extends RecipeProvider {
 
     @Override
     protected void buildRecipes() {
+        wandRecipe(output, ModItems.WAND_WOOD.get(),      Items.CHERRY_PLANKS, Items.BIRCH_PLANKS);
         wandRecipe(output, ModItems.WAND_STONE.get(),     ItemTags.STONE_TOOL_MATERIALS);
         wandRecipe(output, ModItems.WAND_IRON.get(),      Tags.Items.INGOTS_IRON);
+        wandRecipe(output, ModItems.WAND_GOLD.get(),      Tags.Items.INGOTS_GOLD);
         wandRecipe(output, ModItems.WAND_DIAMOND.get(),   Tags.Items.GEMS_DIAMOND);
         wandRecipe(output, ModItems.WAND_NETHERITE.get(), Tags.Items.INGOTS_NETHERITE);
         wandRecipe(output, ModItems.WAND_INFINITY.get(),  Tags.Items.NETHER_STARS);
@@ -45,6 +47,18 @@ public class WandRecipeProvider extends RecipeProvider {
 
         ResourceLocation id = ConstructionWand.loc("dynamic/wand_upgrade");
         SpecialRecipeBuilder.special(RecipeWandUpgrade::new).save(output, id.toString());
+    }
+
+    private void wandRecipe(RecipeOutput output, ItemLike wand, ItemLike... materials) {
+        shaped(RecipeCategory.TOOLS, wand)
+                .define('X', Ingredient.of(materials))
+                .define('#', Tags.Items.RODS_WOODEN)
+                .pattern("  X")
+                .pattern(" # ")
+                .pattern("#  ")
+                .unlockedBy("has_item", inventoryTrigger(
+                        ItemPredicate.Builder.item().of(registries.lookupOrThrow(Registries.ITEM), materials).build()))
+                .save(output);
     }
 
     private void wandRecipe(RecipeOutput output, ItemLike wand, TagKey<Item> material) {

@@ -1,6 +1,11 @@
 package nadiendev.constructionwand.wand;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.SectionPos;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.ChunkPos;
+import net.neoforged.neoforge.network.PacketDistributor;
+import nadiendev.constructionwand.network.PacketRefreshModelData;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
@@ -25,6 +30,9 @@ import nadiendev.constructionwand.wand.undo.ISnapshot;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -115,6 +123,8 @@ public class WandJob
         }
         placeSnapshots = executed;
 
+        refreshModelDataOnClients();
+
         // Play place sound
         if(!placeSnapshots.isEmpty()) {
             SoundType sound = placeSnapshots.get(0).getBlockState().getSoundType();
@@ -125,5 +135,25 @@ public class WandJob
         }
 
         return !placeSnapshots.isEmpty();
+    }
+
+
+    private void refreshModelDataOnClients() {
+        if(!(world instanceof ServerLevel serverLevel)) return;
+        if(placeSnapshots.isEmpty()) return;
+
+        HashMap<ChunkPos, HashSet<BlockPos>> byChunk = new HashMap<>();
+        for(ISnapshot snapshot : placeSnapshots) {
+            BlockPos pos = snapshot.getPos();
+            if(!serverLevel.getBlockState(pos).hasBlockEntity()) continue;
+            ChunkPos chunk = new ChunkPos(SectionPos.blockToSectionCoord(pos.getX()),
+                    SectionPos.blockToSectionCoord(pos.getZ()));
+            byChunk.computeIfAbsent(chunk, c -> new HashSet<>()).add(pos.immutable());
+        }
+
+        for(Map.Entry<ChunkPos, HashSet<BlockPos>> entry : byChunk.entrySet()) {
+            PacketDistributor.sendToPlayersTrackingChunk(serverLevel, entry.getKey(),
+                    new PacketRefreshModelData(entry.getValue()));
+        }
     }
 }
