@@ -26,6 +26,9 @@ public class ClientHandler {
     @SubscribeEvent
     public static void registerKeymapping(final RegisterKeyMappingsEvent event) {
         event.register(KeybindHandler.KEY_OPT);
+        event.register(KeybindHandler.KEY_VOID_SACK_TOGGLE);
+        event.register(KeybindHandler.KEY_WAND_UNDO);
+        event.register(KeybindHandler.KEY_EXCHANGE_SELECT);
     }
        @SubscribeEvent
     public static void registerMenuScreens(RegisterMenuScreensEvent event) {

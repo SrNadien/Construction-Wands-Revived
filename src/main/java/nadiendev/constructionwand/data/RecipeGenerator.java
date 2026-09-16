@@ -35,6 +35,8 @@ public class RecipeGenerator extends RecipeProvider
         wandRecipe(ModItems.WAND_WOOD.get(), Inp.fromItems(registries, "wood_planks", Items.CHERRY_PLANKS, Items.BIRCH_PLANKS));
         wandRecipe(ModItems.WAND_STONE.get(), Inp.fromTag(registries, ItemTags.STONE_TOOL_MATERIALS));
         wandRecipe(ModItems.WAND_IRON.get(), Inp.fromTag(registries, Tags.Items.INGOTS_IRON));
+
+        // WAND_GOLD had no recipe at all before this change; the item existed but couldn't be crafted.
         wandRecipe(ModItems.WAND_GOLD.get(), Inp.fromTag(registries, Tags.Items.INGOTS_GOLD));
         wandRecipe(ModItems.WAND_DIAMOND.get(), Inp.fromTag(registries, Tags.Items.GEMS_DIAMOND));
         wandRecipe(ModItems.WAND_NETHERITE.get(), Inp.fromTag(registries, Tags.Items.INGOTS_NETHERITE));
@@ -42,6 +44,7 @@ public class RecipeGenerator extends RecipeProvider
 
         coreRecipe(ModItems.CORE_ANGEL.get(), Inp.fromTag(registries, Tags.Items.FEATHERS), Inp.fromTag(registries, Tags.Items.INGOTS_GOLD));
         coreRecipe(ModItems.CORE_DESTRUCTION.get(), Inp.fromTag(registries, Tags.Items.STORAGE_BLOCKS_DIAMOND), Inp.fromItem(registries, Items.DIAMOND_PICKAXE));
+        coreRecipe(ModItems.CORE_EXCHANGE.get(), Inp.fromItem(registries, Items.NETHER_STAR), Inp.fromTag(registries, Tags.Items.STORAGE_BLOCKS_NETHERITE));
 
         voidSackRecipe();
 

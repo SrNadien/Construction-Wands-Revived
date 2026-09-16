@@ -21,4 +21,10 @@ public interface IWandAction
     @Nonnull
     List<ISnapshot> getSnapshotsFromAir(Level world, Player player, BlockHitResult rayTraceResult,
                                         ItemStack wand, WandOptions options, IWandSupplier supplier, int limit);
+
+   
+    default boolean handleShiftClick(Level world, Player player, BlockHitResult rayTraceResult,
+                                     ItemStack wand, WandOptions options) {
+        return false;
+    }
 }

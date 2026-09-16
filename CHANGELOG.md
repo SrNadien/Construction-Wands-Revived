@@ -1,6 +1,6 @@
 # Changelog
 
-## 4.0.2 — Minecraft 1.21.11 / NeoForge
+## 4.0.5 — Minecraft 1.21.11 / NeoForge
 
 This release is a port of the 1.21 line, brought over for parity across versions: the fixes and
 changes below were developed on 1.21.1 and 26.1 and carried here so every supported version
@@ -11,10 +11,6 @@ behaves the same.
 - **Wooden wand.** A new entry-tier wand, below stone: 59 uses, 5 blocks per placement, and no
   core slots at all. It is crafted from **cherry or birch planks** only, and its texture uses the
   same silhouette and shading as the rest of the set, in cherry tones.
-
-- **Golden wand.** It did not exist in this version. It has been added in full - item, config
-  entry, texture, recipe, advancement and translations - with the same values as the other
-  versions: 32 uses, 60 blocks per placement, angel range 5, destruction limit 15, upgradeable.
 
 ### Fixes
 
@@ -45,10 +41,6 @@ behaves the same.
 
 ### Changes
 
-- **Golden wand texture redrawn to match the rest of the set.** It was a flat 4-colour
-  head while every other wand had a fully shaded one; it now uses the same silhouette and
-  the same shading detail as the iron, stone, diamond and netherite wands, in gold.
-
 - **JEI updated to the latest build for this Minecraft version.**
 
 - **Minimum NeoForge raised to what the bundled JEI requires:** NeoForge `21.11.44` / JEI `27.38.0.97`.
@@ -62,7 +54,7 @@ behaves the same.
 
 ---
 
-## 4.0.2 — Minecraft 1.21.11 / NeoForge (Español)
+## 4.0.5 — Minecraft 1.21.11 / NeoForge (Español)
 
 Esta version es un port de la linea 1.21, traido para mantener la paridad entre versiones: las
 correcciones y cambios de abajo se desarrollaron en 1.21.1 y 26.1 y se trasladaron aqui para que
@@ -73,10 +65,6 @@ todas las versiones soportadas se comporten igual.
 - **Varita de madera.** Nueva varita de entrada, por debajo de la de piedra: 59 usos, 5 bloques
   por colocacion y sin ranuras para nucleos. Se fabrica solo con **tablas de cerezo o abedul**, y su
   textura usa la misma silueta y sombreado que el resto de la familia, en tonos de cerezo.
-
-- **Varita dorada.** No existia en esta version. Se agrego entera - item, entrada de config,
-  textura, receta, avance y traducciones - con los mismos valores que en las demas versiones:
-  32 usos, 60 bloques por colocacion, alcance de angel 5, limite de destruccion 15, mejorable.
 
 ### Corregido
 
@@ -108,11 +96,6 @@ todas las versiones soportadas se comporten igual.
 
 ### Cambios
 
-- **Textura de la varita dorada redibujada al estilo del resto.** Tenia un cabezal plano de
-  4 colores mientras que las demas lo tenian completamente sombreado; ahora usa la misma
-  silueta y el mismo nivel de detalle que las varitas de hierro, piedra, diamante y
-  netherita, en dorado.
-
 - **JEI actualizado a la ultima build para esta version de Minecraft.**
 
 - **NeoForge minimo subido al que exige el JEI que acompana esta version:** NeoForge `21.11.44` / JEI `27.38.0.97`.
@@ -123,6 +106,58 @@ todas las versiones soportadas se comporten igual.
   varios valores no coincidian con la config. Ahora lista las siete con los valores reales y suma
   la columna de intercambio. Los enlaces de imagenes apuntan a este repositorio y no al original.
 - Imagenes nuevas: las recetas de la varita de madera y la dorada, y un cuadro de estadisticas.
+
+---
+
+## 4.0.4 — Minecraft 1.21.11 / NeoForge
+
+### Changes
+
+- **Exchange core: replacement now stops under a covered block instead of going around it.**
+  When the exchange flood-fill reached a block with something sitting on top of it, that block was
+  correctly skipped — but the fill kept spreading through the diagonal neighbours, wrapped around
+  the obstruction and carried on replacing on the far side. Diagonals now only propagate when both
+  orthogonal neighbours are themselves uncovered, so the exchange cuts off right below the covered
+  block and stops there. Straight propagation already behaved this way; this only closes the
+  diagonal bypass.
+
+- **Destruction core: broken blocks go straight to your inventory when you have no Void Sack.**
+  Previously the drops were spawned in the world and you had to walk over them. Now, if you are not
+  holding an active Void Sack, the drops are inserted directly into your inventory, and once the
+  inventory is full the remainder is discarded instead of littering the ground. Nothing changes when
+  a Void Sack **is** active: the block still drops normally and the sack intercepts the pickup, so
+  linked containers and internal storage work exactly as before. Which items a block drops is
+  unchanged.
+
+- **Golden wand added.** The item existed in name only: it had no config entry, no recipe, no
+  advancement and no translations, and its texture was a flat 4-colour head. It is now complete
+  and drawn in the same style as the rest of the set.
+
+---
+
+## 4.0.4 — Minecraft 1.21.11 / NeoForge (Español)
+
+### Cambios
+
+- **Núcleo de intercambio: el reemplazo ahora se corta debajo de un bloque tapado en vez de rodearlo.**
+  Cuando el relleno del intercambio llegaba a un bloque que tenía algo encima, ese bloque se saltaba
+  correctamente, pero el relleno seguía extendiéndose por los vecinos diagonales, rodeaba el
+  obstáculo y continuaba reemplazando al otro lado. Ahora las diagonales solo se propagan si los dos
+  vecinos ortogonales están a su vez descubiertos, así que el intercambio se corta justo debajo del
+  bloque tapado y se detiene ahí. La propagación recta ya funcionaba así; esto solo cierra el atajo
+  por diagonal.
+
+- **Núcleo de destrucción: los bloques rotos van directos al inventario si no llevas la Bolsa del Vacío.**
+  Antes los drops aparecían en el mundo y había que pasar por encima a recogerlos. Ahora, si no
+  llevas una Bolsa del Vacío activa, los drops se meten directamente en tu inventario y, cuando el
+  inventario está lleno, el resto se elimina en vez de quedar tirado por el suelo. Con la Bolsa del
+  Vacío **activa** no cambia nada: el bloque suelta sus drops normalmente y la bolsa los intercepta
+  al recogerlos, así que los contenedores enlazados y el almacenamiento interno funcionan igual que
+  antes. Qué ítems suelta cada bloque no cambia.
+
+- **Varita dorada agregada.** El item existia solo de nombre: no tenia entrada de config, ni
+  receta, ni avance, ni traducciones, y su textura era un cabezal plano de 4 colores. Ahora esta
+  completa y dibujada con el mismo estilo que el resto de la familia.
 
 ---
 
