@@ -146,17 +146,9 @@ public class WandUtil
             player.awardStat(Stats.ITEM_USED.get(item.getItem()));
         }
 
-        // Mismo orden que BlockItem#place: primero se restaura el BlockEntity guardado en el
-        // stack y despues se avisa al bloque. Sin el primer paso se pierde todo lo que el mod
-        // guarde en el item (el marco de un cajon de Functional Storage, por ejemplo); sin el
-        // stack real en el segundo, los mods que se configuran en setPlacedBy quedan por defecto.
         BlockItem.updateCustomBlockEntityTag(world, player, pos, stack);
         block.getBlock().setPlacedBy(world, pos, block, player, stack);
 
-        // setBlockAndUpdate ya mando el bloque al cliente ANTES de que se escribieran los
-        // datos del block entity, asi que el cliente lo dibuja sin ellos (un cajon enmarcado
-        // sale sin su marco) y no se entera hasta que algo lo obliga a redibujar, como poner
-        // un bloque al lado. Esto reenvia el bloque una vez ya esta completo.
         BlockEntity blockEntity = world.getBlockEntity(pos);
         if(blockEntity != null) {
             blockEntity.setChanged();
@@ -186,11 +178,6 @@ public class WandUtil
         return true;
     }
 
-    /**
-     * Cuenta cuantas unidades tiene el jugador de una variante concreta: se compara contra
-     * el stack plantilla completo (item + componentes), no contra un stack reconstruido,
-     * para que los bloques de mods que guardan datos en el item se encuentren igual.
-     */
     public static int countItem(Player player, ItemStack template) {
         if(player.isCreative()) return Integer.MAX_VALUE;
 
@@ -214,8 +201,6 @@ public class WandUtil
                 }
             }
 
-            // Contenedores equipados en slots de Curios: SupplierInventory.takeItemStack
-            // tambien los vacia, asi que cuentan como disponibles.
             for(ItemStack stack : CuriosCompat.getStacks(serverPlayer)) {
                 int amount = containerManager.countItems(serverPlayer, trace, template, stack);
                 if(amount == Integer.MAX_VALUE) return Integer.MAX_VALUE;

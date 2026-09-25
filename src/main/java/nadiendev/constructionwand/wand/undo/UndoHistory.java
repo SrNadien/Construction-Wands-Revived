@@ -46,7 +46,6 @@ public class UndoHistory
         Level world = player.level();
         if(world.isClientSide()) return;
 
-        // Set state of CTRL key
         PlayerEntry playerEntry = getEntryFromPlayer(player);
         playerEntry.undoActive = ctrlDown;
         playerEntry.shiftActive = shiftDown;
@@ -54,7 +53,6 @@ public class UndoHistory
         LinkedList<HistoryEntry> historyEntries = playerEntry.entries;
         Set<BlockPos> positions;
 
-        // Send block positions of most recent entry to client
         if(historyEntries.isEmpty()) positions = Collections.emptySet();
         else {
             HistoryEntry entry = historyEntries.getLast();
@@ -76,16 +74,13 @@ public class UndoHistory
     }
 
     public boolean undo(Player player, Level world, BlockPos pos) {
-        // If CTRL key is not pressed, return
         PlayerEntry playerEntry = getEntryFromPlayer(player);
         if(!playerEntry.undoActive) return false;
 
-        // Get the most recent entry for undo
         LinkedList<HistoryEntry> historyEntries = playerEntry.entries;
         if(historyEntries.isEmpty()) return false;
         HistoryEntry entry = historyEntries.getLast();
 
-        // Player has to be in the same world and near the blocks
         if(!entry.world.equals(world) || !entry.withinRange(pos)) return false;
 
         if(entry.undo(player)) {
@@ -96,15 +91,6 @@ public class UndoHistory
         return false;
     }
 
-    /**
-     * Undo directo disparado por la tecla K. No requiere que el jugador
-     * esté apuntando a un bloque específico ni que CTRL esté presionado:
-     * simplemente deshace la última entrada de historial mientras el
-     * jugador sostiene la varita.
-     * <p>
-     * Además envía feedback al jugador (system message) indicando si la
-     * acción tuvo éxito, si no había nada para deshacer, o si falló.
-     */
     public boolean forceUndo(Player player, Level world) {
         PlayerEntry playerEntry = getEntryFromPlayer(player);
         LinkedList<HistoryEntry> historyEntries = playerEntry.entries;
@@ -131,11 +117,6 @@ public class UndoHistory
         return false;
     }
 
-    /**
-     * Bloque seleccionado por el jugador con la tecla de selección usando el
-     * Exchange core. Es el bloque que se usará para reemplazar el/los bloque(s)
-     * objetivo en el próximo click.
-     */
     @Nullable
     public BlockItem getExchangeSelection(Player player) {
         return getEntryFromPlayer(player).exchangeSelection;
@@ -187,7 +168,6 @@ public class UndoHistory
         }
 
         public boolean undo(Player player) {
-            // Check first if all snapshots can be restored
             for(ISnapshot snapshot : placeSnapshots) {
                 if(!snapshot.canRestore(world, player)) return false;
             }
@@ -202,7 +182,6 @@ public class UndoHistory
             }
             player.getInventory().setChanged();
 
-            // Play teleport sound
             SoundEvent sound = SoundEvents.CHORUS_FRUIT_TELEPORT;
             world.playSound(null, player.blockPosition(), sound, SoundSource.PLAYERS, 1.0F, 1.0F);
 

@@ -10,11 +10,6 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.entity.player.ItemEntityPickupEvent;
 import nadiendev.constructionwand.items.containeritems.ItemVoidSack;
 
-/**
- * Picku Handler
- *
- * By NadienDev
- */
 public class VoidSackPickupHandler
 {
     @SubscribeEvent
@@ -32,16 +27,14 @@ public class VoidSackPickupHandler
         int originalCount = picked.getCount();
         int remaining = ItemVoidSack.interceptPickup(level, sack, picked);
 
-        if (remaining >= originalCount) return; // el sack no absorbió nada
+        if (remaining >= originalCount) return;
 
         int absorbed = originalCount - remaining;
 
-        // Reduce el stack de la entidad
         ItemStack entityStack = event.getItemEntity().getItem();
         entityStack.shrink(absorbed);
         
 
-        // Si el sack absorbió todo, deniega el pickup normal
         if (remaining == 0) {
             event.setCanPickup(TriState.FALSE);
             if (event.getItemEntity().getItem().isEmpty()) {

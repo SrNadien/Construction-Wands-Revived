@@ -8,10 +8,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 
-/**
- * En 26.3 el RecipeProvider expone un HolderGetter<Item> (campo `items`) en vez del
- * HolderLookup.Provider completo, y ItemPredicate.Builder#of pasa a recibir ese getter.
- */
 public record Inp(String name, Ingredient ingredient, ItemPredicate predicate) {
     public static Inp fromItem(HolderGetter<Item> items, ItemLike in) {
         return new Inp(BuiltInRegistries.ITEM.getKey(in.asItem()).getPath(), Ingredient.of(in),

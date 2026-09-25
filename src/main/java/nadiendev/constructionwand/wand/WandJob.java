@@ -57,12 +57,10 @@ public class WandJob
         this.rayTraceResult = rayTraceResult;
         this.placeSnapshots = new ArrayList<>();
 
-        // Get wand
         this.wand = wand;
         this.wandItem = (ItemWand) wand.getItem();
         options = new WandOptions(wand);
 
-        // Select wand action and supplier based on options
         wandSupplier = options.random.get() ?
                 new SupplierRandom(player, options) : new SupplierInventory(player, options);
         wandAction = options.cores.get().getWandAction();
@@ -72,7 +70,6 @@ public class WandJob
 
     @Nullable
     private static BlockItem getTargetItem(Level world, BlockHitResult rayTraceResult) {
-        // Get target item
         Item tgitem = world.getBlockState(rayTraceResult.getBlockPos()).getBlock().asItem();
         if(!(tgitem instanceof BlockItem)) return null;
         return (BlockItem) tgitem;
@@ -80,7 +77,6 @@ public class WandJob
 
     public void getSnapshots() {
         int limit;
-        // Infinity wand gets enhanced limit in creative mode
         if(player.isCreative() && wandItem == ModItems.WAND_INFINITY.get()) limit = ConfigServer.LIMIT_CREATIVE.get();
         else limit = Math.min(wandItem.remainingDurability(wand), wandAction.getLimit(wand));
 
@@ -107,7 +103,6 @@ public class WandJob
             if(snapshot.execute(world, player, rayTraceResult)) {
                 if(player.isCreative()) executed.add(snapshot);
                 else {
-                    // If the item cant be taken, undo the placement
                     if(wandSupplier.takeItemStack(snapshot.getRequiredItems()) == 0) {
                         executed.add(snapshot);
                         wand.hurtAndBreak(1, player, EquipmentSlot.MAINHAND);
@@ -125,12 +120,10 @@ public class WandJob
 
         refreshModelDataOnClients();
 
-        // Play place sound
         if(!placeSnapshots.isEmpty()) {
             SoundType sound = placeSnapshots.get(0).getBlockState().getSoundType();
             world.playSound(null, player.blockPosition(), sound.getPlaceSound(), SoundSource.BLOCKS, sound.volume, sound.pitch);
 
-            // Add to job history for undo
             ConstructionWand.undoHistory.add(player, world, placeSnapshots);
         }
 

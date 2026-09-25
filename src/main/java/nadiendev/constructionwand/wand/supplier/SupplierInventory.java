@@ -49,15 +49,12 @@ public class SupplierInventory implements IWandSupplier {
 
         itemPool = new OrderedPool<>();
 
-        // Block in offhand -> override
         if (!offhandStack.isEmpty() && offhandStack.getItem() instanceof BlockItem) {
             addStack(offhandStack);
         }
-        // Otherwise use target block
         else if (target != null && target != Items.AIR) {
             addBlockItem(target);
 
-            // Add replacement items
             if (options.match.get() != WandOptions.MATCH.EXACT) {
                 for (Item it : ReplacementRegistry.getMatchingSet(target)) {
                     if (it instanceof BlockItem blockItem) addBlockItem(blockItem);
@@ -66,12 +63,6 @@ public class SupplierInventory implements IWandSupplier {
         }
     }
 
-    /**
-     * Da de alta todas las variantes de un item que el jugador lleve encima. Un mismo
-     * BlockItem puede existir con componentes distintos (cajones enmarcados con distinto
-     * material, shulkers con contenido, bloques configurados por mods) y cada variante
-     * entra por separado para que se coloque con sus datos intactos.
-     */
     protected void addBlockItem(BlockItem item) {
         boolean found = false;
 
@@ -82,8 +73,6 @@ public class SupplierInventory implements IWandSupplier {
             addStack(stack);
         }
 
-        // Si no lo lleva encima todavia puede estar disponible via contenedores, o el
-        // jugador estar en creativo: en ese caso se usa la variante limpia.
         if (!found) addStack(new ItemStack(item));
     }
 
@@ -100,10 +89,6 @@ public class SupplierInventory implements IWandSupplier {
         }
     }
 
-    // -------------------------------------------------------------------------
-    // IWandSupplier
-    // -------------------------------------------------------------------------
-
     @Override
     @Nullable
     public PlaceSnapshot getPlaceSnapshot(Level world, BlockPos pos, BlockHitResult rayTraceResult,
@@ -112,7 +97,6 @@ public class SupplierInventory implements IWandSupplier {
         itemPool.reset();
 
         while (true) {
-            // Draw item from pool (returns null if none are left)
             StackEntry entry = itemPool.draw();
             if (entry == null) return null;
 
@@ -124,7 +108,6 @@ public class SupplierInventory implements IWandSupplier {
                 int ncount = count - 1;
                 itemCounts.put(entry, ncount);
 
-                // Remove item from pool if there are no items left
                 if (ncount == 0) itemPool.remove(entry);
 
                 return placeSnapshot;
@@ -143,19 +126,15 @@ public class SupplierInventory implements IWandSupplier {
         List<ItemStack> mainInv = WandUtil.getMainInv(player);
         List<ItemStack> armor   = WandUtil.getArmor(player);
 
-        // Take items from main inv, loose items first
         count = takeItemsInvList(count, stack, mainInv, false);
         count = takeItemsInvList(count, stack, mainInv, true);
 
-        // Take items from hotbar, containers first
         count = takeItemsInvList(count, stack, hotbar, true);
         count = takeItemsInvList(count, stack, hotbar, false);
 
         count = takeItemsInvList(count, stack, armor, true);
         count = takeItemsInvList(count, stack, armor, false);
 
-        // Take items from Curios slots (containers only). Curios entrega copias de los
-        // stacks, asi que useStacks devuelve a su slot los contenedores que se vaciaron.
         final int remaining = count;
         count = CuriosCompat.useStacks(player,
                 curios -> takeItemsInvList(remaining, stack, curios, true), remaining);
@@ -163,20 +142,11 @@ public class SupplierInventory implements IWandSupplier {
         return count;
     }
 
-    // -------------------------------------------------------------------------
-    // Helpers privados
-    // -------------------------------------------------------------------------
-
-    /**
-     * Consume contra la plantilla completa (item + componentes) para no gastar por error
-     * una variante distinta de la que se coloco.
-     */
     private int takeItemsInvList(int count, ItemStack template, List<ItemStack> inv, boolean container) {
         if (count == 0) return 0;
         if (!(player instanceof ServerPlayer serverPlayer)) return count;
 
         ContainerManager containerManager = ConstructionWand.containerManager;
-        // ContainerTrace is just a placeholder for tracking purposes
         ContainerTrace trace = new ContainerTrace(serverPlayer);
 
         for (ItemStack stack : inv) {

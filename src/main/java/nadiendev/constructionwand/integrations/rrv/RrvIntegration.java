@@ -22,8 +22,6 @@ public final class RrvIntegration {
     private RrvIntegration() {}
 
     public static void init() {
-        // Los textos dependen de los keybinds y de la config, que pueden cambiar en
-        // caliente, asi que se reconstruyen en cada recarga del cliente.
         ItemView.addClientReloadCallback(RrvIntegration::registerInfo);
     }
 

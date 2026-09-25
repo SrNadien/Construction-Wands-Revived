@@ -54,7 +54,6 @@ public class WandOptions
 
         allOptions = new IOption[]{cores, lock, direction, replace, match, random};
 
-        // Solo actualiza el modelo visual, NO toca CustomData → evita el tooltip doble
         updateModelData(wandStack);
     }
 
@@ -62,8 +61,8 @@ public class WandOptions
         boolean hasActiveCore = !(cores.get() instanceof CoreDefault);
         String coreId = "";
         if (hasActiveCore) {
-            String path = cores.get().getRegistryName().getPath(); // "core_angel" / "core_destruction"
-            coreId = path.startsWith("core_") ? path.substring(5) : path; // → "angel" / "destruction"
+            String path = cores.get().getRegistryName().getPath();
+            coreId = path.startsWith("core_") ? path.substring(5) : path;
         }
         stack.set(DataComponents.CUSTOM_MODEL_DATA,
             new CustomModelData(

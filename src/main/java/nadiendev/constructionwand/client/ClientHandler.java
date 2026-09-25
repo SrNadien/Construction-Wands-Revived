@@ -25,17 +25,11 @@ public class ClientHandler {
         NeoForge.EVENT_BUS.register(renderBlockPreview);
         NeoForge.EVENT_BUS.register(new KeybindHandler());
 
-        // Descripciones de items en Reliable Recipe Viewer (JEI las recibe por su propio
-        // plugin, ConstructionWandJeiPlugin). La guarda vive aqui a proposito:
-        // RrvIntegration referencia clases de RRV y solo debe cargarse si el mod esta.
         if(ModList.get().isLoaded("rrv")) {
             RrvIntegration.init();
         }
     }
 
-    // ─────────────────────────────────────────────────────────────────────────
-    // RegisterKeyMappingsEvent
-    // ─────────────────────────────────────────────────────────────────────────
     @SubscribeEvent
     public static void registerKeymapping(final RegisterKeyMappingsEvent event) {
         event.register(KeybindHandler.KEY_OPT);

@@ -1,6 +1,5 @@
 package nadiendev.constructionwand.client;
 
-// import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -14,7 +13,6 @@ import nadiendev.constructionwand.client.KeybindHandler;
 import nadiendev.constructionwand.basics.WandUtil;
 import nadiendev.constructionwand.basics.option.WandOptions;
 import nadiendev.constructionwand.items.wand.ItemWand;
-// import nadiendev.constructionwand.network.ModMessages;
 import nadiendev.constructionwand.network.PacketQueryUndo;
 import nadiendev.constructionwand.network.PacketWandOption;
 
@@ -26,7 +24,6 @@ public class ClientEvents
         optPressed = false;
     }
 
-    // Send state of OPT key to server
     @SubscribeEvent
     public void KeyEvent(InputEvent.Key event) {
         Player player = Minecraft.getInstance().player;
@@ -37,11 +34,9 @@ public class ClientEvents
         if(optPressed != optState) {
             optPressed = optState;
             ClientPacketDistributor.sendToServer(new PacketQueryUndo(optPressed, isLeftShiftKeyDown()));
-            //ConstructionWand.LOGGER.debug("OPT key update: " + optPressed);
         }
     }
 
-    // Sneak+(OPT)+Scroll to change direction lock
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public void MouseScrollEvent(InputEvent.MouseScrollingEvent event) {
         Player player = Minecraft.getInstance().player;
@@ -58,7 +53,6 @@ public class ClientEvents
         event.setCanceled(true);
     }
 
-    // Sneak+(OPT)+Left click wand to change core
     @SubscribeEvent
     public void onLeftClickEmpty(PlayerInteractEvent.LeftClickEmpty event) {
         Player player = event.getEntity();
@@ -73,7 +67,6 @@ public class ClientEvents
         ClientPacketDistributor.sendToServer(new PacketWandOption(wandOptions.cores, true));
     }
 
-    // Sneak+(OPT)+Right click wand to open GUI
     @SubscribeEvent
     public void onRightClickItem(PlayerInteractEvent.RightClickItem event) {
         if(event.getSide().isServer()) return;

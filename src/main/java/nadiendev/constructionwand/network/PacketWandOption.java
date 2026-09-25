@@ -59,7 +59,6 @@ public record PacketWandOption(String key, String value, boolean notifyMessage) 
                 }
             })
             .exceptionally(e -> {
-                // Handle exception
                 ctx.disconnect(Component.translatable("constructionwand.networking.wand_option.failed", e.getMessage()));
                 return null;
             });

@@ -55,19 +55,14 @@ public class ExchangeSnapshot implements ISnapshot
 
     @Override
     public boolean execute(Level world, Player player, BlockHitResult rayTraceResult) {
-        // Recalculate current state, the block may have changed since this candidate was queued
         BlockState currentState = world.getBlockState(pos);
         if(currentState.hasBlockEntity()) return false;
         if(!WandUtil.isBlockRemovable(world, player, pos)) return false;
 
-        // Step 1: remove the existing block. No item parameter -> no drop.
         if(!WandUtil.removeBlock(world, player, currentState, pos)) return false;
 
-        // Step 2: position is now empty, ask the real supplier for a replacement,
-        // exactly like Construction Core does.
         PlaceSnapshot newPlacement = supplier.getPlaceSnapshot(world, pos, rayTraceResult, null);
         if(newPlacement == null) {
-            // No usable replacement block available: rollback the removal.
             world.setBlockAndUpdate(pos, currentState);
             return false;
         }

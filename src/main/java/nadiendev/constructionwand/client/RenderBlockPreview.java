@@ -36,12 +36,6 @@ public class RenderBlockPreview {
     public static HashSet<BlockPos> undoBlocks = new HashSet<>();
     public static Set<BlockPos> previewBlocks;
 
-    /**
-     * 26.2: el render de outlines pasa por el sistema de "submit nodes". Toda la logica
-     * (leer el jugador, la varita y pedir el preview al server) se resuelve aqui, en la
-     * fase de extraccion, y el renderer solo recibe datos ya copiados: el javadoc de
-     * {@link CustomBlockOutlineRenderer} prohibe capturar el nivel/estado mutable.
-     */
     @SubscribeEvent
     public void onExtractBlockOutlineRenderState(ExtractBlockOutlineRenderStateEvent event) {
         Entity entity = event.getCamera().entity();
@@ -58,7 +52,6 @@ public class RenderBlockPreview {
             blocks = undoBlocks;
             color = COLOR_UNDO;
         } else {
-            // Modo preview normal: solicitar al server si cambio el objetivo o la varita
             if (lastRayTraceResult == null
                     || !compareRTR(lastRayTraceResult, target)
                     || !ItemStack.matches(lastWand, wand)
@@ -74,7 +67,6 @@ public class RenderBlockPreview {
 
         if (blocks == null || blocks.isEmpty()) return;
 
-        // Copia defensiva: el set lo actualiza el hilo de red al llegar PacketPreviewResult.
         event.addCustomRenderer(new WandPreviewRenderer(List.copyOf(blocks), color));
     }
 
@@ -82,7 +74,6 @@ public class RenderBlockPreview {
         @Override
         public boolean render(BlockOutlineRenderState renderState, SubmitNodeCollector submitNodeCollector,
                               PoseStack poseStack, LevelRenderState levelRenderState) {
-            // El poseStack llega en origen de camara (vanilla traslada despues de llamarnos).
             Vec3 cameraPos = levelRenderState.cameraRenderState.pos;
 
             for (BlockPos block : blocks) {

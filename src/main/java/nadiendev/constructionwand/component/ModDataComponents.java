@@ -13,7 +13,6 @@ public class ModDataComponents
     public static final DeferredRegister.DataComponents DATA_COMPONENT_TYPES =
             DeferredRegister.createDataComponents(Registries.DATA_COMPONENT_TYPE, ConstructionWand.MODID);
 
-    // ── Void Sack ─────────────────────────────────────────────────────────────
     public static final Supplier<DataComponentType<VoidSackData>> VOID_SACK_DATA =
             DATA_COMPONENT_TYPES.registerComponentType(
                     "void_sack_data",

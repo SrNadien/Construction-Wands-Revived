@@ -39,7 +39,6 @@ public class ConstructionWand {
         eventBus.addListener(this::commonSetup);
         eventBus.addListener(ModMessages::registerPayloads);
 
-        // ── Registros al mod event bus ────────────────────────────────────
         ModDataComponents.register(eventBus);
         ModItems.ITEMS.register(eventBus);
         ModCreativeTabs.CREATIVE_TABS.register(eventBus);

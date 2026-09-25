@@ -22,11 +22,6 @@ import net.minecraft.world.item.Item;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * En 26.3 AdvancementProvider es un SingleRegistryBootstrap<Advancement> que recibe
- * fabricas de AdvancementSubProvider, y los sub-providers escriben sobre un
- * BootstrapContext<Advancement> en vez de sobre un Consumer<AdvancementHolder>.
- */
 public class AdvancementGenerator extends AdvancementProvider {
 
     public AdvancementGenerator() {
@@ -41,7 +36,6 @@ public class AdvancementGenerator extends AdvancementProvider {
 
         @Override
         public void generate() {
-            // ROOT - obtener cualquier wand de piedra
             AdvancementHolder root = Advancement.Builder.advancement()
                     .display(rootDisplay(
                             ModItems.WAND_STONE.get(),
@@ -51,7 +45,6 @@ public class AdvancementGenerator extends AdvancementProvider {
                     .addCriterion("stone_wand", hasItemsTrigger(ModItems.WAND_STONE.get()))
                     .save(output, rootID("root"));
 
-            // WANDS
             AdvancementHolder woodWand    = onHasItem(output, ModItems.WAND_WOOD,       AdvancementType.TASK,      root);
             AdvancementHolder stoneWand   = onHasItem(output, ModItems.WAND_STONE,      AdvancementType.TASK,      woodWand);
             AdvancementHolder ironWand    = onHasItem(output, ModItems.WAND_IRON,       AdvancementType.TASK,      stoneWand);
@@ -60,12 +53,10 @@ public class AdvancementGenerator extends AdvancementProvider {
             AdvancementHolder netherWand  = onHasItem(output, ModItems.WAND_NETHERITE,  AdvancementType.TASK,      diamondWand);
             AdvancementHolder infWand     = onHasItem(output, ModItems.WAND_INFINITY,   AdvancementType.CHALLENGE, netherWand);
 
-            // CORES (dependen del stone wand como base)
             AdvancementHolder angelCore      = onHasItem(output, ModItems.CORE_ANGEL,       AdvancementType.TASK, stoneWand);
             AdvancementHolder destructionCore = onHasItem(output, ModItems.CORE_DESTRUCTION, AdvancementType.TASK, stoneWand);
             AdvancementHolder exchangeCore   = onHasItem(output, ModItems.CORE_EXCHANGE,    AdvancementType.TASK, stoneWand);
 
-            // VOID SACk
             AdvancementHolder voidSack        = onHasItem(output, ModItems.VOID_SACK,        AdvancementType.TASK, root);
         }
 

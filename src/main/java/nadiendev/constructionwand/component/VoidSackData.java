@@ -18,19 +18,17 @@ import java.util.Objects;
 import java.util.Optional;
 
 public record VoidSackData(
-        CompoundTag items,           // inventario interno serializado
-        long linkedPos,              // BlockPos.asLong(), 0 = no linkeado
-        String linkedDim,            // "namespace:path" de la dimensión, "" = none
+        CompoundTag items,
+        long linkedPos,
+        String linkedDim,
         boolean sendToContainer,
         boolean active
 ) {
 
-    // ── Instancia vacía (default) ──────────────────────────────────────────
     public static final VoidSackData EMPTY = new VoidSackData(
             new CompoundTag(), 0L, "", false, false
     );
 
-    // ── Codec (persistencia en disco) ─────────────────────────────────────
     public static final Codec<VoidSackData> CODEC = RecordCodecBuilder.create(instance ->
             instance.group(
                     CompoundTag.CODEC
@@ -51,7 +49,6 @@ public record VoidSackData(
             ).apply(instance, VoidSackData::new)
     );
 
-    // ── StreamCodec (sincronización por red) ──────────────────────────────
     public static final StreamCodec<FriendlyByteBuf, VoidSackData> STREAM_CODEC =
             StreamCodec.composite(
                     ByteBufCodecs.COMPOUND_TAG,  VoidSackData::items,
@@ -61,8 +58,6 @@ public record VoidSackData(
                     ByteBufCodecs.BOOL,           VoidSackData::active,
                     VoidSackData::new
             );
-
-    // ── Helpers de "modificación" (devuelven nueva instancia) ─────────────
 
     public VoidSackData withItems(CompoundTag newItems) {
         return new VoidSackData(newItems, linkedPos, linkedDim, sendToContainer, active);
@@ -84,8 +79,6 @@ public record VoidSackData(
         return new VoidSackData(items, linkedPos, linkedDim, sendToContainer, value);
     }
 
-    // ── Acceso a linkedPos como BlockPos ──────────────────────────────────
-
     public boolean hasLinkedPos() {
         return linkedPos != 0L;
     }
@@ -95,7 +88,6 @@ public record VoidSackData(
         return linkedPos != 0L ? BlockPos.of(linkedPos) : null;
     }
 
-    // ── Helpers para el inventario interno ────────────────────────────────
     public static final String TAG_ITEMS = "Items";
 
     public SimpleContainer loadInventory(int size) {

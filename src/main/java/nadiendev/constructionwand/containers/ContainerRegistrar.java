@@ -15,21 +15,11 @@ public class ContainerRegistrar {
         ConstructionWand.containerManager.register(new HandlerBundle());
         ConstructionWand.containerManager.register(new HandlerCapability());
 
-        // Mod Integrations
         // registerSophisticatedBackpacks(); // aparcado: sin build 26.3
         // registerAppliedEnergistics();  // ver src/disabled-integrations
         // registerRefinedStorage();      // ver src/disabled-integrations
     }
 
-    // -------------------------------------------------------------------------
-    // Integraciones opcionales
-    // -------------------------------------------------------------------------
-
-    // Sophisticated Backpacks: sin build para 26.3 (las publicadas declaran "below 26.3").
-    // El handler esta aparcado en src/disabled-integrations/, no borrado. Para reactivar:
-    // descomentar sophisticatedbackpacks_version / sophisticatedcore_version en
-    // gradle.properties, sus compileOnly en build.gradle, mover el handler de vuelta y
-    // descomentar este metodo junto con su llamada y su import.
     // private static void registerSophisticatedBackpacks() {
     //     try {
     //         if (ModList.get().isLoaded("sophisticatedbackpacks")) {
@@ -40,14 +30,6 @@ public class ContainerRegistrar {
     //         ConstructionWand.LOGGER.warn("Could not load Sophisticated Backpacks integration: " + e.getMessage());
     //     }
     // }
-
-    // -------------------------------------------------------------------------
-    // Applied Energistics 2 / AE2WTLib / Refined Storage
-    //
-    // Sin build para Minecraft 26.2. Los handlers estan aparcados en
-    // src/disabled-integrations/ (fuera del sourceSet). Ver el README de esa
-    // carpeta para reactivarlos.
-    // -------------------------------------------------------------------------
 
     // private static void registerAppliedEnergistics() {
     //     try {

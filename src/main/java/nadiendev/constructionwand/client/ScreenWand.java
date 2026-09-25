@@ -1,7 +1,6 @@
 package nadiendev.constructionwand.client;
 
 import net.minecraft.client.Minecraft;
-// import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.screens.Screen;
@@ -46,14 +45,6 @@ public class ScreenWand extends Screen {
         createButton(1, 1, wandOptions.match);
         createButton(1, 2, wandOptions.random);
     }
-
-    // TODO: What?
-    // @Override
-    // public void render(@Nonnull GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
-    //     renderBackground(guiGraphics, mouseX, mouseY, partialTicks);
-    //     guiGraphics.drawCenteredString(font, wand.getDisplayName(), width / 2, height / 2 - FIELD_HEIGHT / 2 - SPACING_HEIGHT, 16777215);
-    //     super.render(guiGraphics, mouseX, mouseY, partialTicks);
-    // }
 
    @Override
 public boolean keyPressed(KeyEvent event) {

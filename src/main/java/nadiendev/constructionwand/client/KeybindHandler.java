@@ -41,10 +41,6 @@ public class KeybindHandler {
             CATEGORY
     );
 
-    /**
-     * Selecciona el bloque apuntado como reemplazo del Exchange core.
-     * Numpad 7 por defecto (evita el conflicto de Shift+Click con el GUI de la vara).
-     */
     public static final KeyMapping KEY_EXCHANGE_SELECT = new KeyMapping(
             getKey("exchange_select"),
             InputConstants.KEY_NUMPAD7,
@@ -68,7 +64,6 @@ public class KeybindHandler {
         Player player = Minecraft.getInstance().player;
         if (player == null) return;
 
-        // consumeClick() en el tick — correcto según la doc de 26.1
         while (KEY_VOID_SACK_TOGGLE.consumeClick()) {
             for (InteractionHand hand : InteractionHand.values()) {
                 ItemStack stack = player.getItemInHand(hand);
@@ -79,14 +74,12 @@ public class KeybindHandler {
             }
         }
 
-        // K -> undo directo con la varita (no depende de mantener CTRL)
         while (KEY_UNDO.consumeClick()) {
             if (WandUtil.holdingWand(player) != null) {
                 ClientPacketDistributor.sendToServer(new PacketRequestUndo());
             }
         }
 
-        // Numpad 7 -> seleccionar bloque de reemplazo del Exchange core
         while (KEY_EXCHANGE_SELECT.consumeClick()) {
             if (WandUtil.holdingWand(player) != null) {
                 ClientPacketDistributor.sendToServer(new PacketExchangeSelect());
@@ -110,7 +103,6 @@ public class KeybindHandler {
         }
     }
 
-    // (Sneak)+OPT+Scroll to change direction lock
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public void MouseScrollEvent(InputEvent.MouseScrollingEvent event) {
         Player player = Minecraft.getInstance().player;
@@ -130,7 +122,6 @@ public class KeybindHandler {
         event.setCanceled(true);
     }
 
-    // (Sneak)+OPT+Left click wand to change core
     @SubscribeEvent
     public void onLeftClickEmpty(PlayerInteractEvent.LeftClickEmpty event) {
         Player player = event.getEntity();
@@ -145,7 +136,6 @@ public class KeybindHandler {
         ClientPacketDistributor.sendToServer(new PacketWandOption(wandOptions.cores, true));
     }
 
-    // (Sneak)+OPT+Right click wand to open GUI
     @SubscribeEvent
     public void onRightClickItem(PlayerInteractEvent.RightClickItem event) {
         if (event.getSide().isServer()) return;

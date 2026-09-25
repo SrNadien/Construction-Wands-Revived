@@ -64,7 +64,6 @@ public class ConstructionWandJeiPlugin implements IModPlugin
             );
         }
 
-        // ── Void Sack ───────────────────────────────────────────────────────────
         Component mKeyComponent = KeybindHandler.KEY_VOID_SACK_TOGGLE
                 .getTranslatedKeyMessage()
                 .copy().withStyle(ChatFormatting.GOLD);

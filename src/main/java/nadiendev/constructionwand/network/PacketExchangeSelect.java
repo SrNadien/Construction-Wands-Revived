@@ -17,11 +17,6 @@ import nadiendev.constructionwand.wand.action.ActionExchange;
 
 import static nadiendev.constructionwand.ConstructionWand.MODID;
 
-/**
- * Pide al servidor que seleccione el bloque al que apunta el jugador como
- * bloque de reemplazo del Exchange core. Sin datos: el servidor hace su propio
- * raytrace para no confiar en el cliente.
- */
 public record PacketExchangeSelect() implements CustomPacketPayload
 {
     public static final PacketExchangeSelect INSTANCE = new PacketExchangeSelect();
@@ -41,11 +36,9 @@ public record PacketExchangeSelect() implements CustomPacketPayload
         ctx.enqueueWork(() -> {
             if(!(ctx.player() instanceof ServerPlayer player)) return;
 
-            // Solo si tiene la vara en mano
             ItemStack wand = WandUtil.holdingWand(player);
             if(wand == null) return;
 
-            // Raytrace del servidor hacia donde está mirando el jugador
             double reach = player.blockInteractionRange();
             HitResult hit = player.pick(reach, 1.0F, false);
 

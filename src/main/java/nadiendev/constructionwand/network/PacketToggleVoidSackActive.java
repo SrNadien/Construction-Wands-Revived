@@ -11,13 +11,6 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 import nadiendev.constructionwand.ConstructionWand;
 import nadiendev.constructionwand.items.containeritems.ItemVoidSack;
 
-/**
- * Paquete C→S: el cliente presionó M → toggle del estado activo del Void Sack.
- * También puede usarse para toggle de SendToContainer desde la tecla M
- * (dependiendo del modo).
- *
- * By NadienDev
- */
 public record PacketToggleVoidSackActive(InteractionHand hand) implements CustomPacketPayload
 {
     public static final CustomPacketPayload.Type<PacketToggleVoidSackActive> TYPE =
@@ -37,16 +30,10 @@ public record PacketToggleVoidSackActive(InteractionHand hand) implements Custom
         return TYPE;
     }
 
-    // ─────────────────────────────────────────────────────────────────────────
-    //  Handler (hilo del servidor)
-    //  Busca el sack en cualquiera de las dos manos y hace toggle de TAG_ACTIVE.
-    //  Si el sack tiene container linkeado, también hace toggle de SendToContainer.
-    // ─────────────────────────────────────────────────────────────────────────
     public static void handle(PacketToggleVoidSackActive packet, IPayloadContext ctx) {
         ctx.enqueueWork(() -> {
             if (!(ctx.player() instanceof ServerPlayer sp)) return;
 
-            // Busca el sack en la mano indicada; si no, en la otra mano
             ItemStack sack = sp.getItemInHand(packet.hand());
             if (!(sack.getItem() instanceof ItemVoidSack)) {
                 InteractionHand other = packet.hand() == InteractionHand.MAIN_HAND
@@ -58,12 +45,10 @@ public record PacketToggleVoidSackActive(InteractionHand hand) implements Custom
             boolean nowActive = !ItemVoidSack.isActive(sack);
             ItemVoidSack.setActive(sack, nowActive);
 
-            // Si tiene container linkeado, sincroniza también SendToContainer
             if (ItemVoidSack.getLinkedPos(sack) != null) {
                 ItemVoidSack.setSendToContainer(sack, nowActive);
             }
 
-            // Feedback al jugador
             sp.sendSystemMessage(
                     net.minecraft.network.chat.Component.translatable(
                             nowActive
@@ -72,13 +57,10 @@ public record PacketToggleVoidSackActive(InteractionHand hand) implements Custom
                             .withStyle(nowActive
                                 ? net.minecraft.ChatFormatting.GREEN
                                 : net.minecraft.ChatFormatting.YELLOW),
-                    true); // true = actionbar (no llena el chat)
+                    true);
         });
     }
 
-    // ─────────────────────────────────────────────────────────────────────────
-    //  Envío desde el cliente (KeybindHandler)
-    // ─────────────────────────────────────────────────────────────────────────
     public static void send(InteractionHand hand) {
         net.neoforged.neoforge.client.network.ClientPacketDistributor.sendToServer(
                 new PacketToggleVoidSackActive(hand));

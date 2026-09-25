@@ -25,7 +25,6 @@ public class ClientTooltipEvents {
 
         Consumer<Component> tooltip = component -> event.getToolTip().add(component);
 
-        // ItemWand adds its own tooltip in appendHoverText, adding it here too would duplicate it
         if (item instanceof ItemCore && item instanceof IWandCore core) {
             ItemCore.appendCoreTooltip(core, tooltip);
         }

@@ -37,10 +37,6 @@ public class ItemVoidSack extends Item
         super(properties);
     }
 
-    // ─────────────────────────────────────────────────────────────────────────
-    //  DataComponent Access
-    // ─────────────────────────────────────────────────────────────────────────
-
     public static VoidSackData getData(ItemStack sack) {
         return sack.getOrDefault(
                 ModDataComponents.VOID_SACK_DATA.get(),
@@ -51,10 +47,6 @@ public class ItemVoidSack extends Item
         sack.set(ModDataComponents.VOID_SACK_DATA.get(), data);
     }
 
-    // ─────────────────────────────────────────────────────────────────────────
-    //  Internal Inventory (4×4)
-    // ─────────────────────────────────────────────────────────────────────────
-
     public static SimpleContainer loadInventory(ItemStack sack) {
         return getData(sack).loadInventory(SIZE);
     }
@@ -63,10 +55,6 @@ public class ItemVoidSack extends Item
         VoidSackData updated = getData(sack).saveInventory(inv);
         setData(sack, updated);
     }
-
-    // ─────────────────────────────────────────────────────────────────────────
-    //  Linked Container 
-    // ─────────────────────────────────────────────────────────────────────────
 
     @Nullable
     public static BlockPos getLinkedPos(ItemStack sack) {
@@ -99,10 +87,6 @@ public class ItemVoidSack extends Item
         setData(sack, updated);
     }
 
-    // ─────────────────────────────────────────────────────────────────────────
-    //  Toggles
-    // ─────────────────────────────────────────────────────────────────────────
-
     public static boolean isSendToContainer(ItemStack sack) {
         return getData(sack).sendToContainer();
     }
@@ -118,10 +102,6 @@ public class ItemVoidSack extends Item
     public static void setActive(ItemStack sack, boolean value) {
         setData(sack, getData(sack).withActive(value));
     }
-
-    // ─────────────────────────────────────────────────────────────────────────
-    //  Pickup interceptado
-    // ─────────────────────────────────────────────────────────────────────────
 
     public static int receive(ServerLevel level, ItemStack sack, ItemStack toInsert) {
         if (sack.isEmpty() || toInsert.isEmpty()) return toInsert.getCount();
@@ -183,10 +163,6 @@ public class ItemVoidSack extends Item
         return remaining.getCount();
     }
 
-    // ─────────────────────────────────────────────────────────────────────────
-    //  Use
-    // ─────────────────────────────────────────────────────────────────────────
-
     @Override
     public InteractionResult useOn(UseOnContext ctx) {
         Level level = ctx.getLevel();
@@ -233,10 +209,6 @@ public class ItemVoidSack extends Item
             }
         }, buf -> buf.writeBoolean(hand == InteractionHand.MAIN_HAND));
     }
-
-    // ─────────────────────────────────────────────────────────────────────────
-    //  Tooltip
-    // ─────────────────────────────────────────────────────────────────────────
 
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context,

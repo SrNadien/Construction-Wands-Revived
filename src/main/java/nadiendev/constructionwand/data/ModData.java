@@ -20,8 +20,6 @@ public class ModData {
         DataGenerator generator = event.getGenerator();
         PackOutput packOutput = generator.getPackOutput();
 
-        // En 26.3 recetas y avances son registros de datapack recargables: se generan
-        // con un RegistrySetBuilder en vez de con providers sueltos.
         RegistrySetBuilder registrySet = new RegistrySetBuilder()
                 .add(RecipeProvider.asBootstrap(RecipeGenerator::new))
                 .add(Registries.ADVANCEMENT, new AdvancementGenerator());
@@ -36,9 +34,7 @@ public class ModData {
 
         generator.addProvider(true, new ItemModelGenerator(packOutput));
 
-        // en_us
         generator.addProvider(true, new LanguageGenerator(packOutput));
-        // otros idiomas
         generator.addProvider(true, new LanguageGenerator.ESAR(packOutput));
         generator.addProvider(true, new LanguageGenerator.ESCL(packOutput));
         generator.addProvider(true, new LanguageGenerator.ESCO(packOutput));

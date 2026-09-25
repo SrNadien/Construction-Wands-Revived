@@ -5,7 +5,7 @@ import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.ContainerInput; // ClickType fue renombrado a ContainerInput en 26.1
+import net.minecraft.world.inventory.ContainerInput;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
@@ -19,9 +19,8 @@ public class MenuVoidSack extends AbstractContainerMenu
 
     private static final int SACK_ROWS = 4;
     private static final int SACK_COLS = 4;
-    private static final int SACK_SIZE = SACK_ROWS * SACK_COLS; // 16
+    private static final int SACK_SIZE = SACK_ROWS * SACK_COLS;
 
-    // Measured from basket_4x4.png (176x192)
     private static final int SACK_START_X   = 52;
     private static final int SACK_START_Y   = 18;
     private static final int PLAYER_START_X = 8;
@@ -36,7 +35,6 @@ public class MenuVoidSack extends AbstractContainerMenu
         ItemStack sack = player.getItemInHand(hand);
         this.sackInventory = ItemVoidSack.loadInventory(sack);
 
-        // ── Slots del Void Sack (4×4) ─────────────────────────────────────
         for (int row = 0; row < SACK_ROWS; row++) {
             for (int col = 0; col < SACK_COLS; col++) {
                 int index = row * SACK_COLS + col;
@@ -46,7 +44,6 @@ public class MenuVoidSack extends AbstractContainerMenu
             }
         }
 
-        // ── Inventario jugador (3×9) ──────────────────────────────────────
         for (int row = 0; row < 3; row++) {
             for (int col = 0; col < 9; col++) {
                 addSlot(new Slot(playerInv,
@@ -56,7 +53,6 @@ public class MenuVoidSack extends AbstractContainerMenu
             }
         }
 
-        // ── Hotbar (1×9) ──────────────────────────────────────────────────
         for (int col = 0; col < 9; col++) {
             addSlot(new Slot(playerInv, col,
                     PLAYER_START_X + col * 18,
@@ -92,10 +88,6 @@ public class MenuVoidSack extends AbstractContainerMenu
         ItemStack sack = player.getItemInHand(hand);
         return sack.getItem() instanceof ItemVoidSack;
     }
-
-    // En 26.1 clicked() recibe ContainerInput en lugar de ClickType
-    // AbstractContainerMenu ya lo delega internamente, no hace falta override aquí
-    // a menos que necesites lógica custom de click.
 
     @Override
     public void removed(Player player) {

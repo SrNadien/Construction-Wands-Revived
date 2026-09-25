@@ -63,11 +63,9 @@ public record PacketUndoBlocks(HashSet<BlockPos> undoBlocks) implements CustomPa
     {
         public static void handle(final PacketUndoBlocks msg, final IPayloadContext ctx) {
             ctx.enqueueWork(() -> {
-                //ConstructionWand.LOGGER.debug("PacketUndoBlocks received, Blocks: " + msg.undoBlocks.size());
                 ClientHandler.renderBlockPreview.undoBlocks = msg.undoBlocks;
             })
             .exceptionally(e -> {
-                // Handle exception
                 ctx.disconnect(Component.translatable("constructionwand.networking.undo_blocks.failed", e.getMessage()));
                 return null;
             });

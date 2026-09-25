@@ -24,7 +24,6 @@ public class ItemModelGenerator extends ModelProvider {
         super(output, ConstructionWand.MODID);
     }
 
-    // Template handheld de 2 capas
     public static final ModelTemplate TWO_LAYERED_HANDHELD =
             ModelTemplates.createItem("handheld", TextureSlot.LAYER0, TextureSlot.LAYER1);
 
@@ -37,7 +36,6 @@ public class ItemModelGenerator extends ModelProvider {
             itemModels.generateFlatItem(core.get(), ModelTemplates.FLAT_ITEM);
         }
 
-        // Void Sack
         itemModels.itemModelOutput.accept(
                 ModItems.VOID_SACK.get(),
                 ItemModelUtils.plainModel(
@@ -58,19 +56,16 @@ public class ItemModelGenerator extends ModelProvider {
         Item wand = wandItem.get();
         Identifier location = ModelLocationUtils.getModelLocation(wand);
 
-        // Modelo base: sin core (handheld normal)
         ItemModel.Unbaked base = ItemModelUtils.plainModel(
                 itemModels.createFlatItemModel(wand, ModelTemplates.FLAT_HANDHELD_ITEM)
         );
 
         Material wandTexture = TextureMapping.getItemTexture(wand);
 
-        // Overlay: con core "destruction"
         Material overlayMaterial = new Material(
                 Identifier.fromNamespaceAndPath(ConstructionWand.MODID, "item/overlay_core")
         );
 
-        // Modelo con core "angel": layer0 = textura del wand + layer1 = overlay_core
         ItemModel.Unbaked angelModel = ItemModelUtils.plainModel(
                 generateLayeredItem(
                         itemModels,
@@ -80,7 +75,6 @@ public class ItemModelGenerator extends ModelProvider {
                 )
         );
 
-        // Modelo con core "destruction": layer0 = textura del wand + layer1 = overlay_core
         ItemModel.Unbaked destructionModel = ItemModelUtils.plainModel(
                 generateLayeredItem(
                         itemModels,
@@ -90,7 +84,6 @@ public class ItemModelGenerator extends ModelProvider {
                 )
         );
 
-        // Modelo con core "exchange": layer0 = textura del wand + layer1 = overlay_core
         ItemModel.Unbaked exchangeModel = ItemModelUtils.plainModel(
                 generateLayeredItem(
                         itemModels,
@@ -100,7 +93,6 @@ public class ItemModelGenerator extends ModelProvider {
                 )
         );
 
-        // Select por string
         List<SelectItemModel.SwitchCase<String>> cases = new ArrayList<>();
         cases.add(ItemModelUtils.when("angel", angelModel));
         cases.add(ItemModelUtils.when("destruction", destructionModel));

@@ -38,12 +38,9 @@ public record PacketQueryUndo(boolean undoPressed, boolean leftShiftPressed) imp
             ctx.enqueueWork(() -> {
                 if (ctx.player() instanceof ServerPlayer player) {
                     ConstructionWand.undoHistory.updateClient(player, msg.undoPressed, msg.leftShiftPressed);
-
-                    //ConstructionWand.LOGGER.debug("Undo queried");
                 }
             })
             .exceptionally(e -> {
-                // Handle exception
                 ctx.disconnect(Component.translatable("constructionwand.networking.query_undo.failed", e.getMessage()));
                 return null;
             });

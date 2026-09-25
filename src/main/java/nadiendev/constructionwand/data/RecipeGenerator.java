@@ -141,6 +141,4 @@ public class RecipeGenerator extends RecipeProvider
         SpecialRecipeBuilder.special(factory).save(output,
                 ConstructionWand.loc("dynamic/" + name.getPath()).toString());
     }
-
-    // ── Runner ────────────────────────────────────────────────────────────────
 }

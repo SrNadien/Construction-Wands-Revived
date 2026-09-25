@@ -10,12 +10,6 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 import nadiendev.constructionwand.ConstructionWand;
 import nadiendev.constructionwand.items.containeritems.MenuVoidSack;
 
-/**
- * Paquete (Void Sack).
- *
- * By NadienDev
- * 
- */
 public record PacketToggleVoidSack(InteractionHand hand) implements CustomPacketPayload
 {
     public static final CustomPacketPayload.Type<PacketToggleVoidSack> TYPE =
@@ -35,9 +29,6 @@ public record PacketToggleVoidSack(InteractionHand hand) implements CustomPacket
         return TYPE;
     }
 
-    // ─────────────────────────────────────────────────────────────────────────
-    //  Handler (hilo del servidor)
-    // ─────────────────────────────────────────────────────────────────────────
     public static void handle(PacketToggleVoidSack packet, IPayloadContext ctx) {
         ctx.enqueueWork(() -> {
             if (ctx.player() instanceof ServerPlayer serverPlayer) {
@@ -48,9 +39,6 @@ public record PacketToggleVoidSack(InteractionHand hand) implements CustomPacket
         });
     }
 
-    // ─────────────────────────────────────────────────────────────────────────
-    //  Envío desde el cliente
-    // ─────────────────────────────────────────────────────────────────────────
     public static void send(InteractionHand hand) {
         net.neoforged.neoforge.client.network.ClientPacketDistributor.sendToServer(
                 new PacketToggleVoidSack(hand));

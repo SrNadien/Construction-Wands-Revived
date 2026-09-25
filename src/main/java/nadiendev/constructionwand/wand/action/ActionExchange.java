@@ -35,10 +35,6 @@ public class ActionExchange implements IWandAction
         return ConfigServer.getWandProperties(wand.getItem()).getExchange();
     }
 
-    /**
-     * Selecciona (o rechaza) el bloque en {@code pos} como reemplazo del Exchange core.
-     * La usa PacketExchangeSelect (tecla Numpad 7).
-     */
     public static boolean selectReplacementBlock(Level world, Player player, BlockPos pos) {
         BlockState state = world.getBlockState(pos);
         Item item = state.getBlock().asItem();
@@ -64,7 +60,6 @@ public class ActionExchange implements IWandAction
                                         ItemStack wand, WandOptions options, IWandSupplier supplier, int limit) {
         LinkedList<ISnapshot> exchangeSnapshots = new LinkedList<>();
 
-        // Bloque seleccionado con la tecla de selección. Sin selección no hay nada para intercambiar.
         BlockItem selected = ConstructionWand.undoHistory.getExchangeSelection(player);
         if(selected == null) {
             player.sendOverlayMessage(
@@ -73,22 +68,15 @@ public class ActionExchange implements IWandAction
             return exchangeSnapshots;
         }
 
-        // Reinicializa el supplier con el bloque seleccionado (no el bloque objetivo,
-        // que es lo que el WandJob le pasó por defecto al construirlo).
         supplier.getSupply(selected);
 
-        // Current list of block positions to process
         LinkedList<BlockPos> candidates = new LinkedList<>();
-        // All positions that were processed (dont process blocks multiple times)
         HashSet<BlockPos> allCandidates = new HashSet<>();
 
-        // Block face the wand was pointed at
         Direction targetFace = rayTraceResult.getDirection();
-        // Block the wand was pointed at
         BlockPos startingPoint = rayTraceResult.getBlockPos();
         BlockState targetBlock = world.getBlockState(rayTraceResult.getBlockPos());
 
-        // Is exchange direction allowed by lock?
         if(targetFace == Direction.UP || targetFace == Direction.DOWN) {
             if(options.testLock(WandOptions.LOCK.NORTHSOUTH) || options.testLock(WandOptions.LOCK.EASTWEST))
                 candidates.add(startingPoint);
@@ -96,27 +84,22 @@ public class ActionExchange implements IWandAction
         else if(options.testLock(WandOptions.LOCK.HORIZONTAL) || options.testLock(WandOptions.LOCK.VERTICAL))
             candidates.add(startingPoint);
 
-        // Process current candidates, stop when none are avaiable or block limit is reached
         while(!candidates.isEmpty() && exchangeSnapshots.size() < limit) {
             BlockPos currentCandidate = candidates.removeFirst();
 
-            // Only exchange blocks facing the player, with no collidable blocks in between
             if(!WandUtil.isBlockPermeable(world, currentCandidate.relative(targetFace))) continue;
 
             try {
                 BlockState candidateBlock = world.getBlockState(currentCandidate);
 
-                // Never touch blocks with a BlockEntity (chests, furnaces, machines, etc.)
                 if(candidateBlock.hasBlockEntity()) continue;
 
-                // If target and candidate blocks match and the current candidate has not been processed
                 if(options.matchBlocks(targetBlock.getBlock(), candidateBlock.getBlock()) &&
                         allCandidates.add(currentCandidate)) {
                     ExchangeSnapshot snapshot = ExchangeSnapshot.get(world, player, currentCandidate, supplier);
                     if(snapshot == null) continue;
                     exchangeSnapshots.add(snapshot);
 
-                    // Ejes de propagacion segun la cara apuntada, con sus locks
                     Direction[] axisA, axisB;
                     boolean lockA, lockB;
                     if(targetFace == Direction.UP || targetFace == Direction.DOWN) {
@@ -137,10 +120,6 @@ public class ActionExchange implements IWandAction
                     if(lockA) for(Direction a : axisA) candidates.add(currentCandidate.relative(a));
                     if(lockB) for(Direction b : axisB) candidates.add(currentCandidate.relative(b));
 
-                    // Las diagonales solo se propagan si ambos vecinos ortogonales estan
-                    // descubiertos. Asi, cuando justo delante hay un bloque encimado, el
-                    // intercambio se corta debajo de ese bloque en vez de rodearlo y
-                    // seguir reemplazando al otro lado.
                     if(lockA && lockB) {
                         for(Direction a : axisA) {
                             BlockPos sideA = currentCandidate.relative(a);

@@ -21,11 +21,6 @@ public class PlaceSnapshot implements ISnapshot
 {
     private BlockState block;
     private final BlockPos pos;
-    /**
-     * Stack concreto que se va a colocar, con sus componentes. Se guarda el stack entero y
-     * no el BlockItem porque dos variantes del mismo item (cajones enmarcados con distinto
-     * material, por ejemplo) deben colocarse cada una con sus datos.
-     */
     private final ItemStack itemStack;
     private final BlockState supportingBlock;
     private final boolean targetMode;
@@ -65,9 +60,6 @@ public class PlaceSnapshot implements ISnapshot
 
     @Override
     public boolean execute(Level world, Player player, BlockHitResult rayTraceResult) {
-        // Recalculate PlaceBlockState, because other blocks might be placed nearby
-        // Not doing this may cause game crashes (StackOverflowException) when placing lots of blocks
-        // with changing orientation like panes, iron bars or redstone.
         block = getPlaceBlockstate(world, player, rayTraceResult, pos, itemStack, supportingBlock, targetMode);
         if(block == null) return false;
         return WandUtil.placeBlock(world, player, block, pos, itemStack);
@@ -88,10 +80,6 @@ public class PlaceSnapshot implements ISnapshot
         world.removeBlock(pos, false);
     }
 
-    /**
-     * Tests if a certain block can be placed by the wand.
-     * If it can, returns the blockstate to be placed.
-     */
     @SuppressWarnings({"rawtypes", "unchecked"})
     @Nullable
     private static BlockState getPlaceBlockstate(Level world, Player player, BlockHitResult rayTraceResult,
@@ -99,24 +87,17 @@ public class PlaceSnapshot implements ISnapshot
                                                  @Nullable BlockState supportingBlock, boolean targetMode) {
         if(!(itemStack.getItem() instanceof BlockItem item)) return null;
 
-        // Is block at pos replaceable?
         BlockPlaceContext ctx = new WandItemUseContext(world, player, rayTraceResult, pos, itemStack);
         if(!ctx.canPlace()) return null;
 
-        // Can block be placed?
         BlockState blockState = item.getBlock().getStateForPlacement(ctx);
         if(blockState == null || !blockState.canSurvive(world, pos)) return null;
 
-        // Forbidden Tile Entity?
         if(!WandUtil.isTEAllowed(blockState)) return null;
 
-        // No entities colliding?
         if(WandUtil.entitiesCollidingWithBlock(world, blockState, pos)) return null;
 
-        // Copy block properties from supporting block
         if(targetMode && supportingBlock != null) {
-            // Block properties to be copied (alignment/rotation properties)
-
             for(Property property : new Property[]{
                     BlockStateProperties.HORIZONTAL_FACING, BlockStateProperties.FACING, BlockStateProperties.FACING_HOPPER,
                     BlockStateProperties.ROTATION_16, BlockStateProperties.AXIS, BlockStateProperties.HALF, BlockStateProperties.STAIRS_SHAPE}) {
@@ -125,7 +106,6 @@ public class PlaceSnapshot implements ISnapshot
                 }
             }
 
-            // Dont dupe double slabs
             if(supportingBlock.hasProperty(BlockStateProperties.SLAB_TYPE) && blockState.hasProperty(BlockStateProperties.SLAB_TYPE)) {
                 SlabType slabType = supportingBlock.getValue(BlockStateProperties.SLAB_TYPE);
                 if(slabType != SlabType.DOUBLE)

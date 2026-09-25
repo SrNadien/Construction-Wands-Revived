@@ -1,67 +1,5 @@
 package nadiendev.constructionwand.wand.action;
 
-// ──────────────────────────────────────────────────────────────────────────────
-// ActionDestruction.java — ported to Minecraft 26.1.2 / NeoForge 26.1.2.33-beta
-// ──────────────────────────────────────────────────────────────────────────────
-//
-// PORTING NOTES (1.21.11 → 26.1.2)
-// ─────────────────────────────────
-// 1. JAVA 25
-//    Minecraft 26.1 requires Java 25 (set `languageVersion = JavaLanguageVersion.of(25)`
-//    in your build.gradle toolchain block).  Records, pattern-matching instanceof,
-//    sealed classes, and text blocks are all available.  This file already used
-//    records and pattern-matching instanceof — no changes required for those.
-//
-// 2. NO OBFUSCATION
-//    Mojang removed obfuscation in 26.1 (see https://www.minecraft.net/en-us/article/removing-obfuscation-in-java-edition).
-//    All vanilla class/method/field names now match Mojang's official sources
-//    directly; SRG / MCP / Parchment mappings are no longer needed.
-//    The classes used here (BlockPos, Direction, ServerLevel, ServerPlayer,
-//    BlockState, BlockHitResult, Level, Player, ItemStack) keep their Mojang
-//    names unchanged — no import changes required for them.
-//
-// 3. EVENT CLASSES
-//    BlockEvent.BreakEvent and BlockDropsEvent both remain in
-//    net.neoforged.neoforge.event.level throughout the 1.21.x → 26.1 line.
-//    This file does NOT directly subscribe to those events; it only sets a
-//    ThreadLocal context that is consumed by a *separate* @EventBusSubscriber
-//    class (VoidSackDropHandler).  That handler must subscribe to
-//    BlockDropsEvent on NeoForge.EVENT_BUS (the game bus), which is unchanged.
-//
-// 4. API STABILITY
-//    All vanilla APIs called here — Player#getMainHandItem, Player#getOffhandItem,
-//    Player#getInventory, Inventory#getContainerSize, Inventory#getItem,
-//    Level#getBlockState, Level#isClientSide, BlockHitResult#getDirection,
-//    BlockHitResult#getBlockPos — are stable and present in 26.1.
-//
-// 5. ITEMSTACK#isEmpty / ItemStack.EMPTY
-//    Still present and unchanged in 26.1.
-//
-// 6. ServerPlayerGameMode#destroyBlock (called inside DestroySnapshot)
-//    In 26.1 the method signature is unchanged: destroyBlock(BlockPos).
-//    The internal break pipeline is:
-//      → Player#blockActionRestricted (pre-check)
-//      → BlockEvent.BreakEvent fired (NeoForge.EVENT_BUS, server-only)
-//      → Block#playerWillDestroy
-//      → IBlockExtension#canHarvestBlock / PlayerEvent.HarvestCheck
-//      → IBlockExtension#onDestroyedByPlayer
-//      → BlockDropsEvent fired (NeoForge.EVENT_BUS, server-only) ← VoidSackDropHandler hooks here
-//      → Block#popExperience
-//    The VoidSackCapturingSnapshot wrapper below sets ACTIVE_CONTEXT so that
-//    VoidSackDropHandler can identify which block's drops to redirect.
-//
-// 7. ChunkPos construction changes (NOT used in this file, but note for other files):
-//    new ChunkPos(blockPos)  →  ChunkPos.containing(blockPos)
-//    ChunkPos.asLong(blockPos)  →  ChunkPos.pack(blockPos)
-//    new ChunkPos(packedLong)  →  ChunkPos.unpack(packedLong)
-//
-// 8. GuiGraphics renamed to GuiGraphicsExtractor in 26.1 (NOT relevant here).
-//
-// 9. ItemStackTemplate — instantiating ItemStack before registries load now
-//    requires ItemStackTemplate (NOT relevant here; we only hold live stacks).
-//
-// ──────────────────────────────────────────────────────────────────────────────
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -88,45 +26,9 @@ import java.util.List;
 
 public class ActionDestruction implements IWandAction
 {
-    // ─────────────────────────────────────────────────────────────────────────
-    // VoidSack drop-interception context
-    //
-    // HOW THIS WORKS IN 26.1
-    // ───────────────────────
-    // When execute() is called on a VoidSackCapturingSnapshot, it:
-    //   1. Places a VoidSackDropContext into ACTIVE_CONTEXT (ThreadLocal).
-    //   2. Calls delegate.execute() which internally calls
-    //      ServerPlayerGameMode#destroyBlock(BlockPos).
-    //   3. NeoForge fires BlockDropsEvent on NeoForge.EVENT_BUS (server thread).
-    //   4. VoidSackDropHandler (a separate @EventBusSubscriber class) reads
-    //      ACTIVE_CONTEXT in its @SubscribeEvent handler:
-    //        - Cancels the event (suppresses item-entity spawning).
-    //        - Inserts the drop stacks directly into the sack's inventory.
-    //   5. ACTIVE_CONTEXT is cleared in the finally block.
-    //
-    // The ThreadLocal is safe here because BlockDropsEvent fires synchronously
-    // on the same server thread that called destroyBlock.
-    // ─────────────────────────────────────────────────────────────────────────
-
-    /**
-     * Active context for VoidSackDropHandler.
-     * Set in VoidSackCapturingSnapshot#execute(), cleared in finally.
-     */
     public static final ThreadLocal<VoidSackDropContext> ACTIVE_CONTEXT = new ThreadLocal<>();
 
-    /**
-     * Carries the information the drop handler needs to redirect drops.
-     *
-     * @param pos   The position of the block being broken.
-     * @param level The server level in which the break occurs.
-     * @param sack  The ItemVoidSack stack that will receive the drops.
-     */
-    // record is a Java 16+ feature — fully supported under Java 25.
     public record VoidSackDropContext(BlockPos pos, ServerLevel level, ItemStack sack) {}
-
-    // ─────────────────────────────────────────────────────────────────────────
-    // IWandAction implementation
-    // ─────────────────────────────────────────────────────────────────────────
 
     @Override
     public int getLimit(ItemStack wand) {
@@ -145,53 +47,36 @@ public class ActionDestruction implements IWandAction
             int limit)
     {
         LinkedList<ISnapshot> destroySnapshots = new LinkedList<>();
-        // Current list of block positions to process
         LinkedList<BlockPos> candidates = new LinkedList<>();
-        // All positions that were already processed (prevent double-breaking)
         HashSet<BlockPos> allCandidates = new HashSet<>();
 
-        // Block face the wand was aimed at
         Direction breakFace = rayTraceResult.getDirection();
-        // Block the wand was aimed at
         BlockPos startingPoint = rayTraceResult.getBlockPos();
         BlockState targetBlock = world.getBlockState(rayTraceResult.getBlockPos());
 
-        // Seed the candidate list based on which face was hit and which
-        // axis locks are active.
-        // Vertical face (UP/DOWN) → allow NS/EW spreading
         if (breakFace == Direction.UP || breakFace == Direction.DOWN) {
             if (options.testLock(WandOptions.LOCK.NORTHSOUTH) || options.testLock(WandOptions.LOCK.EASTWEST))
                 candidates.add(startingPoint);
         }
-        // Side face (N/S/E/W) → allow horizontal/vertical spreading
         else if (options.testLock(WandOptions.LOCK.HORIZONTAL) || options.testLock(WandOptions.LOCK.VERTICAL)) {
             candidates.add(startingPoint);
         }
 
-        // BFS: process candidates until exhausted or the block limit is hit.
         while (!candidates.isEmpty() && destroySnapshots.size() < limit) {
             BlockPos currentCandidate = candidates.removeFirst();
 
-            // Only break blocks whose face toward the player is unobstructed.
-            // WandUtil.isBlockPermeable is unchanged in 26.1.
             if (!WandUtil.isBlockPermeable(world, currentCandidate.relative(breakFace))) continue;
 
             try {
                 BlockState candidateBlock = world.getBlockState(currentCandidate);
 
-                // Match block type and record the candidate if not yet processed.
                 if (options.matchBlocks(targetBlock.getBlock(), candidateBlock.getBlock())
                         && allCandidates.add(currentCandidate))
                 {
-                    // DestroySnapshot.get performs permission/tool checks internally
-                    // using the 26.1 break pipeline (BlockEvent.BreakEvent etc.).
                     DestroySnapshot snapshot = DestroySnapshot.get(world, player, currentCandidate);
                     if (snapshot == null) continue;
                     destroySnapshots.add(snapshot);
 
-                    // Spread to neighbours based on the break face and active locks.
-                    // Java 25 allows switch expressions, but the traditional switch
-                    // statement is retained here for clarity and zero migration risk.
                     switch (breakFace) {
                         case DOWN:
                         case UP:
@@ -249,25 +134,9 @@ public class ActionDestruction implements IWandAction
                     }
                 }
             } catch (Exception e) {
-                // Defensive: skip any block that throws unexpectedly.
             }
         }
 
-        // ─────────────────────────────────────────────────────────────────────
-        // Void Sack wrapping (server-side only)
-        //
-        // If a VoidSack is present in the player's inventory, wrap each
-        // snapshot so that BlockDropsEvent is intercepted by VoidSackDropHandler
-        // on the NeoForge.EVENT_BUS game bus.
-        //
-        // Level#isClientSide() is the 26.1 successor to world.isRemote;
-        // it is unchanged from 1.20.x → 26.1.
-        //
-        // Pattern-matching instanceof (Java 16+, available under Java 25):
-        //   `player instanceof ServerPlayer serverPlayer`
-        // replaces the old cast:
-        //   `(ServerPlayer) player`
-        // ─────────────────────────────────────────────────────────────────────
         if (!world.isClientSide() && player instanceof ServerPlayer serverPlayer) {
             ItemStack voidSack = findSack(serverPlayer);
             if (!voidSack.isEmpty()) {
@@ -282,18 +151,6 @@ public class ActionDestruction implements IWandAction
         return destroySnapshots;
     }
 
-    /**
-     * Searches the player's full inventory for the first VoidSack.
-     *
-     * Search order:
-     *   1. Main hand  (fastest path for normal use)
-     *   2. Off hand
-     *   3. Full inventory (hotbar + main grid + armour slots)
-     *
-     * Player#getMainHandItem, Player#getOffhandItem, Player#getInventory,
-     * Inventory#getContainerSize, and Inventory#getItem are all stable
-     * in Minecraft 26.1.
-     */
     public static ItemStack findSack(Player player) {
         ItemStack main = player.getMainHandItem();
         if (main.getItem() instanceof ItemVoidSack) return main;
@@ -309,24 +166,6 @@ public class ActionDestruction implements IWandAction
         return ItemStack.EMPTY;
     }
 
-    // ─────────────────────────────────────────────────────────────────────────
-    // VoidSackCapturingSnapshot
-    //
-    // Wraps any ISnapshot so that, just before block destruction, it installs
-    // a VoidSackDropContext into ACTIVE_CONTEXT.  VoidSackDropHandler (a
-    // separate @EventBusSubscriber) reads this context when BlockDropsEvent
-    // fires and redirects all drops into the sack instead of the world.
-    //
-    // Concurrency note: BlockDropsEvent always fires on the server thread that
-    // called ServerPlayerGameMode#destroyBlock, which is the same thread that
-    // set the ThreadLocal — so this is safe without extra synchronization.
-    //
-    // 26.1 API used here:
-    //   • ISnapshot — your mod interface, unchanged
-    //   • BlockPos, BlockState, ItemStack, Level, Player — unchanged vanilla
-    //   • BlockHitResult — unchanged vanilla
-    //   • ServerLevel — unchanged, still in net.minecraft.server.level
-    // ─────────────────────────────────────────────────────────────────────────
     private static class VoidSackCapturingSnapshot implements ISnapshot
     {
         private final ISnapshot delegate;
@@ -339,7 +178,6 @@ public class ActionDestruction implements IWandAction
             this.sack     = sack;
         }
 
-        // Delegation — pass through all read-only queries to the wrapped snapshot.
         @Override public BlockPos   getPos()                              { return delegate.getPos(); }
         @Override public BlockState getBlockState()                       { return delegate.getBlockState(); }
         @Override public ItemStack  getRequiredItems()                    { return delegate.getRequiredItems(); }
@@ -347,13 +185,6 @@ public class ActionDestruction implements IWandAction
         @Override public void       forceRestore(Level w)                { delegate.forceRestore(w); }
         @Override public boolean    restore(Level w, Player p)           { return delegate.restore(w, p); }
 
-        /**
-         * Sets ACTIVE_CONTEXT before delegating to the real execute() so that
-         * VoidSackDropHandler can see the context when BlockDropsEvent fires.
-         *
-         * The try/finally guarantees ACTIVE_CONTEXT is always cleared even if
-         * the delegate throws.
-         */
         @Override
         public boolean execute(Level world, Player player, BlockHitResult ray) {
             ACTIVE_CONTEXT.set(new VoidSackDropContext(delegate.getPos(), level, sack));
@@ -365,12 +196,6 @@ public class ActionDestruction implements IWandAction
         }
     }
 
-    // ─────────────────────────────────────────────────────────────────────────
-    // getSnapshotsFromAir
-    //
-    // Destruction mode has no "build from air" operation — return empty list.
-    // Unchanged from the original; no API touched here.
-    // ─────────────────────────────────────────────────────────────────────────
     @Nonnull
     @Override
     public List<ISnapshot> getSnapshotsFromAir(

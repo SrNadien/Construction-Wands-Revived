@@ -30,7 +30,6 @@ public class VoidSackDropHandler
 
         BlockPos pos = ctx.pos();
 
-        // Los drops ya son silk touch porque DestroySnapshot usa destroyBlock con silk tool
         List<ItemEntity> drops = new ArrayList<>(event.getDrops());
         event.getDrops().clear();
 
@@ -40,7 +39,6 @@ public class VoidSackDropHandler
 
             int leftover = ItemVoidSack.receive(level, sack, drop);
             if (leftover > 0) {
-                // Sack lleno: devolver el sobrante al mundo
                 event.getDrops().add(new ItemEntity(level,
                         pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5,
                         drop.copyWithCount(leftover)));

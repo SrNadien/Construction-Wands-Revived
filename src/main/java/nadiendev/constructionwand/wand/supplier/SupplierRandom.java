@@ -20,7 +20,6 @@ public class SupplierRandom extends SupplierInventory
     public void getSupply(@Nullable BlockItem target) {
         itemCounts = new LinkedHashMap<>();
 
-        // Random mode -> add all items from hotbar
         itemPool = new RandomPool<>(player.getRandom());
 
         for(ItemStack stack : WandUtil.getHotbarWithOffhand(player)) {

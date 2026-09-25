@@ -51,7 +51,6 @@ public class WandUpgrades<T extends IWandUpgrade>
 
             T data;
             try {
-                //noinspection unchecked
                 data = (T) item;
                 upgrades.add(data);
             } catch(ClassCastException e) {

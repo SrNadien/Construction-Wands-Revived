@@ -63,38 +63,23 @@ public class DestroySnapshot implements ISnapshot
 
         if (!WandUtil.isBlockRemovable(world, player, pos)) return false;
 
-        // En 26.1, ItemEnchantments se movió a net.minecraft.world.item.enchantment.ItemEnchantments
-        // (ya no está en net.minecraft.world.item.component).
-        // ItemEnchantments.EMPTY sigue existiendo; ItemEnchantments.Mutable también.
         var silkTouchHolder = serverLevel.registryAccess()
                 .lookupOrThrow(Registries.ENCHANTMENT)
                 .getOrThrow(Enchantments.SILK_TOUCH);
 
-        // Construir ItemEnchantments con Silk Touch nivel 1
         ItemEnchantments.Mutable mutableEnchantments =
                 new ItemEnchantments.Mutable(ItemEnchantments.EMPTY);
         mutableEnchantments.set(silkTouchHolder, 1);
 
-        // Crear la herramienta con el componente de enchantments
         ItemStack silkTool = new ItemStack(Items.NETHERITE_PICKAXE);
         silkTool.set(DataComponents.ENCHANTMENTS, mutableEnchantments.toImmutable());
 
-        // Nota: silkTool está creado pero destroyBlock usa la herramienta del jugador internamente.
-        // Para forzar silk touch en el drop, se puede swapear temporalmente la herramienta
-        // o usar el overload que acepta una herramienta custom si existe en 26.1.
-        // En vanilla 26.1 destroyBlock no acepta una herramienta override, así que el bloque
-        // se romperá con la herramienta del jugador. Si se necesita silk touch garantizado,
-        // habría que reemplazar temporalmente el item en mano del jugador.
         ServerPlayer serverPlayer = player instanceof ServerPlayer sp ? sp : null;
 
-        // Con Void Sack activo se mantiene el comportamiento normal: el bloque suelta sus
-        // drops en el mundo y el sack los intercepta al recogerlos.
         if(hasActiveVoidSack(player)) {
             return serverLevel.destroyBlock(pos, true, serverPlayer, 512);
         }
 
-        // Sin Void Sack: los drops van directos al inventario del jugador y, cuando el
-        // inventario esta lleno, el resto simplemente se descarta.
         BlockState broken = world.getBlockState(pos);
         BlockEntity blockEntity = world.getBlockEntity(pos);
         List<ItemStack> drops = Block.getDrops(broken, serverLevel, pos, blockEntity, player, ItemStack.EMPTY);
@@ -103,14 +88,12 @@ public class DestroySnapshot implements ISnapshot
 
         for(ItemStack drop : drops) {
             if(drop.isEmpty()) continue;
-            // add() mete lo que quepa; lo que sobra se pierde (inventario lleno).
             player.getInventory().add(drop);
         }
 
         return true;
     }
 
-    /** True si el jugador lleva un Void Sack activo en alguna mano. */
     private static boolean hasActiveVoidSack(Player player) {
         for(InteractionHand hand : InteractionHand.values()) {
             ItemStack stack = player.getItemInHand(hand);

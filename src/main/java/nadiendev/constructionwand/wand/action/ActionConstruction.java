@@ -20,9 +20,6 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 
-/**
- * Default WandAction. Extends your building on the side you're facing.
- */
 public class ActionConstruction implements IWandAction
 {
     @Override
@@ -42,7 +39,6 @@ public class ActionConstruction implements IWandAction
         BlockState targetBlock = world.getBlockState(rayTraceResult.getBlockPos());
         BlockPos startingPoint = rayTraceResult.getBlockPos().relative(placeDirection);
 
-        // Is place direction allowed by lock?
         if(placeDirection == Direction.UP || placeDirection == Direction.DOWN) {
             if(options.testLock(WandOptions.LOCK.NORTHSOUTH) || options.testLock(WandOptions.LOCK.EASTWEST))
                 candidates.add(startingPoint);
@@ -117,8 +113,6 @@ public class ActionConstruction implements IWandAction
                     }
                 }
             } catch(Exception e) {
-                // Can't do anything, could be anything.
-                // Skip if anything goes wrong.
             }
         }
         return placeSnapshots;
