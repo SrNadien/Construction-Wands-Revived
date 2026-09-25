@@ -1,5 +1,95 @@
 # Changelog
 
+## 4.0.1 — Minecraft 26.3 / NeoForge
+
+### Additions
+
+- **JEI is back.** JEI now ships for 26.3, so the item descriptions (wand stats, core
+  descriptions and the Void Sack entry) show up in JEI again. Reliable Recipe Viewer stays
+  supported: both register the same texts and can be installed together.
+- **Curios is back.** Wands pull blocks again from containers equipped in Curios slots.
+
+### Fixes
+
+- **Blocks inside containers in Curios slots now count as available.** The wand could take
+  blocks from those containers, but never counted them, so it only placed as many blocks as
+  the regular inventory had and the curio containers were practically never used.
+
+### Ported
+
+- **Curios 17 hands out copies of the slot contents.** Its slots are now NeoForge resource
+  handlers, and reading a slot returns a copy instead of the stack itself. Emptying that copy
+  changed nothing in the slot, so blocks would have been placed without being taken from the
+  container. Changed containers are now written back to their slot.
+
+### Build
+
+- JEI `31.7.0.40`, Curios `17.0.0-beta+26.3`.
+- `mezz_config` `0.6.3` declared as `runtimeOnly`: JEI 31 needs it at runtime, and without it
+  JEI does not start in the dev runs.
+- The Curios helpers moved to `integrations/curios`, next to the other integrations.
+- Comments removed from the Java sources. The commented-out code for mods without a 26.3 build
+  (Botania, Sophisticated Backpacks, AE2, Refined Storage) stays, ready to switch back on.
+
+### Still unavailable
+
+| Integration | Mod | Reason |
+|---|---|---|
+| Wireless Terminal, Portable Cell | Applied Energistics 2 | no 26.3 build |
+| Wireless terminals (all variants) | AE2 Wireless Terminal Library | no 26.3 build |
+| Wireless Grid | Refined Storage | no 26.3 build |
+| — | Refined Storage Curios Integration | no 26.3 build |
+| Backpacks as block sources | Sophisticated Backpacks | no 26.3 build |
+
+---
+
+## 4.0.1 — Minecraft 26.3 / NeoForge (Español)
+
+### Añadido
+
+- **Vuelve JEI.** JEI ya tiene build para 26.3, así que las descripciones de los ítems
+  (estadísticas de las varitas, descripción de los núcleos y la entrada de la Bolsa del Vacío)
+  vuelven a salir en JEI. Reliable Recipe Viewer sigue soportado: los dos registran los mismos
+  textos y se pueden tener instalados a la vez.
+- **Vuelve Curios.** Las varitas vuelven a sacar bloques de los contenedores equipados en slots
+  de Curios.
+
+### Corregido
+
+- **Los bloques dentro de contenedores en slots de Curios ahora cuentan como disponibles.** La
+  varita podía sacar bloques de esos contenedores, pero nunca los contaba, así que solo colocaba
+  tantos bloques como hubiera en el inventario normal y los contenedores de Curios prácticamente
+  no se usaban.
+
+### Portado
+
+- **Curios 17 entrega copias del contenido de los slots.** Sus slots ahora son resource handlers
+  de NeoForge, y leer un slot devuelve una copia en vez del stack real. Vaciar esa copia no
+  cambiaba nada en el slot, así que los bloques se habrían colocado sin descontarse del
+  contenedor. Ahora los contenedores modificados se guardan de vuelta en su slot.
+
+### Compilación
+
+- JEI `31.7.0.40`, Curios `17.0.0-beta+26.3`.
+- `mezz_config` `0.6.3` declarado como `runtimeOnly`: JEI 31 lo necesita en runtime y, sin él,
+  JEI no arranca en los runs de desarrollo.
+- Los helpers de Curios pasan a `integrations/curios`, junto al resto de integraciones.
+- Se quitaron los comentarios del código Java. El código comentado de los mods sin build para
+  26.3 (Botania, Sophisticated Backpacks, AE2, Refined Storage) se mantiene, listo para
+  reactivarse.
+
+### Sigue sin estar disponible
+
+| Integración | Mod | Motivo |
+|---|---|---|
+| Terminal inalámbrica, Celda portátil | Applied Energistics 2 | sin build para 26.3 |
+| Terminales inalámbricas (todas) | AE2 Wireless Terminal Library | sin build para 26.3 |
+| Wireless Grid | Refined Storage | sin build para 26.3 |
+| — | Refined Storage Curios Integration | sin build para 26.3 |
+| Mochilas como fuente de bloques | Sophisticated Backpacks | sin build para 26.3 |
+
+---
+
 ## 4.0.0 — Minecraft 26.3 / NeoForge
 
 This release is a port of the 1.21 line, brought over for parity across versions: the fixes and
