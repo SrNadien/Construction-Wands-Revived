@@ -19,6 +19,11 @@ base {
 // NeoForge 26.3 usa Java 25
 java.toolchain.languageVersion = JavaLanguageVersion.of(25)
 
+// Genera tambien <nombre>-sources.jar junto al jar del mod
+java {
+    withSourcesJar()
+}
+
 neoForge {
     version = project.neo_version
 
@@ -196,6 +201,7 @@ publishing {
     publications {
         mavenJava(MavenPublication) {
             artifact jar
+            artifact sourcesJar
         }
     }
     repositories {
