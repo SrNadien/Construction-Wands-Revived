@@ -31,6 +31,7 @@ import net.neoforged.neoforge.event.level.block.BreakBlockEvent;
 import nadiendev.constructionwand.ConstructionWand;
 import nadiendev.constructionwand.containers.ContainerManager;
 import nadiendev.constructionwand.containers.ContainerTrace;
+import nadiendev.constructionwand.integrations.curios.CuriosCompat;
 import nadiendev.constructionwand.items.wand.ItemWand;
 import nadiendev.constructionwand.wand.WandItemUseContext;
 
@@ -211,6 +212,14 @@ public class WandUtil
                     if(amount == Integer.MAX_VALUE) return Integer.MAX_VALUE;
                     total += amount;
                 }
+            }
+
+            // Contenedores equipados en slots de Curios: SupplierInventory.takeItemStack
+            // tambien los vacia, asi que cuentan como disponibles.
+            for(ItemStack stack : CuriosCompat.getStacks(serverPlayer)) {
+                int amount = containerManager.countItems(serverPlayer, trace, template, stack);
+                if(amount == Integer.MAX_VALUE) return Integer.MAX_VALUE;
+                total += amount;
             }
         }
         return total;

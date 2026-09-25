@@ -21,6 +21,7 @@ import nadiendev.constructionwand.basics.pool.IPool;
 import nadiendev.constructionwand.basics.pool.OrderedPool;
 import nadiendev.constructionwand.containers.ContainerTrace;
 import nadiendev.constructionwand.containers.ContainerManager;
+import nadiendev.constructionwand.integrations.curios.CuriosCompat;
 import nadiendev.constructionwand.wand.undo.PlaceSnapshot;
 
 import javax.annotation.Nullable;
@@ -100,22 +101,6 @@ public class SupplierInventory implements IWandSupplier {
     }
 
     // -------------------------------------------------------------------------
-    // Helpers de inventario de Curios -- DESACTIVADO en 26.2
-    //
-    // Curios esta roto en esta version de NeoForge, asi que la dependencia no se
-    // compila. CuriosCompat/CuriosHelper estan aparcados en src/disabled-integrations/
-    // (ver el README de esa carpeta para reactivarlos).
-    // -------------------------------------------------------------------------
-
-    // /**
-    //  * Devuelve los stacks del inventario de Curios del jugador.
-    //  * Si Curios no está instalado, retorna una lista vacía sin coste alguno.
-    //  */
-    // private List<ItemStack> getCuriosInv() {
-    //     return CuriosCompat.getStacks(player);
-    // }
-
-    // -------------------------------------------------------------------------
     // IWandSupplier
     // -------------------------------------------------------------------------
 
@@ -157,7 +142,6 @@ public class SupplierInventory implements IWandSupplier {
         List<ItemStack> hotbar  = WandUtil.getHotbarWithOffhand(player);
         List<ItemStack> mainInv = WandUtil.getMainInv(player);
         List<ItemStack> armor   = WandUtil.getArmor(player);
-        // List<ItemStack> curios  = getCuriosInv();  // Curios desactivado en 26.2
 
         // Take items from main inv, loose items first
         count = takeItemsInvList(count, stack, mainInv, false);
@@ -170,8 +154,11 @@ public class SupplierInventory implements IWandSupplier {
         count = takeItemsInvList(count, stack, armor, true);
         count = takeItemsInvList(count, stack, armor, false);
 
-        // Take items from Curios slots (containers only; los curio slots) -- desactivado en 26.2
-        // count = takeItemsInvList(count, stack, curios, true);
+        // Take items from Curios slots (containers only). Curios entrega copias de los
+        // stacks, asi que useStacks devuelve a su slot los contenedores que se vaciaron.
+        final int remaining = count;
+        count = CuriosCompat.useStacks(player,
+                curios -> takeItemsInvList(remaining, stack, curios, true), remaining);
 
         return count;
     }

@@ -66,10 +66,10 @@ repositories {
     maven {
         url = "https://maven.blamejared.com"
     }
-    // Repo de Curios: integracion desactivada (el mod esta roto en esta version).
-    // maven {
-    //     url = "https://maven.theillusivec4.top/"
-    // }
+    // Curios API
+    maven {
+        url = "https://maven.theillusivec4.top/"
+    }
     maven {
         name = "Curse Maven"
         url = "https://cursemaven.com"
@@ -108,12 +108,12 @@ dependencies {
     // declara como dependencia normal.
 
     //jei
-    // JEI no tiene build para 26.3 todavia -- integracion aparcada en src/disabled-integrations/
-    // (no borrada: volver a descomentar estas lineas y mover integrations/jei de vuelta
-    // a src/main/java cuando JEI publique para 26.3).
-    // implementation "mezz.jei:jei-${mcversion}-neoforge:${jei_version}"
+    implementation "mezz.jei:jei-${mcversion}-neoforge:${jei_version}"
+    // mezz_config: JEI 31 la declara como dependencia de runtime y sin ella JEI no arranca
+    // en los runs de desarrollo. Va explicita para no depender de la resolucion transitiva.
+    runtimeOnly "net.mezzdev.config:mezz_config-${mcversion}-neoforge:${mezz_config_version}"
 
-    //rrv (Reliable Recipe Viewer) -- reemplazo de JEI mientras tanto
+    //rrv (Reliable Recipe Viewer) -- convive con JEI, registra las mismas descripciones
     implementation "maven.modrinth:rrv:${rrv_version}"
 
     // Sophisticated Backpacks / Core: las builds publicadas declaran soportar hasta 26.2
@@ -128,11 +128,10 @@ dependencies {
     //sophisticated core
     // compileOnly "curse.maven:sophisticated-core-618298:${sophisticatedcore_version}"
 
-    // Curios API: DESACTIVADO, el mod esta roto en esta version de NeoForge.
-    // CuriosCompat.java y CuriosHelper.java estan aparcados en src/disabled-integrations/
-    // y los usos en SupplierInventory.java quedan comentados.
-    // compileOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}:api"
-    // runtimeOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}"
+    // Curios API. integrations/curios/CuriosIntegration.java sigue aparcado: solo lo usan
+    // los handlers de AE2, que no tienen build para 26.3.
+    compileOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}:api"
+    runtimeOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}"
 
     // ---------------------------------------------------------------------
     // Integraciones sin build para Minecraft 26.3.
@@ -179,7 +178,7 @@ tasks.withType(ProcessResources).configureEach {
             author : author,
             mod_description : mod_description,
             licence : licence,
-            // jei_version : jei_version,                                  // sin build 26.3
+            jei_version : jei_version,
             // sophisticatedbackpacks_version: sophisticatedbackpacks_version, // sin build 26.3
             // sophisticatedcore_version: sophisticatedcore_version,           // sin build 26.3
             minecraft_range_version: minecraft_range_version,

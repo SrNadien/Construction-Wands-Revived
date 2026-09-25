@@ -24,15 +24,15 @@ description="${mod_description}"
     ordering = "NONE"
     side="BOTH"
 
-#jei dependency -- sin build de JEI para 26.3, integracion aparcada
-#[[dependencies.${modid}]]
-#    modId="jei"
-#    type="optional"
-#    versionRange="[JEI_VERSION,)"   # volver a poner la variable jei_version al reactivar
-#    ordering="AFTER"
-#    side="CLIENT"
+#jei dependency
+[[dependencies.${modid}]]
+    modId="jei"
+    type="optional"
+    versionRange="[${jei_version},)"
+    ordering="AFTER"
+    side="CLIENT"
 
-#rrv dependency -- Reliable Recipe Viewer, reemplaza a JEI mientras JEI no tenga build para 26.3
+#rrv dependency -- Reliable Recipe Viewer, convive con JEI
 [[dependencies.${modid}]]
     modId="rrv"
     type="optional"

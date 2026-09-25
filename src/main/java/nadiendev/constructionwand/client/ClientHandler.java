@@ -25,8 +25,8 @@ public class ClientHandler {
         NeoForge.EVENT_BUS.register(renderBlockPreview);
         NeoForge.EVENT_BUS.register(new KeybindHandler());
 
-        // Descripciones de items en Reliable Recipe Viewer, que cubre el hueco de JEI
-        // mientras no haya build de JEI para 26.3. La guarda vive aqui a proposito:
+        // Descripciones de items en Reliable Recipe Viewer (JEI las recibe por su propio
+        // plugin, ConstructionWandJeiPlugin). La guarda vive aqui a proposito:
         // RrvIntegration referencia clases de RRV y solo debe cargarse si el mod esta.
         if(ModList.get().isLoaded("rrv")) {
             RrvIntegration.init();

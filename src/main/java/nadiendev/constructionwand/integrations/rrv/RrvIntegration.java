@@ -15,17 +15,6 @@ import nadiendev.constructionwand.basics.ConfigServer;
 import nadiendev.constructionwand.client.KeybindHandler;
 import nadiendev.constructionwand.items.ModItems;
 
-/**
- * Descripciones de items en Reliable Recipe Viewer.
- *
- * Mientras JEI no tenga build para 26.3, RRV cubre el mismo hueco: son exactamente los
- * mismos textos que registra ConstructionWandJeiPlugin (aparcado en
- * src/disabled-integrations/), traducidos de addIngredientInfo a las info recipes de RRV.
- *
- * Esta clase toca clases de RRV, asi que solo debe cargarse cuando el mod esta presente:
- * la comprobacion ModList.isLoaded("rrv") vive en ClientHandler, en otra clase, para que
- * la JVM no intente resolver estos imports si RRV no esta instalado.
- */
 public final class RrvIntegration {
     private static final String baseKey = ConstructionWand.MODID + ".description.";
     private static final String baseKeyItem = "item." + ConstructionWand.MODID + ".";
