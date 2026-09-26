@@ -37,3 +37,17 @@ type="optional"
 versionRange = "${ae2wtlib_version}"
 ordering = "NONE"
 side = "BOTH"
+[[dependencies.${modid}]]
+    modId="rrv"
+    type="optional"
+    versionRange="[0,)"
+    ordering="AFTER"
+    side="CLIENT"
+
+# rei dependency
+[[dependencies.${modid}]]
+    modId="roughlyenoughitems"
+    type="optional"
+    versionRange="[0,)"
+    ordering="AFTER"
+    side="CLIENT"

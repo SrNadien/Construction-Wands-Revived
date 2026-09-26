@@ -15,6 +15,11 @@ base {
 // NeoForge 26.1 usa Java 25
 java.toolchain.languageVersion = JavaLanguageVersion.of(25)
 
+// Genera tambien <nombre>-sources.jar junto al jar del mod
+java {
+    withSourcesJar()
+}
+
 //minecraft.accessTransformers.file rootProject.file('src/main/resources/META-INF/accesstransformer.cfg')
 //minecraft.accessTransformers.entry public net.minecraft.client.Minecraft textureManager # textureManager
 
@@ -48,6 +53,14 @@ sourceSets.main.resources {
 }
 
 repositories {
+    maven { url = "https://maven.shedaniel.me/" }
+    maven {
+        name = "Modrinth"
+        url = "https://api.modrinth.com/maven"
+        content {
+            includeGroup "maven.modrinth"
+        }
+    }
     mavenLocal()
     mavenCentral()
     maven {
@@ -83,6 +96,14 @@ dependencies {
 
     //jei
     implementation "mezz.jei:jei-${mcversion}-neoforge:${jei_version}"
+
+    //rei (Roughly Enough Items)
+    compileOnly "me.shedaniel:RoughlyEnoughItems-api-neoforge:${rei_version}"
+    compileOnly "me.shedaniel:RoughlyEnoughItems-default-plugin-neoforge:${rei_version}"
+    runtimeOnly "me.shedaniel:RoughlyEnoughItems-neoforge:${rei_version}"
+
+    //rrv (Reliable Recipe Viewer) -- convive con JEI, registra las mismas descripciones
+    implementation "curse.maven:reliable-recipe-viewer-1422317:${rrv_version}"
 
     //sophisticated backpacks
     implementation "curse.maven:sophisticated-backpacks-422301:${sophisticatedbackpacks_version}"
