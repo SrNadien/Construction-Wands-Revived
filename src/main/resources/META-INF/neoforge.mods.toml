@@ -31,6 +31,14 @@ description="${description}"
     ordering="AFTER"
     side = "BOTH"
 
+# emi dependency
+[[dependencies.${modid}]]
+    modId="emi"
+    type="optional"
+    versionRange="[0,)"
+    ordering="AFTER"
+    side="CLIENT"
+
 # guideme dependency 
 [[dependencies.${modid}]]
     modId="guideme"
@@ -84,3 +92,10 @@ type="optional"
 versionRange = "${ae2wtlib_version}"
 ordering = "NONE"
 side = "BOTH"
+# rei dependency
+[[dependencies.${modid}]]
+    modId="roughlyenoughitems"
+    type="optional"
+    versionRange="[0,)"
+    ordering="AFTER"
+    side="CLIENT"
