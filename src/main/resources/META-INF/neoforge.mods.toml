@@ -53,3 +53,10 @@ type="optional"
 versionRange = "${curios_version}"
 ordering = "NONE"
 side = "BOTH"
+# rei dependency
+[[dependencies.${modid}]]
+    modId="roughlyenoughitems"
+    type="optional"
+    versionRange="[0,)"
+    ordering="AFTER"
+    side="CLIENT"

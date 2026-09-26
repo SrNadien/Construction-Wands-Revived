@@ -15,6 +15,11 @@ base {
 // Mojang ships Java 21 to end users in 1.20.5+, so your mod should target Java 21.
 java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 
+// Genera tambien <nombre>-sources.jar junto al jar del mod
+java {
+    withSourcesJar()
+}
+
 //minecraft.accessTransformers.file rootProject.file('src/main/resources/META-INF/accesstransformer.cfg')
 //minecraft.accessTransformers.entry public net.minecraft.client.Minecraft textureManager # textureManager
 
@@ -95,6 +100,11 @@ dependencies {
     compileOnly "mezz.jei:jei-${mcversion}-common-api:${jei_version}"
     compileOnly "mezz.jei:jei-${mcversion}-neoforge-api:${jei_version}"
     runtimeOnly "mezz.jei:jei-${mcversion}-neoforge:${jei_version}"
+
+    //rei (Roughly Enough Items)
+    compileOnly "me.shedaniel:RoughlyEnoughItems-api-neoforge:${rei_version}"
+    compileOnly "me.shedaniel:RoughlyEnoughItems-default-plugin-neoforge:${rei_version}"
+    runtimeOnly "me.shedaniel:RoughlyEnoughItems-neoforge:${rei_version}"
 
     
     // sophisticated backpacks
