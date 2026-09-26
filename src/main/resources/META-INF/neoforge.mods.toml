@@ -31,3 +31,17 @@ description="${mod_description}"
     versionRange="[${jei_version},)"
     ordering="AFTER"
     side="CLIENT"
+[[dependencies.${modid}]]
+    modId="rrv"
+    type="optional"
+    versionRange="[0,)"
+    ordering="AFTER"
+    side="CLIENT"
+
+# rei dependency
+[[dependencies.${modid}]]
+    modId="roughlyenoughitems"
+    type="optional"
+    versionRange="[0,)"
+    ordering="AFTER"
+    side="CLIENT"
