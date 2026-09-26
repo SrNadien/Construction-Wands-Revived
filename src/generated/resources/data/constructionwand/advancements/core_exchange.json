@@ -1,0 +1,38 @@
+{
+  "parent": "constructionwand:root",
+  "criteria": {
+    "core_exchange": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "constructionwand:core_exchange"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.constructionwand.core_exchange.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "constructionwand:core_exchange"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.constructionwand.core_exchange.title"
+    }
+  },
+  "requirements": [
+    [
+      "core_exchange"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

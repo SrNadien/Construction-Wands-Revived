@@ -1,0 +1,38 @@
+{
+  "parent": "constructionwand:root",
+  "criteria": {
+    "infinity_wand": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "constructionwand:infinity_wand"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.constructionwand.infinity_wand.desc"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "constructionwand:infinity_wand"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.constructionwand.infinity_wand.title"
+    }
+  },
+  "requirements": [
+    [
+      "infinity_wand"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

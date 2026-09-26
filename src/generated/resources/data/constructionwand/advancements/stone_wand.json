@@ -1,0 +1,39 @@
+{
+  "parent": "constructionwand:root",
+  "criteria": {
+    "stone_wand": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "constructionwand:stone_wand"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.constructionwand.stone_wand.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "constructionwand:stone_wand",
+      "nbt": "{Damage:0}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.constructionwand.stone_wand.title"
+    }
+  },
+  "requirements": [
+    [
+      "stone_wand"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,39 @@
+{
+  "parent": "constructionwand:root",
+  "criteria": {
+    "diamond_wand": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "constructionwand:diamond_wand"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.constructionwand.diamond_wand.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "constructionwand:diamond_wand",
+      "nbt": "{Damage:0}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.constructionwand.diamond_wand.title"
+    }
+  },
+  "requirements": [
+    [
+      "diamond_wand"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,39 @@
+{
+  "parent": "constructionwand:root",
+  "criteria": {
+    "netherite_wand": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "constructionwand:netherite_wand"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.constructionwand.netherite_wand.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "constructionwand:netherite_wand",
+      "nbt": "{Damage:0}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.constructionwand.netherite_wand.title"
+    }
+  },
+  "requirements": [
+    [
+      "netherite_wand"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,39 @@
+{
+  "criteria": {
+    "wand": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "constructionwand:stone_wand"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "background": "minecraft:textures/block/oak_planks.png",
+    "description": {
+      "translate": "advancement.constructionwand.root.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "constructionwand:stone_wand",
+      "nbt": "{Damage:0}"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "advancement.constructionwand.root.title"
+    }
+  },
+  "requirements": [
+    [
+      "wand"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

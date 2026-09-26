@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "tag": "forge:glass_panes"
+    },
+    "O": {
+      "tag": "forge:storage_blocks/emerald"
+    },
+    "X": {
+      "item": "minecraft:diamond_shovel"
+    }
+  },
+  "pattern": [
+    " #X",
+    "#O#",
+    "X# "
+  ],
+  "result": {
+    "item": "constructionwand:core_exchange"
+  },
+  "show_notification": true
+}

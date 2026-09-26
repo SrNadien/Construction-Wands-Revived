@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": {
+      "tag": "forge:rods/wooden"
+    },
+    "X": [
+      {
+        "item": "minecraft:cherry_planks"
+      },
+      {
+        "item": "minecraft:birch_planks"
+      }
+    ]
+  },
+  "pattern": [
+    "  X",
+    " # ",
+    "#  "
+  ],
+  "result": {
+    "item": "constructionwand:wood_wand"
+  },
+  "show_notification": true
+}
