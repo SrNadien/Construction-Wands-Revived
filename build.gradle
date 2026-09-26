@@ -14,6 +14,11 @@ base {
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 
+// Genera tambien <nombre>-sources.jar junto al jar del mod
+java {
+    withSourcesJar()
+}
+
 //minecraft.accessTransformers.file rootProject.file('src/main/resources/META-INF/accesstransformer.cfg')
 //minecraft.accessTransformers.entry public net.minecraft.client.Minecraft textureManager # textureManager
 
@@ -76,6 +81,14 @@ dependencies {
     // runtimeOnly "mezz.jei:jei-${mcversion}-neoforge:${jei_version}"
     // compileOnly "mezz.jei:jei-${mcversion}-pre-3-common-api:${jei_version}"
     implementation "mezz.jei:jei-${mcversion}-neoforge:${jei_version}"
+
+    //rrv (Reliable Recipe Viewer) -- convive con JEI
+    implementation "curse.maven:reliable-recipe-viewer-1422317:${rrv_version}"
+
+    //rei (Roughly Enough Items)
+    compileOnly "me.shedaniel:RoughlyEnoughItems-api-neoforge:${rei_version}"
+    compileOnly "me.shedaniel:RoughlyEnoughItems-default-plugin-neoforge:${rei_version}"
+    runtimeOnly "me.shedaniel:RoughlyEnoughItems-neoforge:${rei_version}"
 
     //sophisticated backpacks
     implementation "curse.maven:sophisticated-backpacks-422301:${sophisticatedbackpacks_version}"
