@@ -1,0 +1,154 @@
+plugins {
+    id 'java-library'
+    id 'eclipse'
+    id 'idea'
+    id 'maven-publish'
+    id 'net.neoforged.gradle.userdev' version '7.1.21'
+}
+
+version = "${mcversion}-${mod_version}-${tag_lanzador}"
+group = "${author}.${modid}"
+base {
+    archivesName = "${mod_named}"
+}
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+
+// Genera tambien <nombre>-sources.jar junto al jar del mod
+java {
+    withSourcesJar()
+}
+
+//minecraft.accessTransformers.file rootProject.file('src/main/resources/META-INF/accesstransformer.cfg')
+//minecraft.accessTransformers.entry public net.minecraft.client.Minecraft textureManager # textureManager
+
+runs {
+    configureEach {
+        systemProperty 'forge.logging.markers', 'REGISTRIES'
+        systemProperty 'forge.logging.console.level', 'debug'
+
+        jvmArgument '-Xmx1G'
+
+        modSource project.sourceSets.main
+    }
+
+    client {
+        systemProperty 'neoforge.enabledGameTestNamespaces', "${modid}"
+         jvmArgument '-Xmx2G'
+    }
+
+    server {
+        systemProperty 'neoforge.enabledGameTestNamespaces', "${modid}"
+        argument '--nogui'                          
+    }
+
+    clientData {
+        arguments.addAll '--mod', "${modid}", '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
+    }
+}
+
+sourceSets.main.resources {
+    srcDir 'src/generated/resources'
+}
+
+repositories {
+    maven {
+        url = "https://maven.blamejared.com"
+    }
+    maven {
+        url = "https://maven.theillusivec4.top/"
+    }
+    maven {
+        name = "TerraformersMC"
+        url = "https://maven.terraformersmc.com/"
+    }
+    maven { url "https://maven.shedaniel.me" } 
+    maven {
+        name = "Curse Maven"
+        url = "https://cursemaven.com"
+        content {
+            includeGroup "curse.maven"
+        }
+    }
+}
+
+dependencies {
+    implementation "net.neoforged:neoforge:${neo_version}"
+
+    //jei
+    // compileOnly "mezz.jei:jei-${mcversion}-common-api:${jei_version}"
+    // compileOnly "mezz.jei:jei-${mcversion}-neoforge-api:${jei_version}"
+    // runtimeOnly "mezz.jei:jei-${mcversion}-neoforge:${jei_version}"
+    // compileOnly "mezz.jei:jei-${mcversion}-pre-3-common-api:${jei_version}"
+    implementation "mezz.jei:jei-${mcversion}-neoforge:${jei_version}"
+
+    //rei (Roughly Enough Items)
+    compileOnly "me.shedaniel:RoughlyEnoughItems-api-neoforge:${rei_version}"
+    compileOnly "me.shedaniel:RoughlyEnoughItems-default-plugin-neoforge:${rei_version}"
+    runtimeOnly "me.shedaniel:RoughlyEnoughItems-neoforge:${rei_version}"
+
+    //sophisticated backpacks
+    implementation "curse.maven:sophisticated-backpacks-422301:${sophisticatedbackpacks_version}"
+
+    //sophisticated core
+    implementation "curse.maven:sophisticated-core-618298:${sophisticatedcore_version}"
+}
+
+jar {
+    manifest {
+        attributes([
+                "Specification-Title"     : project.base.archivesName.get(),   
+                "Specification-Version"   : "1",
+                "Implementation-Title"    : project.base.archivesName.get(),   
+                "Implementation-Version"  : "${version}",
+                "Implementation-Vendor"   : "${author}",
+                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+        ])
+    }
+}
+
+tasks.withType(ProcessResources).configureEach {
+    var replaceProperties = [
+            mod_version: mod_version,
+            mcversion : mcversion,
+            neo_version : neo_version,
+            modid      : modid,
+            mod_names : mod_names,
+            author : author,
+            mod_description : mod_description,
+            licence : licence,
+            jei_version : jei_version,
+            sophisticatedbackpacks_version: sophisticatedbackpacks_version,
+            sophisticatedcore_version: sophisticatedcore_version,
+    ]
+    inputs.properties replaceProperties
+
+    filesMatching(['META-INF/neoforge.mods.toml']) {
+        expand replaceProperties
+    }
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifact jar
+        }
+    }
+    repositories {
+        maven {
+            url "file:///${project.projectDir}/mcmodsrepo"
+        }
+    }
+}
+
+idea {
+    module {
+        downloadSources = true
+        downloadJavadoc = true
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.getRelease().set(21)
+}
