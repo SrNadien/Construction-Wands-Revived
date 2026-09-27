@@ -1,0 +1,33 @@
+{
+  "parent": "constructionwand:root",
+  "criteria": {
+    "wood_wand": {
+      "conditions": {
+        "items": [
+          {
+            "items": "constructionwand:wood_wand"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.constructionwand.wood_wand.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "constructionwand:wood_wand"
+    },
+    "title": {
+      "translate": "advancement.constructionwand.wood_wand.title"
+    }
+  },
+  "requirements": [
+    [
+      "wood_wand"
+    ]
+  ],
+  "sends_telemetry_event": true
+}
