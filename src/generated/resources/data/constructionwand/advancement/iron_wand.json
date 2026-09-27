@@ -1,0 +1,33 @@
+{
+  "parent": "constructionwand:root",
+  "criteria": {
+    "iron_wand": {
+      "conditions": {
+        "items": [
+          {
+            "items": "constructionwand:iron_wand"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.constructionwand.iron_wand.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "constructionwand:iron_wand"
+    },
+    "title": {
+      "translate": "advancement.constructionwand.iron_wand.title"
+    }
+  },
+  "requirements": [
+    [
+      "iron_wand"
+    ]
+  ],
+  "sends_telemetry_event": true
+}
