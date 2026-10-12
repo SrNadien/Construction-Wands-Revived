@@ -80,21 +80,7 @@ public class SupplierInventory implements IWandSupplier {
         StackEntry entry = new StackEntry(stack);
         if (itemCounts.containsKey(entry)) return;
 
-        ItemStack template = entry.copyStack();
-        int count = WandUtil.countItem(player, template);
-
-        // Si hay algun container handler que reconoce este item, usamos MAX_VALUE
-        // para no limitar por el stock real de la red (que se decrementaria incorrectamente
-        // en getPlaceSnapshot). El verdadero consumo ocurre en takeItemStack().
-        // Esto tambien corrige el bug en modo creativo con terminales wireless:
-        // countItemInContainers devuelve el stock real de la red, pero getPlaceSnapshot
-        // lo va decrementando y se queda sin stock aunque la red tenga miles.
-        if (hasContainerWithItem(template)) {
-            count = Integer.MAX_VALUE;
-        } else {
-            count += countItemInContainers(template);
-        }
-
+        int count = WandUtil.countItem(player, entry.copyStack());
         if (count > 0) {
             itemCounts.put(entry, count);
             itemPool.add(entry);
@@ -107,40 +93,6 @@ public class SupplierInventory implements IWandSupplier {
      */
     private List<ItemStack> getCuriosInv(Player player) {
         return Services.PLATFORM.getCurioStacks(player);
-    }
-
-    private boolean hasContainerWithItem(ItemStack itemStack) {
-        ContainerManager containerManager = ConstructionWand.instance.containerManager;
-
-        for (ItemStack inv : WandUtil.getHotbarWithOffhand(player)) {
-            if (containerManager.hasHandler(player, itemStack, inv)) return true;
-        }
-        for (ItemStack inv : WandUtil.getMainInv(player)) {
-            if (containerManager.hasHandler(player, itemStack, inv)) return true;
-        }
-        for (ItemStack inv : getCuriosInv(player)) {
-            if (containerManager.hasHandler(player, itemStack, inv)) return true;
-        }
-        return false;
-    }
-
-    private int countItemInContainers(ItemStack itemStack) {
-        if (!(player instanceof ServerPlayer sp)) return 0;
-
-        ContainerManager containerManager = ConstructionWand.instance.containerManager;
-        ContainerTrace trace = new ContainerTrace(sp);
-        int total = 0;
-
-        for (ItemStack inv : WandUtil.getHotbarWithOffhand(player)) {
-            total += containerManager.countItems(player, trace, itemStack, inv);
-        }
-        for (ItemStack inv : WandUtil.getMainInv(player)) {
-            total += containerManager.countItems(player, trace, itemStack, inv);
-        }
-        for (ItemStack inv : getCuriosInv(player)) {
-            total += containerManager.countItems(player, trace, itemStack, inv);
-        }
-        return total;
     }
 
     @Override
@@ -163,7 +115,7 @@ public class SupplierInventory implements IWandSupplier {
             PlaceSnapshot placeSnapshot = PlaceSnapshot.get(world, player, rayTraceResult, pos,
                     entry.copyStack(), supportingBlock, options);
             if (placeSnapshot != null) {
-                int newCount = (count == Integer.MAX_VALUE) ? Integer.MAX_VALUE : count - 1;
+                int newCount = count - 1;
                 itemCounts.put(entry, newCount);
 
                 if (newCount == 0)

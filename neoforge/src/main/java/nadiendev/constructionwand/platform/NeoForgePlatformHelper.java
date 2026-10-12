@@ -99,6 +99,7 @@ public class NeoForgePlatformHelper implements IPlatformHelper {
     @Nullable
     @Override
     public IItemInventory getItemInventory(ItemStack stack) {
+        if (stack == null || stack.isEmpty()) return null;
         //? if >=1.21.9 {
         var handler = net.neoforged.neoforge.transfer.access.ItemAccess.forStack(stack).getCapability(Capabilities.Item.ITEM);
         return handler == null ? null : new NeoItemInventory(handler);

@@ -28,23 +28,15 @@ public class ContainerManager
         return handlers.add(handler);
     }
 
-    /**
-     * Devuelve true si algún handler registrado reconoce inventoryStack como
-     * un container válido. Funciona en cliente y servidor.
-     */
-    public boolean hasHandler(Player player, ItemStack itemStack, ItemStack inventoryStack) {
-        for (IContainerHandler handler : handlers) {
-            if (handler.matches(player, itemStack, inventoryStack)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     public int countItems(Player player, ContainerTrace trace, ItemStack itemStack, ItemStack inventoryStack) {
         for(IContainerHandler handler : handlers) {
             if(handler.matches(player, itemStack, inventoryStack)) {
-                return handler.countItems(player, trace, itemStack, inventoryStack);
+                int sig = handler.getSignature(player, inventoryStack);
+                if (trace.push(sig)) {
+                    return handler.countItems(player, trace, itemStack, inventoryStack);
+                } else {
+                    return 0;
+                }
             }
         }
         return 0;
@@ -53,12 +45,12 @@ public class ContainerManager
     public int useItems(Player player, ContainerTrace trace, ItemStack itemStack, ItemStack inventoryStack, int count) {
         for(IContainerHandler handler : handlers) {
             if(handler.matches(player, itemStack, inventoryStack)) {
-                int prevCount = count;
-                int remainingCount = handler.useItems(player, trace, itemStack, inventoryStack, count);
-                if(remainingCount < prevCount) {
-                    player.getInventory().setChanged();
+                int sig = handler.getSignature(player, inventoryStack);
+                if (trace.push(sig)) {
+                    return handler.useItems(player, trace, itemStack, inventoryStack, count);
+                } else {
+                    return count;
                 }
-                return remainingCount;
             }
         }
         return count;

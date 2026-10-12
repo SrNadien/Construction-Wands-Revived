@@ -12,7 +12,15 @@ public class HandlerCapability implements IContainerHandler
 {
     @Override
     public boolean matches(Player player, ItemStack itemStack, ItemStack inventoryStack) {
-        return inventoryStack != null && Services.PLATFORM.getItemInventory(inventoryStack) != null;
+        // Los slots vacios llegan hasta aqui; ItemAccess.forStack() lanza IllegalArgumentException con ellos.
+        return inventoryStack != null
+                && !inventoryStack.isEmpty()
+                && Services.PLATFORM.getItemInventory(inventoryStack) != null;
+    }
+
+    @Override
+    public int getSignature(Player player, ItemStack inventoryStack) {
+        return inventoryStack.hashCode();
     }
 
     @Override

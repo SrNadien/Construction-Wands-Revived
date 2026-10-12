@@ -217,6 +217,14 @@ public class WandUtil
                 total += amount;
             }
         }
+
+        if(trace != null) {
+            for(ItemStack stack : Services.PLATFORM.getCurioStacks(player)) {
+                int amount = containerManager.countItems(player, trace, template, stack);
+                if(amount == Integer.MAX_VALUE) return Integer.MAX_VALUE;
+                total += amount;
+            }
+        }
         return total;
     }
 

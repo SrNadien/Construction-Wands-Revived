@@ -28,7 +28,7 @@ public record NeoItemInventory(ResourceHandler<ItemResource> handler) implements
     public ItemStack extract(int slot, int amount, boolean simulate) {
         ItemResource resource = handler.getResource(slot);
         if (resource.isEmpty() || amount <= 0) return ItemStack.EMPTY;
-        try (Transaction transaction = Transaction.open(null)) {
+        try (Transaction transaction = Transaction.openRoot()) {
             int extracted = handler.extract(slot, resource, amount, transaction);
             if (extracted <= 0) return ItemStack.EMPTY;
             if (!simulate) transaction.commit();
@@ -39,7 +39,7 @@ public record NeoItemInventory(ResourceHandler<ItemResource> handler) implements
     @Override
     public ItemStack insert(int slot, ItemStack stack, boolean simulate) {
         if (stack.isEmpty()) return stack;
-        try (Transaction transaction = Transaction.open(null)) {
+        try (Transaction transaction = Transaction.openRoot()) {
             int inserted = handler.insert(slot, ItemResource.of(stack), stack.getCount(), transaction);
             if (inserted <= 0) return stack;
             if (!simulate) transaction.commit();
