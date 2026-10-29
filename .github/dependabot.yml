@@ -1,9 +1,203 @@
 # Keeps the workflow actions current on its own. Without this, action versions
 # silently rot until a runtime deprecation breaks a release.
+# To add new branches you just copy the format and put the branch name in "target-branch"
 version: 2
 updates:
+  # multiloader/1.20.1
   - package-ecosystem: "github-actions"
     directory: "/"
+    target-branch: "multiloader/1.20.1"
+    schedule:
+      interval: "monthly"
+    commit-message:
+      prefix: "chore"
+    groups:
+      actions:
+        patterns: ["*"]
+
+  # multiloader/1.21.1
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+    commit-message:
+      prefix: "chore"
+    groups:
+      actions:
+        patterns: ["*"]
+
+  # multiloader/1.21.2
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    target-branch: "multiloader/1.21.2"
+    schedule:
+      interval: "monthly"
+    commit-message:
+      prefix: "chore"
+    groups:
+      actions:
+        patterns: ["*"]
+
+  # multiloader/1.21.3
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    target-branch: "multiloader/1.21.3"
+    schedule:
+      interval: "monthly"
+    commit-message:
+      prefix: "chore"
+    groups:
+      actions:
+        patterns: ["*"]
+
+  # multiloader/1.21.4
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    target-branch: "multiloader/1.21.4"
+    schedule:
+      interval: "monthly"
+    commit-message:
+      prefix: "chore"
+    groups:
+      actions:
+        patterns: ["*"]
+
+  # multiloader/1.21.5
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    target-branch: "multiloader/1.21.5"
+    schedule:
+      interval: "monthly"
+    commit-message:
+      prefix: "chore"
+    groups:
+      actions:
+        patterns: ["*"]
+
+  # multiloader/1.21.6
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    target-branch: "multiloader/1.21.6"
+    schedule:
+      interval: "monthly"
+    commit-message:
+      prefix: "chore"
+    groups:
+      actions:
+        patterns: ["*"]
+
+  # multiloader/1.21.7
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    target-branch: "multiloader/1.21.7"
+    schedule:
+      interval: "monthly"
+    commit-message:
+      prefix: "chore"
+    groups:
+      actions:
+        patterns: ["*"]
+
+  # multiloader/1.21.8
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    target-branch: "multiloader/1.21.8"
+    schedule:
+      interval: "monthly"
+    commit-message:
+      prefix: "chore"
+    groups:
+      actions:
+        patterns: ["*"]
+
+  # multiloader/1.21.9
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    target-branch: "multiloader/1.21.9"
+    schedule:
+      interval: "monthly"
+    commit-message:
+      prefix: "chore"
+    groups:
+      actions:
+        patterns: ["*"]
+
+  # multiloader/1.21.10
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    target-branch: "multiloader/1.21.10"
+    schedule:
+      interval: "monthly"
+    commit-message:
+      prefix: "chore"
+    groups:
+      actions:
+        patterns: ["*"]
+
+  # multiloader/1.21.11
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    target-branch: "multiloader/1.21.11"
+    schedule:
+      interval: "monthly"
+    commit-message:
+      prefix: "chore"
+    groups:
+      actions:
+        patterns: ["*"]
+
+  # multiloader/26.1
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    target-branch: "multiloader/26.1"
+    schedule:
+      interval: "monthly"
+    commit-message:
+      prefix: "chore"
+    groups:
+      actions:
+        patterns: ["*"]
+
+  # multiloader/26.1.1
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    target-branch: "multiloader/26.1.1"
+    schedule:
+      interval: "monthly"
+    commit-message:
+      prefix: "chore"
+    groups:
+      actions:
+        patterns: ["*"]
+
+  # multiloader/26.1.2
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    target-branch: "multiloader/26.1.2"
+    schedule:
+      interval: "monthly"
+    commit-message:
+      prefix: "chore"
+    groups:
+      actions:
+        patterns: ["*"]
+
+  # multiloader/26.2
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    target-branch: "multiloader/26.2"
+    schedule:
+      interval: "monthly"
+    commit-message:
+      prefix: "chore"
+    groups:
+      actions:
+        patterns: ["*"]
+
+  # multiloader/26.3
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    target-branch: "multiloader/26.3"
     schedule:
       interval: "monthly"
     commit-message:
