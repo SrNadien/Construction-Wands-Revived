@@ -14,6 +14,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
+import nadiendev.constructionwand.basics.ConfigServer;
 import nadiendev.constructionwand.basics.WandUtil;
 import nadiendev.constructionwand.wand.action.ActionDestruction;
 
@@ -87,6 +88,13 @@ public class DestroySnapshot implements ISnapshot
             // destruction would hand the blocks out a second time
             if(destroyed) dropsKept = true;
             return destroyed;
+        }
+
+        // Creative players never need the drops, and the server config can turn the pickup off: the blocks are
+        // destroyed and undoing it puts them back for free
+        if(player.isCreative() || !ConfigServer.DESTRUCTION_GIVES_DROPS.get()) {
+            given.clear();
+            return serverLevel.destroyBlock(pos, false, serverPlayer, 512);
         }
 
         BlockState broken = world.getBlockState(pos);
