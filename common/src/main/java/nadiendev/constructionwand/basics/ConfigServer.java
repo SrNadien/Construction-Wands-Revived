@@ -25,6 +25,7 @@ public class ConfigServer
     public static final Supplier<Boolean> ANGEL_FALLING;
     public static final Supplier<Integer> ENERGY_CAPACITY;
     public static final Supplier<Integer> ENERGY_PER_BLOCK;
+    public static final Supplier<Boolean> DESTRUCTION_GIVES_DROPS;
 
     public static final Supplier<List<?>> SIMILAR_BLOCKS;
     private static final String[] SIMILAR_BLOCKS_DEFAULT = {
@@ -148,6 +149,9 @@ public class ConfigServer
         ENERGY_CAPACITY = builder.defineInRange("EnergyCapacity", 100000, 1, Integer.MAX_VALUE);
         builder.comment("Energy a wand with the Energy Upgrade uses for every block it places or exchanges (FE)");
         ENERGY_PER_BLOCK = builder.defineInRange("EnergyPerBlock", 100, 0, Integer.MAX_VALUE);
+        builder.comment("Items dropped by the blocks the Destruction core breaks go to the inventory (or to an active Void Sack).",
+                "When false the blocks are destroyed without dropping anything. Creative players never get the drops.");
+        DESTRUCTION_GIVES_DROPS = builder.define("DestructionGivesDrops", true);
         builder.comment("Blocks to treat equally when in Similar mode. Enter block IDs seperated by ;");
         SIMILAR_BLOCKS = builder.defineList("SimilarBlocks", Arrays.asList(SIMILAR_BLOCKS_DEFAULT));
         builder.pop();
