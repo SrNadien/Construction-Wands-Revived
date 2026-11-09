@@ -1,5 +1,26 @@
 # Changelog
 
+## 4.0.14 — Minecraft 1.21.1 / NeoForge and Fabric
+
+### Fixes
+
+- **The Destruction core no longer hands out the drops in creative mode, and it can be turned off in survival.** The
+  core gives the drops of the blocks it breaks to your inventory (or to an active Void Sack), but its description said
+  that the blocks disappear into the void. In creative mode the blocks are now simply destroyed. The server config has
+  a new option, DestructionGivesDrops (on by default), that destroys the blocks without dropping anything also in
+  survival when it is off. The description of the core in the game now says what it really does.
+
+## 4.0.14 — Minecraft 1.21.1 / NeoForge and Fabric (Español)
+
+### Corregido
+
+- **El nucleo de Destruccion ya no entrega los drops en creativo y se puede desactivar en supervivencia.** El nucleo
+  da los drops de los bloques que rompe a tu inventario (o a una Bolsa del Vacio activa), pero su descripcion decia
+  que los bloques desaparecen en el vacio. En creativo los bloques ahora simplemente se destruyen. La config del
+  servidor tiene una opcion nueva, DestructionGivesDrops (activada por defecto), que al desactivarla destruye los
+  bloques sin soltar nada tambien en supervivencia. La descripcion del nucleo en el juego ahora dice lo que hace de
+  verdad.
+
 ## 4.0.13 — Minecraft 1.21.1 / NeoForge and Fabric
 
 ### Fixes
